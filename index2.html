@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with GeoTIFF Layer</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="js/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/geoblaze@1.2.0/dist/geoblaze.web.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-filelayer/leaflet.filelayer.js"></script>
+
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([0, 0], 1);
+
+    // Add Google Maps Basic layer
+    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      attribution: 'Google Maps Basic',
+      maxZoom: 18,
+    }).addTo(map);
+
+    // Function to handle file upload
+    function handleFile(e) {
+      var file = e.target.files[0];
+
+      // Read the file as an ArrayBuffer
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var arrayBuffer = e.target.result;
+
+        // Create an image element
+        var img = new Image();
+
+        // Load the GeoTIFF data into the image element
+        img.onload = function () {
+          // Create a canvas element
+          var canvas = document.createElement('canvas');
+          var ctx = canvas.getContext('2d');
+
+          // Set the canvas size to the image size
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          // Draw the image on the canvas
+          ctx.drawImage(img, 0, 0);
+
+          // Convert the canvas to a GeoRaster
+          var geoRaster = geoblaze.fromCanvas(canvas);
+
+          // Create a GeoRasterLayer from the GeoRaster
+          var layer = L.georasterLayer(geoRaster, {
+            opacity: 0.7,
+            pixelValuesToColorFn: geoblaze.pixelToColor,
+          }).addTo(map);
+
+          // Fit the map to the extent of the GeoRasterLayer
+          map.fitBounds(layer.getBounds());
+        };
+
+        // Set the image source to the GeoTIFF data
+        img.src = arrayBuffer;
+      };
+
+      // Read the file as an ArrayBuffer
+      reader.readAsArrayBuffer(file);
+    }
+
+    // Initialize the file input element
+    var fileInput = document.getElementById('file-input');
+    fileInput.addEventListener('change', handleFile, false);
+  </script>
+
+  <input type="file" id="file-input" accept=".tif, .tiff" />
+</body>
+</html>
