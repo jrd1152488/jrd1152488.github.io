@@ -213,48 +213,6 @@
       </div>
     </div>
 
-    <div class="sidebar-pane" id="calculator" style="margin-bottom: 30px;">
-      <h1 class="sidebar-header common-header">
-        <i class="fa-solid fa-database header-icon"></i>
-        <span class="header-text">HLA Calculator</span>
-        <span class="sidebar-close"></span>
-      </h1>
-      <div>
-        <table>
-          <tr>
-            <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
-            <td><input type="number" id="ghi" name="ghi" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="slope">Mean Slope, Percent:</label></td>
-            <td><input type="number" id="slope" name="slope" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
-            <td><input type="number" id="tl_distance" name="tl_distance" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
-            <td><input type="number" id="purchase_price" name="purchase_price" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="total_area">Total Area in Ha:</label></td>
-            <td><input type="number" id="total_area" name="total_area" step="any"></td>
-          </tr>
-
-          <tr>
-            <td colspan="2" style="text-align:center; padding: 10px 0;">
-              <button onclick="calculate()" class="easy-button">Calculate</button></td>
-          </tr>
-
-          <tr>
-            <td><label for="result">Result:</label></td>
-            <td><input type="number" id="result" name="result" readonly></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
     <div class="sidebar-pane" id="geotiff">
       <h1 class="sidebar-header common-header">
         <i class="fa-solid fa-calculator header-icon"></i>
@@ -300,14 +258,59 @@
         <button id="fetchButton" class="easy-button">Calculate Stats</button>
       </div>
 
-      <div id="loading-prompt" class="loading-prompt">
+      <div id="loading-prompt" class="loading-prompt" style="display: none;">
         Loading...
       </div>
+      
 
       <div style="margin-bottom: 10px; margin-top: 10px;" id="GHIstatisticss"></div>
       <div style="margin-bottom: 10px;" id="WSstatisticss"></div>
 
     </div>
+
+    <div class="sidebar-pane" id="calculator" style="margin-bottom: 30px;">
+      <h1 class="sidebar-header common-header">
+        <i class="fa-solid fa-database header-icon"></i>
+        <span class="header-text">HLA Calculator</span>
+        <span class="sidebar-close"></span>
+      </h1>
+      <div>
+        <table>
+          <tr>
+            <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
+            <td><input type="number" id="ghi" name="ghi" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="slope">Mean Slope, Percent:</label></td>
+            <td><input type="number" id="slope" name="slope" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
+            <td><input type="number" id="tl_distance" name="tl_distance" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
+            <td><input type="number" id="purchase_price" name="purchase_price" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="total_area">Total Area in Ha:</label></td>
+            <td><input type="number" id="total_area" name="total_area" step="any"></td>
+          </tr>
+
+          <tr>
+            <td colspan="2" style="text-align:center; padding: 10px 0;">
+              <button onclick="calculate()" class="easy-button">Calculate</button></td>
+          </tr>
+
+          <tr>
+            <td><label for="result">Result:</label></td>
+            <td><input type="number" id="result" name="result" readonly></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    
   </div>
 
 
@@ -1815,7 +1818,9 @@
 
             var scale = chroma.scale("Viridis");
 
-            loadingPrompt.style.display = 'none';
+            // loadingPrompt.style.display = 'none';
+                // Hide the loading prompt when finished
+    document.getElementById('loading-prompt').style.display = "none";
 
           });
         });

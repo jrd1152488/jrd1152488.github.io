@@ -131,6 +131,7 @@
     border-radius:4px;
     text-align: center;
     line-height: 26px;
+    background-color:#ffffff;
 }
 .leaflet-control-search .search-button:hover {
     /* background:url(../images/search-icon.png) no-repeat 2px -22px #fafafa; */
