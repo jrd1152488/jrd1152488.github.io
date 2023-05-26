@@ -1,0 +1,134 @@
+.search-control {
+    border-radius: 0px;
+    background: white;
+    min-width: 20px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 300;
+    margin-left: 300px;
+  }
+
+.leaflet-touch .search-control {
+	min-width: 20px;
+	min-height: 20px;
+}
+
+.search-control a, .search-control .search-control-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: none;
+  }
+
+.search-control .search-control-alternatives a {
+	width: inherit;
+	height: inherit;
+	line-height: inherit;
+}
+
+.search-control a:hover, .search-control .search-control-icon:hover {
+	border-bottom: none;
+}
+
+.search-control-form {
+	display: none;
+	vertical-align: middle;
+}
+.search-control-expanded .search-control-form {
+	display: inline-block;
+}
+.search-control-form input {
+	font-size: 100%;
+	border: 0;
+	background-color: transparent;
+	width: 246px;
+
+}
+
+.search-control-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+.leaflet-touch .search-control-icon {
+	width: 20px;
+	height: 20px;
+}
+
+.search-control-throbber .search-control-icon {
+	background-image: url(images/throbber.gif);
+}
+
+.search-control-form-no-error {
+	display: none;
+}
+
+.search-control-form input:focus {
+	outline: none;
+}
+
+.search-control-form button {
+	display: none;
+}
+.search-control-error {
+	margin-top: 8px;
+	margin-left: 8px;
+	display: block;
+	color: #444;
+}
+.search-control-alternatives {
+	display: block;
+	width: 272px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.search-control-alternatives-minimized {
+	display: none;
+	height: 0;
+}
+.search-control-alternatives li {
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
+	padding: 5px 8px;
+	text-overflow: ellipsis;
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+}
+
+.search-control-alternatives li a, .search-control-alternatives li a:hover {
+	width: inherit;
+	height: inherit;
+	line-height: inherit;
+	background: inherit;
+	border-radius: inherit;
+	text-align: left;
+}
+
+.search-control-alternatives li:last-child {
+	border-bottom: none;
+}
+.search-control-alternatives li:hover, .search-control-selected {
+	background-color: #f5f5f5;
+}
+.search-control-address-detail {
+	
+}
+.search-control-address-context {
+	color: #666;
+}
