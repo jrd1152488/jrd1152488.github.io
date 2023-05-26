@@ -1576,8 +1576,367 @@
     }
 
 
+    // Calculate GHI Statistics
 
-    
+
+
+    var coordinates = [];
+
+    document.getElementById('fetchButton').addEventListener('click', function () {
+      var fileInput = document.getElementById('fileInput');
+      var file = fileInput.files[0];
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var fileContent = e.target.result;
+        var geojson = JSON.parse(fileContent);
+
+        coordinates = extractCoordinates(geojson);
+
+      };
+      reader.readAsText(file);
+
+
+      map.createPane('GHIValue');
+      map.getPane('GHIValue').style.zIndex = 102;
+
+
+
+
+      var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
+
+      fetch(url_to_geotiff_GHI_file)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
+
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
+
+            console.log("max:", max);
+            console.log("min:", min);
+            console.log("range:", range);
+
+            const meanss = geoblaze.mean(georaster, coordinates);
+            const mn = Number(meanss).toFixed(2);
+            console.log("Mean:", meanss);
+
+            const medianss = geoblaze.median(georaster, coordinates);
+            const mdn = Number(medianss).toFixed(2);
+            console.log("Median:", medianss);
+
+            const modess = geoblaze.mode(georaster, coordinates);
+            let md = Number(modess).toFixed(2);
+            console.log("Mode:", modess);
+
+            var statisticsDiv = document.getElementById('GHIstatisticss');
+statisticsDiv.innerHTML = '<strong>Irradiance (GHI):</strong><br>' +
+                          'Mean: ' + mn + '<br>' +
+                          'Median: ' + mdn + '<br>' +
+                          'Mode: ' + md;
+
+
+            var scale = chroma.scale("Viridis");
+
+
+          });
+        });
+
+
+
+    });
+
+
+
+    function extractCoordinates(geojson) {
+      var coordinates = [];
+
+      if (geojson && geojson.features) {
+        geojson.features.forEach(function (feature) {
+          if (feature.geometry && feature.geometry.coordinates) {
+            coordinates.push(feature.geometry.coordinates);
+          }
+        });
+      }
+
+      return coordinates;
+    };
+
+
+
+
+
+    // Calculate Wind Speed Statistics
+
+
+
+
+    var WScoordinates = [];
+
+    document.getElementById('fetchButton').addEventListener('click', function () {
+      var fileInput = document.getElementById('fileInput');
+      var file = fileInput.files[0];
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var fileContent = e.target.result;
+        var WSgeojson = JSON.parse(fileContent);
+
+        WScoordinates = extractCoordinates(WSgeojson);
+
+      };
+      reader.readAsText(file);
+
+
+      map.createPane('WSValue');
+      map.getPane('WSValue').style.zIndex = 102;
+
+
+
+
+      var url_to_geotiff_WS_file = "https://czrxstrd4.github.io/avemn/WS.tif";
+
+      var loadingPrompt = document.getElementById('loading-prompt');
+      loadingPrompt.style.display = 'block';
+
+      fetch(url_to_geotiff_WS_file)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
+
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
+
+            console.log("max:", max);
+            console.log("min:", min);
+            console.log("range:", range);
+
+            const meanss = geoblaze.mean(georaster, WScoordinates);
+            const mn = Number(meanss).toFixed(2);
+            console.log("Mean:", meanss);
+
+            const medianss = geoblaze.median(georaster, WScoordinates);
+            const mdn = Number(medianss).toFixed(2);
+            console.log("Median:", medianss);
+
+            const modess = geoblaze.mode(georaster, WScoordinates);
+            let md = Number(modess).toFixed(2);
+            console.log("Mode:", modess);
+
+            var statisticsDiv = document.getElementById('WSstatisticss');
+statisticsDiv.innerHTML = '<strong>Wind Speed:</strong><br>' +
+                          'Mean: ' + mn + '<br>' +
+                          'Median: ' + mdn + '<br>' +
+                          'Mode: ' + md;
+
+            var scale = chroma.scale("Viridis");
+
+            loadingPrompt.style.display = 'none';
+
+          });
+        });
+
+
+
+    });
+
+
+
+    function extractCoordinates(WSgeojson) {
+      var coordinates = [];
+
+      if (WSgeojson && WSgeojson.features) {
+        WSgeojson.features.forEach(function (feature) {
+          if (feature.geometry && feature.geometry.coordinates) {
+            coordinates.push(feature.geometry.coordinates);
+          }
+        });
+      }
+
+      return coordinates;
+    };
+
+
+
+
+
+
+
+
+    // Display the GHI Map with identify function
+
+
+
+    map.createPane('GHIValues');
+    map.getPane('GHIValues').style.zIndex = 102;
+
+    var url_to_geotiff_GHI_files = "https://czrxstrd4.github.io/avemn/GHI.tif";
+
+    var GHIValuesLayer; // Declare GHIValuesLayer variable
+
+
+
+    fetch(url_to_geotiff_GHI_files)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
+
+          console.log("max:", max);
+          console.log("min:", min);
+          console.log("range:", range);
+
+          var scale = chroma.scale("Viridis");
+
+          GHIValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.4,
+            pane: 'GHIValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
+
+              if (pixelValue === 0) return null;
+
+              var scaledPixelValue = (pixelValue - min) / range;
+
+              var color = scale(scaledPixelValue).hex();
+
+              return color;
+            }
+          });
+
+          // Toggle popups based on checkbox state
+          var toggleCheckbox = document.getElementById('toggleCheckbox');
+          toggleCheckbox.addEventListener('change', function () {
+            togglePopups();
+          });
+
+
+
+
+          // Create popup
+          function handleMapClick(e) {
+            var popupss = L.popup();
+
+            var latlng = e.latlng;
+
+            var identifyResultGHIs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+            var GHIValues = (identifyResultGHIs / 1000) * 1000;
+
+            popupss
+              .setLatLng(latlng)
+              .setContent("GHI: " + GHIValues.toFixed(2) + " kWh/m²")
+              .openOn(map);
+          }
+
+
+          function togglePopups() {
+            if (GHIValuesLayer) {
+              if (map.hasLayer(GHIValuesLayer)) {
+                map.removeLayer(GHIValuesLayer);
+                map.off('click', handleMapClick);
+              } else {
+                map.addLayer(GHIValuesLayer);
+                map.on('click', handleMapClick);
+              }
+            }
+          }
+
+        });
+      });
+
+
+
+    // Display the Wind Map with identify function
+
+
+
+    map.createPane('WSValues');
+    map.getPane('WSValues').style.zIndex = 102;
+
+    var url_to_geotiff_WS_files = "https://czrxstrd4.github.io/avemn/WS.tif";
+
+    var WSValuesLayer; // Declare WSValuesLayer variable
+
+
+
+    fetch(url_to_geotiff_WS_files)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
+
+          console.log("max:", max);
+          console.log("min:", min);
+          console.log("range:", range);
+
+          var scale = chroma.scale("YlGnBu");
+
+          WSValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.6,
+            resolution: 80,
+            pane: 'WSValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
+
+              if (pixelValue === 0) return null;
+
+              var scaledPixelValue = (pixelValue - min) / range;
+
+              var color = scale(scaledPixelValue).hex();
+
+              return color;
+            }
+          });
+
+          // Toggle popups based on checkbox state
+          var WStoggleCheckbox = document.getElementById('WStoggleCheckbox');
+          WStoggleCheckbox.addEventListener('change', function () {
+            togglePopups();
+          });
+
+
+
+
+          // Create popup
+          function handleMapClick(e) {
+            var popupss = L.popup();
+
+            var latlng = e.latlng;
+
+            var identifyResultWSs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+            var WSValues = (identifyResultWSs / 1000) * 1000;
+
+            popupss
+              .setLatLng(latlng)
+              .setContent("Wind Speed: " + WSValues.toFixed(2) + " m/s")
+              .openOn(map);
+          }
+
+
+          function togglePopups() {
+            if (WSValuesLayer) {
+              if (map.hasLayer(WSValuesLayer)) {
+                map.removeLayer(WSValuesLayer);
+                map.off('click', handleMapClick);
+              } else {
+                map.addLayer(WSValuesLayer);
+                map.on('click', handleMapClick);
+              }
+            }
+          }
+
+        });
+      });
   </script>
 </body>
 
