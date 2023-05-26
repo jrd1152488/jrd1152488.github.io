@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<!-- CSS/JS -->
+  <!-- CSS/JS -->
   <title>Web Map</title>
 
   <link rel="stylesheet" href="css/leaflet.css">
@@ -161,7 +161,7 @@
       background-color: #4caf50;
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 15px;
       text-align: center;
       text-decoration: none;
       font-size: 14px;
@@ -274,73 +274,83 @@
         Wind Speed Map
       </label>
 
-      <div>
+      <!-- <div>
         <input type="file" id="fileInput" style="margin-bottom: 10px; margin-top: 10px;" accept=".geojson" multiple />
-        <div id="fileContent"></div>
+        <div id="fileContent"></div> -->
 
 
-        <!-- 
+      <!-- 
         <div>
           <input type="file" id="fileInput" accept=".geojson" multiple />
           <button id="chooseFilesButton" class="easy-button" style="text-align: left;">Select Shapefile</button>
           <div id="fileContent"></div>
         </div> -->
 
-        <div>
-          <button id="fetchButton" class="easy-button">Calculate Stats</button>
-        </div>
-
-        <div id="loading-prompt" class="loading-prompt">
-          Loading...
-        </div>
-
-        <div style="margin-bottom: 10px; margin-top: 10px;" id="GHIstatisticss"></div>
-        <div style="margin-bottom: 10px;" id="WSstatisticss"></div>
-
+      <div>
+        <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
+          onchange="displayFileName()" />
+        <button style="margin-bottom: 10px; margin-top: 10px;" id="uploadButton" class="easy-button"
+          onclick="document.getElementById('fileInput').click()">Upload Shapefile</button>
+        <span id="fileName"></span>
       </div>
+
+
+
+      <div>
+        <button id="fetchButton" class="easy-button">Calculate Stats</button>
+      </div>
+
+      <div id="loading-prompt" class="loading-prompt">
+        Loading...
+      </div>
+
+      <div style="margin-bottom: 10px; margin-top: 10px;" id="GHIstatisticss"></div>
+      <div style="margin-bottom: 10px;" id="WSstatisticss"></div>
+
     </div>
+  </div>
 
 
-    <style>
-      #calculator table td {
-        vertical-align: middle;
-      }
+  <style>
+    #calculator table td {
+      vertical-align: middle;
+    }
 
-      .common-header {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
+    .common-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
 
-      .common-header .header-icon {
-        font-size: 32px;
-        padding-right: 5px;
-        /* Adjust the padding as needed */
-      }
+    .common-header .header-icon {
+      font-size: 32px;
+      padding-right: 5px;
+      /* Adjust the padding as needed */
+    }
 
-      .common-header .header-text {
-        font-size: 32px;
-        padding-left: 5px;
-        /* Adjust the padding as needed */
-      }
+    .common-header .header-text {
+      font-size: 32px;
+      padding-left: 5px;
+      /* Adjust the padding as needed */
+    }
 
-      .easy-button {
-        display: inline-block;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
+    .easy-button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-      .easy-button:hover {
-        background-color: #45a049;
-      }
-    </style>
+    .easy-button:hover {
+      background-color: #45a049;
+    }
+  </style>
 
   </div>
 
@@ -348,7 +358,7 @@
   <div id="polygon-layer" class="leaflet-pane leaflet-overlay-pane"></div>
 
   <script>
-//SPT
+    //SPT
     var highlightLayer;
 
     function highlightFeature(e) {
@@ -1722,6 +1732,8 @@
         });
     });
 
+
+
     function extractCoordinates(geojson) {
       var coordinates = [];
 
@@ -1735,6 +1747,16 @@
 
       return coordinates;
     };
+
+    function displayFileName() {
+      var fileInput = document.getElementById('fileInput');
+      var fileNameSpan = document.getElementById('fileName');
+      if (fileInput.files.length > 0) {
+        fileNameSpan.textContent = fileInput.files[0].name;
+      } else {
+        fileNameSpan.textContent = "";
+      }
+    }
 
     // Calculate Wind Speed Statistics
     var WScoordinates = [];
