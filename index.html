@@ -166,10 +166,13 @@
   <div id="sidebar" class="sidebar">
     <div class="sidebar-tabs">
     </div>
-    <div class="sidebar-content">
-      <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
-        <h1 class="sidebar-header common-header"><i class="fa-solid fa-layer-group"></i> Layer Data <span class="sidebar-close"></span></h1>
-        <div id="layer-data-content">
+    <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
+      <h1 class="sidebar-header common-header">
+        <i class="fa-solid fa-layer-group header-icon"></i>
+        <span class="header-text">Layer Data</span>
+        <span class="sidebar-close"></span>
+      </h1>
+      <div id="layer-data-content">
           <button id="google-maps-basic-button"><i class="fa fa-map"></i> Google Maps Basic</button>
           <button id="google-maps-satellite-button"><i class="fa fa-satellite"></i> Google Maps Satellite</button>
           <button id="google-satellite-hybrid-button"><i class="fa fa-globe"></i> Google Maps Satellite Hybrid</button>
@@ -177,7 +180,11 @@
       </div>
 
       <div class="sidebar-pane" id="calculator" style="margin-bottom: 30px;">
-        <h1 class="sidebar-header common-header"><i class="fa-solid fa-database"></i> HLA Calculator <span class="sidebar-close"></span></h1>
+        <h1 class="sidebar-header common-header">
+          <i class="fa-solid fa-database header-icon"></i>
+          <span class="header-text">HLA Calculator</span>
+          <span class="sidebar-close"></span>
+        </h1>
         <div>
           <table>
             <tr>
@@ -214,32 +221,12 @@
         </div>
       </div>
 
-      <style>
-        #calculator table td {
-          vertical-align: middle;
-        }
-        
-        .common-header {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          padding: 10px;
-        }
-        
-        .common-header .header-icon {
-          font-size: 20px;
-        }
-        
-        .common-header .header-text {
-          font-size: 20px;
-          margin-left: 30px;
-        }
-      </style>
-
-    </div>
-
     <div class="sidebar-pane" id="geotiff">
-      <h1 class="sidebar-header common-header"><i class="fa-solid fa-calculator"></i> Raster Calculator <span class="sidebar-close"></span></h1>
+      <h1 class="sidebar-header common-header">
+        <i class="fa-solid fa-calculator header-icon"></i>
+        <span class="header-text">Raster Calculator</span>
+        <span class="sidebar-close"></span>
+      </h1>
       <div>
         <input type="file" id="fileInput" accept=".geojson" multiple />
 
@@ -267,6 +254,28 @@
       </div>
     </div>
 
+
+    <style>
+      #calculator table td {
+        vertical-align: middle;
+      }
+      
+      .common-header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      
+      .common-header .header-icon {
+        font-size: 32px;
+        padding-right: 10px; /* Adjust the padding as needed */
+      }
+      
+      .common-header .header-text {
+        font-size: 32px;
+        padding-left: 10px; /* Adjust the padding as needed */
+      }
+    </style>
 
   </div>
 
