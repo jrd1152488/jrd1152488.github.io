@@ -296,39 +296,41 @@
         <span class="sidebar-close"></span>
       </h1>
       <div>
-        <table>
-          <tr>
-            <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
-            <td><input type="number" id="ghi" name="ghi" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="slope">Mean Slope, Percent:</label></td>
-            <td><input type="number" id="slope" name="slope" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
-            <td><input type="number" id="tl_distance" name="tl_distance" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
-            <td><input type="number" id="purchase_price" name="purchase_price" step="any"></td>
-          </tr>
-          <tr>
-            <td><label for="total_area">Total Area in Ha:</label></td>
-            <td><input type="number" id="total_area" name="total_area" step="any"></td>
-          </tr>
-
-          <tr>
-            <td colspan="2" style="text-align:center; padding: 10px 0;">
-              <button onclick="calculate()" class="easy-button">Calculate</button></td>
-          </tr>
-
-          <tr>
-            <td><label for="result">Result:</label></td>
-            <td><input type="number" id="result" name="result" readonly></td>
-          </tr>
-        </table>
-      </div>
+        <div>
+          <table class="table">
+            <tr>
+              <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
+              <td><input type="number" id="ghi" name="ghi" step="any" class="form-control"></td>
+            </tr>
+            <tr>
+              <td><label for="slope">Mean Slope, Percent:</label></td>
+              <td><input type="number" id="slope" name="slope" step="any" class="form-control"></td>
+            </tr>
+            <tr>
+              <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
+              <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control"></td>
+            </tr>
+            <tr>
+              <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
+              <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control"></td>
+            </tr>
+            <tr>
+              <td><label for="total_area">Total Area in Ha:</label></td>
+              <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"></td>
+            </tr>
+        
+            <tr>
+              <td colspan="2" style="text-align:center; padding: 10px 0;">
+                <button onclick="calculate()" class="btn btn-primary">Calculate</button></td>
+            </tr>
+        
+            <tr>
+              <td><label for="result">Result:</label></td>
+              <td><input type="number" id="result" name="result" readonly class="form-control"></td>
+            </tr>
+          </table>
+        </div>
+        
     </div>
 
 
