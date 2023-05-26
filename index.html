@@ -154,6 +154,40 @@
       background-position: 1px left;
       background-size: 16px 16px;
     }
+
+    .easy-button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .easy-button:hover {
+      background-color: #45a049;
+    }
+
+    .easy-button-map-raster {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: grey;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.easy-button-map-raster.selected {
+  background-color: green;
+}
+
   </style>
 </head>
 
@@ -173,53 +207,53 @@
         <span class="sidebar-close"></span>
       </h1>
       <div id="layer-data-content">
-          <button id="google-maps-basic-button"><i class="fa fa-map"></i> Google Maps Basic</button>
-          <button id="google-maps-satellite-button"><i class="fa fa-satellite"></i> Google Maps Satellite</button>
-          <button id="google-satellite-hybrid-button"><i class="fa fa-globe"></i> Google Maps Satellite Hybrid</button>
-        </div>
+        <button id="google-maps-basic-button"><i class="fa fa-map"></i> Google Maps Basic</button>
+        <button id="google-maps-satellite-button"><i class="fa fa-satellite"></i> Google Maps Satellite</button>
+        <button id="google-satellite-hybrid-button"><i class="fa fa-globe"></i> Google Maps Satellite Hybrid</button>
       </div>
+    </div>
 
-      <div class="sidebar-pane" id="calculator" style="margin-bottom: 30px;">
-        <h1 class="sidebar-header common-header">
-          <i class="fa-solid fa-database header-icon"></i>
-          <span class="header-text">HLA Calculator</span>
-          <span class="sidebar-close"></span>
-        </h1>
-        <div>
-          <table>
-            <tr>
-              <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
-              <td><input type="number" id="ghi" name="ghi" step="any"></td>
-            </tr>
-            <tr>
-              <td><label for="slope">Mean Slope, Percent:</label></td>
-              <td><input type="number" id="slope" name="slope" step="any"></td>
-            </tr>
-            <tr>
-              <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
-              <td><input type="number" id="tl_distance" name="tl_distance" step="any"></td>
-            </tr>
-            <tr>
-              <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
-              <td><input type="number" id="purchase_price" name="purchase_price" step="any"></td>
-            </tr>
-            <tr>
-              <td><label for="total_area">Total Area in Ha:</label></td>
-              <td><input type="number" id="total_area" name="total_area" step="any"></td>
-            </tr>
+    <div class="sidebar-pane" id="calculator" style="margin-bottom: 30px;">
+      <h1 class="sidebar-header common-header">
+        <i class="fa-solid fa-database header-icon"></i>
+        <span class="header-text">HLA Calculator</span>
+        <span class="sidebar-close"></span>
+      </h1>
+      <div>
+        <table>
+          <tr>
+            <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
+            <td><input type="number" id="ghi" name="ghi" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="slope">Mean Slope, Percent:</label></td>
+            <td><input type="number" id="slope" name="slope" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
+            <td><input type="number" id="tl_distance" name="tl_distance" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
+            <td><input type="number" id="purchase_price" name="purchase_price" step="any"></td>
+          </tr>
+          <tr>
+            <td><label for="total_area">Total Area in Ha:</label></td>
+            <td><input type="number" id="total_area" name="total_area" step="any"></td>
+          </tr>
 
-            <tr>
-              <td colspan="2" style="text-align:center; padding: 10px 0;"><button
-                  onclick="calculate()">Calculate</button></td>
-            </tr>
+          <tr>
+            <td colspan="2" style="text-align:center; padding: 10px 0;">
+              <button onclick="calculate()" class="easy-button">Calculate</button></td>
+          </tr>
 
-            <tr>
-              <td><label for="result">Result:</label></td>
-              <td><input type="number" id="result" name="result" readonly></td>
-            </tr>
-          </table>
-        </div>
+          <tr>
+            <td><label for="result">Result:</label></td>
+            <td><input type="number" id="result" name="result" readonly></td>
+          </tr>
+        </table>
       </div>
+    </div>
 
     <div class="sidebar-pane" id="geotiff">
       <h1 class="sidebar-header common-header">
@@ -227,26 +261,50 @@
         <span class="header-text">Raster Calculator</span>
         <span class="sidebar-close"></span>
       </h1>
+
+      <input type="checkbox" id="toggleCheckbox" />
+      <label class="toggle-checkbox" for="toggleCheckbox" style="margin-right: 20px;" id="toggleCheckbox-label">
+        <span class="toggle-slider"></span>
+        GHI Map
+      </label>
+
+
+
+      <input type="checkbox" id="WStoggleCheckbox" />
+      <label class="toggle-checkbox" for="WStoggleCheckbox" id="WStoggleCheckbox-label">
+        <span class="toggle-slider"></span>
+        Wind Speed Map
+      </label>
+      
+      
+
+      <div style="margin-bottom: 10px;" id="GHIstatisticss"></div>
+      <div style="margin-bottom: 10px;" id="WSstatisticss"></div>
+
+
+
+
       <div>
-        <input type="file" id="fileInput" accept=".geojson" multiple />
-
-        <button id="fetchButton">Calc Stats</button>
+        <input type="file" id="fileInput" style="margin-bottom: 10px;" accept=".geojson" multiple />
         <div id="fileContent"></div>
+      
+        
+<!-- 
+        <div>
+          <input type="file" id="fileInput" accept=".geojson" multiple />
+          <button id="chooseFilesButton" class="easy-button" style="text-align: left;">Select Shapefile</button>
+          <div id="fileContent"></div>
+        </div> -->
 
-        <div id="GHIstatisticss"></div>
-        <div id="WSstatisticss"></div>
 
-        <input type="checkbox" id="toggleCheckbox" />
-        <label class="toggle-checkbox" for="toggleCheckbox" id="toggleCheckbox-label">
-          <span class="toggle-slider"></span>
-          GHI Map
-        </label>
 
-        <input type="checkbox" id="WStoggleCheckbox" />
-        <label class="toggle-checkbox" for="WStoggleCheckbox" id="WStoggleCheckbox-label">
-          <span class="toggle-slider"></span>
-          Wind Speed Map
-        </label>
+
+
+        
+
+        <div>
+          <button id="fetchButton" class="easy-button">Calc Stats</button>
+        </div>
 
         <div id="loading-prompt" class="loading-prompt">
           Loading...
@@ -259,21 +317,40 @@
       #calculator table td {
         vertical-align: middle;
       }
-      
+
       .common-header {
         display: flex;
         align-items: center;
         justify-content: flex-start;
       }
-      
+
       .common-header .header-icon {
         font-size: 32px;
-        padding-right: 10px; /* Adjust the padding as needed */
+        padding-right: 10px;
+        /* Adjust the padding as needed */
       }
-      
+
       .common-header .header-text {
         font-size: 32px;
-        padding-left: 10px; /* Adjust the padding as needed */
+        padding-left: 10px;
+        /* Adjust the padding as needed */
+      }
+
+      .easy-button {
+        display: inline-block;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .easy-button:hover {
+        background-color: #45a049;
       }
     </style>
 
@@ -1618,52 +1695,51 @@
       };
       reader.readAsText(file);
 
-
-      map.createPane('GHIValue');
-      map.getPane('GHIValue').style.zIndex = 102;
-
+    map.createPane('GHIValue');
+    map.getPane('GHIValue').style.zIndex = 102;
 
 
 
-      var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
 
-      fetch(url_to_geotiff_GHI_file)
-        .then(response => response.arrayBuffer())
-        .then(arrayBuffer => {
-          parseGeoraster(arrayBuffer).then(georaster => {
+    var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
 
-            const min = georaster.mins[0];
-            const max = georaster.maxs[0];
-            const range = georaster.ranges[0];
+    fetch(url_to_geotiff_GHI_file)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
 
-            console.log("max:", max);
-            console.log("min:", min);
-            console.log("range:", range);
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
 
-            const meanss = geoblaze.mean(georaster, coordinates);
-            const mn = Number(meanss).toFixed(2);
-            console.log("Mean:", meanss);
+          console.log("max:", max);
+          console.log("min:", min);
+          console.log("range:", range);
 
-            const medianss = geoblaze.median(georaster, coordinates);
-            const mdn = Number(medianss).toFixed(2);
-            console.log("Median:", medianss);
+          const meanss = geoblaze.mean(georaster, coordinates);
+          const mn = Number(meanss).toFixed(2);
+          console.log("Mean:", meanss);
 
-            const modess = geoblaze.mode(georaster, coordinates);
-            let md = Number(modess).toFixed(2);
-            console.log("Mode:", modess);
+          const medianss = geoblaze.median(georaster, coordinates);
+          const mdn = Number(medianss).toFixed(2);
+          console.log("Median:", medianss);
 
-            var statisticsDiv = document.getElementById('GHIstatisticss');
-statisticsDiv.innerHTML = '<strong>Irradiance (GHI):</strong><br>' +
-                          'Mean: ' + mn + '<br>' +
-                          'Median: ' + mdn + '<br>' +
-                          'Mode: ' + md;
+          const modess = geoblaze.mode(georaster, coordinates);
+          let md = Number(modess).toFixed(2);
+          console.log("Mode:", modess);
 
-
-            var scale = chroma.scale("Viridis");
+          var statisticsDiv = document.getElementById('GHIstatisticss');
+          statisticsDiv.innerHTML = '<strong>Irradiance (GHI):</strong><br>' +
+            'Mean: ' + mn + '<br>' +
+            'Median: ' + mdn + '<br>' +
+            'Mode: ' + md;
 
 
-          });
+          var scale = chroma.scale("Viridis");
+
+
         });
+      });
 
 
 
@@ -1748,10 +1824,10 @@ statisticsDiv.innerHTML = '<strong>Irradiance (GHI):</strong><br>' +
             console.log("Mode:", modess);
 
             var statisticsDiv = document.getElementById('WSstatisticss');
-statisticsDiv.innerHTML = '<strong>Wind Speed:</strong><br>' +
-                          'Mean: ' + mn + '<br>' +
-                          'Median: ' + mdn + '<br>' +
-                          'Mode: ' + md;
+            statisticsDiv.innerHTML = '<strong>Wind Speed:</strong><br>' +
+              'Mean: ' + mn + '<br>' +
+              'Median: ' + mdn + '<br>' +
+              'Mode: ' + md;
 
             var scale = chroma.scale("Viridis");
 
@@ -1788,8 +1864,6 @@ statisticsDiv.innerHTML = '<strong>Wind Speed:</strong><br>' +
 
 
     // Display the GHI Map with identify function
-
-
 
     map.createPane('GHIValues');
     map.getPane('GHIValues').style.zIndex = 102;
@@ -1925,9 +1999,6 @@ statisticsDiv.innerHTML = '<strong>Wind Speed:</strong><br>' +
           WStoggleCheckbox.addEventListener('change', function () {
             togglePopups();
           });
-
-
-
 
           // Create popup
           function handleMapClick(e) {
