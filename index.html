@@ -258,11 +258,9 @@
         </label>
       </div>
 
-
       <!-- <div>
         <input type="file" id="fileInput" style="margin-bottom: 10px; margin-top: 10px;" accept=".geojson" multiple />
         <div id="fileContent"></div> -->
-
 
       <!-- 
         <div>
@@ -271,17 +269,15 @@
           <div id="fileContent"></div>
         </div> -->
 
-      <div>
-        <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
-          onchange="displayFileName()" />
-        <button style="margin-bottom: 10px; margin-top: 10px;" id="uploadButton" class="easy-button"
-          onclick="document.getElementById('fileInput').click()">Upload Shapefile</button>
-        <span id="fileName"></span>
-      </div>
-
-      <div>
-        <button id="fetchButton" class="easy-button">Calculate Stats</button>
-      </div>
+        <div>
+          <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;" onchange="displayFileName()">
+          <label for="fileInput" style="margin-bottom: 10px;" class="btn btn-primary btn-sm">Upload Shapefile</label>
+          <span id="fileName"></span>
+        </div>
+        
+        <div>
+          <button id="fetchButton" class="btn btn-primary">Calculate Stats</button>
+        </div>
 
       <div id="loading-prompt" class="loading-prompt" style="display: none;">
         Loading...
