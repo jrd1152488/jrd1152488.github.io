@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<!-- CSS/JS -->
   <title>Web Map</title>
 
   <link rel="stylesheet" href="css/leaflet.css">
@@ -173,21 +174,20 @@
     }
 
     .easy-button-map-raster {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: grey;
-  color: white;
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  cursor: pointer;
-}
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: grey;
+      color: white;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+    }
 
-.easy-button-map-raster.selected {
-  background-color: green;
-}
-
+    .easy-button-map-raster.selected {
+      background-color: green;
+    }
   </style>
 </head>
 
@@ -207,8 +207,8 @@
         <span class="sidebar-close"></span>
       </h1>
       <div id="layer-data-content">
-        <button id="google-maps-basic-button"><i class="fa fa-map"></i> Google Maps Basic</button>
-        <button id="google-maps-satellite-button"><i class="fa fa-satellite"></i> Google Maps Satellite</button>
+        <button id="google-maps-basic-button"><i class="fa fa-map"></i> Google Maps Basic</button></br>
+        <button id="google-maps-satellite-button"><i class="fa fa-satellite"></i> Google Maps Satellite</button></br>
         <button id="google-satellite-hybrid-button"><i class="fa fa-globe"></i> Google Maps Satellite Hybrid</button>
       </div>
     </div>
@@ -277,9 +277,9 @@
       <div>
         <input type="file" id="fileInput" style="margin-bottom: 10px; margin-top: 10px;" accept=".geojson" multiple />
         <div id="fileContent"></div>
-      
-        
-<!-- 
+
+
+        <!-- 
         <div>
           <input type="file" id="fileInput" accept=".geojson" multiple />
           <button id="chooseFilesButton" class="easy-button" style="text-align: left;">Select Shapefile</button>
@@ -314,13 +314,13 @@
 
       .common-header .header-icon {
         font-size: 32px;
-        padding-right: 10px;
+        padding-right: 5px;
         /* Adjust the padding as needed */
       }
 
       .common-header .header-text {
         font-size: 32px;
-        padding-left: 10px;
+        padding-left: 5px;
         /* Adjust the padding as needed */
       }
 
@@ -348,6 +348,7 @@
   <div id="polygon-layer" class="leaflet-pane leaflet-overlay-pane"></div>
 
   <script>
+//SPT
     var highlightLayer;
 
     function highlightFeature(e) {
@@ -1662,10 +1663,8 @@
       exportedLayer.fitBounds();
     }
 
-
+    //---------------------------------------GEOBLAZE------------------------------------------------------------------------//
     // Calculate GHI Statistics
-
-
 
     var coordinates = [];
 
@@ -1679,61 +1678,49 @@
         var geojson = JSON.parse(fileContent);
 
         coordinates = extractCoordinates(geojson);
-
       };
       reader.readAsText(file);
 
-    map.createPane('GHIValue');
-    map.getPane('GHIValue').style.zIndex = 102;
+      map.createPane('GHIValue');
+      map.getPane('GHIValue').style.zIndex = 102;
 
+      var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
 
+      fetch(url_to_geotiff_GHI_file)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
 
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
 
-    var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
+            console.log("max:", max);
+            console.log("min:", min);
+            console.log("range:", range);
 
-    fetch(url_to_geotiff_GHI_file)
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
+            const meanss = geoblaze.mean(georaster, coordinates);
+            const mn = Number(meanss).toFixed(2);
+            console.log("Mean:", meanss);
 
-          const min = georaster.mins[0];
-          const max = georaster.maxs[0];
-          const range = georaster.ranges[0];
+            const medianss = geoblaze.median(georaster, coordinates);
+            const mdn = Number(medianss).toFixed(2);
+            console.log("Median:", medianss);
 
-          console.log("max:", max);
-          console.log("min:", min);
-          console.log("range:", range);
+            const modess = geoblaze.mode(georaster, coordinates);
+            let md = Number(modess).toFixed(2);
+            console.log("Mode:", modess);
 
-          const meanss = geoblaze.mean(georaster, coordinates);
-          const mn = Number(meanss).toFixed(2);
-          console.log("Mean:", meanss);
+            var statisticsDiv = document.getElementById('GHIstatisticss');
+            statisticsDiv.innerHTML = '<strong>Irradiance (GHI):</strong><br>' +
+              'Mean: ' + mn + '<br>' +
+              'Median: ' + mdn + '<br>' +
+              'Mode: ' + md;
 
-          const medianss = geoblaze.median(georaster, coordinates);
-          const mdn = Number(medianss).toFixed(2);
-          console.log("Median:", medianss);
-
-          const modess = geoblaze.mode(georaster, coordinates);
-          let md = Number(modess).toFixed(2);
-          console.log("Mode:", modess);
-
-          var statisticsDiv = document.getElementById('GHIstatisticss');
-          statisticsDiv.innerHTML = '<strong>Irradiance (GHI):</strong><br>' +
-            'Mean: ' + mn + '<br>' +
-            'Median: ' + mdn + '<br>' +
-            'Mode: ' + md;
-
-
-          var scale = chroma.scale("Viridis");
-
-
+            var scale = chroma.scale("Viridis");
+          });
         });
-      });
-
-
-
     });
-
-
 
     function extractCoordinates(geojson) {
       var coordinates = [];
@@ -1749,17 +1736,8 @@
       return coordinates;
     };
 
-
-
-
-
     // Calculate Wind Speed Statistics
-
-
-
-
     var WScoordinates = [];
-
     document.getElementById('fetchButton').addEventListener('click', function () {
       var fileInput = document.getElementById('fileInput');
       var file = fileInput.files[0];
@@ -1774,12 +1752,8 @@
       };
       reader.readAsText(file);
 
-
       map.createPane('WSValue');
       map.getPane('WSValue').style.zIndex = 102;
-
-
-
 
       var url_to_geotiff_WS_file = "https://czrxstrd4.github.io/avemn/WS.tif";
 
@@ -1823,12 +1797,7 @@
 
           });
         });
-
-
-
     });
-
-
 
     function extractCoordinates(WSgeojson) {
       var coordinates = [];
@@ -1840,16 +1809,8 @@
           }
         });
       }
-
       return coordinates;
     };
-
-
-
-
-
-
-
 
     // Display the GHI Map with identify function
 
@@ -1859,8 +1820,6 @@
     var url_to_geotiff_GHI_files = "https://czrxstrd4.github.io/avemn/GHI.tif";
 
     var GHIValuesLayer; // Declare GHIValuesLayer variable
-
-
 
     fetch(url_to_geotiff_GHI_files)
       .then(response => response.arrayBuffer())
@@ -1900,9 +1859,6 @@
             togglePopups();
           });
 
-
-
-
           // Create popup
           function handleMapClick(e) {
             var popupss = L.popup();
@@ -1938,16 +1894,12 @@
 
     // Display the Wind Map with identify function
 
-
-
     map.createPane('WSValues');
     map.getPane('WSValues').style.zIndex = 102;
 
     var url_to_geotiff_WS_files = "https://czrxstrd4.github.io/avemn/WS.tif";
 
     var WSValuesLayer; // Declare WSValuesLayer variable
-
-
 
     fetch(url_to_geotiff_WS_files)
       .then(response => response.arrayBuffer())
@@ -2002,7 +1954,6 @@
               .setContent("Wind Speed: " + WSValues.toFixed(2) + " m/s")
               .openOn(map);
           }
-
 
           function togglePopups() {
             if (WSValuesLayer) {
