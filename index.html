@@ -265,27 +265,17 @@
       <input type="checkbox" id="toggleCheckbox" />
       <label class="toggle-checkbox" for="toggleCheckbox" style="margin-right: 20px;" id="toggleCheckbox-label">
         <span class="toggle-slider"></span>
-        GHI Map
+        Irradiance(GHI) Map
       </label>
-
-
 
       <input type="checkbox" id="WStoggleCheckbox" />
       <label class="toggle-checkbox" for="WStoggleCheckbox" id="WStoggleCheckbox-label">
         <span class="toggle-slider"></span>
         Wind Speed Map
       </label>
-      
-      
-
-      <div style="margin-bottom: 10px;" id="GHIstatisticss"></div>
-      <div style="margin-bottom: 10px;" id="WSstatisticss"></div>
-
-
-
 
       <div>
-        <input type="file" id="fileInput" style="margin-bottom: 10px;" accept=".geojson" multiple />
+        <input type="file" id="fileInput" style="margin-bottom: 10px; margin-top: 10px;" accept=".geojson" multiple />
         <div id="fileContent"></div>
       
         
@@ -296,19 +286,17 @@
           <div id="fileContent"></div>
         </div> -->
 
-
-
-
-
-        
-
         <div>
-          <button id="fetchButton" class="easy-button">Calc Stats</button>
+          <button id="fetchButton" class="easy-button">Calculate Stats</button>
         </div>
 
         <div id="loading-prompt" class="loading-prompt">
           Loading...
         </div>
+
+        <div style="margin-bottom: 10px; margin-top: 10px;" id="GHIstatisticss"></div>
+        <div style="margin-bottom: 10px;" id="WSstatisticss"></div>
+
       </div>
     </div>
 
