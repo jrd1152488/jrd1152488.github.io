@@ -278,12 +278,12 @@
     }
 
     .common-header .header-icon {
-      font-size: 20px;
+      font-size: 22px;
       padding-right: 5px;
     }
 
     .common-header .header-text {
-      font-size: 20px;
+      font-size: 24px;
       padding-left: 5px;
     }
 
@@ -304,25 +304,69 @@
       background-color: #45a049;
     }
 
-    .sidebar-spacer {
-      height: 20px;
-    }
-
-    .custom-font {
-      font-size: 12px;
-    }
-
-    .custom-icon {
-      font-size: 16px;
-    }
-
-    .custom-text {
-      font-size: 12px;
-    }
     .custom-button-grid {
-  display: grid;
-  align-items: center;
+      display: grid;
+      align-items: center;
+      height: 45px;
+    }
+
+    .custom-button span {
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    .custom-button.active {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .custom-icon {
+    font-size: 14px;
+  }
+
+  .custom-text {
+    font-size: 12px;
+  }
+  
+  .custom-heading {
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 0.8;
+    margin-bottom: 5px;
+  }
+  .list-group-item {
+    padding: 5px;
+    line-height: 1;
+  }
+  .loading-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #f0f0f0;
+  position: relative;
 }
+
+.loading-bar::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 100%;
+  background-color: #00aaff;
+  position: absolute;
+  animation: loading-animation 2s infinite;
+}
+
+@keyframes loading-animation {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 50%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
   </style>
 </head>
 
@@ -342,842 +386,878 @@
   </div>
 
   <div id="sidebar" class="sidebar">
-    <div class="sidebar-tabs">
-    </div>
-    <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
-    </div>
+    <div class="container">
+      <div class="scrollbar" id="scrollbar-side">
+        <div class="sidebar-tabs">
+        </div>
+        <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
+        </div>
 
-    <div class="sidebar-pane" id="geotiff">
-      <h1 class="sidebar-header common-header">
-        <i class="fa-solid fa-calculator header-icon"></i>
-        <span class="header-text">Raster Calculator</span>
-        <span class="sidebar-close"></span>
-      </h1>
+        <div class="sidebar-pane" id="geotiff">
+          <h1 class="sidebar-header common-header" style="margin-bottom: 10px;">
+            <i class="fa-solid fa-calculator header-icon"></i>
+            <span class="header-text">Raster Calculator</span>
+            <span class="sidebar-close"></span>
+          </h1>
 
-      <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
-        <div class="row">
-          <div class="col-md-4">
-            <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid" style="font-size: 14px;">
-              <input class="btn-check" type="checkbox" id="toggleCheckbox" autocomplete="off">
-              <span>Irradiance Map</span>
-            </label>
+          <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 5px; ">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid"
+                  style="font-size: 14px;" onclick="toggleButton('toggleCheckbox')">
+                  <input class="btn-check" type="checkbox" id="toggleCheckbox" autocomplete="off">
+                  <span>Irradiance Map</span>
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid"
+                  style="font-size: 14px;" onclick="toggleButton('WStoggleCheckbox')">
+                  <input class="btn-check" type="checkbox" id="WStoggleCheckbox" autocomplete="off">
+                  <span>Wind Speed Map</span>
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid"
+                  style="font-size: 14px;" onclick="toggleButton('SLPtoggleCheckbox')">
+                  <input class="btn-check" type="checkbox" id="SLPtoggleCheckbox" autocomplete="off">
+                  <span>Slope Map</span>
+                </label>
+              </div>
+            </div>
           </div>
-          <div class="col-md-4">
-            <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid" style="font-size: 14px;">
-              <input class="btn-check" type="checkbox" id="WStoggleCheckbox" autocomplete="off">
-              <span>Wind Speed Map</span>
-            </label>
+
+          <hr class="sidebar-spacer">
+
+          <!-- <div>
+            <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
+              onchange="displayFileName()">
+            <label for="fileInput" style="margin-bottom: 10px;" class="btn btn-primary btn-sm">Upload Shapefile</label>
+            <span id="fileName"></span>
           </div>
-          <div class="col-md-4">
-            <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid" style="font-size: 14px;">
-              <input class="btn-check" type="checkbox" id="SLPtoggleCheckbox" autocomplete="off">
-              <span>Slope Map</span>
-            </label>
+
+          <div>
+            <button id="fetchButton" class="btn btn-primary btn-sm">Calculate Stats</button>
+          </div> -->
+
+          <div style="display: flex; justify-content: space-between;">
+            <div>
+              <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;" onchange="displayFileName()">
+              <label for="fileInput" style="margin-bottom: 10px;" class="btn btn-primary btn-sm">Upload Shapefile</label>
+
+            </div>
+          
+            <div>
+              <button id="fetchButton" class="btn btn-primary btn-sm">Calculate Stats</button>
+            </div>
+          </div>
+          <strong>Assessed Area: </strong><span id="fileName"></span>
+          <body onload="runSequentially()">
+            <pre id="output"></pre>
+
+            <!-- <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
+              Loading...
+            </div> -->
+
+            <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
+              <div class="loading-bar"></div>
+            </div>
+            
+
+
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <div class="card" style="width: 24rem;">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <p><i class="fa-regular fa-sun custom-icon"></i> <span class="custom-heading">Irradiance:</span></p>
+                    <span id="GHIstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-wind custom-icon"></i> <span class="custom-heading">Wind Speed:</span></p>
+                    <span id="WSstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-mountain custom-icon"></i> <span class="custom-heading">Slope:</span></p>
+                    <span id="SLPstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-regular fa-compass custom-icon"></i> <span class="custom-heading">Azimuth:</span></p>
+                    <span id="Azmtstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-file-contract custom-icon"></i> <span class="custom-heading">Service Contract:</span></p>
+                    <span id="SCstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-earth-asia custom-icon"></i> <span class="custom-heading">Ancestral Domains:</span></p>
+                    <span id="ADstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-water custom-icon"></i> <span class="custom-heading">Irrigated Land:</span></p>
+                    <span id="Irgtnstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-kiwi-bird custom-icon"></i> <span class="custom-heading">Protected Areas:</span></p>
+                    <span id="PrtdArsstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-house-crack custom-icon"></i> <span class="custom-heading">Active Fault:</span></p>
+                    <span id="Fltstatisticss" class="custom-text"></span>
+                  </li>
+                  <li class="list-group-item">
+                    <p><i class="fa-solid fa-triangle-exclamation custom-icon"></i> <span class="custom-heading">Floods:</span></p>
+                    <span id="FldBistatisticss" class="custom-text"></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card text-center">
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="true" href="#">Solar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Wind</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Slope</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Show Dynamic Histogram</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+
+
+
+            <canvas id="histogramChart"></canvas>
+
+        </div>
+
+        <hr class="sidebar-spacer">
+
+
+        <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
+          <h1 class="sidebar-header common-header">
+            <i class="fa-solid fa-database header-icon"></i>
+            <span class="header-text">HLA Calculator</span>
+            <span class="sidebar-close"></span>
+          </h1>
+          <div>
+            <div>
+              <table class="table">
+                <tr>
+                  <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
+                  <td><input type="number" id="ghi" name="ghi" step="any" class="form-control"></td>
+                </tr>
+                <tr>
+                  <td><label for="slope">Mean Slope, Percent:</label></td>
+                  <td><input type="number" id="slope" name="slope" step="any" class="form-control"></td>
+                </tr>
+                <tr>
+                  <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
+                  <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control"></td>
+                </tr>
+                <tr>
+                  <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
+                  <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control">
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="total_area">Total Area in Ha:</label></td>
+                  <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"></td>
+                </tr>
+
+                <tr>
+                  <td colspan="2" style="text-align:center; padding: 10px 0;">
+                    <button onclick="calculate()" class="btn btn-primary">Calculate</button></td>
+                </tr>
+
+                <tr>
+                  <td><label for="result">Result:</label></td>
+                  <td><input type="number" id="result" name="result" readonly class="form-control"></td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-      
-      
-      
-      
+      <style>
 
-
-      <div>
-        <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
-          onchange="displayFileName()">
-        <label for="fileInput" style="margin-bottom: 10px;" class="btn btn-primary btn-sm">Upload Shapefile</label>
-        <span id="fileName"></span>
-      </div>
-
-      <div>
-        <button id="fetchButton" class="btn btn-primary btn-sm">Calculate Stats</button>
-      </div>
-
-      <body onload="runSequentially()">
-        <pre id="output"></pre>
-
-        <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
-          Loading...
-        </div>
-
-        <div class="row" style="margin-top: 10px;font-size: small;">
-          <div class="col-md-12">
-            <div class="mb-3">
-              <h4><i class="fa-regular fa-sun custom-icon"></i> Irradiance:</h4>
-              <span id="GHIstatisticss" class="custom-text">GHIstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-wind custom-icon"></i> Wind Speed:</h4>
-              <span id="WSstatisticss" class="custom-text">WSstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-mountain custom-icon"></i> Slope:</h4>
-              <span id="SLPstatisticss" class="custom-text">SLPstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-mountain custom-icon"></i> Azimuth:</h4>
-              <span id="Azmtstatisticss" class="custom-text">Azmtstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-file-contract custom-icon"></i> Service Contract:</h4>
-              <span id="SCstatisticss" class="custom-text">SCstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-earth-asia custom-icon"></i> Ancestral Domains:</h4>
-              <span id="ADstatisticss" class="custom-text">ADstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-water custom-icon"></i> Irrigated Land:</h4>
-              <span id="Irgtnstatisticss" class="custom-text">Irgtnstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-kiwi-bird custom-icon"></i> Protected Areas:</h4>
-              <span id="PrtdArsstatisticss" class="custom-text">PrtdArsstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-house-crack custom-icon"></i> Fault:</h4>
-              <span id="Fltstatisticss" class="custom-text">Fltstatisticss</span>
-            </div>
-            <div class="mb-3">
-              <h4><i class="fa-solid fa-house-flood-water custom-icon"></i> Floods:</h4>
-              <span id="FldBistatisticss" class="custom-text">FldBistatisticss</span>
-            </div>
-          </div>
-        </div>
-        
-
-
-        <canvas id="histogramChart"></canvas>
+      </style>
 
     </div>
 
-    <hr class="sidebar-spacer">
+    <!-- Add a layer group for drawn and uploaded polygons -->
+    <div id="polygon-layer" class="leaflet-pane leaflet-overlay-pane"></div>
 
+    <script>
+      //SPT
+      var highlightLayer;
 
-    <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
-      <h1 class="sidebar-header common-header">
-        <i class="fa-solid fa-database header-icon"></i>
-        <span class="header-text">HLA Calculator</span>
-        <span class="sidebar-close"></span>
-      </h1>
-      <div>
-        <div>
-          <table class="table">
-            <tr>
-              <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
-              <td><input type="number" id="ghi" name="ghi" step="any" class="form-control"></td>
-            </tr>
-            <tr>
-              <td><label for="slope">Mean Slope, Percent:</label></td>
-              <td><input type="number" id="slope" name="slope" step="any" class="form-control"></td>
-            </tr>
-            <tr>
-              <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
-              <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control"></td>
-            </tr>
-            <tr>
-              <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
-              <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control"></td>
-            </tr>
-            <tr>
-              <td><label for="total_area">Total Area in Ha:</label></td>
-              <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"></td>
-            </tr>
+      function highlightFeature(e) {
+        highlightLayer = e.target;
 
-            <tr>
-              <td colspan="2" style="text-align:center; padding: 10px 0;">
-                <button onclick="calculate()" class="btn btn-primary">Calculate</button></td>
-            </tr>
-
-            <tr>
-              <td><label for="result">Result:</label></td>
-              <td><input type="number" id="result" name="result" readonly class="form-control"></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-    <style>
-
-    </style>
-
-  </div>
-
-  <!-- Add a layer group for drawn and uploaded polygons -->
-  <div id="polygon-layer" class="leaflet-pane leaflet-overlay-pane"></div>
-
-  <script>
-    //SPT
-    var highlightLayer;
-
-    function highlightFeature(e) {
-      highlightLayer = e.target;
-
-      if (e.target.feature.geometry.type === 'LineString') {
-        highlightLayer.setStyle({
-          color: '#ffff00',
-        });
-      } else {
-        highlightLayer.setStyle({
-          fillColor: '#ffff00',
-          fillOpacity: 1
-        });
+        if (e.target.feature.geometry.type === 'LineString') {
+          highlightLayer.setStyle({
+            color: '#ffff00',
+          });
+        } else {
+          highlightLayer.setStyle({
+            fillColor: '#ffff00',
+            fillOpacity: 1
+          });
+        }
       }
-    }
-    var map = L.map('map', {
-      zoomControl: false,
-      maxZoom: 28,
-      minZoom: 1
-    });
+      var map = L.map('map', {
+        zoomControl: false,
+        maxZoom: 28,
+        minZoom: 1
+      });
 
-    var philippines = L.latLng(12.8797, 121.7740);
-    map.setView(philippines, 6);
+      var philippines = L.latLng(12.8797, 121.7740);
+      map.setView(philippines, 6);
 
 
-    var fileUploaders = new L.FeatureGroup();
-    map.addLayer(fileUploaders);
+      var fileUploaders = new L.FeatureGroup();
+      map.addLayer(fileUploaders);
 
-    var autolinker = new Autolinker({
-      truncate: {
-        length: 30,
-        location: 'smart'
+      var autolinker = new Autolinker({
+        truncate: {
+          length: 30,
+          location: 'smart'
+        }
+      });
+
+      function toggleButton(buttonId) {
+        var button = document.getElementById(buttonId);
+        button.classList.toggle("active");
       }
-    });
 
 
-    var bounds_group = new L.featureGroup([]);
+      var bounds_group = new L.featureGroup([]);
 
-    function setBounds() {}
+      function setBounds() {}
 
-    map.createPane('pane_GoogleMapsBasic_0');
-    map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
-    var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-      pane: 'pane_GoogleMapsBasic_0',
-      opacity: 0.671,
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 0,
-      maxNativeZoom: 18
-    });
-    layer_GoogleMapsBasic_0;
+      map.createPane('pane_GoogleMapsBasic_0');
+      map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
+      var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        pane: 'pane_GoogleMapsBasic_0',
+        opacity: 0.671,
+        minZoom: 1,
+        maxZoom: 28,
+        minNativeZoom: 0,
+        maxNativeZoom: 18
+      });
+      layer_GoogleMapsBasic_0;
 
-    map.createPane('pane_GoogleMapsSatellite_1');
-    map.getPane('pane_GoogleMapsSatellite_1').style.zIndex = 100;
-    var layer_GoogleMapsSatellite_1 = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
-      pane: 'pane_GoogleMapsSatellite_1',
-      opacity: 1.0,
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 0,
-      maxNativeZoom: 25
-    });
-    layer_GoogleMapsSatellite_1;
-    map.addLayer(layer_GoogleMapsSatellite_1);
-
-    map.createPane('pane_GoogleSatelliteHybrid_1');
-    map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
-    var layer_GoogleSatelliteHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-      pane: 'pane_GoogleSatelliteHybrid_1',
-      opacity: 1.0,
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 0,
-      maxNativeZoom: 25
-    });
-    layer_GoogleSatelliteHybrid_1;
-
-    map.createPane('pane_planetNICFI');
-    map.getPane('pane_planetNICFI').style.zIndex = 100;
-    var layer_planetNICFI = L.tileLayer(
-      'https://tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2023-03_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAK157598af286b421386a7fa8a69f90b85', {
-        pane: 'pane_planetNICFI',
+      map.createPane('pane_GoogleMapsSatellite_1');
+      map.getPane('pane_GoogleMapsSatellite_1').style.zIndex = 100;
+      var layer_GoogleMapsSatellite_1 = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
+        pane: 'pane_GoogleMapsSatellite_1',
         opacity: 1.0,
         minZoom: 1,
         maxZoom: 28,
         minNativeZoom: 0,
         maxNativeZoom: 25
       });
-    layer_planetNICFI;
+      layer_GoogleMapsSatellite_1;
+      map.addLayer(layer_GoogleMapsSatellite_1);
 
-    function createTileLayer(name, url) {
-      map.createPane(`pane_${name}`);
-      map.getPane(`pane_${name}`).style.zIndex = 101;
-      const layer = L.tileLayer(url, {
-        pane: `pane_${name}`,
-        opacity: 1,
-        attribution: '',
+      map.createPane('pane_GoogleSatelliteHybrid_1');
+      map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
+      var layer_GoogleSatelliteHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+        pane: 'pane_GoogleSatelliteHybrid_1',
+        opacity: 1.0,
         minZoom: 1,
         maxZoom: 28,
-        minNativeZoom: 4,
-        maxNativeZoom: 14
+        minNativeZoom: 0,
+        maxNativeZoom: 25
       });
-      return layer;
-    }
+      layer_GoogleSatelliteHybrid_1;
 
-    const layer_GHISLP = createTileLayer('GHISLP',
-      'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
-    const layer_IRDGHI = createTileLayer('IRDGHI',
-      'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
-    const layer_SLPSLR = createTileLayer('SLPSLR',
-      'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
-    const layer_WSSLP = createTileLayer('WSSLP',
-      'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
-    const layer_WS = createTileLayer('WS',
-      'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
-    const layer_SLPWD = createTileLayer('SLPWD',
-      'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
-    const layer_SLP = createTileLayer('SLP',
-      'https://github.github/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+      map.createPane('pane_planetNICFI');
+      map.getPane('pane_planetNICFI').style.zIndex = 100;
+      var layer_planetNICFI = L.tileLayer(
+        'https://tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2023-03_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAK157598af286b421386a7fa8a69f90b85', {
+          pane: 'pane_planetNICFI',
+          opacity: 1.0,
+          minZoom: 1,
+          maxZoom: 28,
+          minNativeZoom: 0,
+          maxNativeZoom: 25
+        });
+      layer_planetNICFI;
 
-    var sidebar = L.control.sidebar('sidebar').addTo(map);
-    var drawnItems = new L.FeatureGroup().addTo(map);
+      function createTileLayer(name, url) {
+        map.createPane(`pane_${name}`);
+        map.getPane(`pane_${name}`).style.zIndex = 101;
+        const layer = L.tileLayer(url, {
+          pane: `pane_${name}`,
+          opacity: 1,
+          attribution: '',
+          minZoom: 1,
+          maxZoom: 28,
+          minNativeZoom: 4,
+          maxNativeZoom: 14
+        });
+        return layer;
+      }
 
-    L.easyButton({
-      states: [{
-        stateName: 'toggle-sidebar',
-        icon: 'fa-bars',
-        title: 'Toggle Sidebar',
-        onClick: function (control) {
-          sidebar.toggle();
-        }
-      }]
-    }).addTo(map);
+      const layer_GHISLP = createTileLayer('GHISLP',
+        'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
+      const layer_IRDGHI = createTileLayer('IRDGHI',
+        'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
+      const layer_SLPSLR = createTileLayer('SLPSLR',
+        'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
+      const layer_WSSLP = createTileLayer('WSSLP',
+        'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
+      const layer_WS = createTileLayer('WS',
+        'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
+      const layer_SLPWD = createTileLayer('SLPWD',
+        'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
+      const layer_SLP = createTileLayer('SLP',
+        'https://github.github/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+
+      var sidebar = L.control.sidebar('sidebar').addTo(map);
+      var drawnItems = new L.FeatureGroup().addTo(map);
+
+      L.easyButton({
+        states: [{
+          stateName: 'toggle-sidebar',
+          icon: 'fa-bars',
+          title: 'Toggle Sidebar',
+          onClick: function (control) {
+            sidebar.toggle();
+          }
+        }]
+      }).addTo(map);
 
 
-    //Geocoder
-    var osmGeocoder = new L.Control.Geocoder({
-      collapsed: false,
-      position: 'bottomleft',
-    }).addTo(map);
+      //Geocoder
+      var osmGeocoder = new L.Control.Geocoder({
+        collapsed: false,
+        position: 'bottomleft',
+      }).addTo(map);
 
-    document.getElementsByClassName('leaflet-control-geocoder-icon')[0].className += ' fa fa-map-location-dot';
-    document.getElementsByClassName('leaflet-control-geocoder-icon')[0].title +=
-      'Search for a place, such as Barangay, Muncipality, etc.';
+      document.getElementsByClassName('leaflet-control-geocoder-icon')[0].className += ' fa fa-map-location-dot';
+      document.getElementsByClassName('leaflet-control-geocoder-icon')[0].title +=
+        'Search for a place, such as Barangay, Muncipality, etc.';
 
 
-    // Custom control for coordinates input
-    var CoordinatesInputControl = L.Control.extend({
-      options: {
-        position: 'bottomleft'
-      },
+      // Custom control for coordinates input
+      var CoordinatesInputControl = L.Control.extend({
+        options: {
+          position: 'bottomleft'
+        },
 
-      onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'coordinates-input-control leaflet-bar');
-        container.innerHTML = `
+        onAdd: function (map) {
+          var container = L.DomUtil.create('div', 'coordinates-input-control leaflet-bar');
+          container.innerHTML = `
           <input type="text" id="coordinates" placeholder="Search for Longitude, Latitude" />
         `;
-        L.DomEvent.disableClickPropagation(container);
-        return container;
+          L.DomEvent.disableClickPropagation(container);
+          return container;
+        }
+      });
+
+      // Add the custom control to the map
+      var coordinatesInputControl = new CoordinatesInputControl().addTo(map);
+
+      // Add a marker to the map
+      var marker = L.marker([0, 0]).addTo(map);
+      marker.setOpacity(0);
+
+      // Event listener for the coordinates input
+      document.getElementById('coordinates').addEventListener('keydown', function (event) {
+        if (event.keyCode === 13) {
+          var coordinates = event.target.value.split(',');
+          var latitude = parseFloat(coordinates[0]);
+          var longitude = parseFloat(coordinates[1]);
+
+          if (isNaN(latitude) || isNaN(longitude)) {
+            alert('Please enter valid coordinates.');
+            return;
+          }
+
+          var latLng = L.latLng(latitude, longitude);
+          marker.setLatLng(latLng);
+          marker.setOpacity(1);
+          map.setView(latLng, map.getZoom());
+        }
+      });
+
+
+      //Calculator--------------------------------------------------------------------------------------------------
+      function calculate() {
+        var ghi = parseFloat(document.getElementById("ghi").value);
+        var slope = parseFloat(document.getElementById("slope").value);
+        var tl_distance = parseFloat(document.getElementById("tl_distance").value);
+        var purchase_price = parseFloat(document.getElementById("purchase_price").value);
+        var total_area = parseFloat(document.getElementById("total_area").value);
+
+        if (ghi > 0 && slope > 0 && tl_distance > 0 && purchase_price > 0 && total_area > 0) {
+          var result = Math.round((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 + (
+            slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
+            tl_distance)) / 10) + 1)) * 0.2329 + (purchase_price < 150 ? 10 : purchase_price > 350 ? 1 : (((9 * (
+            350 -
+            purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 : ((-
+            0.000000000122212 * Math.pow(total_area, 5)) + (0.000000127783385 * Math.pow(total_area, 4)) - (
+            0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) - (
+            0.818987139682201 * total_area) + 24.612688789833400)) * 0.3414, 1);
+          document.getElementById("result").value = result;
+        } else {
+          alert("Please enter valid input values for all fields!");
+        }
       }
-    });
 
-    // Add the custom control to the map
-    var coordinatesInputControl = new CoordinatesInputControl().addTo(map);
+      // // Add initial layer to the map
+      // layer_GoogleMapsSatellite_1.addTo(map);
 
-    // Add a marker to the map
-    var marker = L.marker([0, 0]).addTo(map);
-    marker.setOpacity(0);
+      // // Add event listeners to change the map layer when a button is clicked
+      // document.getElementById('google-maps-basic-button').addEventListener('click', function () {
+      //   map.eachLayer(function (layer) {
+      //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
+      //       map.removeLayer(layer);
+      //     }
+      //   });
+      //   layer_GoogleMapsBasic_0.addTo(map);
+      // });
 
-    // Event listener for the coordinates input
-    document.getElementById('coordinates').addEventListener('keydown', function (event) {
-      if (event.keyCode === 13) {
-        var coordinates = event.target.value.split(',');
-        var latitude = parseFloat(coordinates[0]);
-        var longitude = parseFloat(coordinates[1]);
+      // document.getElementById('google-maps-satellite-button').addEventListener('click', function () {
+      //   map.eachLayer(function (layer) {
+      //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
+      //       map.removeLayer(layer);
+      //     }
+      //   });
+      //   layer_GoogleMapsSatellite_1.addTo(map);
+      // });
 
-        if (isNaN(latitude) || isNaN(longitude)) {
-          alert('Please enter valid coordinates.');
+      // document.getElementById('google-satellite-hybrid-button').addEventListener('click', function () {
+      //   map.eachLayer(function (layer) {
+      //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
+      //       map.removeLayer(layer);
+      //     }
+      //   });
+      //   layer_GoogleSatelliteHybrid_1.addTo(map);
+      // });
+
+      //------------------------------------------FILE UPLOAD---------------------------------------------------------------------
+      // Function to handle KML, KMZ, and GeoJSON files
+      async function handleFile(file) {
+        let geojson;
+        if (file.name.endsWith('.kml') || file.name.endsWith('.kmz')) {
+          let kmlText;
+          if (file.name.endsWith('.kmz')) {
+            const zip = new JSZip();
+            const content = await zip.loadAsync(file);
+            const kmlFile = content.files[Object.keys(content.files).find(name => name.endsWith('.kml'))];
+            kmlText = await kmlFile.async('text');
+          } else {
+            kmlText = await file.text();
+          }
+
+          const parser = new DOMParser();
+          const kml = parser.parseFromString(kmlText, 'text/xml');
+          geojson = toGeoJSON.kml(kml);
+        } else if (file.name.endsWith('.geojson')) {
+          const fileText = await file.text();
+          geojson = JSON.parse(fileText);
+        } else {
+          alert('Unsupported file format. Please upload KML, KMZ, or GeoJSON files.');
           return;
         }
 
-        var latLng = L.latLng(latitude, longitude);
-        marker.setLatLng(latLng);
-        marker.setOpacity(1);
-        map.setView(latLng, map.getZoom());
-      }
-    });
-
-
-    //Calculator--------------------------------------------------------------------------------------------------
-    function calculate() {
-      var ghi = parseFloat(document.getElementById("ghi").value);
-      var slope = parseFloat(document.getElementById("slope").value);
-      var tl_distance = parseFloat(document.getElementById("tl_distance").value);
-      var purchase_price = parseFloat(document.getElementById("purchase_price").value);
-      var total_area = parseFloat(document.getElementById("total_area").value);
-
-      if (ghi > 0 && slope > 0 && tl_distance > 0 && purchase_price > 0 && total_area > 0) {
-        var result = Math.round((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 + (
-          slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
-          tl_distance)) / 10) + 1)) * 0.2329 + (purchase_price < 150 ? 10 : purchase_price > 350 ? 1 : (((9 * (350 -
-          purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 : ((-
-          0.000000000122212 * Math.pow(total_area, 5)) + (0.000000127783385 * Math.pow(total_area, 4)) - (
-          0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) - (
-          0.818987139682201 * total_area) + 24.612688789833400)) * 0.3414, 1);
-        document.getElementById("result").value = result;
-      } else {
-        alert("Please enter valid input values for all fields!");
-      }
-    }
-
-    // // Add initial layer to the map
-    // layer_GoogleMapsSatellite_1.addTo(map);
-
-    // // Add event listeners to change the map layer when a button is clicked
-    // document.getElementById('google-maps-basic-button').addEventListener('click', function () {
-    //   map.eachLayer(function (layer) {
-    //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
-    //       map.removeLayer(layer);
-    //     }
-    //   });
-    //   layer_GoogleMapsBasic_0.addTo(map);
-    // });
-
-    // document.getElementById('google-maps-satellite-button').addEventListener('click', function () {
-    //   map.eachLayer(function (layer) {
-    //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
-    //       map.removeLayer(layer);
-    //     }
-    //   });
-    //   layer_GoogleMapsSatellite_1.addTo(map);
-    // });
-
-    // document.getElementById('google-satellite-hybrid-button').addEventListener('click', function () {
-    //   map.eachLayer(function (layer) {
-    //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
-    //       map.removeLayer(layer);
-    //     }
-    //   });
-    //   layer_GoogleSatelliteHybrid_1.addTo(map);
-    // });
-
-    //------------------------------------------FILE UPLOAD---------------------------------------------------------------------
-    // Function to handle KML, KMZ, and GeoJSON files
-    async function handleFile(file) {
-      let geojson;
-      if (file.name.endsWith('.kml') || file.name.endsWith('.kmz')) {
-        let kmlText;
-        if (file.name.endsWith('.kmz')) {
-          const zip = new JSZip();
-          const content = await zip.loadAsync(file);
-          const kmlFile = content.files[Object.keys(content.files).find(name => name.endsWith('.kml'))];
-          kmlText = await kmlFile.async('text');
-        } else {
-          kmlText = await file.text();
+        if (!geojson) {
+          console.error('GeoJSON data is not defined');
+          return;
         }
 
-        const parser = new DOMParser();
-        const kml = parser.parseFromString(kmlText, 'text/xml');
-        geojson = toGeoJSON.kml(kml);
-      } else if (file.name.endsWith('.geojson')) {
-        const fileText = await file.text();
-        geojson = JSON.parse(fileText);
-      } else {
-        alert('Unsupported file format. Please upload KML, KMZ, or GeoJSON files.');
-        return;
-      }
-
-      if (!geojson) {
-        console.error('GeoJSON data is not defined');
-        return;
-      }
-
-      var layer = L.geoJSON(geojson, {
-        onEachFeature: function (feature, layer) {
-          if (!layer._defaultShape || !layer.getLatLngs) {
-            console.error('Layer is not a valid shape');
-            return;
-          }
-          const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ? layer
-            ._defaultShape() : layer.getLatLngs())), true);
-          const name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
-        },
-        style: {
-          color: 'yellow',
-          clickable: true,
-          fillOpacity: .1,
-          fillColor: '#fff'
-        },
-        pointToLayer: function (data, latlng) {
-          return L.circleMarker(latlng, {
-            style: {
-              color: 'yellow'
+        var layer = L.geoJSON(geojson, {
+          onEachFeature: function (feature, layer) {
+            if (!layer._defaultShape || !layer.getLatLngs) {
+              console.error('Layer is not a valid shape');
+              return;
             }
-          });
+            const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ? layer
+              ._defaultShape() : layer.getLatLngs())), true);
+            const name = feature.properties.name || 'Unnamed feature';
+            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+          },
+          style: {
+            color: 'yellow',
+            clickable: true,
+            fillOpacity: .1,
+            fillColor: '#fff'
+          },
+          pointToLayer: function (data, latlng) {
+            return L.circleMarker(latlng, {
+              style: {
+                color: 'yellow'
+              }
+            });
+          }
+        });
+
+
+        fileUploaders.addLayer(layer);
+        map.fitBounds(layer.getBounds());
+      }
+
+      // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
+      const holder_fileInput = document.createElement('input');
+      holder_fileInput.type = 'file';
+      holder_fileInput.accept = '.kml,.kmz,.geojson';
+      holder_fileInput.style.display = 'none';
+      document.body.appendChild(holder_fileInput);
+
+      // Add event listener to the hidden file input element
+      holder_fileInput.addEventListener('change', () => {
+        if (holder_fileInput.files.length > 0) {
+          handleFile(holder_fileInput.files[0]);
         }
       });
 
+      // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
+      L.easyButton({
+        states: [{
+          stateName: 'upload-file',
+          icon: 'fa-file-import',
+          title: 'Upload KML/KMZ/GeoJSON',
+          onClick: function (control) {
+            holder_fileInput.click();
+          }
+        }]
+      }).addTo(map);
 
-      fileUploaders.addLayer(layer);
-      map.fitBounds(layer.getBounds());
-    }
+      //_____________________________________________________________________________________________________________________________________________
 
-    // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
-    const holder_fileInput = document.createElement('input');
-    holder_fileInput.type = 'file';
-    holder_fileInput.accept = '.kml,.kmz,.geojson';
-    holder_fileInput.style.display = 'none';
-    document.body.appendChild(holder_fileInput);
 
-    // Add event listener to the hidden file input element
-    holder_fileInput.addEventListener('change', () => {
-      if (holder_fileInput.files.length > 0) {
-        handleFile(holder_fileInput.files[0]);
-      }
-    });
-
-    // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-    L.easyButton({
-      states: [{
-        stateName: 'upload-file',
-        icon: 'fa-file-import',
-        title: 'Upload KML/KMZ/GeoJSON',
-        onClick: function (control) {
-          holder_fileInput.click();
+      // Create the search button
+      var searchButton = L.easyButton('fa-search', function (btn, map) {
+        var searchContainer = document.getElementById('searchContainer');
+        if (searchContainer.style.display === 'none') {
+          searchContainer.style.display = 'flex';
+        } else {
+          searchContainer.style.display = 'none';
         }
-      }]
-    }).addTo(map);
+      });
 
-    //_____________________________________________________________________________________________________________________________________________
+      // Add the search button to the map
+      searchButton.addTo(map);
+      // Create the search bar and its functionality
+      var searchContainer = document.createElement('div');
+      searchContainer.id = 'searchContainer';
+      searchContainer.className = 'search-container';
 
+      var inputGroup = document.createElement('div');
+      inputGroup.className = 'input-group';
 
-    // Create the search button
-    var searchButton = L.easyButton('fa-search', function (btn, map) {
-      var searchContainer = document.getElementById('searchContainer');
-      if (searchContainer.style.display === 'none') {
-        searchContainer.style.display = 'flex';
-      } else {
-        searchContainer.style.display = 'none';
-      }
-    });
+      var searchInput = document.createElement('input');
+      searchInput.id = 'searchInput';
+      searchInput.className = 'form-control search-input';
+      searchInput.type = 'text';
+      searchInput.placeholder = 'Search...';
 
-    // Add the search button to the map
-    searchButton.addTo(map);
-    // Create the search bar and its functionality
-    var searchContainer = document.createElement('div');
-    searchContainer.id = 'searchContainer';
-    searchContainer.className = 'search-container';
+      var searchButton = document.createElement('button');
+      searchButton.id = 'searchButton';
+      searchButton.className = 'btn btn-primary btn-sm search-button';
+      searchButton.type = 'button';
+      searchButton.innerHTML = 'Search';
 
-    var inputGroup = document.createElement('div');
-    inputGroup.className = 'input-group';
+      inputGroup.appendChild(searchInput);
+      inputGroup.appendChild(searchButton);
+      searchContainer.appendChild(inputGroup);
+      document.body.appendChild(searchContainer);
 
-    var searchInput = document.createElement('input');
-    searchInput.id = 'searchInput';
-    searchInput.className = 'form-control search-input';
-    searchInput.type = 'text';
-    searchInput.placeholder = 'Search...';
+      // Event listener for the search button
+      searchButton.addEventListener('click', function () {
+        var searchTerm = searchInput.value;
+        // Perform the search functionality based on the search term
+        // ...
+        console.log('Search term:', searchTerm);
+      });
 
-    var searchButton = document.createElement('button');
-    searchButton.id = 'searchButton';
-    searchButton.className = 'btn btn-primary btn-sm search-button';
-    searchButton.type = 'button';
-    searchButton.innerHTML = 'Search';
+      //_____________________________________________________________________________________________________________________________________________
 
-    inputGroup.appendChild(searchInput);
-    inputGroup.appendChild(searchButton);
-    searchContainer.appendChild(inputGroup);
-    document.body.appendChild(searchContainer);
-
-    // Event listener for the search button
-    searchButton.addEventListener('click', function () {
-      var searchTerm = searchInput.value;
-      // Perform the search functionality based on the search term
-      // ...
-      console.log('Search term:', searchTerm);
-    });
-
-    //_____________________________________________________________________________________________________________________________________________
-
-    //---------------------------------------TILE LAYERS------------------------------------------------------------------------//
-    //OpenTopo
-    map.createPane('pane_OpenTopo');
-    map.getPane('pane_OpenTopo').style.zIndex = 104;
-    var layer_OpenTopo = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
-      pane: 'pane_OpenTopo',
-      opacity: 1,
-      attribution: '',
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 0,
-      maxNativeZoom: 25
-    });
-    layer_OpenTopo;
-
-    //EsriTopo
-    map.createPane('pane_EsriTopo');
-    map.getPane('pane_EsriTopo').style.zIndex = 103;
-    var layer_EsriTopo = L.tileLayer(
-      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-        pane: 'pane_EsriTopo',
+      //---------------------------------------TILE LAYERS------------------------------------------------------------------------//
+      //OpenTopo
+      map.createPane('pane_OpenTopo');
+      map.getPane('pane_OpenTopo').style.zIndex = 104;
+      var layer_OpenTopo = L.tileLayer('https://tile.opentopomap.org/{z}/{x}/{y}.png', {
+        pane: 'pane_OpenTopo',
         opacity: 1,
         attribution: '',
         minZoom: 1,
         maxZoom: 28,
         minNativeZoom: 0,
-        maxNativeZoom: 18
+        maxNativeZoom: 25
       });
-    layer_EsriTopo;
+      layer_OpenTopo;
 
-    function pop_ServiceContractMap_1(feature, layer) {
-      layer.on({
-        mouseout: function (e) {
-          for (i in e.target._eventParents) {
-            e.target._eventParents[i].resetStyle(e.target);
-          }
-        },
-        mouseover: highlightFeature,
-      });
-      var popupContent = '<table>\
+      //EsriTopo
+      map.createPane('pane_EsriTopo');
+      map.getPane('pane_EsriTopo').style.zIndex = 103;
+      var layer_EsriTopo = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+          pane: 'pane_EsriTopo',
+          opacity: 1,
+          attribution: '',
+          minZoom: 1,
+          maxZoom: 28,
+          minNativeZoom: 0,
+          maxNativeZoom: 18
+        });
+      layer_EsriTopo;
+
+      function pop_ServiceContractMap_1(feature, layer) {
+        layer.on({
+          mouseout: function (e) {
+            for (i in e.target._eventParents) {
+              e.target._eventParents[i].resetStyle(e.target);
+            }
+          },
+          mouseover: highlightFeature,
+        });
+        var popupContent = '<table>\
                     <tr>\
                         <th scope="row">ID</th>\
                         <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID']
-        .toLocaleString()) : '') + '</td>\
+          .toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Project Name</th>\
                         <td>' + (feature.properties['sc_Project Name'] !== null ? autolinker.link(feature.properties[
-        'sc_Project Name'].toLocaleString()) : '') + '</td>\
+          'sc_Project Name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">SPV</th>\
                         <td>' + (feature.properties['sc_SPV'] !== null ? autolinker.link(feature.properties['sc_SPV']
-        .toLocaleString()) : '') + '</td>\
+          .toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Parent Company</th>\
                         <td>' + (feature.properties['sc_Parent Company'] !== null ? autolinker.link(feature.properties[
-        'sc_Parent Company'].toLocaleString()) : '') + '</td>\
+          'sc_Parent Company'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Resource Type</th>\
                         <td>' + (feature.properties['sc_Resource'] !== null ? autolinker.link(feature.properties[
-        'sc_Resource'].toLocaleString()) : '') + '</td>\
+          'sc_Resource'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Technology Type</th>\
                         <td>' + (feature.properties['sc_Technology Type'] !== null ? autolinker.link(feature
-        .properties['sc_Technology Type'].toLocaleString()) : '') + '</td>\
+          .properties['sc_Technology Type'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Capacity (MW)</th>\
                         <td>' + (feature.properties['sc_Capacity (MW)'] !== null ? autolinker.link(feature.properties[
-        'sc_Capacity (MW)'].toLocaleString()) : '') + '</td>\
+          'sc_Capacity (MW)'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">COD</th>\
                         <td>' + (feature.properties['sc_COD'] !== null ? autolinker.link(feature.properties['sc_COD']
-        .toLocaleString()) : '') + '</td>\
+          .toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Status</th>\
                         <td>' + (feature.properties['sc_Status'] !== null ? autolinker.link(feature.properties[
-        'sc_Status'].toLocaleString()) : '') + '</td>\
+          'sc_Status'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Resource Value</th>\
                         <td>' + (feature.properties['sc_Resource Value'] !== null ? autolinker.link(feature.properties[
-        'sc_Resource Value'].toLocaleString()) : '') + '</td>\
+          'sc_Resource Value'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Terrain Grade</th>\
                         <td>' + (feature.properties['sc_Terrain Grade'] !== null ? autolinker.link(feature.properties[
-        'sc_Terrain Grade'].toLocaleString()) : '') + '</td>\
+          'sc_Terrain Grade'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Nearest Substation</th>\
                         <td>' + (feature.properties['sc_Nearest Substation'] !== null ? autolinker.link(feature
-        .properties['sc_Nearest Substation'].toLocaleString()) : '') + '</td>\
+          .properties['sc_Nearest Substation'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Est. TL Length (km)</th>\
                         <td>' + (feature.properties['sc_Est. TL Length (km)'] !== null ? autolinker.link(feature
-        .properties['sc_Est. TL Length (km)'].toLocaleString()) : '') + '</td>\
+          .properties['sc_Est. TL Length (km)'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-      layer.bindPopup(popupContent, {
-        maxHeight: 400
-      });
-    }
-
-    function style_ServiceContractMap_1_0(feature) {
-      switch (String(feature.properties['sc_Technology Type'])) {
-        case '-':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(0,182,0,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Offshore':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(0,0,200,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Onshore':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(0,226,233,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Floating':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(255,158,1,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Rooftop':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(255,238,1,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Ground mounted':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(255,94,0,0.6)',
-              interactive: true,
-          }
-          break;
+        layer.bindPopup(popupContent, {
+          maxHeight: 400
+        });
       }
-    }
-    map.createPane('pane_ServiceContractMap_1');
-    map.getPane('pane_ServiceContractMap_1').style.zIndex = 110;
-    map.getPane('pane_ServiceContractMap_1').style['mix-blend-mode'] = 'normal';
-    var layer_ServiceContractMap_1 = new L.geoJson(json_ServiceContractMap_1, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_ServiceContractMap_1',
-      layerName: 'layer_ServiceContractMap_1',
-      pane: 'pane_ServiceContractMap_1',
-      onEachFeature: pop_ServiceContractMap_1,
-      style: style_ServiceContractMap_1_0,
-    });
-    bounds_group.addLayer(layer_ServiceContractMap_1);
-    map.addLayer(layer_ServiceContractMap_1);
 
-
-    //Ancestral_Domains
-    map.createPane('pane_AncestralDomain_3');
-    map.getPane('pane_AncestralDomain_3').style.zIndex = 109;
-    map.getPane('pane_AncestralDomain_3').style['mix-blend-mode'] = 'normal';
-    var layer_AncestralDomain_3 = new L.geoJson(json_AncestralDomain_3, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_AncestralDomain_3',
-      layerName: 'layer_AncestralDomain_3',
-      pane: 'pane_AncestralDomain_3',
-      onEachFeature: pop_AncestralDomain_3,
-      style: style_AncestralDomain_3_0,
-    });
-    bounds_group.addLayer(layer_AncestralDomain_3);
-
-    //Protected_Areas
-    map.createPane('pane_ProtectedAreas_4');
-    map.getPane('pane_ProtectedAreas_4').style.zIndex = 108;
-    map.getPane('pane_ProtectedAreas_4').style['mix-blend-mode'] = 'normal';
-    var layer_ProtectedAreas_4 = new L.geoJson(json_ProtectedAreas_4, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_ProtectedAreas_4',
-      layerName: 'layer_ProtectedAreas_4',
-      pane: 'pane_ProtectedAreas_4',
-      onEachFeature: pop_ProtectedAreas_4,
-      style: style_ProtectedAreas_4_0,
-    });
-    bounds_group.addLayer(layer_ProtectedAreas_4);
-
-    //Key_Biodiversity
-    map.createPane('pane_KeyBiodiversityAreas_5');
-    map.getPane('pane_KeyBiodiversityAreas_5').style.zIndex = 107;
-    var layer_KeyBiodiversityAreas_5 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
-      "keybiodiversityareas_202005", {
-        pane: 'pane_KeyBiodiversityAreas_5',
-        format: 'image/png',
-        uppercase: true,
-        transparent: true,
-        continuousWorld: true,
-        tiled: true,
-        info_format: 'text/html',
-        opacity: 0.6,
-        identify: true,
+      function style_ServiceContractMap_1_0(feature) {
+        switch (String(feature.properties['sc_Technology Type'])) {
+          case '-':
+            return {
+              pane: 'pane_ServiceContractMap_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,182,0,0.6)',
+                interactive: true,
+            }
+            break;
+          case 'Offshore':
+            return {
+              pane: 'pane_ServiceContractMap_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,200,0.6)',
+                interactive: true,
+            }
+            break;
+          case 'Onshore':
+            return {
+              pane: 'pane_ServiceContractMap_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,226,233,0.6)',
+                interactive: true,
+            }
+            break;
+          case 'Floating':
+            return {
+              pane: 'pane_ServiceContractMap_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,158,1,0.6)',
+                interactive: true,
+            }
+            break;
+          case 'Rooftop':
+            return {
+              pane: 'pane_ServiceContractMap_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,238,1,0.6)',
+                interactive: true,
+            }
+            break;
+          case 'Ground mounted':
+            return {
+              pane: 'pane_ServiceContractMap_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,94,0,0.6)',
+                interactive: true,
+            }
+            break;
+        }
+      }
+      map.createPane('pane_ServiceContractMap_1');
+      map.getPane('pane_ServiceContractMap_1').style.zIndex = 110;
+      map.getPane('pane_ServiceContractMap_1').style['mix-blend-mode'] = 'normal';
+      var layer_ServiceContractMap_1 = new L.geoJson(json_ServiceContractMap_1, {
         attribution: '',
+        interactive: true,
+        dataVar: 'json_ServiceContractMap_1',
+        layerName: 'layer_ServiceContractMap_1',
+        pane: 'pane_ServiceContractMap_1',
+        onEachFeature: pop_ServiceContractMap_1,
+        style: style_ServiceContractMap_1_0,
       });
-    layer_KeyBiodiversityAreas_5;
+      bounds_group.addLayer(layer_ServiceContractMap_1);
+      map.addLayer(layer_ServiceContractMap_1);
 
-    //River and Water Bodies
-    map.createPane('pane_RVRWBS');
-    map.getPane('pane_RVRWBS').style.zIndex = 111;
-    var layer_RVRWBS = L.tileLayer('https://github.com/czrxstrd4/RVRWBS/raw/main/RVRWBS/{z}/{x}/{y}.png', {
-      pane: 'pane_RVRWBS',
-      opacity: 0.6,
-      attribution: '',
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 4,
-      maxNativeZoom: 14
-    });
-    layer_RVRWBS;
 
-    //Flood_Hazard
-    map.createPane('pane_FloodHazard_25yrs_6');
-    map.getPane('pane_FloodHazard_25yrs_6').style.zIndex = 113;
-    var layer_FloodHazard_25yrs_6 = L.tileLayer(
-      'https://github.com/czrxstrd4/FLDHM/raw/main/Tiles/{z}/{x}/{y}.png', {
-        pane: 'pane_FloodHazard_25yrs_6',
+      //Ancestral_Domains
+      map.createPane('pane_AncestralDomain_3');
+      map.getPane('pane_AncestralDomain_3').style.zIndex = 109;
+      map.getPane('pane_AncestralDomain_3').style['mix-blend-mode'] = 'normal';
+      var layer_AncestralDomain_3 = new L.geoJson(json_AncestralDomain_3, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_AncestralDomain_3',
+        layerName: 'layer_AncestralDomain_3',
+        pane: 'pane_AncestralDomain_3',
+        onEachFeature: pop_AncestralDomain_3,
+        style: style_AncestralDomain_3_0,
+      });
+      bounds_group.addLayer(layer_AncestralDomain_3);
+
+      //Protected_Areas
+      map.createPane('pane_ProtectedAreas_4');
+      map.getPane('pane_ProtectedAreas_4').style.zIndex = 108;
+      map.getPane('pane_ProtectedAreas_4').style['mix-blend-mode'] = 'normal';
+      var layer_ProtectedAreas_4 = new L.geoJson(json_ProtectedAreas_4, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_ProtectedAreas_4',
+        layerName: 'layer_ProtectedAreas_4',
+        pane: 'pane_ProtectedAreas_4',
+        onEachFeature: pop_ProtectedAreas_4,
+        style: style_ProtectedAreas_4_0,
+      });
+      bounds_group.addLayer(layer_ProtectedAreas_4);
+
+      //Key_Biodiversity
+      map.createPane('pane_KeyBiodiversityAreas_5');
+      map.getPane('pane_KeyBiodiversityAreas_5').style.zIndex = 107;
+      var layer_KeyBiodiversityAreas_5 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "keybiodiversityareas_202005", {
+          pane: 'pane_KeyBiodiversityAreas_5',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.6,
+          identify: true,
+          attribution: '',
+        });
+      layer_KeyBiodiversityAreas_5;
+
+      //River and Water Bodies
+      map.createPane('pane_RVRWBS');
+      map.getPane('pane_RVRWBS').style.zIndex = 111;
+      var layer_RVRWBS = L.tileLayer('https://github.com/czrxstrd4/RVRWBS/raw/main/RVRWBS/{z}/{x}/{y}.png', {
+        pane: 'pane_RVRWBS',
         opacity: 0.6,
         attribution: '',
         minZoom: 1,
@@ -1185,781 +1265,853 @@
         minNativeZoom: 4,
         maxNativeZoom: 14
       });
-    layer_FloodHazard_25yrs_6;
-
-    //Active_Fault
-    map.createPane('pane_ActiveFault_13');
-    map.getPane('pane_ActiveFault_13').style.zIndex = 121;
-    map.getPane('pane_ActiveFault_13').style['mix-blend-mode'] = 'normal';
-    var layer_ActiveFault_13 = new L.geoJson(json_ActiveFault_13, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_ActiveFault_13',
-      layerName: 'layer_ActiveFault_13',
-      pane: 'pane_ActiveFault_13',
-      onEachFeature: pop_ActiveFault_13,
-      style: style_ActiveFault_13_0,
-    });
-    bounds_group.addLayer(layer_ActiveFault_13);
-
-    //Liquefaction
-    map.createPane('pane_LQFCN');
-    map.getPane('pane_LQFCN').style.zIndex = 112;
-    var layer_LQFCN = L.tileLayer('https://github.com/czrxstrd4/LQFCN/raw/main/LQFCN/{z}/{x}/{y}.png', {
-      pane: 'pane_LQFCN',
-      opacity: 0.6,
-      attribution: '',
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 4,
-      maxNativeZoom: 14
-    });
-    layer_LQFCN;
-
-    //Active_Volcano
-    map.createPane('pane_Volcanoes_7');
-    map.getPane('pane_Volcanoes_7').style.zIndex = 121;
-    map.getPane('pane_Volcanoes_7').style['mix-blend-mode'] = 'normal';
-    var layer_Volcanoes_7 = new L.geoJson(json_Volcanoes_7, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_Volcanoes_7',
-      layerName: 'layer_Volcanoes_7',
-      pane: 'pane_Volcanoes_7',
-      onEachFeature: pop_Volcanoes_7,
-      pointToLayer: function (feature, latlng) {
-        var context = {
-          feature: feature,
-          variables: {}
-        };
-        return L.shapeMarker(latlng, style_Volcanoes_7_0(feature));
-      },
-    });
-    bounds_group.addLayer(layer_Volcanoes_7);
-
-    //Lahar
-    map.createPane('pane_Lahar_6');
-    map.getPane('pane_Lahar_6').style.zIndex = 120;
-    map.getPane('pane_Lahar_6').style['mix-blend-mode'] = 'normal';
-    var layer_Lahar_6 = new L.geoJson(json_Lahar_6, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_Lahar_6',
-      layerName: 'layer_Lahar_6',
-      pane: 'pane_Lahar_6',
-      onEachFeature: pop_Lahar_6,
-      style: style_Lahar_6_0,
-    });
-    bounds_group.addLayer(layer_Lahar_6);
-
-    //Lava
-    map.createPane('pane_Lava_5');
-    map.getPane('pane_Lava_5').style.zIndex = 119;
-    map.getPane('pane_Lava_5').style['mix-blend-mode'] = 'normal';
-    var layer_Lava_5 = new L.geoJson(json_Lava_5, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_Lava_5',
-      layerName: 'layer_Lava_5',
-      pane: 'pane_Lava_5',
-      onEachFeature: pop_Lava_5,
-      style: style_Lava_5_0,
-    });
-    bounds_group.addLayer(layer_Lava_5);
-
-    //Pyroclastic_Flow
-    map.createPane('pane_PyroclasticFlow_4');
-    map.getPane('pane_PyroclasticFlow_4').style.zIndex = 118;
-    map.getPane('pane_PyroclasticFlow_4').style['mix-blend-mode'] = 'normal';
-    var layer_PyroclasticFlow_4 = new L.geoJson(json_PyroclasticFlow_4, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_PyroclasticFlow_4',
-      layerName: 'layer_PyroclasticFlow_4',
-      pane: 'pane_PyroclasticFlow_4',
-      onEachFeature: pop_PyroclasticFlow_4,
-      style: style_PyroclasticFlow_4_0,
-    });
-    bounds_group.addLayer(layer_PyroclasticFlow_4);
-
-    //Taal_Ballistic
-    map.createPane('pane_TaalBallisticProjectiles_3');
-    map.getPane('pane_TaalBallisticProjectiles_3').style.zIndex = 117;
-    map.getPane('pane_TaalBallisticProjectiles_3').style['mix-blend-mode'] = 'normal';
-    var layer_TaalBallisticProjectiles_3 = new L.geoJson(json_TaalBallisticProjectiles_3, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_TaalBallisticProjectiles_3',
-      layerName: 'layer_TaalBallisticProjectiles_3',
-      pane: 'pane_TaalBallisticProjectiles_3',
-      onEachFeature: pop_TaalBallisticProjectiles_3,
-      style: style_TaalBallisticProjectiles_3_0,
-    });
-    bounds_group.addLayer(layer_TaalBallisticProjectiles_3);
-
-    //Taal_Fissuring
-    map.createPane('pane_TaalFissuring_2');
-    map.getPane('pane_TaalFissuring_2').style.zIndex = 116;
-    map.getPane('pane_TaalFissuring_2').style['mix-blend-mode'] = 'normal';
-    var layer_TaalFissuring_2 = new L.geoJson(json_TaalFissuring_2, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_TaalFissuring_2',
-      layerName: 'layer_TaalFissuring_2',
-      pane: 'pane_TaalFissuring_2',
-      onEachFeature: pop_TaalFissuring_2,
-      style: style_TaalFissuring_2_0,
-    });
-    bounds_group.addLayer(layer_TaalFissuring_2);
-
-    //Taal_Buffer
-    map.createPane('pane_TaalBufferRings_1');
-    map.getPane('pane_TaalBufferRings_1').style.zIndex = 115;
-    map.getPane('pane_TaalBufferRings_1').style['mix-blend-mode'] = 'normal';
-    var layer_TaalBufferRings_1 = new L.geoJson(json_TaalBufferRings_1, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_TaalBufferRings_1',
-      layerName: 'layer_TaalBufferRings_1',
-      pane: 'pane_TaalBufferRings_1',
-      onEachFeature: pop_TaalBufferRings_1,
-      style: style_TaalBufferRings_1_0,
-    });
-    bounds_group.addLayer(layer_TaalBufferRings_1);
-
-    //Seaports
-    map.createPane('pane_Seaports_14');
-    map.getPane('pane_Seaports_14').style.zIndex = 122;
-    map.getPane('pane_Seaports_14').style['mix-blend-mode'] = 'normal';
-    var layer_Seaports_14 = new L.geoJson(json_Seaports_14, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_Seaports_14',
-      layerName: 'layer_Seaports_14',
-      pane: 'pane_Seaports_14',
-      onEachFeature: pop_Seaports_14,
-      pointToLayer: function (feature, latlng) {
-        var context = {
-          feature: feature,
-          variables: {}
-        };
-        return L.circleMarker(latlng, style_Seaports_14_0(feature));
-      },
-    });
-    bounds_group.addLayer(layer_Seaports_14);
-
-    //Roads
-    map.createPane('pane_RDS');
-    map.getPane('pane_RDS').style.zIndex = 106;
-    var layer_RDS = L.tileLayer('https://github.com/czrxstrd4/RDS/raw/main/RDS/{z}/{x}/{y}.png', {
-      pane: 'pane_RDS',
-      opacity: 1,
-      attribution: '',
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 4,
-      maxNativeZoom: 14
-    });
-    layer_RDS;
-
-    //Barangay
-    map.createPane('pane_BarangaysMin_1');
-    map.getPane('pane_BarangaysMin_1').style.zIndex = 106;
-    map.getPane('pane_BarangaysMin_1').style['mix-blend-mode'] = 'normal';
-    var layer_BarangaysMin_1 = new L.geoJson(json_BarangaysMin_1, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_BarangaysMin_1',
-      layerName: 'layer_BarangaysMin_1',
-      pane: 'pane_BarangaysMin_1',
-      onEachFeature: pop_BarangaysMin_1,
-      style: style_BarangaysMin_1_0,
-    });
-    bounds_group.addLayer(layer_BarangaysMin_1);
-
-    map.createPane('pane_ExistingTL_1');
-    map.getPane('pane_ExistingTL_1').style.zIndex = 123;
-    map.getPane('pane_ExistingTL_1').style['mix-blend-mode'] = 'normal';
-    var layer_ExistingTL_1 = new L.geoJson(json_ExistingTL_1, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_ExistingTL_1',
-      layerName: 'layer_ExistingTL_1',
-      pane: 'pane_ExistingTL_1',
-      onEachFeature: pop_ExistingTL_1,
-      style: style_ExistingTL_1_0,
-    });
-    layer_ExistingTL_1;
-
-    map.createPane('pane_TDPTL_2');
-    map.getPane('pane_TDPTL_2').style.zIndex = 124;
-    map.getPane('pane_TDPTL_2').style['mix-blend-mode'] = 'normal';
-    var layer_TDPTL_2 = new L.geoJson(json_TDPTL_2, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_TDPTL_2',
-      layerName: 'layer_TDPTL_2',
-      pane: 'pane_TDPTL_2',
-      onEachFeature: pop_TDPTL_2,
-      style: style_TDPTL_2_0,
-    });
-    layer_TDPTL_2;
-
-    map.createPane('pane_PlantCustomerownedSubstations_3');
-    map.getPane('pane_PlantCustomerownedSubstations_3').style.zIndex = 125;
-    map.getPane('pane_PlantCustomerownedSubstations_3').style['mix-blend-mode'] = 'normal';
-    var layer_PlantCustomerownedSubstations_3 = new L.geoJson(json_PlantCustomerownedSubstations_3, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_PlantCustomerownedSubstations_3',
-      layerName: 'layer_PlantCustomerownedSubstations_3',
-      pane: 'pane_PlantCustomerownedSubstations_3',
-      onEachFeature: pop_PlantCustomerownedSubstations_3,
-      pointToLayer: function (feature, latlng) {
-        var context = {
-          feature: feature,
-          variables: {}
-        };
-        return L.circleMarker(latlng, style_PlantCustomerownedSubstations_3_0(feature));
-      },
-    });
-    layer_PlantCustomerownedSubstations_3;
-
-    map.createPane('pane_69kVDULoadendSubstations_4');
-    map.getPane('pane_69kVDULoadendSubstations_4').style.zIndex = 126;
-    map.getPane('pane_69kVDULoadendSubstations_4').style['mix-blend-mode'] = 'normal';
-    var layer_69kVDULoadendSubstations_4 = new L.geoJson(json_69kVDULoadendSubstations_4, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_69kVDULoadendSubstations_4',
-      layerName: 'layer_69kVDULoadendSubstations_4',
-      pane: 'pane_69kVDULoadendSubstations_4',
-      onEachFeature: pop_69kVDULoadendSubstations_4,
-      pointToLayer: function (feature, latlng) {
-        var context = {
-          feature: feature,
-          variables: {}
-        };
-        return L.circleMarker(latlng, style_69kVDULoadendSubstations_4_0(feature));
-      },
-    });
-    layer_69kVDULoadendSubstations_4;
-
-    map.createPane('pane_500230138115kVExistingSubstations_5');
-    map.getPane('pane_500230138115kVExistingSubstations_5').style.zIndex = 127;
-    map.getPane('pane_500230138115kVExistingSubstations_5').style['mix-blend-mode'] = 'normal';
-    var layer_500230138115kVExistingSubstations_5 = new L.geoJson(json_500230138115kVExistingSubstations_5, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_500230138115kVExistingSubstations_5',
-      layerName: 'layer_500230138115kVExistingSubstations_5',
-      pane: 'pane_500230138115kVExistingSubstations_5',
-      onEachFeature: pop_500230138115kVExistingSubstations_5,
-      pointToLayer: function (feature, latlng) {
-        var context = {
-          feature: feature,
-          variables: {}
-        };
-        return L.circleMarker(latlng, style_500230138115kVExistingSubstations_5_0(feature));
-      },
-    });
-    layer_500230138115kVExistingSubstations_5;
-
-    map.createPane('pane_500230kVTDPSubstations_6');
-    map.getPane('pane_500230kVTDPSubstations_6').style.zIndex = 128;
-    map.getPane('pane_500230kVTDPSubstations_6').style['mix-blend-mode'] = 'normal';
-    var layer_500230kVTDPSubstations_6 = new L.geoJson(json_500230kVTDPSubstations_6, {
-      attribution: '',
-      interactive: true,
-      dataVar: 'json_500230kVTDPSubstations_6',
-      layerName: 'layer_500230kVTDPSubstations_6',
-      pane: 'pane_500230kVTDPSubstations_6',
-      onEachFeature: pop_500230kVTDPSubstations_6,
-      pointToLayer: function (feature, latlng) {
-        var context = {
-          feature: feature,
-          variables: {}
-        };
-        return L.circleMarker(latlng, style_500230kVTDPSubstations_6_0(feature));
-      },
-    });
-    layer_500230kVTDPSubstations_6;
-
-    // var map = L.map('map').setView([0, 0], 2);
-
-
-    //Base_Layers
-    var baseLayers = [{
-        name: "Satellite",
-        layer: layer_GoogleMapsSatellite_1
-      },
-      {
-        name: "Satellite-Hybrid",
-        layer: layer_GoogleSatelliteHybrid_1
-      },
-      {
-        name: "Basic",
-        layer: layer_GoogleMapsBasic_0
-      },
-      {
-        name: "Live Satellite (April 2023)",
-        layer: layer_planetNICFI
-      }
-    ];
-    //Over_Layers
-    var overLayers = [{
-        group: "Solar Suitability",
-        collapsed: true,
-        layers: [{
-            name: 'GHI x Slope<br /><img src="legend/GHIxSlope.png" />',
-            layer: layer_GHISLP
-          },
-          {
-            name: 'Irradiance<br /><img src="legend/Irradiance.png" />',
-            layer: layer_IRDGHI
-          },
-          {
-            name: 'Slope Caps - Solar<br /><img src="legend/SlopeCaps-Solar.png" />',
-            layer: layer_SLPSLR
-          }
-        ]
-      },
-      {
-        group: "Wind Suitability",
-        collapsed: true,
-        layers: [{
-            name: 'Wind Speed x Slope<br /><img src="legend/WSxSlope.png" />',
-            layer: layer_WSSLP
-          },
-          {
-            name: 'Wind Speed<br /><img src="legend/WindSpeed.png" />',
-            layer: layer_WS,
-
-          },
-          {
-            name: 'Slope Caps - Wind<br /><img src="legend/SlopeCaps-Wind.png" />',
-            layer: layer_SLPWD,
-
-          }
-        ]
-      },
-
-      {
-        group: "Area Restrictions",
-        collapsed: true,
-        layers: [{
-            name: 'Service Contract<br /><table><tr><td style="text-align: center;"><img src="legend/Merged_2_Geothermal0.png" /></td><td>Geothermal</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OffshoreWind1.png" /></td><td>Offshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OnshoreWind2.png" /></td><td>Onshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_Solar3.png" /></td><td>Solar</td></tr></table>',
-            layer: layer_ServiceContractMap_1,
-
-
-          },
-          {
-            name: "Ancestral Domains",
-            layer: layer_AncestralDomain_3,
-            icon: '<i class="fa fa-universal-access" aria-hidden="true"></i>'
-          },
-          {
-            name: "Protected Areas",
-            layer: layer_ProtectedAreas_4,
-            icon: '<i class="fa fa-leaf" aria-hidden="true"></i>'
-          },
-          {
-            name: 'Key Biodiversity Areas<br /><img src="legend/KBA.png" />',
-            layer: layer_KeyBiodiversityAreas_5,
-
-          }
-        ]
-      },
-
-      {
-        group: "Hazards",
-        collapsed: true,
-        layers: [{
-            name: "River & Water Bodies",
-            layer: layer_RVRWBS,
-            icon: '<i class="fa fa-tint" aria-hidden="true"></i>'
-
-          },
-          {
-            name: 'Flood Hazard<br /><img src="legend/Flood.png" />',
-            layer: layer_FloodHazard_25yrs_6
-
-          },
-          {
-            name: 'Active Faults<br /><img src="legend/Fault.png" />',
-            layer: layer_ActiveFault_13,
-
-          },
-          {
-            name: 'Liquefaction<br /><img src="legend/Liquefaction.png" />',
-            layer: layer_LQFCN,
-
-          }
-
-        ]
-      },
-
-      {
-        group: "Hazards - Volcano",
-        collapsed: true,
-        layers: [{
-            name: 'Active Volcanoes<br /><img src="legend/Volcanoes.png" />',
-            layer: layer_Volcanoes_7
-          },
-          {
-            name: 'Lahar<br /><img src="legend/Lahar.png" />',
-            layer: layer_Lahar_6
-
-          },
-          {
-            name: "Lava",
-            layer: layer_Lava_5
-
-          },
-          {
-            name: "Pyroclastic Flow",
-            layer: layer_PyroclasticFlow_4
-
-          },
-          {
-            name: "Taal Ballistic Projectiles",
-            layer: layer_TaalBallisticProjectiles_3
-
-          },
-          {
-            name: "Taal Fissuring",
-            layer: layer_TaalFissuring_2
-
-          },
-          {
-            name: 'Taal Buffer Rings<br /><img src="legend/Taal_Buffer.png" />',
-            layer: layer_TaalBufferRings_1
-
-          }
-
-        ]
-      },
-
-      {
-        group: "Added layer",
-        collapsed: true,
-        layers: [{
-            name: "Drawn Layer",
-            layer: drawnItems,
-            icon: '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
-
-          },
-          {
-            name: "Uploaded Layer",
-            layer: fileUploaders,
-            icon: '<i class="fa fa-upload" aria-hidden="true"></i>'
-
-          }
-
-
-        ]
-      },
-
-      {
-        group: "Others",
-        collapsed: true,
-        layers: [{
-            name: "Seaports",
-            layer: layer_Seaports_14,
-            icon: '<img src="legend/Seaports_14.png" />'
-          },
-          {
-            name: "Roads",
-            layer: layer_RDS,
-            icon: '<img src="legend/Roads.png" />'
-          },
-          {
-            name: "Barangays",
-            layer: layer_BarangaysMin_1,
-            icon: '<img src="legend/BarangaysMin_1.png" />'
-          }
-
-
-        ]
-      },
-
-      {
-        group: "Transmission SS & TL",
-        collapsed: true,
-        layers: [{
-            name: "Existing SS (Above 69kV)",
-            layer: layer_500230138115kVExistingSubstations_5,
-            icon: '<img src="legend/500230138115kVExistingSubstations_5.png" />'
-          },
-          {
-            name: "TDP SS",
-            layer: layer_500230kVTDPSubstations_6,
-            icon: '<img src="legend/500230kVTDPSubstations_6.png" />'
-          },
-          {
-            name: "Existing SS (69kV)",
-            layer: layer_69kVDULoadendSubstations_4,
-            icon: '<img src="legend/69kVDULoadendSubstations_4.png" />'
-          },
-          {
-            name: "Plant-Owned SS",
-            layer: layer_PlantCustomerownedSubstations_3,
-            icon: '<img src="legend/PlantCustomerownedSubstations_3.png" />'
-          },
-          {
-            name: "Existing TL",
-            layer: layer_ExistingTL_1,
-            icon: '<img src="legend/ExistingTL_1.png" />'
-          },
-          {
-            name: "TDP TL",
-            layer: layer_TDPTL_2,
-            icon: '<img src="legend/TDPTL_2.png" />'
-          }
-
-
-        ]
-      },
-
-    ];
-
-    var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
-      compact: false,
-      collapsed: false,
-      selectorGroup: true,
-      collapsibleGroups: true
-    });
-
-    //saerch bars------------------------------------------------
-    map.addControl(panelLayers);
-
-    // map.addControl(new L.Control.Search({
-    //   layer: layer_500230138115kVExistingSubstations_5,
-    //   initial: false,
-    //   textPlaceholder: "Search Existing Substation",
-    //   hideMarkerOnCollapse: false,
-    //   propertyName: 'Title',
-    //   collapsed: true // Set collapsed to true to initially hide the layer
-    // }));
-    // document.getElementsByClassName('search-button')[0].classList.add('kv500-icon');
-
-    // map.addControl(new L.Control.Search({
-    //   layer: layer_500230kVTDPSubstations_6,
-    //   initial: false,
-    //   textPlaceholder: "Search TDP Substation",
-    //   hideMarkerOnCollapse: false,
-    //   propertyName: 'Title',
-    //   collapsed: true // Set collapsed to true to initially hide the layer
-    // }));
-
-    // // Remove the 'fa fa-bolt' class and add the 'tdp-icon' class
-    // var tdpSearchButton = document.getElementsByClassName('search-button')[1];
-    // tdpSearchButton.classList.remove('fa', 'fa-bolt');
-    // tdpSearchButton.classList.add('tdp-icon');
-
-    // map.addControl(new L.Control.Search({
-    //   layer: layer_69kVDULoadendSubstations_4,
-    //   initial: false,
-    //   textPlaceholder: "Search 69kV Substation",
-    //   hideMarkerOnCollapse: false,
-    //   propertyName: 'Title',
-    //   collapsed: true // Set collapsed to true to initially hide the layer
-    // }));
-
-    // // Remove the 'fa fal-bolt' class and add the 'kv69-icon' class
-    // var kv69SearchButton = document.getElementsByClassName('search-button')[2];
-    // kv69SearchButton.classList.remove('fa', 'fal-bolt');
-    // kv69SearchButton.classList.add('kv69-icon');
-
-
-    // map.addControl(new L.Control.Search({
-    //   layer: layer_ServiceContractMap_1,
-    //   initial: false,
-    //   textPlaceholder: "Search Power Project",
-    //   hideMarkerOnCollapse: true,
-    //   propertyName: 'SWG_Projec'
-    // }));
-    // document.getElementsByClassName('search-button')[3].className +=
-    //   ' fa fa-bolt';
-
-    var measureControl = new L.Control.Measure({
-      position: 'topleft',
-      primaryLengthUnit: 'meters',
-      secondaryLengthUnit: 'kilometers',
-      primaryAreaUnit: 'sqmeters',
-      secondaryAreaUnit: 'hectares'
-    });
-    measureControl.addTo(map);
-    document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-      .innerHTML = '';
-    document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-      .className += ' fas fa-ruler';
-
-    //----------------------------------------------------------
-
-    //--------------------------------------------------------------------Draw Polygons------------------------------------------------------------------------//
-
-    var drawnItems = new L.FeatureGroup();
-    map.addLayer(drawnItems);
-    L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
-
-    map.addControl(new L.Control.Draw({
-      edit: {
-        featureGroup: drawnItems,
-        poly: {
-          allowIntersection: false
+      layer_RVRWBS;
+
+      //Flood_Hazard
+      map.createPane('pane_FloodHazard_25yrs_6');
+      map.getPane('pane_FloodHazard_25yrs_6').style.zIndex = 113;
+      var layer_FloodHazard_25yrs_6 = L.tileLayer(
+        'https://github.com/czrxstrd4/FLDHM/raw/main/Tiles/{z}/{x}/{y}.png', {
+          pane: 'pane_FloodHazard_25yrs_6',
+          opacity: 0.6,
+          attribution: '',
+          minZoom: 1,
+          maxZoom: 28,
+          minNativeZoom: 4,
+          maxNativeZoom: 14
+        });
+      layer_FloodHazard_25yrs_6;
+
+      //Active_Fault
+      map.createPane('pane_ActiveFault_13');
+      map.getPane('pane_ActiveFault_13').style.zIndex = 121;
+      map.getPane('pane_ActiveFault_13').style['mix-blend-mode'] = 'normal';
+      var layer_ActiveFault_13 = new L.geoJson(json_ActiveFault_13, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_ActiveFault_13',
+        layerName: 'layer_ActiveFault_13',
+        pane: 'pane_ActiveFault_13',
+        onEachFeature: pop_ActiveFault_13,
+        style: style_ActiveFault_13_0,
+      });
+      bounds_group.addLayer(layer_ActiveFault_13);
+
+      //Liquefaction
+      map.createPane('pane_LQFCN');
+      map.getPane('pane_LQFCN').style.zIndex = 112;
+      var layer_LQFCN = L.tileLayer('https://github.com/czrxstrd4/LQFCN/raw/main/LQFCN/{z}/{x}/{y}.png', {
+        pane: 'pane_LQFCN',
+        opacity: 0.6,
+        attribution: '',
+        minZoom: 1,
+        maxZoom: 28,
+        minNativeZoom: 4,
+        maxNativeZoom: 14
+      });
+      layer_LQFCN;
+
+      //Active_Volcano
+      map.createPane('pane_Volcanoes_7');
+      map.getPane('pane_Volcanoes_7').style.zIndex = 121;
+      map.getPane('pane_Volcanoes_7').style['mix-blend-mode'] = 'normal';
+      var layer_Volcanoes_7 = new L.geoJson(json_Volcanoes_7, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_Volcanoes_7',
+        layerName: 'layer_Volcanoes_7',
+        pane: 'pane_Volcanoes_7',
+        onEachFeature: pop_Volcanoes_7,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {}
+          };
+          return L.shapeMarker(latlng, style_Volcanoes_7_0(feature));
+        },
+      });
+      bounds_group.addLayer(layer_Volcanoes_7);
+
+      //Lahar
+      map.createPane('pane_Lahar_6');
+      map.getPane('pane_Lahar_6').style.zIndex = 120;
+      map.getPane('pane_Lahar_6').style['mix-blend-mode'] = 'normal';
+      var layer_Lahar_6 = new L.geoJson(json_Lahar_6, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_Lahar_6',
+        layerName: 'layer_Lahar_6',
+        pane: 'pane_Lahar_6',
+        onEachFeature: pop_Lahar_6,
+        style: style_Lahar_6_0,
+      });
+      bounds_group.addLayer(layer_Lahar_6);
+
+      //Lava
+      map.createPane('pane_Lava_5');
+      map.getPane('pane_Lava_5').style.zIndex = 119;
+      map.getPane('pane_Lava_5').style['mix-blend-mode'] = 'normal';
+      var layer_Lava_5 = new L.geoJson(json_Lava_5, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_Lava_5',
+        layerName: 'layer_Lava_5',
+        pane: 'pane_Lava_5',
+        onEachFeature: pop_Lava_5,
+        style: style_Lava_5_0,
+      });
+      bounds_group.addLayer(layer_Lava_5);
+
+      //Pyroclastic_Flow
+      map.createPane('pane_PyroclasticFlow_4');
+      map.getPane('pane_PyroclasticFlow_4').style.zIndex = 118;
+      map.getPane('pane_PyroclasticFlow_4').style['mix-blend-mode'] = 'normal';
+      var layer_PyroclasticFlow_4 = new L.geoJson(json_PyroclasticFlow_4, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_PyroclasticFlow_4',
+        layerName: 'layer_PyroclasticFlow_4',
+        pane: 'pane_PyroclasticFlow_4',
+        onEachFeature: pop_PyroclasticFlow_4,
+        style: style_PyroclasticFlow_4_0,
+      });
+      bounds_group.addLayer(layer_PyroclasticFlow_4);
+
+      //Taal_Ballistic
+      map.createPane('pane_TaalBallisticProjectiles_3');
+      map.getPane('pane_TaalBallisticProjectiles_3').style.zIndex = 117;
+      map.getPane('pane_TaalBallisticProjectiles_3').style['mix-blend-mode'] = 'normal';
+      var layer_TaalBallisticProjectiles_3 = new L.geoJson(json_TaalBallisticProjectiles_3, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_TaalBallisticProjectiles_3',
+        layerName: 'layer_TaalBallisticProjectiles_3',
+        pane: 'pane_TaalBallisticProjectiles_3',
+        onEachFeature: pop_TaalBallisticProjectiles_3,
+        style: style_TaalBallisticProjectiles_3_0,
+      });
+      bounds_group.addLayer(layer_TaalBallisticProjectiles_3);
+
+      //Taal_Fissuring
+      map.createPane('pane_TaalFissuring_2');
+      map.getPane('pane_TaalFissuring_2').style.zIndex = 116;
+      map.getPane('pane_TaalFissuring_2').style['mix-blend-mode'] = 'normal';
+      var layer_TaalFissuring_2 = new L.geoJson(json_TaalFissuring_2, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_TaalFissuring_2',
+        layerName: 'layer_TaalFissuring_2',
+        pane: 'pane_TaalFissuring_2',
+        onEachFeature: pop_TaalFissuring_2,
+        style: style_TaalFissuring_2_0,
+      });
+      bounds_group.addLayer(layer_TaalFissuring_2);
+
+      //Taal_Buffer
+      map.createPane('pane_TaalBufferRings_1');
+      map.getPane('pane_TaalBufferRings_1').style.zIndex = 115;
+      map.getPane('pane_TaalBufferRings_1').style['mix-blend-mode'] = 'normal';
+      var layer_TaalBufferRings_1 = new L.geoJson(json_TaalBufferRings_1, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_TaalBufferRings_1',
+        layerName: 'layer_TaalBufferRings_1',
+        pane: 'pane_TaalBufferRings_1',
+        onEachFeature: pop_TaalBufferRings_1,
+        style: style_TaalBufferRings_1_0,
+      });
+      bounds_group.addLayer(layer_TaalBufferRings_1);
+
+      //Seaports
+      map.createPane('pane_Seaports_14');
+      map.getPane('pane_Seaports_14').style.zIndex = 122;
+      map.getPane('pane_Seaports_14').style['mix-blend-mode'] = 'normal';
+      var layer_Seaports_14 = new L.geoJson(json_Seaports_14, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_Seaports_14',
+        layerName: 'layer_Seaports_14',
+        pane: 'pane_Seaports_14',
+        onEachFeature: pop_Seaports_14,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {}
+          };
+          return L.circleMarker(latlng, style_Seaports_14_0(feature));
+        },
+      });
+      bounds_group.addLayer(layer_Seaports_14);
+
+      //Roads
+      map.createPane('pane_RDS');
+      map.getPane('pane_RDS').style.zIndex = 106;
+      var layer_RDS = L.tileLayer('https://github.com/czrxstrd4/RDS/raw/main/RDS/{z}/{x}/{y}.png', {
+        pane: 'pane_RDS',
+        opacity: 1,
+        attribution: '',
+        minZoom: 1,
+        maxZoom: 28,
+        minNativeZoom: 4,
+        maxNativeZoom: 14
+      });
+      layer_RDS;
+
+      //Barangay
+      map.createPane('pane_BarangaysMin_1');
+      map.getPane('pane_BarangaysMin_1').style.zIndex = 106;
+      map.getPane('pane_BarangaysMin_1').style['mix-blend-mode'] = 'normal';
+      var layer_BarangaysMin_1 = new L.geoJson(json_BarangaysMin_1, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_BarangaysMin_1',
+        layerName: 'layer_BarangaysMin_1',
+        pane: 'pane_BarangaysMin_1',
+        onEachFeature: pop_BarangaysMin_1,
+        style: style_BarangaysMin_1_0,
+      });
+      bounds_group.addLayer(layer_BarangaysMin_1);
+
+      map.createPane('pane_ExistingTL_1');
+      map.getPane('pane_ExistingTL_1').style.zIndex = 123;
+      map.getPane('pane_ExistingTL_1').style['mix-blend-mode'] = 'normal';
+      var layer_ExistingTL_1 = new L.geoJson(json_ExistingTL_1, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_ExistingTL_1',
+        layerName: 'layer_ExistingTL_1',
+        pane: 'pane_ExistingTL_1',
+        onEachFeature: pop_ExistingTL_1,
+        style: style_ExistingTL_1_0,
+      });
+      layer_ExistingTL_1;
+
+      map.createPane('pane_TDPTL_2');
+      map.getPane('pane_TDPTL_2').style.zIndex = 124;
+      map.getPane('pane_TDPTL_2').style['mix-blend-mode'] = 'normal';
+      var layer_TDPTL_2 = new L.geoJson(json_TDPTL_2, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_TDPTL_2',
+        layerName: 'layer_TDPTL_2',
+        pane: 'pane_TDPTL_2',
+        onEachFeature: pop_TDPTL_2,
+        style: style_TDPTL_2_0,
+      });
+      layer_TDPTL_2;
+
+      map.createPane('pane_PlantCustomerownedSubstations_3');
+      map.getPane('pane_PlantCustomerownedSubstations_3').style.zIndex = 125;
+      map.getPane('pane_PlantCustomerownedSubstations_3').style['mix-blend-mode'] = 'normal';
+      var layer_PlantCustomerownedSubstations_3 = new L.geoJson(json_PlantCustomerownedSubstations_3, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_PlantCustomerownedSubstations_3',
+        layerName: 'layer_PlantCustomerownedSubstations_3',
+        pane: 'pane_PlantCustomerownedSubstations_3',
+        onEachFeature: pop_PlantCustomerownedSubstations_3,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {}
+          };
+          return L.circleMarker(latlng, style_PlantCustomerownedSubstations_3_0(feature));
+        },
+      });
+      layer_PlantCustomerownedSubstations_3;
+
+      map.createPane('pane_69kVDULoadendSubstations_4');
+      map.getPane('pane_69kVDULoadendSubstations_4').style.zIndex = 126;
+      map.getPane('pane_69kVDULoadendSubstations_4').style['mix-blend-mode'] = 'normal';
+      var layer_69kVDULoadendSubstations_4 = new L.geoJson(json_69kVDULoadendSubstations_4, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_69kVDULoadendSubstations_4',
+        layerName: 'layer_69kVDULoadendSubstations_4',
+        pane: 'pane_69kVDULoadendSubstations_4',
+        onEachFeature: pop_69kVDULoadendSubstations_4,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {}
+          };
+          return L.circleMarker(latlng, style_69kVDULoadendSubstations_4_0(feature));
+        },
+      });
+      layer_69kVDULoadendSubstations_4;
+
+      map.createPane('pane_500230138115kVExistingSubstations_5');
+      map.getPane('pane_500230138115kVExistingSubstations_5').style.zIndex = 127;
+      map.getPane('pane_500230138115kVExistingSubstations_5').style['mix-blend-mode'] = 'normal';
+      var layer_500230138115kVExistingSubstations_5 = new L.geoJson(json_500230138115kVExistingSubstations_5, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_500230138115kVExistingSubstations_5',
+        layerName: 'layer_500230138115kVExistingSubstations_5',
+        pane: 'pane_500230138115kVExistingSubstations_5',
+        onEachFeature: pop_500230138115kVExistingSubstations_5,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {}
+          };
+          return L.circleMarker(latlng, style_500230138115kVExistingSubstations_5_0(feature));
+        },
+      });
+      layer_500230138115kVExistingSubstations_5;
+
+      map.createPane('pane_500230kVTDPSubstations_6');
+      map.getPane('pane_500230kVTDPSubstations_6').style.zIndex = 128;
+      map.getPane('pane_500230kVTDPSubstations_6').style['mix-blend-mode'] = 'normal';
+      var layer_500230kVTDPSubstations_6 = new L.geoJson(json_500230kVTDPSubstations_6, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_500230kVTDPSubstations_6',
+        layerName: 'layer_500230kVTDPSubstations_6',
+        pane: 'pane_500230kVTDPSubstations_6',
+        onEachFeature: pop_500230kVTDPSubstations_6,
+        pointToLayer: function (feature, latlng) {
+          var context = {
+            feature: feature,
+            variables: {}
+          };
+          return L.circleMarker(latlng, style_500230kVTDPSubstations_6_0(feature));
+        },
+      });
+      layer_500230kVTDPSubstations_6;
+
+      // var map = L.map('map').setView([0, 0], 2);
+
+
+      //Base_Layers
+      var baseLayers = [{
+          name: "Satellite",
+          layer: layer_GoogleMapsSatellite_1
+        },
+        {
+          name: "Satellite-Hybrid",
+          layer: layer_GoogleSatelliteHybrid_1
+        },
+        {
+          name: "Basic",
+          layer: layer_GoogleMapsBasic_0
+        },
+        {
+          name: "Live Satellite (April 2023)",
+          layer: layer_planetNICFI
         }
-      },
-      draw: {
-        polygon: {
-          allowIntersection: false,
-          showArea: true
-        }
-      }
-    }));
+      ];
+      //Over_Layers
+      var overLayers = [{
+          group: "Solar Suitability",
+          collapsed: true,
+          layers: [{
+              name: 'GHI x Slope<br /><img src="legend/GHIxSlope.png" />',
+              layer: layer_GHISLP
+            },
+            {
+              name: 'Irradiance<br /><img src="legend/Irradiance.png" />',
+              layer: layer_IRDGHI
+            },
+            {
+              name: 'Slope Caps - Solar<br /><img src="legend/SlopeCaps-Solar.png" />',
+              layer: layer_SLPSLR
+            }
+          ]
+        },
+        {
+          group: "Wind Suitability",
+          collapsed: true,
+          layers: [{
+              name: 'Wind Speed x Slope<br /><img src="legend/WSxSlope.png" />',
+              layer: layer_WSSLP
+            },
+            {
+              name: 'Wind Speed<br /><img src="legend/WindSpeed.png" />',
+              layer: layer_WS,
 
-    // Truncate value based on number of decimals
-    var _round = function (num, len) {
-      return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
-    };
-    // Helper method to format LatLng object (x.xxxxxx, y.yyyyyy)
-    var strLatLng = function (latlng) {
-      return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
-    };
+            },
+            {
+              name: 'Slope Caps - Wind<br /><img src="legend/SlopeCaps-Wind.png" />',
+              layer: layer_SLPWD,
 
-    // Generate popup content based on layer type
-    // - Returns HTML string, or null if unknown object
-    var getPopupContent = function (layer) {
-      // Marker - add lat/long
-      if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-        return strLatLng(layer.getLatLng());
-        // Circle - lat/long, radius
-      } else if (layer instanceof L.Circle) {
-        var center = layer.getLatLng(),
-          radius = layer.getRadius();
-        return "Center: " + strLatLng(center) + "<br />" +
-          "Radius: ~" + _round(radius, 2) + " m";
-        // Rectangle/Polygon - area
-      } else if (layer instanceof L.Polygon) {
-        var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-          area = L.GeometryUtil.geodesicArea(latlngs);
-        return "Area: ~" + L.GeometryUtil.readableArea(area, true);
-        // Polyline - distance
-      } else if (layer instanceof L.Polyline) {
-        var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-          distance = 0;
-        if (latlngs.length < 2) {
-          return "Distance: N/A";
-        } else {
-          for (var i = 0; i < latlngs.length - 1; i++) {
-            distance += latlngs[i].distanceTo(latlngs[i + 1]);
+            }
+          ]
+        },
+
+        {
+          group: "Area Restrictions",
+          collapsed: true,
+          layers: [{
+              name: 'Service Contract<br /><table><tr><td style="text-align: center;"><img src="legend/Merged_2_Geothermal0.png" /></td><td>Geothermal</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OffshoreWind1.png" /></td><td>Offshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OnshoreWind2.png" /></td><td>Onshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_Solar3.png" /></td><td>Solar</td></tr></table>',
+              layer: layer_ServiceContractMap_1,
+
+
+            },
+            {
+              name: "Ancestral Domains",
+              layer: layer_AncestralDomain_3,
+              icon: '<i class="fa fa-universal-access" aria-hidden="true"></i>'
+            },
+            {
+              name: "Protected Areas",
+              layer: layer_ProtectedAreas_4,
+              icon: '<i class="fa fa-leaf" aria-hidden="true"></i>'
+            },
+            {
+              name: 'Key Biodiversity Areas<br /><img src="legend/KBA.png" />',
+              layer: layer_KeyBiodiversityAreas_5,
+
+            }
+          ]
+        },
+
+        {
+          group: "Hazards",
+          collapsed: true,
+          layers: [{
+              name: "River & Water Bodies",
+              layer: layer_RVRWBS,
+              icon: '<i class="fa fa-tint" aria-hidden="true"></i>'
+
+            },
+            {
+              name: 'Flood Hazard<br /><img src="legend/Flood.png" />',
+              layer: layer_FloodHazard_25yrs_6
+
+            },
+            {
+              name: 'Active Faults<br /><img src="legend/Fault.png" />',
+              layer: layer_ActiveFault_13,
+
+            },
+            {
+              name: 'Liquefaction<br /><img src="legend/Liquefaction.png" />',
+              layer: layer_LQFCN,
+
+            }
+
+          ]
+        },
+
+        {
+          group: "Hazards - Volcano",
+          collapsed: true,
+          layers: [{
+              name: 'Active Volcanoes<br /><img src="legend/Volcanoes.png" />',
+              layer: layer_Volcanoes_7
+            },
+            {
+              name: 'Lahar<br /><img src="legend/Lahar.png" />',
+              layer: layer_Lahar_6
+
+            },
+            {
+              name: "Lava",
+              layer: layer_Lava_5
+
+            },
+            {
+              name: "Pyroclastic Flow",
+              layer: layer_PyroclasticFlow_4
+
+            },
+            {
+              name: "Taal Ballistic Projectiles",
+              layer: layer_TaalBallisticProjectiles_3
+
+            },
+            {
+              name: "Taal Fissuring",
+              layer: layer_TaalFissuring_2
+
+            },
+            {
+              name: 'Taal Buffer Rings<br /><img src="legend/Taal_Buffer.png" />',
+              layer: layer_TaalBufferRings_1
+
+            }
+
+          ]
+        },
+
+        {
+          group: "Added layer",
+          collapsed: true,
+          layers: [{
+              name: "Drawn Layer",
+              layer: drawnItems,
+              icon: '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
+
+            },
+            {
+              name: "Uploaded Layer",
+              layer: fileUploaders,
+              icon: '<i class="fa fa-upload" aria-hidden="true"></i>'
+
+            }
+
+
+          ]
+        },
+
+        {
+          group: "Others",
+          collapsed: true,
+          layers: [{
+              name: "Seaports",
+              layer: layer_Seaports_14,
+              icon: '<img src="legend/Seaports_14.png" />'
+            },
+            {
+              name: "Roads",
+              layer: layer_RDS,
+              icon: '<img src="legend/Roads.png" />'
+            },
+            {
+              name: "Barangays",
+              layer: layer_BarangaysMin_1,
+              icon: '<img src="legend/BarangaysMin_1.png" />'
+            }
+
+
+          ]
+        },
+
+        {
+          group: "Transmission SS & TL",
+          collapsed: true,
+          layers: [{
+              name: "Existing SS (Above 69kV)",
+              layer: layer_500230138115kVExistingSubstations_5,
+              icon: '<img src="legend/500230138115kVExistingSubstations_5.png" />'
+            },
+            {
+              name: "TDP SS",
+              layer: layer_500230kVTDPSubstations_6,
+              icon: '<img src="legend/500230kVTDPSubstations_6.png" />'
+            },
+            {
+              name: "Existing SS (69kV)",
+              layer: layer_69kVDULoadendSubstations_4,
+              icon: '<img src="legend/69kVDULoadendSubstations_4.png" />'
+            },
+            {
+              name: "Plant-Owned SS",
+              layer: layer_PlantCustomerownedSubstations_3,
+              icon: '<img src="legend/PlantCustomerownedSubstations_3.png" />'
+            },
+            {
+              name: "Existing TL",
+              layer: layer_ExistingTL_1,
+              icon: '<img src="legend/ExistingTL_1.png" />'
+            },
+            {
+              name: "TDP TL",
+              layer: layer_TDPTL_2,
+              icon: '<img src="legend/TDPTL_2.png" />'
+            }
+
+
+          ]
+        },
+
+      ];
+
+      var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
+        compact: false,
+        collapsed: false,
+        selectorGroup: true,
+        collapsibleGroups: true
+      });
+
+      //saerch bars------------------------------------------------
+      map.addControl(panelLayers);
+
+      // map.addControl(new L.Control.Search({
+      //   layer: layer_500230138115kVExistingSubstations_5,
+      //   initial: false,
+      //   textPlaceholder: "Search Existing Substation",
+      //   hideMarkerOnCollapse: false,
+      //   propertyName: 'Title',
+      //   collapsed: true // Set collapsed to true to initially hide the layer
+      // }));
+      // document.getElementsByClassName('search-button')[0].classList.add('kv500-icon');
+
+      // map.addControl(new L.Control.Search({
+      //   layer: layer_500230kVTDPSubstations_6,
+      //   initial: false,
+      //   textPlaceholder: "Search TDP Substation",
+      //   hideMarkerOnCollapse: false,
+      //   propertyName: 'Title',
+      //   collapsed: true // Set collapsed to true to initially hide the layer
+      // }));
+
+      // // Remove the 'fa fa-bolt' class and add the 'tdp-icon' class
+      // var tdpSearchButton = document.getElementsByClassName('search-button')[1];
+      // tdpSearchButton.classList.remove('fa', 'fa-bolt');
+      // tdpSearchButton.classList.add('tdp-icon');
+
+      // map.addControl(new L.Control.Search({
+      //   layer: layer_69kVDULoadendSubstations_4,
+      //   initial: false,
+      //   textPlaceholder: "Search 69kV Substation",
+      //   hideMarkerOnCollapse: false,
+      //   propertyName: 'Title',
+      //   collapsed: true // Set collapsed to true to initially hide the layer
+      // }));
+
+      // // Remove the 'fa fal-bolt' class and add the 'kv69-icon' class
+      // var kv69SearchButton = document.getElementsByClassName('search-button')[2];
+      // kv69SearchButton.classList.remove('fa', 'fal-bolt');
+      // kv69SearchButton.classList.add('kv69-icon');
+
+
+      // map.addControl(new L.Control.Search({
+      //   layer: layer_ServiceContractMap_1,
+      //   initial: false,
+      //   textPlaceholder: "Search Power Project",
+      //   hideMarkerOnCollapse: true,
+      //   propertyName: 'SWG_Projec'
+      // }));
+      // document.getElementsByClassName('search-button')[3].className +=
+      //   ' fa fa-bolt';
+
+      var measureControl = new L.Control.Measure({
+        position: 'topleft',
+        primaryLengthUnit: 'meters',
+        secondaryLengthUnit: 'kilometers',
+        primaryAreaUnit: 'sqmeters',
+        secondaryAreaUnit: 'hectares'
+      });
+      measureControl.addTo(map);
+      document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+      document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+
+      //----------------------------------------------------------
+
+      //--------------------------------------------------------------------Draw Polygons------------------------------------------------------------------------//
+
+      var drawnItems = new L.FeatureGroup();
+      map.addLayer(drawnItems);
+      L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
+
+      map.addControl(new L.Control.Draw({
+        edit: {
+          featureGroup: drawnItems,
+          poly: {
+            allowIntersection: false
           }
-          return "Distance: ~" + _round((distance / 1000), 2) + " km";
+        },
+        draw: {
+          polygon: {
+            allowIntersection: false,
+            showArea: true
+          }
         }
-      }
-      return null;
-    };
+      }));
 
-    // Object created - bind popup to layer, add to feature group
-    map.on(L.Draw.Event.CREATED, function (event) {
-      var layer = event.layer;
-      var content = getPopupContent(layer);
-      if (content !== null) {
-        layer.bindPopup(content);
-      }
-      drawnItems.addLayer(layer);
-    });
-    // Object(s) edited - update popups
-    map.on(L.Draw.Event.EDITED, function (event) {
-      var layers = event.layers,
-        content = null;
-      layers.eachLayer(function (layer) {
-        content = getPopupContent(layer);
+      // Truncate value based on number of decimals
+      var _round = function (num, len) {
+        return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
+      };
+      // Helper method to format LatLng object (x.xxxxxx, y.yyyyyy)
+      var strLatLng = function (latlng) {
+        return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
+      };
+
+      // Generate popup content based on layer type
+      // - Returns HTML string, or null if unknown object
+      var getPopupContent = function (layer) {
+        // Marker - add lat/long
+        if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+          return strLatLng(layer.getLatLng());
+          // Circle - lat/long, radius
+        } else if (layer instanceof L.Circle) {
+          var center = layer.getLatLng(),
+            radius = layer.getRadius();
+          return "Center: " + strLatLng(center) + "<br />" +
+            "Radius: ~" + _round(radius, 2) + " m";
+          // Rectangle/Polygon - area
+        } else if (layer instanceof L.Polygon) {
+          var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
+            area = L.GeometryUtil.geodesicArea(latlngs);
+          return "Area: ~" + L.GeometryUtil.readableArea(area, true);
+          // Polyline - distance
+        } else if (layer instanceof L.Polyline) {
+          var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
+            distance = 0;
+          if (latlngs.length < 2) {
+            return "Distance: N/A";
+          } else {
+            for (var i = 0; i < latlngs.length - 1; i++) {
+              distance += latlngs[i].distanceTo(latlngs[i + 1]);
+            }
+            return "Distance: ~" + _round((distance / 1000), 2) + " km";
+          }
+        }
+        return null;
+      };
+
+      // Object created - bind popup to layer, add to feature group
+      map.on(L.Draw.Event.CREATED, function (event) {
+        var layer = event.layer;
+        var content = getPopupContent(layer);
         if (content !== null) {
-          layer.setPopupContent(content);
+          layer.bindPopup(content);
+        }
+        drawnItems.addLayer(layer);
+      });
+      // Object(s) edited - update popups
+      map.on(L.Draw.Event.EDITED, function (event) {
+        var layers = event.layers,
+          content = null;
+        layers.eachLayer(function (layer) {
+          content = getPopupContent(layer);
+          if (content !== null) {
+            layer.setPopupContent(content);
+          }
+        });
+      });
+      // Create a custom delete all polygons button
+      var deleteAllButton = L.easyButton({
+        states: [{
+          stateName: 'delete-all',
+          icon: 'fa-trash',
+          title: 'Delete All',
+          onClick: function (btn, map) {
+            drawnItems.clearLayers();
+          }
+        }]
+      }).addTo(map);
+
+      // Add tooltip when hovering over the button
+      deleteAllButton.button.title = 'Delete All';
+      //--------------------------------------------------------------------End Draw Polygons------------------------------------------------------------------------//
+      //Export Polygons---------------------------------------------------------------------------------------------
+
+      // Create the export EasyButton
+      var exportButton = L.easyButton({
+        states: [{
+          stateName: 'export',
+          icon: 'fa-download',
+          title: 'Export all polygons',
+          onClick: function (btn, map) {
+            // Extract GeoJson from featureGroup
+            var data = drawnItems.toGeoJSON();
+
+            // Stringify the GeoJson
+            var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+
+            // Create export
+            var exportLink = document.createElement('a');
+            exportLink.setAttribute('href', 'data:' + convertedData);
+            exportLink.setAttribute('download', 'data.geojson');
+            exportLink.click();
+          }
+        }]
+      }).addTo(map);
+
+      // Add tooltip when hovering over the button
+      exportButton.button.title = 'Export all polygons';
+
+
+
+      //------------------------------------------------------------------------------------------------------------
+
+
+
+
+      //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
+      var searchInput = L.DomUtil.get('searchInput');
+      var searchButton = L.DomUtil.get('searchButton');
+      var searchDropdown = L.DomUtil.get('searchDropdown');
+
+      // Hide the layers initially
+      [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+        layer_500230kVTDPSubstations_6
+      ]
+      .forEach(function (layer) {
+        layer.removeFrom(map);
+      });
+
+      searchInput.addEventListener('input', function () {
+        var searchTerm = searchInput.value.trim();
+        var matchingTitles = [];
+
+        if (searchTerm === '') {
+          clearDropdownMenu();
+        } else {
+          // Iterate over each layer and search for matching titles
+          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+            layer_500230kVTDPSubstations_6
+          ].forEach(function (layer) {
+            layer.eachLayer(function (subLayer) {
+              var title = subLayer.feature.properties.Title;
+              if (title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                matchingTitles.push({
+                  title: title,
+                  layer: subLayer
+                });
+                subLayer.setStyle({
+                  opacity: 1
+                });
+              } else {
+                subLayer.setStyle({
+                  opacity: 0
+                });
+              }
+            });
+          });
+
+          updateDropdownMenu(matchingTitles);
         }
       });
-    });
-    // Create a custom delete all polygons button
-    var deleteAllButton = L.easyButton({
-      states: [{
-        stateName: 'delete-all',
-        icon: 'fa-trash',
-        title: 'Delete All',
-        onClick: function (btn, map) {
-          drawnItems.clearLayers();
-        }
-      }]
-    }).addTo(map);
-
-    // Add tooltip when hovering over the button
-    deleteAllButton.button.title = 'Delete All';
-    //--------------------------------------------------------------------End Draw Polygons------------------------------------------------------------------------//
-    //Export Polygons---------------------------------------------------------------------------------------------
-
-    // Create the export EasyButton
-    var exportButton = L.easyButton({
-      states: [{
-        stateName: 'export',
-        icon: 'fa-download',
-        title: 'Export all polygons',
-        onClick: function (btn, map) {
-          // Extract GeoJson from featureGroup
-          var data = drawnItems.toGeoJSON();
-
-          // Stringify the GeoJson
-          var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
-
-          // Create export
-          var exportLink = document.createElement('a');
-          exportLink.setAttribute('href', 'data:' + convertedData);
-          exportLink.setAttribute('download', 'data.geojson');
-          exportLink.click();
-        }
-      }]
-    }).addTo(map);
-
-    // Add tooltip when hovering over the button
-    exportButton.button.title = 'Export all polygons';
 
 
 
-    //------------------------------------------------------------------------------------------------------------
-
-
-
-
-    //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
-    var searchInput = L.DomUtil.get('searchInput');
-    var searchButton = L.DomUtil.get('searchButton');
-    var searchDropdown = L.DomUtil.get('searchDropdown');
-
-    // Hide the layers initially
-    [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-      layer_500230kVTDPSubstations_6
-    ]
-    .forEach(function (layer) {
-      layer.removeFrom(map);
-    });
-
-    searchInput.addEventListener('input', function () {
-      var searchTerm = searchInput.value.trim();
-      var matchingTitles = [];
-
-      if (searchTerm === '') {
+      function updateDropdownMenu(titles) {
         clearDropdownMenu();
-      } else {
-        // Iterate over each layer and search for matching titles
+
+        titles.forEach(function (item) {
+          var dropdownItem = document.createElement('li');
+          dropdownItem.classList.add('dropdown-item');
+          dropdownItem.textContent = item.title;
+          dropdownItem.addEventListener('click', function () {
+            searchInput.value = item.title;
+            clearDropdownMenu();
+            map.flyTo(item.layer.getLatLng(), 12);
+            showLayers();
+          });
+          searchDropdown.appendChild(dropdownItem);
+        });
+
+        if (titles.length > 0) {
+          searchDropdown.style.display = 'block';
+        } else {
+          searchDropdown.style.display = 'none';
+        }
+      }
+
+      function clearDropdownMenu() {
+        searchDropdown.innerHTML = '';
+        searchDropdown.style.display = 'none';
+      }
+
+      searchButton.addEventListener('click', function () {
+        var searchTerm = searchInput.value;
+
+        var matchingLayer = null;
         [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
           layer_500230kVTDPSubstations_6
-        ].forEach(function (layer) {
+        ]
+        .forEach(function (layer) {
           layer.eachLayer(function (subLayer) {
             var title = subLayer.feature.properties.Title;
-            if (title.toLowerCase().includes(searchTerm.toLowerCase())) {
-              matchingTitles.push({
-                title: title,
-                layer: subLayer
-              });
+            if (title === searchTerm) {
+              matchingLayer = subLayer;
               subLayer.setStyle({
                 opacity: 1
               });
@@ -1971,913 +2123,856 @@
           });
         });
 
-        updateDropdownMenu(matchingTitles);
-      }
-    });
-
-
-
-    function updateDropdownMenu(titles) {
-      clearDropdownMenu();
-
-      titles.forEach(function (item) {
-        var dropdownItem = document.createElement('li');
-        dropdownItem.classList.add('dropdown-item');
-        dropdownItem.textContent = item.title;
-        dropdownItem.addEventListener('click', function () {
-          searchInput.value = item.title;
-          clearDropdownMenu();
-          map.flyTo(item.layer.getLatLng(), 12);
-          showLayers();
-        });
-        searchDropdown.appendChild(dropdownItem);
+        if (matchingLayer) {
+          map.flyTo(matchingLayer.getLatLng(), 12);
+          showLayersAfterMove();
+        }
       });
 
-      if (titles.length > 0) {
-        searchDropdown.style.display = 'block';
-      } else {
-        searchDropdown.style.display = 'none';
+      map.on('moveend', showLayersAfterMove);
+
+      function showLayersAfterMove() {
+        var zoom = map.getZoom();
+        if (zoom >= 12) {
+          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+            layer_500230kVTDPSubstations_6
+          ]
+          .forEach(function (layer) {
+            layer.addTo(map);
+          });
+        }
       }
-    }
+      //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
 
-    function clearDropdownMenu() {
-      searchDropdown.innerHTML = '';
-      searchDropdown.style.display = 'none';
-    }
 
-    searchButton.addEventListener('click', function () {
-      var searchTerm = searchInput.value;
+      //--------------------------------------------------------------------GeoBlaze------------------------------------------------------------------------//
 
-      var matchingLayer = null;
-      [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-        layer_500230kVTDPSubstations_6
-      ]
-      .forEach(function (layer) {
-        layer.eachLayer(function (subLayer) {
-          var title = subLayer.feature.properties.Title;
-          if (title === searchTerm) {
-            matchingLayer = subLayer;
-            subLayer.setStyle({
-              opacity: 1
+      // Display the GHI Map with identify function
+
+      //Display filename for shapefile input
+      function displayFileName() {
+        var fileInput = document.getElementById('fileInput');
+        var fileNameSpan = document.getElementById('fileName');
+        fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+      }
+
+      //Create map values for GHI and WS
+      map.createPane('GHIValues');
+      map.getPane('GHIValues').style.zIndex = 102;
+
+      var url_to_geotiff_GHI_files = "https://czrxstrd4.github.io/avemn/GHI.tif";
+
+      var GHIValuesLayer; // Declare GHIValuesLayer variable
+
+      fetch(url_to_geotiff_GHI_files)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
+
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
+
+            console.log("max:", max);
+            console.log("min:", min);
+            console.log("range:", range);
+
+            var scale = chroma.scale("Viridis");
+
+            GHIValuesLayer = new GeoRasterLayer({
+              georaster: georaster,
+              opacity: 0.4,
+              pane: 'GHIValues',
+              pixelValuesToColorFn: function (pixelValues) {
+                var pixelValue = pixelValues[0];
+
+                if (pixelValue === 0) return null;
+
+                var scaledPixelValue = (pixelValue - min) / range;
+
+                var color = scale(scaledPixelValue).hex();
+
+                return color;
+              }
             });
-          } else {
-            subLayer.setStyle({
-              opacity: 0
+
+            // Toggle popups based on checkbox state
+            var toggleCheckbox = document.getElementById('toggleCheckbox');
+            toggleCheckbox.addEventListener('change', function () {
+              togglePopups();
             });
-          }
-        });
-      });
-
-      if (matchingLayer) {
-        map.flyTo(matchingLayer.getLatLng(), 12);
-        showLayersAfterMove();
-      }
-    });
-
-    map.on('moveend', showLayersAfterMove);
-
-    function showLayersAfterMove() {
-      var zoom = map.getZoom();
-      if (zoom >= 12) {
-        [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-          layer_500230kVTDPSubstations_6
-        ]
-        .forEach(function (layer) {
-          layer.addTo(map);
-        });
-      }
-    }
-    //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
 
 
-    //--------------------------------------------------------------------GeoBlaze------------------------------------------------------------------------//
 
-    // Display the GHI Map with identify function
 
-    //Display filename for shapefile input
-    function displayFileName() {
-      var fileInput = document.getElementById('fileInput');
-      var fileNameSpan = document.getElementById('fileName');
-      fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
-    }
+            // Create popup
+            function handleMapClick(e) {
+              var popupss = L.popup();
 
-    //Create map values for GHI and WS
-    map.createPane('GHIValues');
-    map.getPane('GHIValues').style.zIndex = 102;
+              var latlng = e.latlng;
 
-    var url_to_geotiff_GHI_files = "https://czrxstrd4.github.io/avemn/GHI.tif";
+              var identifyResultGHIs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+              var GHIValues = (identifyResultGHIs / 1000) * 1000;
 
-    var GHIValuesLayer; // Declare GHIValuesLayer variable
-
-    fetch(url_to_geotiff_GHI_files)
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
-
-          const min = georaster.mins[0];
-          const max = georaster.maxs[0];
-          const range = georaster.ranges[0];
-
-          console.log("max:", max);
-          console.log("min:", min);
-          console.log("range:", range);
-
-          var scale = chroma.scale("Viridis");
-
-          GHIValuesLayer = new GeoRasterLayer({
-            georaster: georaster,
-            opacity: 0.4,
-            pane: 'GHIValues',
-            pixelValuesToColorFn: function (pixelValues) {
-              var pixelValue = pixelValues[0];
-
-              if (pixelValue === 0) return null;
-
-              var scaledPixelValue = (pixelValue - min) / range;
-
-              var color = scale(scaledPixelValue).hex();
-
-              return color;
+              popupss
+                .setLatLng(latlng)
+                .setContent("GHI: " + GHIValues.toFixed(2) + " kWh/m²")
+                .openOn(map);
             }
+
+
+            function togglePopups() {
+              if (GHIValuesLayer) {
+                if (map.hasLayer(GHIValuesLayer)) {
+                  map.removeLayer(GHIValuesLayer);
+                  map.off('click', handleMapClick);
+                } else {
+                  map.addLayer(GHIValuesLayer);
+                  map.on('click', handleMapClick);
+                }
+              }
+            }
+
           });
+        });
 
-          // Toggle popups based on checkbox state
-          var toggleCheckbox = document.getElementById('toggleCheckbox');
-          toggleCheckbox.addEventListener('change', function () {
-            togglePopups();
-          });
+      // Display the Wind Map with identify function
+      map.createPane('WSValues');
+      map.getPane('WSValues').style.zIndex = 102;
+
+      var url_to_geotiff_WS_files = "https://czrxstrd4.github.io/avemn/WS.tif";
+
+      var WSValuesLayer; // Declare WSValuesLayer variable
+
+      fetch(url_to_geotiff_WS_files)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
+
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
+
+            console.log("max:", max);
+            console.log("min:", min);
+            console.log("range:", range);
+
+            var scale = chroma.scale("YlGnBu");
+
+            WSValuesLayer = new GeoRasterLayer({
+              georaster: georaster,
+              opacity: 0.6,
+              resolution: 80,
+              pane: 'WSValues',
+              pixelValuesToColorFn: function (pixelValues) {
+                var pixelValue = pixelValues[0];
+                if (pixelValue === 0) return null;
+                var scaledPixelValue = (pixelValue - min) / range;
+                var color = scale(scaledPixelValue).hex();
+                return color;
+              }
+            });
+
+            // Toggle popups based on checkbox state
+            var WStoggleCheckbox = document.getElementById('WStoggleCheckbox');
+            WStoggleCheckbox.addEventListener('change', function () {
+              togglePopups();
+            });
 
 
+            // Create popup
+            function handleMapClick(e) {
+              var popupss = L.popup();
+              var latlng = e.latlng;
+              var identifyResultWSs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+              var WSValues = (identifyResultWSs / 1000) * 1000;
 
-
-          // Create popup
-          function handleMapClick(e) {
-            var popupss = L.popup();
-
-            var latlng = e.latlng;
-
-            var identifyResultGHIs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-            var GHIValues = (identifyResultGHIs / 1000) * 1000;
-
-            popupss
-              .setLatLng(latlng)
-              .setContent("GHI: " + GHIValues.toFixed(2) + " kWh/m²")
-              .openOn(map);
-          }
-
-
-          function togglePopups() {
-            if (GHIValuesLayer) {
-              if (map.hasLayer(GHIValuesLayer)) {
-                map.removeLayer(GHIValuesLayer);
-                map.off('click', handleMapClick);
+              if (WSValues > 0) {
+                popupss
+                  .setLatLng(latlng)
+                  .setContent("Wind Speed: " + WSValues.toFixed(2) + " m/s")
+                  .openOn(map);
               } else {
-                map.addLayer(GHIValuesLayer);
-                map.on('click', handleMapClick);
+                popupss
+                  .setLatLng(latlng)
+                  .setContent("Wind Speed: NaN m/s")
+                  .openOn(map);
               }
             }
-          }
 
+            function togglePopups() {
+              if (WSValuesLayer) {
+                if (map.hasLayer(WSValuesLayer)) {
+                  map.removeLayer(WSValuesLayer);
+                  map.off('click', handleMapClick);
+                } else {
+                  map.addLayer(WSValuesLayer);
+                  map.on('click', handleMapClick);
+                }
+              }
+            }
+          });
         });
-      });
 
-    // Display the Wind Map with identify function
-    map.createPane('WSValues');
-    map.getPane('WSValues').style.zIndex = 102;
+      // Display the Slope Map with identify function
+      map.createPane('SLPValues');
+      map.getPane('SLPValues').style.zIndex = 103;
 
-    var url_to_geotiff_WS_files = "https://czrxstrd4.github.io/avemn/WS.tif";
+      var url_to_geotiff_SLP_files = "https://czrxstrd4.github.io/avemn/SLP.tif";
 
-    var WSValuesLayer; // Declare WSValuesLayer variable
+      var SLPValuesLayer; // Declare WSValuesLayer variable
 
-    fetch(url_to_geotiff_WS_files)
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
+      fetch(url_to_geotiff_SLP_files)
+        .then(response => response.arrayBuffer())
+        .then(arrayBuffer => {
+          parseGeoraster(arrayBuffer).then(georaster => {
 
-          const min = georaster.mins[0];
-          const max = georaster.maxs[0];
-          const range = georaster.ranges[0];
+            const min = georaster.mins[0];
+            const max = georaster.maxs[0];
+            const range = georaster.ranges[0];
 
-          console.log("max:", max);
-          console.log("min:", min);
-          console.log("range:", range);
+            var scale = chroma.scale("YlGnBu");
 
-          var scale = chroma.scale("YlGnBu");
+            SLPValuesLayer = new GeoRasterLayer({
+              georaster: georaster,
+              opacity: 0.8,
+              resolution: 80,
+              pane: 'SLPValues',
+              pixelValuesToColorFn: function (pixelValues) {
+                var pixelValue = pixelValues[0];
+                if (pixelValue === 0) return null;
 
-          WSValuesLayer = new GeoRasterLayer({
-            georaster: georaster,
-            opacity: 0.6,
-            resolution: 80,
-            pane: 'WSValues',
-            pixelValuesToColorFn: function (pixelValues) {
-              var pixelValue = pixelValues[0];
-              if (pixelValue === 0) return null;
-              var scaledPixelValue = (pixelValue - min) / range;
-              var color = scale(scaledPixelValue).hex();
-              return color;
-            }
-          });
+                var maxSlope = 90; // Maximum slope value
+                var minColor = chroma('lightblue'); // Color for lower slope values
+                var maxColor = chroma('darkred'); // Color for higher slope values
 
-          // Toggle popups based on checkbox state
-          var WStoggleCheckbox = document.getElementById('WStoggleCheckbox');
-          WStoggleCheckbox.addEventListener('change', function () {
-            togglePopups();
-          });
+                // Calculate the color based on the slope value
+                var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
+
+                return color;
+              }
+            });
 
 
-          // Create popup
-          function handleMapClick(e) {
-            var popupss = L.popup();
-            var latlng = e.latlng;
-            var identifyResultWSs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-            var WSValues = (identifyResultWSs / 1000) * 1000;
+            // Toggle popups based on checkbox state
+            var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
+            SLPtoggleCheckbox.addEventListener('change', function () {
+              togglePopups();
+            });
 
-            if (WSValues > 0) {
-              popupss
-                .setLatLng(latlng)
-                .setContent("Wind Speed: " + WSValues.toFixed(2) + " m/s")
-                .openOn(map);
-            } else {
-              popupss
-                .setLatLng(latlng)
-                .setContent("Wind Speed: NaN m/s")
-                .openOn(map);
-            }
-          }
 
-          function togglePopups() {
-            if (WSValuesLayer) {
-              if (map.hasLayer(WSValuesLayer)) {
-                map.removeLayer(WSValuesLayer);
-                map.off('click', handleMapClick);
+            // Create popup
+            function handleMapClick(e) {
+              var popupss = L.popup();
+              var latlng = e.latlng;
+              var identifyResultSLPs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+              var SLPValues = (identifyResultSLPs / 1000) * 1000;
+
+              if (SLPValues > 0) {
+                popupss
+                  .setLatLng(latlng)
+                  .setContent("Slope: " + SLPValues.toFixed(2) + " %")
+                  .openOn(map);
               } else {
-                map.addLayer(WSValuesLayer);
-                map.on('click', handleMapClick);
+                popupss
+                  .setLatLng(latlng)
+                  .setContent("Slope: NaN m/s")
+                  .openOn(map);
               }
             }
-          }
-        });
-      });
 
-    // Display the Slope Map with identify function
-    map.createPane('SLPValues');
-    map.getPane('SLPValues').style.zIndex = 103;
-
-    var url_to_geotiff_SLP_files = "https://czrxstrd4.github.io/avemn/SLP.tif";
-
-    var SLPValuesLayer; // Declare WSValuesLayer variable
-
-    fetch(url_to_geotiff_SLP_files)
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
-
-          const min = georaster.mins[0];
-          const max = georaster.maxs[0];
-          const range = georaster.ranges[0];
-
-          var scale = chroma.scale("YlGnBu");
-
-          SLPValuesLayer = new GeoRasterLayer({
-            georaster: georaster,
-            opacity: 0.8,
-            resolution: 80,
-            pane: 'SLPValues',
-            pixelValuesToColorFn: function (pixelValues) {
-              var pixelValue = pixelValues[0];
-              if (pixelValue === 0) return null;
-
-              var maxSlope = 90; // Maximum slope value
-              var minColor = chroma('lightblue'); // Color for lower slope values
-              var maxColor = chroma('darkred'); // Color for higher slope values
-
-              // Calculate the color based on the slope value
-              var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
-
-              return color;
+            function togglePopups() {
+              if (SLPValuesLayer) {
+                if (map.hasLayer(SLPValuesLayer)) {
+                  map.removeLayer(SLPValuesLayer);
+                  map.off('click', handleMapClick);
+                } else {
+                  map.addLayer(SLPValuesLayer);
+                  map.on('click', handleMapClick);
+                }
+              }
             }
           });
-
-
-          // Toggle popups based on checkbox state
-          var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
-          SLPtoggleCheckbox.addEventListener('change', function () {
-            togglePopups();
-          });
-
-
-          // Create popup
-          function handleMapClick(e) {
-            var popupss = L.popup();
-            var latlng = e.latlng;
-            var identifyResultSLPs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-            var SLPValues = (identifyResultSLPs / 1000) * 1000;
-
-            if (SLPValues > 0) {
-              popupss
-                .setLatLng(latlng)
-                .setContent("Slope: " + SLPValues.toFixed(2) + " %")
-                .openOn(map);
-            } else {
-              popupss
-                .setLatLng(latlng)
-                .setContent("Slope: NaN m/s")
-                .openOn(map);
-            }
-          }
-
-          function togglePopups() {
-            if (SLPValuesLayer) {
-              if (map.hasLayer(SLPValuesLayer)) {
-                map.removeLayer(SLPValuesLayer);
-                map.off('click', handleMapClick);
-              } else {
-                map.addLayer(SLPValuesLayer);
-                map.on('click', handleMapClick);
-              }
-            }
-          }
         });
-      });
 
 
-    // End of create map layer for GHI & WS
+      // End of create map layer for GHI & WS
 
-    var coordinates = [];
+      var coordinates = [];
 
-    var loadingPrompt = document.getElementById('loading-prompt');
-    let FldSumstat;
-    var FldClass;
+      var loadingPrompt = document.getElementById('loading-prompt');
+      let FldSumstat;
+      var FldClass;
 
-    function runSequentially() {
-      var codeBlocks = [{
-          code: function () {
+      function runSequentially() {
+        var codeBlocks = [{
+            code: function () {
 
 
-            var fileInput = document.getElementById('fileInput');
-            var file = fileInput.files[0];
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              var fileContent = e.target.result;
-              var geojson = JSON.parse(fileContent);
-              coordinates = extractCoordinates(geojson);
-            };
-            reader.readAsText(file);
-            loadingPrompt.style.display = 'block';
+              var fileInput = document.getElementById('fileInput');
+              var file = fileInput.files[0];
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                var fileContent = e.target.result;
+                var geojson = JSON.parse(fileContent);
+                coordinates = extractCoordinates(geojson);
+              };
+              reader.readAsText(file);
+              loadingPrompt.style.display = 'block';
 
-            function extractCoordinates(geojson) {
-              var coordinates = [];
-              if (geojson && geojson.features) {
-                geojson.features.forEach(function (feature) {
-                  if (feature.geometry && feature.geometry.coordinates) {
-                    coordinates.push(feature.geometry.coordinates);
-                  }
-                });
-              }
-              return coordinates;
-            };
+              function extractCoordinates(geojson) {
+                var coordinates = [];
+                if (geojson && geojson.features) {
+                  geojson.features.forEach(function (feature) {
+                    if (feature.geometry && feature.geometry.coordinates) {
+                      coordinates.push(feature.geometry.coordinates);
+                    }
+                  });
+                }
+                return coordinates;
+              };
 
+            },
+            delay: 1000 // Delay for code block 1 in milliseconds
           },
-          delay: 1000 // Delay for code block 1 in milliseconds
-        },
-        {
-          code: function () {
+          {
+            code: function () {
 
-            // Calculate GHI Statistics
+              // Calculate GHI Statistics
 
-            var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
-            fetch(url_to_geotiff_GHI_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+              var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
+              fetch(url_to_geotiff_GHI_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = Number(meanss).toFixed(2);
 
-                  var statisticsDiv = document.getElementById('GHIstatisticss');
-                  statisticsDiv.textContent = 'Mean: ' + mn + ' kW/m2';
+                    var statisticsDiv = document.getElementById('GHIstatisticss');
+                    statisticsDiv.textContent = 'Mean: ' + mn + ' kW/m2';
 
-                  georaster = null;
+                    georaster = null;
 
+                  });
                 });
-              });
 
+            },
+            delay: 2000 // Delay for code block 2 in milliseconds
           },
-          delay: 2000 // Delay for code block 2 in milliseconds
-        },
-        {
-          code: function () {
-            // Calculate Wind Speed Statistics
-            
-            var url_to_geotiff_WS_file = "https://czrxstrd4.github.io/avemn/WS.tif";
-            fetch(url_to_geotiff_WS_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+          {
+            code: function () {
+              // Calculate Wind Speed Statistics
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
+              var url_to_geotiff_WS_file = "https://czrxstrd4.github.io/avemn/WS.tif";
+              fetch(url_to_geotiff_WS_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
-                  var statisticsDiv = document.getElementById('WSstatisticss');
-                  statisticsDiv.textContent = 'Mean: ' + mn + ' m/s';
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = Number(meanss).toFixed(2);
 
-                  georaster = null;
+                    var statisticsDiv = document.getElementById('WSstatisticss');
+                    statisticsDiv.textContent = 'Mean: ' + mn + ' m/s';
 
+                    georaster = null;
+
+                  });
                 });
-              });
+            },
+            delay: 2000 // Delay for code block 3 in milliseconds
           },
-          delay: 2000 // Delay for code block 3 in milliseconds
-        },
-        {
-          code: function () {
+          {
+            code: function () {
 
-            var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
-            fetch(url_to_geotiff_SLP_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+              var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
+              fetch(url_to_geotiff_SLP_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
-                  
-                  var statisticsDiv = document.getElementById('SLPstatisticss');
-                  statisticsDiv.textContent = 'Mean: ' + mn + '%';
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = Number(meanss).toFixed(2);
 
-                  georaster = null;
+                    var statisticsDiv = document.getElementById('SLPstatisticss');
+                    statisticsDiv.textContent = 'Mean: ' + mn + '%';
 
+                    georaster = null;
+
+                  });
                 });
-              });
 
 
 
+            },
+            delay: 5000 // Delay for code block 3 in milliseconds
           },
-          delay: 5000 // Delay for code block 3 in milliseconds
-        },
-        {
-          code: function () {
+          {
+            code: function () {
 
-            var url_to_geotiff_Azmt_file = "https://czrxstrd4.github.io/avemn/Azmt.tif";
+              var url_to_geotiff_Azmt_file = "https://czrxstrd4.github.io/avemn/Azmt.tif";
 
-            fetch(url_to_geotiff_Azmt_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+              fetch(url_to_geotiff_Azmt_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
-                  let notes;
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = Number(meanss).toFixed(2);
+                    let notes;
 
-                  if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
-                    notes = "North, " + mn + "°";
-                  } else if (mn >= 22.51 && mn <= 67.5) {
-                    notes = "NorthEast, " + mn + "°";
-                  } else if (mn >= 67.51 && mn <= 112.5) {
-                    notes = "East, " + mn + "°";
-                  } else if (mn >= 112.51 && mn <= 157.5) {
-                    notes = "SouthEast, " + mn + "°";
-                  } else if (mn >= 157.51 && mn <= 202.5) {
-                    notes = "South, " + mn + "°";
-                  } else if (mn >= 202.51 && mn <= 247.5) {
-                    notes = "SouthWest, " + mn + "°";
-                  } else if (mn >= 247.51 && mn <= 292.5) {
-                    notes = "West, " + mn + "°";
-                  } else if (mn >= 292.51 && mn <= 337.5) {
-                    notes = "NorthWest, " + mn + "°";
-                  } else {
-                    notes = "N/A";
-                  }
-                  document.getElementById("Azmtstatisticss").innerHTML = notes;
-                  georaster = null;
+                    if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
+                      notes = "North, " + mn + "°";
+                    } else if (mn >= 22.51 && mn <= 67.5) {
+                      notes = "NorthEast, " + mn + "°";
+                    } else if (mn >= 67.51 && mn <= 112.5) {
+                      notes = "East, " + mn + "°";
+                    } else if (mn >= 112.51 && mn <= 157.5) {
+                      notes = "SouthEast, " + mn + "°";
+                    } else if (mn >= 157.51 && mn <= 202.5) {
+                      notes = "South, " + mn + "°";
+                    } else if (mn >= 202.51 && mn <= 247.5) {
+                      notes = "SouthWest, " + mn + "°";
+                    } else if (mn >= 247.51 && mn <= 292.5) {
+                      notes = "West, " + mn + "°";
+                    } else if (mn >= 292.51 && mn <= 337.5) {
+                      notes = "NorthWest, " + mn + "°";
+                    } else {
+                      notes = "N/A";
+                    }
+                    document.getElementById("Azmtstatisticss").innerHTML = notes;
+                    georaster = null;
+                  });
                 });
-              });
+            },
+            delay: 5000 // Delay for code block 3 in milliseconds
           },
-          delay: 5000 // Delay for code block 3 in milliseconds
-        },
-        {
-          code: function () {
-            // Calculate Service Contract Statistics
+          {
+            code: function () {
+              // Calculate Service Contract Statistics
 
-            var url_to_geotiff_SC_file = "https://czrxstrd4.github.io/avemn/SC.tif";
+              var url_to_geotiff_SC_file = "https://czrxstrd4.github.io/avemn/SC.tif";
 
-            fetch(url_to_geotiff_SC_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+              fetch(url_to_geotiff_SC_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-                  let notes;
-                  let fontColor;
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    let notes;
+                    let fontColor;
 
-                  if (mn > 0) {
-                    notes =
-                      "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
-                      mn + "%";
-                    fontColor = "red";
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
-                  document.getElementById("SCstatisticss").innerHTML = notes;
-                  document.getElementById("SCstatisticss").style.color =
-                    fontColor;
-                  georaster = null;
-
-                });
-              });
-
-
-          },
-          delay: 6000 // Delay for code block 3 in milliseconds
-        },
-        {
-          code: function () {
-            // Calculate Ancestral Domain Statistics
-
-            var url_to_geotiff_AD_file = "https://czrxstrd4.github.io/avemn/AncstrlD.tif";
-            fetch(url_to_geotiff_AD_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-                  let notes;
-                  let fontColor;
-
-
-                  if (mn > 0) {
-
-                    notes =
-                      "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
-                      mn + "%";
-                    fontColor = "red";
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
-
-                  document.getElementById("ADstatisticss").innerHTML = notes;
-                  document.getElementById("ADstatisticss").style.color =
-                    fontColor;
-
-                  georaster = null;
-
-                });
-              });
-          },
-          delay: 3000 // Delay for code block 2 in milliseconds
-        },
-        {
-          code: function () {
-            // Calculate Irrigation Statistics
-
-            var url_to_geotiff_Irgtn_file = "https://czrxstrd4.github.io/avemn/Irrgtn.tif";
-
-
-            fetch(url_to_geotiff_Irgtn_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-                  let notes;
-                  let fontColor;
-
-                  if (mn > 0) {
-
-                    notes =
-                      "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
-                      mn + "%";
-                    fontColor = "red";
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
-                  document.getElementById("Irgtnstatisticss").innerHTML = notes;
-                  document.getElementById("Irgtnstatisticss").style.color =
-                    fontColor;
-                  georaster = null;
-
-                });
-              });
-          },
-          delay: 2000 // Delay for code block 2 in milliseconds
-        },
-        {
-          code: function () {
-            // Calculate Protected Area Statistics
-
-            var url_to_geotiff_PrtdArs_file = "https://czrxstrd4.github.io/avemn/PrtdArs.tif";
-
-            fetch(url_to_geotiff_PrtdArs_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
-                  let notes;
-                  let fontColor;
-
-                  if (mn > 0) {
-
-                    notes =
-                      "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
-                      mn + "%";
-                    fontColor = "red";
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
-
-                  document.getElementById("PrtdArsstatisticss").innerHTML = notes;
-                  document.getElementById("PrtdArsstatisticss").style.color =
-                    fontColor;
-                  georaster = null;
-
-                });
-              });
-          },
-          delay: 3000 // Delay for code block 2 in milliseconds
-        },
-        {
-          code: function () {
-
-            // Calculate Active Fault Statistics
-
-            var url_to_geotiff_Flt_file = "https://czrxstrd4.github.io/avemn/Flt.tif";
-            fetch(url_to_geotiff_Flt_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
-                  let notes;
-                  let fontColor;
-
-                  if (mn > 0) {
-
-                    notes =
-                      "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
-                    fontColor = "red";
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
-
-                  document.getElementById("Fltstatisticss").innerHTML = notes;
-                  document.getElementById("Fltstatisticss").style.color =
-                    fontColor;
-
-
-                  georaster = null;
-
-                });
-              });
-          },
-          delay: 2000 // Delay for code block 3 in milliseconds
-        },
-        {
-          code: function () {
-
-            // Calculate Flood Hazard Classified Statistics
-
-            var url_to_geotiff_Fld_file = "https://czrxstrd4.github.io/avemn/Fld.tif";
-
-            fetch(url_to_geotiff_Fld_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-
-                  const sumss = geoblaze.sum(georaster, coordinates);
-                  FldSumstat = (Number(sumss)).toFixed(2);
-                  georaster = null;
-
-                });
-              });
-          },
-          delay: 3000 // Delay for code block 2 in milliseconds
-        },
-        {
-          code: function () {
-
-
-            // Calculate Flood Hazard Binary Statistics
-            var url_to_geotiff_FldBi_file = "https://czrxstrd4.github.io/avemn/FldBi.tif";
-            let FldBiSumstat;
-
-            fetch(url_to_geotiff_FldBi_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-
-                  const sumss = geoblaze.sum(georaster, coordinates);
-
-                  let notes;
-                  let fontColor;
-
-                  if (mn > 0) {
-
-
-                    if ((FldSumstat / ((Number(sumss)).toFixed(2))) < 1.67) {
-
-                      notes = "Overlap at ~" + mn +
-                        "%, & Susceptibility Level at Low Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
+                    if (mn > 0) {
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
+                        mn + "%";
                       fontColor = "red";
-                    } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >=
-                      1.67 && (FldSumstat / ((Number(sumss)).toFixed(2))) <=
-                      2.33) {
-                      notes = "Overlap at ~" + mn +
-                        "%, & Susceptibility Level at Medium Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+                    document.getElementById("SCstatisticss").innerHTML = notes;
+                    document.getElementById("SCstatisticss").style.color =
+                      fontColor;
+                    georaster = null;
+
+                  });
+                });
+
+
+            },
+            delay: 6000 // Delay for code block 3 in milliseconds
+          },
+          {
+            code: function () {
+              // Calculate Ancestral Domain Statistics
+
+              var url_to_geotiff_AD_file = "https://czrxstrd4.github.io/avemn/AncstrlD.tif";
+              fetch(url_to_geotiff_AD_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    let notes;
+                    let fontColor;
+
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
+                        mn + "%";
                       fontColor = "red";
-                    } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >
-                      2.33) {
-                      notes = "Overlap at ~" + mn +
-                        "%, & Susceptibility Level at High Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("ADstatisticss").innerHTML = notes;
+                    document.getElementById("ADstatisticss").style.color =
+                      fontColor;
+
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          },
+          {
+            code: function () {
+              // Calculate Irrigation Statistics
+
+              var url_to_geotiff_Irgtn_file = "https://czrxstrd4.github.io/avemn/Irrgtn.tif";
+
+
+              fetch(url_to_geotiff_Irgtn_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
+                        mn + "%";
                       fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+                    document.getElementById("Irgtnstatisticss").innerHTML = notes;
+                    document.getElementById("Irgtnstatisticss").style.color =
+                      fontColor;
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 2000 // Delay for code block 2 in milliseconds
+          },
+          {
+            code: function () {
+              // Calculate Protected Area Statistics
+
+              var url_to_geotiff_PrtdArs_file = "https://czrxstrd4.github.io/avemn/PrtdArs.tif";
+
+              fetch(url_to_geotiff_PrtdArs_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    console.log("Mean:", meanss);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("PrtdArsstatisticss").innerHTML = notes;
+                    document.getElementById("PrtdArsstatisticss").style.color =
+                      fontColor;
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          },
+          {
+            code: function () {
+
+              // Calculate Active Fault Statistics
+
+              var url_to_geotiff_Flt_file = "https://czrxstrd4.github.io/avemn/Flt.tif";
+              fetch(url_to_geotiff_Flt_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    console.log("Mean:", meanss);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("Fltstatisticss").innerHTML = notes;
+                    document.getElementById("Fltstatisticss").style.color =
+                      fontColor;
+
+
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 2000 // Delay for code block 3 in milliseconds
+          },
+          {
+            code: function () {
+
+              // Calculate Flood Hazard Classified Statistics
+
+              var url_to_geotiff_Fld_file = "https://czrxstrd4.github.io/avemn/Fld.tif";
+
+              fetch(url_to_geotiff_Fld_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+
+                    const sumss = geoblaze.sum(georaster, coordinates);
+                    FldSumstat = (Number(sumss)).toFixed(2);
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          },
+          {
+            code: function () {
+
+
+              // Calculate Flood Hazard Binary Statistics
+              var url_to_geotiff_FldBi_file = "https://czrxstrd4.github.io/avemn/FldBi.tif";
+              let FldBiSumstat;
+
+              fetch(url_to_geotiff_FldBi_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+
+                    const sumss = geoblaze.sum(georaster, coordinates);
+
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+
+                      if ((FldSumstat / ((Number(sumss)).toFixed(2))) < 1.67) {
+
+                        notes = "Overlap at ~" + mn +
+                          "%, & Susceptibility Level at Low Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
+                        fontColor = "red";
+                      } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >=
+                        1.67 && (FldSumstat / ((Number(sumss)).toFixed(2))) <=
+                        2.33) {
+                        notes = "Overlap at ~" + mn +
+                          "%, & Susceptibility Level at Medium Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
+                        fontColor = "red";
+                      } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >
+                        2.33) {
+                        notes = "Overlap at ~" + mn +
+                          "%, & Susceptibility Level at High Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
+                        fontColor = "red";
+                      }
+
+
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
                     }
 
 
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
+                    document.getElementById("FldBistatisticss").innerHTML = notes;
+                    document.getElementById("FldBistatisticss").style.color =
+                      fontColor;
 
 
-                  document.getElementById("FldBistatisticss").innerHTML = notes;
-                  document.getElementById("FldBistatisticss").style.color =
-                    fontColor;
+                    georaster = null;
 
-
-                  georaster = null;
-
-                });
-              });
-          },
-          delay: 3000 // Delay for code block 3 in milliseconds
-        },
-        {
-          code: function () {
-
-            var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
-
-            fetch(url_to_geotiff_SLP_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
-                  console.log("Mean:", meanss);
-
-                  var statisticsDiv = document.getElementById('SLPstatisticss');
-                  statisticsDiv.textContent = 'Slope: Mean: ' + mn;
-
-
-                  const SLPHisto = geoblaze.histogram(georaster, coordinates, {
-                    scaleType: "ratio",
-                    numClasses: 5,
-                    classType: "equal-interval"
                   });
-                  console.log(SLPHisto);
+                });
+            },
+            delay: 3000 // Delay for code block 3 in milliseconds
+          },
+          {
+            code: function () {
+
+              var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
+
+              fetch(url_to_geotiff_SLP_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
 
-                  if (Array.isArray(SLPHisto) && SLPHisto.length > 0) {
-                    const histogramData = SLPHisto[
-                      0]; // Access the first (and only) object in the array
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = Number(meanss).toFixed(2);
+                    console.log("Mean:", meanss);
 
-                    const customLabels = ["Flat", "Undulating", "Label 3",
-                      "Label 4", "Label 5"
-                    ];
+                    var statisticsDiv = document.getElementById('SLPstatisticss');
+                    statisticsDiv.textContent = 'Slope: Mean: ' + mn;
 
-                    const data = Object.values(histogramData);
 
-                    // Calculate the total sum of data
-                    const sum = data.reduce((total, value) => total + value, 0);
+                    const SLPHisto = geoblaze.histogram(georaster, coordinates, {
+                      scaleType: "ratio",
+                      numClasses: 5,
+                      classType: "equal-interval"
+                    });
+                    console.log(SLPHisto);
 
-                    // Calculate the percentage of each data point
-                    const percentages = data.map(value => ((value / sum) * 100)
-                      .toFixed(2));
 
-                    // Create the histogram chart
-                    var ctx = document.getElementById('histogramChart')
-                      .getContext('2d');
-                    var histogramChart = new Chart(ctx, {
-                      type: 'bar',
-                      data: {
-                        labels: customLabels,
-                        datasets: [{
-                          label: 'Histogram',
-                          data: data,
-                          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                          borderColor: 'rgba(75, 192, 192, 1)',
-                          borderWidth: 1
-                        }]
-                      },
-                      options: {
-                        plugins: {
-                          tooltip: {
-                            callbacks: {
-                              label: function (context) {
-                                // Retrieve the original data point
-                                const originalValue =
-                                  context.parsed.y;
+                    if (Array.isArray(SLPHisto) && SLPHisto.length > 0) {
+                      const histogramData = SLPHisto[
+                        0]; // Access the first (and only) object in the array
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  originalValue * 4.015;
+                      const customLabels = ["Flat", "Undulating", "Label 3",
+                        "Label 4", "Label 5"
+                      ];
 
-                                // Retrieve the percentage
-                                const percentage =
-                                  percentages[context
-                                    .dataIndex];
+                      const data = Object.values(histogramData);
 
-                                // Return the label string for the tooltip
-                                return `Area: ${multipliedValue} hectares, % Coverage: ${percentage}%`;
+                      // Calculate the total sum of data
+                      const sum = data.reduce((total, value) => total + value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = data.map(value => ((value / sum) * 100)
+                        .toFixed(2));
+
+                      // Create the histogram chart
+                      var ctx = document.getElementById('histogramChart')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: data,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    originalValue * 4.015;
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Area: ${multipliedValue} hectares, % Coverage: ${percentage}%`;
+                                }
                               }
                             }
-                          }
-                        },
-                        scales: {
-                          x: {
-                            beginAtZero: true
                           },
-                          y: {
-                            beginAtZero: true
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true
+                            }
                           }
                         }
-                      }
-                    });
-                  } else {
-                    console.error("Invalid data for histogram");
-                  }
+                      });
+                    } else {
+                      console.error("Invalid data for histogram");
+                    }
 
 
 
 
-                  georaster = null;
+                    georaster = null;
 
+                  });
                 });
-              });
 
 
 
-          },
-          delay: 1000 // Delay for code block 2 in milliseconds
-        },
-
-
-
-
-        {
-          code: function () {
-            loadingPrompt.style.display = 'none';
-
-
-
+            },
+            delay: 1000 // Delay for code block 2 in milliseconds
           },
 
 
 
 
-          delay: 1000 // Delay for code block 2 in milliseconds
-        }
-      ];
+          {
+            code: function () {
+              loadingPrompt.style.display = 'none';
 
-      document.getElementById('fetchButton').addEventListener('click', function () {
-        var index = 0;
 
-        function executeNext() {
-          if (index < codeBlocks.length) {
-            var codeBlock = codeBlocks[index];
-            codeBlock.code(); // Execute the code block
 
-            index++;
-            setTimeout(executeNext, codeBlock.delay); // Delay before executing the next code block
+            },
+
+
+
+
+            delay: 1000 // Delay for code block 2 in milliseconds
           }
-        }
+        ];
 
-        executeNext();
-      });
-    }
-  </script>
+        document.getElementById('fetchButton').addEventListener('click', function () {
+          var index = 0;
+
+          function executeNext() {
+            if (index < codeBlocks.length) {
+              var codeBlock = codeBlocks[index];
+              codeBlock.code(); // Execute the code block
+
+              index++;
+              setTimeout(executeNext, codeBlock.delay); // Delay before executing the next code block
+            }
+          }
+
+          executeNext();
+        });
+      }
+    </script>
 </body>
 
 </html>
