@@ -56,7 +56,7 @@ function pop_500230kVTDPSubstations_6(feature, layer) {
   function style_500230kVTDPSubstations_6_0() {
     return {
       pane: 'pane_500230kVTDPSubstations_6',
-      radius: 5.0,
+      radius: 6.0,
       opacity: 0.8,
       color: 'rgba(35,35,35,1.0)',
       dashArray: '',

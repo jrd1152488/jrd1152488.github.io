@@ -1,4 +1,4 @@
-function pop_69kVDULoadendSubtations_4(feature, layer) {
+function pop_69kVDULoadendSubstations_4(feature, layer) {
     layer.on({
         mouseout: function (e) {
             for (i in e.target._eventParents) {
@@ -54,9 +54,9 @@ function pop_69kVDULoadendSubtations_4(feature, layer) {
 }
 
 
-function style_69kVDULoadendSubtations_4_0() {
+function style_69kVDULoadendSubstations_4_0() {
 return {
-  pane: 'pane_69kVDULoadendSubtations_4',
+  pane: 'pane_69kVDULoadendSubstations_4',
   radius: 4.0,
   opacity: 0.8,
   color: 'rgba(35,35,35,1.0)',

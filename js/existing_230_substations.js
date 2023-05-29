@@ -52,8 +52,8 @@ function pop_500230138115kVExistingSubstations_5(feature, layer) {
 function style_500230138115kVExistingSubstations_5_0() {
   return {
     pane: 'pane_500230138115kVExistingSubstations_5',
-    radius: 8.0,
-    opacity: 1,
+    radius: 6.0,
+    opacity: 0.8,
     color: 'rgba(35,35,35,1.0)',
     dashArray: '',
     lineCap: 'butt',
