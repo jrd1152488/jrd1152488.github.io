@@ -134,9 +134,10 @@
     #map {
       height: 100%;
     }
+
     body {
-    font-family: 'Open Sans', sans-serif;
-  }
+      font-family: 'Open Sans', sans-serif;
+    }
 
     .coordinates-input-control {
       position: absolute;
@@ -260,7 +261,7 @@
     }
 
     .btn-custom {
-      font-size: 14px;
+      font-size: 12px;
       /* Adjust the font size as desired */
       padding: 6px 20 px;
       /* Adjust the padding to resize the buttons */
@@ -277,12 +278,12 @@
     }
 
     .common-header .header-icon {
-      font-size: 25px;
+      font-size: 20px;
       padding-right: 5px;
     }
 
     .common-header .header-text {
-      font-size: 25px;
+      font-size: 20px;
       padding-left: 5px;
     }
 
@@ -305,8 +306,23 @@
 
     .sidebar-spacer {
       height: 20px;
-      /* Adjust the height as desired */
     }
+
+    .custom-font {
+      font-size: 12px;
+    }
+
+    .custom-icon {
+      font-size: 16px;
+    }
+
+    .custom-text {
+      font-size: 12px;
+    }
+    .custom-button-grid {
+  display: grid;
+  align-items: center;
+}
   </style>
 </head>
 
@@ -331,8 +347,6 @@
     <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
     </div>
 
-
-
     <div class="sidebar-pane" id="geotiff">
       <h1 class="sidebar-header common-header">
         <i class="fa-solid fa-calculator header-icon"></i>
@@ -340,25 +354,32 @@
         <span class="sidebar-close"></span>
       </h1>
 
-      <div class="d-flex justify-content-center" style="margin-bottom: 20px;">
-        <div class="btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-outline-primary">
-            <input class="btn-check" type="checkbox" id="toggleCheckbox" autocomplete="off">
-            Irradiance (GHI) Map
-          </label>
-
-          <label class="btn btn-outline-primary">
-            <input class="btn-check" type="checkbox" id="WStoggleCheckbox" autocomplete="off">
-            Wind Speed Map
-          </label>
-
-          <label class="btn btn-outline-primary">
-            <input class="btn-check" type="checkbox" id="SLPtoggleCheckbox" autocomplete="off">
-            Slope Map
-          </label>
+      <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 20px;">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid" style="font-size: 14px;">
+              <input class="btn-check" type="checkbox" id="toggleCheckbox" autocomplete="off">
+              <span>Irradiance Map</span>
+            </label>
+          </div>
+          <div class="col-md-4">
+            <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid" style="font-size: 14px;">
+              <input class="btn-check" type="checkbox" id="WStoggleCheckbox" autocomplete="off">
+              <span>Wind Speed Map</span>
+            </label>
+          </div>
+          <div class="col-md-4">
+            <label class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid" style="font-size: 14px;">
+              <input class="btn-check" type="checkbox" id="SLPtoggleCheckbox" autocomplete="off">
+              <span>Slope Map</span>
+            </label>
+          </div>
         </div>
       </div>
-
+      
+      
+      
+      
 
 
       <div>
@@ -379,33 +400,60 @@
           Loading...
         </div>
 
-        <div class="row" style="margin-top: 10px;">
-          <div class="col-md-6">
-            <div class="mb-3" id="GHIstatisticss"></div>
-            <div class="mb-3" id="WSstatisticss"></div>
-
-          </div>
-          <div class="col-md-6">
-            <div class="mb-3" id="SLPstatisticss"></div>
-            <div class="mb-3" id="Azmtstatisticss"></div>
-          </div>
-        </div>
-        <div class="row">
+        <div class="row" style="margin-top: 10px;font-size: small;">
           <div class="col-md-12">
-            <div class="mb-3" id="SCstatisticss"></div>
-            <div class="mb-3" id="ADstatisticss"></div>
-            <div class="mb-3" id="Irgtnstatisticss"></div>
-            <div class="mb-3" id="PrtdArsstatisticss"></div>
-            <div class="mb-3" id="PrtdArsstatisticss2"></div>
-            <div class="mb-3" id="Fltstatisticss"></div>
-            <div class="mb-3" id="FldBistatisticss"></div>
+            <div class="mb-3">
+              <h4><i class="fa-regular fa-sun custom-icon"></i> Irradiance:</h4>
+              <span id="GHIstatisticss" class="custom-text">GHIstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-wind custom-icon"></i> Wind Speed:</h4>
+              <span id="WSstatisticss" class="custom-text">WSstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-mountain custom-icon"></i> Slope:</h4>
+              <span id="SLPstatisticss" class="custom-text">SLPstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-mountain custom-icon"></i> Azimuth:</h4>
+              <span id="Azmtstatisticss" class="custom-text">Azmtstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-file-contract custom-icon"></i> Service Contract:</h4>
+              <span id="SCstatisticss" class="custom-text">SCstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-earth-asia custom-icon"></i> Ancestral Domains:</h4>
+              <span id="ADstatisticss" class="custom-text">ADstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-water custom-icon"></i> Irrigated Land:</h4>
+              <span id="Irgtnstatisticss" class="custom-text">Irgtnstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-kiwi-bird custom-icon"></i> Protected Areas:</h4>
+              <span id="PrtdArsstatisticss" class="custom-text">PrtdArsstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-house-crack custom-icon"></i> Fault:</h4>
+              <span id="Fltstatisticss" class="custom-text">Fltstatisticss</span>
+            </div>
+            <div class="mb-3">
+              <h4><i class="fa-solid fa-house-flood-water custom-icon"></i> Floods:</h4>
+              <span id="FldBistatisticss" class="custom-text">FldBistatisticss</span>
+            </div>
           </div>
         </div>
+        
 
 
-        <div class="sidebar-spacer"></div>
+        <canvas id="histogramChart"></canvas>
 
     </div>
+
+    <hr class="sidebar-spacer">
+
+
     <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
       <h1 class="sidebar-header common-header">
         <i class="fa-solid fa-database header-icon"></i>
@@ -2171,7 +2219,7 @@
         });
       });
 
-      // Display the Slope Map with identify function
+    // Display the Slope Map with identify function
     map.createPane('SLPValues');
     map.getPane('SLPValues').style.zIndex = 103;
 
@@ -2198,11 +2246,18 @@
             pixelValuesToColorFn: function (pixelValues) {
               var pixelValue = pixelValues[0];
               if (pixelValue === 0) return null;
-              var scaledPixelValue = (pixelValue - min) / range;
-              var color = scale(scaledPixelValue).hex();
+
+              var maxSlope = 90; // Maximum slope value
+              var minColor = chroma('lightblue'); // Color for lower slope values
+              var maxColor = chroma('darkred'); // Color for higher slope values
+
+              // Calculate the color based on the slope value
+              var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
+
               return color;
             }
           });
+
 
           // Toggle popups based on checkbox state
           var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
@@ -2261,24 +2316,17 @@
 
             var fileInput = document.getElementById('fileInput');
             var file = fileInput.files[0];
-
             var reader = new FileReader();
             reader.onload = function (e) {
               var fileContent = e.target.result;
               var geojson = JSON.parse(fileContent);
-
               coordinates = extractCoordinates(geojson);
-
             };
             reader.readAsText(file);
-
-
             loadingPrompt.style.display = 'block';
-
 
             function extractCoordinates(geojson) {
               var coordinates = [];
-
               if (geojson && geojson.features) {
                 geojson.features.forEach(function (feature) {
                   if (feature.geometry && feature.geometry.coordinates) {
@@ -2286,7 +2334,6 @@
                   }
                 });
               }
-
               return coordinates;
             };
 
@@ -2299,7 +2346,6 @@
             // Calculate GHI Statistics
 
             var url_to_geotiff_GHI_file = "https://czrxstrd4.github.io/avemn/GHI.tif";
-
             fetch(url_to_geotiff_GHI_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
@@ -2307,10 +2353,9 @@
 
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
-                  console.log("Mean:", meanss);
 
                   var statisticsDiv = document.getElementById('GHIstatisticss');
-                  statisticsDiv.textContent = 'Irradiance (GHI): Mean: ' + mn;
+                  statisticsDiv.textContent = 'Mean: ' + mn + ' kW/m2';
 
                   georaster = null;
 
@@ -2323,12 +2368,8 @@
         {
           code: function () {
             // Calculate Wind Speed Statistics
-
-
+            
             var url_to_geotiff_WS_file = "https://czrxstrd4.github.io/avemn/WS.tif";
-
-
-
             fetch(url_to_geotiff_WS_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
@@ -2336,10 +2377,9 @@
 
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
-                  console.log("Mean:", meanss);
 
                   var statisticsDiv = document.getElementById('WSstatisticss');
-                  statisticsDiv.textContent = 'Wind Speed: Mean: ' + mn;
+                  statisticsDiv.textContent = 'Mean: ' + mn + ' m/s';
 
                   georaster = null;
 
@@ -2352,21 +2392,16 @@
           code: function () {
 
             var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
-
             fetch(url_to_geotiff_SLP_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
                 parseGeoraster(arrayBuffer).then(georaster => {
 
-
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
-                  console.log("Mean:", meanss);
-
+                  
                   var statisticsDiv = document.getElementById('SLPstatisticss');
-                  statisticsDiv.textContent = 'Slope: Mean: ' + mn;
-
-
+                  statisticsDiv.textContent = 'Mean: ' + mn + '%';
 
                   georaster = null;
 
@@ -2388,12 +2423,9 @@
               .then(arrayBuffer => {
                 parseGeoraster(arrayBuffer).then(georaster => {
 
-
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
-                  console.log("Mean:", meanss);
                   let notes;
-
 
                   if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
                     notes = "North, " + mn + "°";
@@ -2414,8 +2446,7 @@
                   } else {
                     notes = "N/A";
                   }
-                  document.getElementById("Azmtstatisticss").innerHTML =
-                    "Azimuth: " + notes;
+                  document.getElementById("Azmtstatisticss").innerHTML = notes;
                   georaster = null;
                 });
               });
@@ -2435,27 +2466,22 @@
 
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
                   let notes;
                   let fontColor;
 
-
                   if (mn > 0) {
-
                     notes =
-                      "RE Service Contract: With Potential Overlap. Contact the owner/broker/DOE to confirm. Overlap at ~" +
+                      "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
                   } else {
 
-                    notes = "RE Service Contract: No potential overlap.";
+                    notes = "No potential overlap.";
                     fontColor = "green";
                   }
-
                   document.getElementById("SCstatisticss").innerHTML = notes;
                   document.getElementById("SCstatisticss").style.color =
                     fontColor;
-
                   georaster = null;
 
                 });
@@ -2470,7 +2496,6 @@
             // Calculate Ancestral Domain Statistics
 
             var url_to_geotiff_AD_file = "https://czrxstrd4.github.io/avemn/AncstrlD.tif";
-
             fetch(url_to_geotiff_AD_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
@@ -2478,7 +2503,6 @@
 
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
                   let notes;
                   let fontColor;
 
@@ -2486,12 +2510,12 @@
                   if (mn > 0) {
 
                     notes =
-                      "Ancestral Domain: With Potential Overlap. Contact the owner/broker/LGU/NCIP to confirm. Overlap at ~" +
+                      "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
                   } else {
 
-                    notes = "Ancestral Domain: No potential overlap.";
+                    notes = "No potential overlap.";
                     fontColor = "green";
                   }
 
@@ -2520,27 +2544,23 @@
 
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
                   let notes;
                   let fontColor;
 
                   if (mn > 0) {
 
                     notes =
-                      "Irrigated Land: With Potential Overlap. Contact the owner/broker/LGU/NIA to confirm. Overlap at ~" +
+                      "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
                   } else {
 
-                    notes = "Irrigated Land: No potential overlap.";
+                    notes = "No potential overlap.";
                     fontColor = "green";
                   }
-
                   document.getElementById("Irgtnstatisticss").innerHTML = notes;
                   document.getElementById("Irgtnstatisticss").style.color =
                     fontColor;
-
-
                   georaster = null;
 
                 });
@@ -2568,12 +2588,12 @@
                   if (mn > 0) {
 
                     notes =
-                      "Protected Area: With Potential Overlap. Contact the owner/broker/LGU/DENR to confirm. Overlap at ~" +
+                      "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
                   } else {
 
-                    notes = "Protected Area: No potential overlap.";
+                    notes = "No potential overlap.";
                     fontColor = "green";
                   }
 
@@ -2593,8 +2613,6 @@
             // Calculate Active Fault Statistics
 
             var url_to_geotiff_Flt_file = "https://czrxstrd4.github.io/avemn/Flt.tif";
-
-
             fetch(url_to_geotiff_Flt_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
@@ -2609,11 +2627,11 @@
                   if (mn > 0) {
 
                     notes =
-                      "Active Fault: With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
+                      "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
                     fontColor = "red";
                   } else {
 
-                    notes = "Active Fault: No potential overlap.";
+                    notes = "No potential overlap.";
                     fontColor = "green";
                   }
 
@@ -2632,8 +2650,6 @@
         {
           code: function () {
 
-
-
             // Calculate Flood Hazard Classified Statistics
 
             var url_to_geotiff_Fld_file = "https://czrxstrd4.github.io/avemn/Fld.tif";
@@ -2642,15 +2658,11 @@
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
                 parseGeoraster(arrayBuffer).then(georaster => {
-
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
 
                   const sumss = geoblaze.sum(georaster, coordinates);
                   FldSumstat = (Number(sumss)).toFixed(2);
-                  console.log("FldSumstat:", FldSumstat);
-
                   georaster = null;
 
                 });
@@ -2663,8 +2675,6 @@
 
 
             // Calculate Flood Hazard Binary Statistics
-
-
             var url_to_geotiff_FldBi_file = "https://czrxstrd4.github.io/avemn/FldBi.tif";
             let FldBiSumstat;
 
@@ -2675,11 +2685,8 @@
 
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = (Number(meanss) * 100).toFixed(2);
-                  console.log("Mean:", meanss);
 
                   const sumss = geoblaze.sum(georaster, coordinates);
-
-                  console.log("FldBiSumstat:", ((Number(sumss)).toFixed(2)));
 
                   let notes;
                   let fontColor;
@@ -2689,26 +2696,26 @@
 
                     if ((FldSumstat / ((Number(sumss)).toFixed(2))) < 1.67) {
 
-                      notes = "Flood Hazard: Overlap at ~" + mn +
-                        "%, & Susceptibility Level at Low Susceptibility. Check the maps and Contact the owner/broker/LGU to confirm.";
+                      notes = "Overlap at ~" + mn +
+                        "%, & Susceptibility Level at Low Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
                       fontColor = "red";
                     } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >=
                       1.67 && (FldSumstat / ((Number(sumss)).toFixed(2))) <=
                       2.33) {
-                      notes = "Flood Hazard: Overlap at ~" + mn +
-                        "%, & Susceptibility Level at Medium Susceptibility. Check the maps and Contact the owner/broker/LGU to confirm.";
+                      notes = "Overlap at ~" + mn +
+                        "%, & Susceptibility Level at Medium Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
                       fontColor = "red";
                     } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >
                       2.33) {
-                      notes = "Flood Hazard: Overlap at ~" + mn +
-                        "%, & Susceptibility Level at High Susceptibility. Check the maps and Contact the owner/broker/LGU to confirm.";
+                      notes = "Overlap at ~" + mn +
+                        "%, & Susceptibility Level at High Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
                       fontColor = "red";
                     }
 
 
                   } else {
 
-                    notes = "Flood Hazard: No potential overlap.";
+                    notes = "No potential overlap.";
                     fontColor = "green";
                   }
 
@@ -2726,81 +2733,115 @@
           delay: 3000 // Delay for code block 3 in milliseconds
         },
         {
-  code: function() {
-    var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
+          code: function () {
 
-    fetch(url_to_geotiff_SLP_file)
-      .then(response => response.arrayBuffer())
-      .then(arrayBuffer => {
-        parseGeoraster(arrayBuffer).then(georaster => {
-          // Get the histogram data
-          const statsss = geoblaze.histogram(georaster, coordinates, {
-  scaleType: "ratio",
-  numClasses: 5,
-  classType: "equal-interval"
-});
-          console.log(statsss);
+            var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
 
-          // Prepare the data for the chart
-          const histogramLabels = Object.keys(statsss);
-          const data = Object.values(statsss);
+            fetch(url_to_geotiff_SLP_file)
+              .then(response => response.arrayBuffer())
+              .then(arrayBuffer => {
+                parseGeoraster(arrayBuffer).then(georaster => {
 
-          // Create the histogram chart
-          const canvas = document.getElementById('histogramChart');
-          const ctx = canvas.getContext('2d');
-          new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: histogramLabels,
-              datasets: [{
-                label: 'Histogram',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-        });
-      });
 
-      // Prepare the data for the chart
-const histogramLabels = Object.keys(statsss);
-const data = Object.values(statsss);
+                  const meanss = geoblaze.mean(georaster, coordinates);
+                  const mn = Number(meanss).toFixed(2);
+                  console.log("Mean:", meanss);
 
-// Create the histogram chart
-const canvas = document.getElementById('histogramChart');
-const ctx = canvas.getContext('2d');
-new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: histogramLabels,
-    datasets: [{
-      label: 'Histogram',
-      data: data,
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-  },
-  delay: 1000 // Delay for code block 2 in milliseconds
-},
+                  var statisticsDiv = document.getElementById('SLPstatisticss');
+                  statisticsDiv.textContent = 'Slope: Mean: ' + mn;
+
+
+                  const SLPHisto = geoblaze.histogram(georaster, coordinates, {
+                    scaleType: "ratio",
+                    numClasses: 5,
+                    classType: "equal-interval"
+                  });
+                  console.log(SLPHisto);
+
+
+                  if (Array.isArray(SLPHisto) && SLPHisto.length > 0) {
+                    const histogramData = SLPHisto[
+                      0]; // Access the first (and only) object in the array
+
+                    const customLabels = ["Flat", "Undulating", "Label 3",
+                      "Label 4", "Label 5"
+                    ];
+
+                    const data = Object.values(histogramData);
+
+                    // Calculate the total sum of data
+                    const sum = data.reduce((total, value) => total + value, 0);
+
+                    // Calculate the percentage of each data point
+                    const percentages = data.map(value => ((value / sum) * 100)
+                      .toFixed(2));
+
+                    // Create the histogram chart
+                    var ctx = document.getElementById('histogramChart')
+                      .getContext('2d');
+                    var histogramChart = new Chart(ctx, {
+                      type: 'bar',
+                      data: {
+                        labels: customLabels,
+                        datasets: [{
+                          label: 'Histogram',
+                          data: data,
+                          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                          borderColor: 'rgba(75, 192, 192, 1)',
+                          borderWidth: 1
+                        }]
+                      },
+                      options: {
+                        plugins: {
+                          tooltip: {
+                            callbacks: {
+                              label: function (context) {
+                                // Retrieve the original data point
+                                const originalValue =
+                                  context.parsed.y;
+
+                                // Calculate the multiplied value
+                                const multipliedValue =
+                                  originalValue * 4.015;
+
+                                // Retrieve the percentage
+                                const percentage =
+                                  percentages[context
+                                    .dataIndex];
+
+                                // Return the label string for the tooltip
+                                return `Area: ${multipliedValue} hectares, % Coverage: ${percentage}%`;
+                              }
+                            }
+                          }
+                        },
+                        scales: {
+                          x: {
+                            beginAtZero: true
+                          },
+                          y: {
+                            beginAtZero: true
+                          }
+                        }
+                      }
+                    });
+                  } else {
+                    console.error("Invalid data for histogram");
+                  }
+
+
+
+
+                  georaster = null;
+
+                });
+              });
+
+
+
+          },
+          delay: 1000 // Delay for code block 2 in milliseconds
+        },
 
 
 
