@@ -366,6 +366,60 @@
     width: 100%;
   }
 }
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.background-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #202123;
+  z-index: -1;
+}
+
+.logo-container {
+  width: 60px; /* Adjust the width as per your needs */
+  height: 60px; /* Adjust the height as per your needs */
+  margin-right: 10px;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.header-text {
+  color: black;
+  font-size: x-large;
+}
+
+.sidebar-pane {
+  background-color: white;
+}
+  /* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
 
   </style>
 </head>
@@ -385,16 +439,22 @@
     </div>
   </div>
 
-  <div id="sidebar" class="sidebar">
+  <div id="sidebar" class="sidebar" style="padding: 1px;">
     <div class="container">
-      <div class="scrollbar" id="scrollbar-side">
-        <div class="sidebar-tabs">
-        </div>
-        <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
-        </div>
-
+      <div class="container custom-scrollbar">
+        <div class="sidebar-tabs" >
         <div class="sidebar-pane" id="geotiff">
-          <h1 class="sidebar-header common-header" style="margin-bottom: 10px;">
+          <div class="header-container" style="margin-top: 20px;">
+            <div class="background-div"></div>
+            <div class="logo-container">
+              <img src="AP Emblem.png" alt="AP Emblem" class="logo">
+            </div>
+            <span class="header-text"><strong>ARI Market Strategy SPT</strong></span>
+          </div>
+
+<!-- Raster Calculator -->
+        <div class="sidebar-pane" id="geotiff">
+          <h1 class="sidebar-header common-header" style="margin-bottom: 10px; margin-top: 30px;">
             <i class="fa-solid fa-calculator header-icon"></i>
             <span class="header-text">Raster Calculator</span>
             <span class="sidebar-close"></span>
@@ -428,17 +488,6 @@
 
           <hr class="sidebar-spacer">
 
-          <!-- <div>
-            <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
-              onchange="displayFileName()">
-            <label for="fileInput" style="margin-bottom: 10px;" class="btn btn-primary btn-sm">Upload Shapefile</label>
-            <span id="fileName"></span>
-          </div>
-
-          <div>
-            <button id="fetchButton" class="btn btn-primary btn-sm">Calculate Stats</button>
-          </div> -->
-
           <div style="display: flex; justify-content: space-between;">
             <div>
               <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;" onchange="displayFileName()">
@@ -454,16 +503,10 @@
           <body onload="runSequentially()">
             <pre id="output"></pre>
 
-            <!-- <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
-              Loading...
-            </div> -->
-
             <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
               <div class="loading-bar"></div>
             </div>
             
-
-
             <div style="display: flex; justify-content: center; align-items: center;">
               <div class="card" style="width: 24rem;">
                 <ul class="list-group list-group-flush">
@@ -511,30 +554,48 @@
               </div>
             </div>
 
-            <div class="card text-center">
-              <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="#">Solar</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Wind</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Slope</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Show Dynamic Histogram</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
+<!-- Histogram -->
+</br><strong>Histogram Results: </strong>
+
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="true" href="#solarTab" data-bs-toggle="tab">Solar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#windTab" data-bs-toggle="tab">Wind</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#slopeTab" data-bs-toggle="tab">Slope</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="solarTab">
+        <!-- Solar content -->
+        <!-- Add your content here -->
+      </div>
+      <div class="tab-pane fade" id="windTab">
+        <!-- Wind content -->
+        <!-- Add your content here -->
+      </div>
+      <div class="tab-pane fade" id="slopeTab">
+        <canvas id="histogramChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+</br>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <a href="#" class="btn btn-primary btn-sm" id="clearResultsBtn">Clear Results</a>
+</div>
 
 
 
-            <canvas id="histogramChart"></canvas>
+
 
         </div>
 
@@ -638,6 +699,12 @@
         button.classList.toggle("active");
       }
 
+      document.getElementById('clearResultsBtn').addEventListener('click', function() {
+        // Clear the values of the Raster Calculator and the filename here
+        // Replace the following lines with the necessary code
+        document.getElementById('rasterCalculatorInput').value = '';
+        document.getElementById('filenameInput').value = '';
+      });
 
       var bounds_group = new L.featureGroup([]);
 
@@ -2830,107 +2897,143 @@
           {
             code: function () {
 
-              var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
+// Calculate Slope Histogram
 
-              fetch(url_to_geotiff_SLP_file)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                  parseGeoraster(arrayBuffer).then(georaster => {
+var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLPClass.tif";
 
-
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = Number(meanss).toFixed(2);
-                    console.log("Mean:", meanss);
-
-                    var statisticsDiv = document.getElementById('SLPstatisticss');
-                    statisticsDiv.textContent = 'Slope: Mean: ' + mn;
+fetch(url_to_geotiff_SLP_file)
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
 
 
-                    const SLPHisto = geoblaze.histogram(georaster, coordinates, {
-                      scaleType: "ratio",
-                      numClasses: 5,
-                      classType: "equal-interval"
+            const SLPHisto = geoblaze.histogram(georaster, coordinates, {
+                scaleType: "nominal"
+            });
+            console.log(SLPHisto);
+
+
+            const histogramData = geoblaze.histogram(georaster,
+                coordinates, {
+                    scaleType: "nominal"
+                });
+
+            if (Array.isArray(histogramData) && histogramData.length > 0) {
+                // Access the first (and only) object in the array
+                const histogramValues = Object.values(histogramData[0]);
+
+                // Calculate the total sum of data
+                const sum = histogramValues.reduce((total, value) => total +
+                    value, 0);
+
+                // Calculate the percentage of each data point
+                const percentages = histogramValues.map(value => ((value /
+                    sum) * 100).toFixed(2));
+
+                // Assign custom labels based on the actual labels
+
+
+
+                const customLabels = Object.keys(histogramData[0]).map(
+                    key => {
+                        if (key === "1") {
+                            return "Level";
+                        } else if (key === "2") {
+                            return "Level to Undulating";
+                        } else if (key === "3") {
+                            return "Undulating to Rolling";
+                        } else if (key === "4") {
+                            return "Rolling to Hilly";
+                        } else if (key === "5") {
+                            return "Hilly to Mountainous";
+                        } else if (key === "6") {
+                            return "Mountainous";
+                        } else {
+                            return `Label ${key}`;
+                        }
                     });
-                    console.log(SLPHisto);
 
-
-                    if (Array.isArray(SLPHisto) && SLPHisto.length > 0) {
-                      const histogramData = SLPHisto[
-                        0]; // Access the first (and only) object in the array
-
-                      const customLabels = ["Flat", "Undulating", "Label 3",
-                        "Label 4", "Label 5"
-                      ];
-
-                      const data = Object.values(histogramData);
-
-                      // Calculate the total sum of data
-                      const sum = data.reduce((total, value) => total + value, 0);
-
-                      // Calculate the percentage of each data point
-                      const percentages = data.map(value => ((value / sum) * 100)
-                        .toFixed(2));
-
-                      // Create the histogram chart
-                      var ctx = document.getElementById('histogramChart')
-                        .getContext('2d');
-                      var histogramChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                          labels: customLabels,
-                          datasets: [{
+                // Create the histogram chart
+                var ctx = document.getElementById('histogramChart')
+                    .getContext('2d');
+                var histogramChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: customLabels,
+                        datasets: [{
                             label: 'Histogram',
-                            data: data,
+                            data: histogramValues,
                             backgroundColor: 'rgba(75, 192, 192, 0.2)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1
-                          }]
-                        },
-                        options: {
-                          plugins: {
+                        }]
+                    },
+                    options: {
+                        plugins: {
                             tooltip: {
-                              callbacks: {
-                                label: function (context) {
-                                  // Retrieve the original data point
-                                  const originalValue =
-                                    context.parsed.y;
+                                callbacks: {
+                                    label: function (context) {
+                                        // Retrieve the original data point
+                                        const originalValue =
+                                            context.parsed.y;
 
-                                  // Calculate the multiplied value
-                                  const multipliedValue =
-                                    originalValue * 4.015;
+                                        // Calculate the multiplied value
+                                        const multipliedValue =
+                                            Number(
+                                                originalValue *
+                                                4.015).toFixed(
+                                                2);
 
-                                  // Retrieve the percentage
-                                  const percentage =
-                                    percentages[context
-                                      .dataIndex];
+                                        // Retrieve the percentage
+                                        const percentage =
+                                            percentages[context
+                                                .dataIndex];
 
-                                  // Return the label string for the tooltip
-                                  return `Area: ${multipliedValue} hectares, % Coverage: ${percentage}%`;
+                                        // Return the label string for the tooltip
+                                        return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                    }
                                 }
-                              }
                             }
-                          },
-                          scales: {
+                        },
+                        scales: {
                             x: {
-                              beginAtZero: true
+                                beginAtZero: true
                             },
                             y: {
-                              beginAtZero: true
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Hectares',
+                                    font: {
+                                        size: 14
+                                    }
+                                },
+
+                                ticks: {
+                                    callback: function (value) {
+                                        return (value * 4.015)
+                                            .toFixed(0);
+                                    }
+                                }
+
                             }
-                          }
                         }
-                      });
-                    } else {
-                      console.error("Invalid data for histogram");
                     }
-
-
-
-
-                    georaster = null;
-
-                  });
                 });
+            } else {
+                console.error("Invalid data for histogram");
+            }
+
+
+
+
+            georaster = null;
+
+        });
+    });
+
+
+
 
 
 
