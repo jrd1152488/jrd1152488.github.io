@@ -127,12 +127,16 @@
   <script src="js/existing_tl.js"></script>
   <script src="js/tdp_tl.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
   <style>
     #map {
       height: 100%;
     }
+    body {
+    font-family: 'Open Sans', sans-serif;
+  }
 
     .coordinates-input-control {
       position: absolute;
@@ -254,6 +258,55 @@
       overflow-y: auto;
       font-size: small;
     }
+
+    .btn-custom {
+      font-size: 14px;
+      /* Adjust the font size as desired */
+      padding: 6px 20 px;
+      /* Adjust the padding to resize the buttons */
+    }
+
+    #calculator table td {
+      vertical-align: middle;
+    }
+
+    .common-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .common-header .header-icon {
+      font-size: 25px;
+      padding-right: 5px;
+    }
+
+    .common-header .header-text {
+      font-size: 25px;
+      padding-left: 5px;
+    }
+
+    .easy-button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .easy-button:hover {
+      background-color: #45a049;
+    }
+
+    .sidebar-spacer {
+      height: 20px;
+      /* Adjust the height as desired */
+    }
   </style>
 </head>
 
@@ -270,7 +323,6 @@
       </div>
       <ul id="searchDropdown" class="search-dropdown dropdown-menu"></ul>
     </div>
-
   </div>
 
   <div id="sidebar" class="sidebar">
@@ -279,25 +331,36 @@
     <div class="sidebar-pane" id="layer-data" style="margin-bottom: 30px; margin-top: 30px;">
     </div>
 
+
+
     <div class="sidebar-pane" id="geotiff">
       <h1 class="sidebar-header common-header">
         <i class="fa-solid fa-calculator header-icon"></i>
         <span class="header-text">Raster Calculator</span>
         <span class="sidebar-close"></span>
       </h1>
-      <div class="form-check checkbox-style-16">
-        <input class="form-check-input" type="checkbox" id="toggleCheckbox">
-        <label class="form-check-label" for="toggleCheckbox">
-          Irradiance (GHI) Map
-        </label>
+
+      <div class="d-flex justify-content-center" style="margin-bottom: 20px;">
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-primary">
+            <input class="btn-check" type="checkbox" id="toggleCheckbox" autocomplete="off">
+            Irradiance (GHI) Map
+          </label>
+
+          <label class="btn btn-outline-primary">
+            <input class="btn-check" type="checkbox" id="WStoggleCheckbox" autocomplete="off">
+            Wind Speed Map
+          </label>
+
+          <label class="btn btn-outline-primary">
+            <input class="btn-check" type="checkbox" id="SLPtoggleCheckbox" autocomplete="off">
+            Slope Map
+          </label>
+        </div>
       </div>
 
-      <div class="form-check checkbox-style-16">
-        <input class="form-check-input" type="checkbox" id="WStoggleCheckbox">
-        <label class="form-check-label" for="WStoggleCheckbox" style="margin-bottom: 20px;">
-          Wind Speed Map
-        </label>
-      </div>
+
+
       <div>
         <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
           onchange="displayFileName()">
@@ -312,34 +375,35 @@
       <body onload="runSequentially()">
         <pre id="output"></pre>
 
-      <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
-        Loading...
-      </div>
-
-      <div class="row" style="margin-top: 10px;">
-        <div class="col-md-6">
-          <div class="mb-3" id="GHIstatisticss"></div>
-          <div class="mb-3" id="WSstatisticss"></div>
-
+        <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
+          Loading...
         </div>
-        <div class="col-md-6">
-          <div class="mb-3" id="SLPstatisticss"></div>
-          <div class="mb-3" id="Azmtstatisticss"></div>
+
+        <div class="row" style="margin-top: 10px;">
+          <div class="col-md-6">
+            <div class="mb-3" id="GHIstatisticss"></div>
+            <div class="mb-3" id="WSstatisticss"></div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3" id="SLPstatisticss"></div>
+            <div class="mb-3" id="Azmtstatisticss"></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="mb-3" id="SCstatisticss"></div>
-          <div class="mb-3" id="ADstatisticss"></div>
-          <div class="mb-3" id="Irgtnstatisticss"></div>
-          <div class="mb-3" id="PrtdArsstatisticss"></div>
-          <div class="mb-3" id="PrtdArsstatisticss2"></div>
-          <div class="mb-3" id="Fltstatisticss"></div>
-          <div class="mb-3" id="FldBistatisticss"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="mb-3" id="SCstatisticss"></div>
+            <div class="mb-3" id="ADstatisticss"></div>
+            <div class="mb-3" id="Irgtnstatisticss"></div>
+            <div class="mb-3" id="PrtdArsstatisticss"></div>
+            <div class="mb-3" id="PrtdArsstatisticss2"></div>
+            <div class="mb-3" id="Fltstatisticss"></div>
+            <div class="mb-3" id="FldBistatisticss"></div>
+          </div>
         </div>
-      </div>
 
 
+        <div class="sidebar-spacer"></div>
 
     </div>
     <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
@@ -386,42 +450,7 @@
       </div>
     </div>
     <style>
-      #calculator table td {
-        vertical-align: middle;
-      }
 
-      .common-header {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-
-      .common-header .header-icon {
-        font-size: 30px;
-        padding-right: 5px;
-      }
-
-      .common-header .header-text {
-        font-size: 30px;
-        padding-left: 5px;
-      }
-
-      .easy-button {
-        display: inline-block;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .easy-button:hover {
-        background-color: #45a049;
-      }
     </style>
 
   </div>
@@ -2141,6 +2170,82 @@
           }
         });
       });
+
+      // Display the Slope Map with identify function
+    map.createPane('SLPValues');
+    map.getPane('SLPValues').style.zIndex = 103;
+
+    var url_to_geotiff_SLP_files = "https://czrxstrd4.github.io/avemn/SLP.tif";
+
+    var SLPValuesLayer; // Declare WSValuesLayer variable
+
+    fetch(url_to_geotiff_SLP_files)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
+
+          var scale = chroma.scale("YlGnBu");
+
+          SLPValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.8,
+            resolution: 80,
+            pane: 'SLPValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
+              if (pixelValue === 0) return null;
+              var scaledPixelValue = (pixelValue - min) / range;
+              var color = scale(scaledPixelValue).hex();
+              return color;
+            }
+          });
+
+          // Toggle popups based on checkbox state
+          var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
+          SLPtoggleCheckbox.addEventListener('change', function () {
+            togglePopups();
+          });
+
+
+          // Create popup
+          function handleMapClick(e) {
+            var popupss = L.popup();
+            var latlng = e.latlng;
+            var identifyResultSLPs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+            var SLPValues = (identifyResultSLPs / 1000) * 1000;
+
+            if (SLPValues > 0) {
+              popupss
+                .setLatLng(latlng)
+                .setContent("Slope: " + SLPValues.toFixed(2) + " %")
+                .openOn(map);
+            } else {
+              popupss
+                .setLatLng(latlng)
+                .setContent("Slope: NaN m/s")
+                .openOn(map);
+            }
+          }
+
+          function togglePopups() {
+            if (SLPValuesLayer) {
+              if (map.hasLayer(SLPValuesLayer)) {
+                map.removeLayer(SLPValuesLayer);
+                map.off('click', handleMapClick);
+              } else {
+                map.addLayer(SLPValuesLayer);
+                map.on('click', handleMapClick);
+              }
+            }
+          }
+        });
+      });
+
+
     // End of create map layer for GHI & WS
 
     var coordinates = [];
@@ -2148,7 +2253,6 @@
     var loadingPrompt = document.getElementById('loading-prompt');
     let FldSumstat;
     var FldClass;
-
 
     function runSequentially() {
       var codeBlocks = [{
@@ -2622,9 +2726,96 @@
           delay: 3000 // Delay for code block 3 in milliseconds
         },
         {
+  code: function() {
+    var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
+
+    fetch(url_to_geotiff_SLP_file)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+          // Get the histogram data
+          const statsss = geoblaze.histogram(georaster, coordinates, {
+  scaleType: "ratio",
+  numClasses: 5,
+  classType: "equal-interval"
+});
+          console.log(statsss);
+
+          // Prepare the data for the chart
+          const histogramLabels = Object.keys(statsss);
+          const data = Object.values(statsss);
+
+          // Create the histogram chart
+          const canvas = document.getElementById('histogramChart');
+          const ctx = canvas.getContext('2d');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: histogramLabels,
+              datasets: [{
+                label: 'Histogram',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        });
+      });
+
+      // Prepare the data for the chart
+const histogramLabels = Object.keys(statsss);
+const data = Object.values(statsss);
+
+// Create the histogram chart
+const canvas = document.getElementById('histogramChart');
+const ctx = canvas.getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: histogramLabels,
+    datasets: [{
+      label: 'Histogram',
+      data: data,
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+  },
+  delay: 1000 // Delay for code block 2 in milliseconds
+},
+
+
+
+
+        {
           code: function () {
             loadingPrompt.style.display = 'none';
+
+
+
           },
+
+
+
+
           delay: 1000 // Delay for code block 2 in milliseconds
         }
       ];
