@@ -359,6 +359,23 @@
       animation: loading-animation 2s infinite;
     }
 
+    .custom-panel {
+  background-color: rgba(245, 245, 245, 0.6);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.custom-panel .form-check-label {
+  padding-left: 10px;
+}
+
+.custom-panel .form-check-input {
+  margin-right: 5px;
+}
+
+
+
     @keyframes loading-animation {
       0% {
         width: 0;
@@ -437,7 +454,7 @@
 
     <div id="searchContainer" class="search-container">
       <div class="input-group">
-        <input id="searchInput" class="form-control search-input" type="text" placeholder="Input substations...">
+        <input id="searchInput" class="form-control search-input" type="text" placeholder="Search for substations...">
         <button id="searchButton" class="btn btn-primary btn-sm search-button" type="button">
           Search
         </button>
@@ -928,6 +945,18 @@
           }
         }]
       }).addTo(map);
+
+      //Hash-Autolinker
+      var hash = new L.Hash(map);
+      map.attributionControl.setPrefix(
+        '<a href="https://docs.google.com/presentation/d/1axuiZhPorCGUERwNVxPLmkL-y0abwjHQ74vIZsYIFpg/edit?usp=sharing" title="Step by Step Guide of the SPT Process"target="_blank">Guide</a> &middot; Developed by: <a href="https://ph.linkedin.com/in/cezar-john-estrada-5a6a31105" title="Developer"target="_blank">CJEstrada</a> &middot; <a href="https://ph.linkedin.com/in/jolanzrodrigo"title="Developer"target="_blank">JRodrigo</a> &middot; <a href="https://ph.linkedin.com/in/wyethsy" title="Consultant"target="_blank">WSy</a>'
+      );
+      var autolinker = new Autolinker({
+        truncate: {
+          length: 30,
+          location: 'smart'
+        }
+      });
 
 
       //Geocoder
@@ -2016,60 +2045,11 @@
         compact: false,
         collapsed: false,
         selectorGroup: true,
-        collapsibleGroups: true
+        collapsibleGroups: true,
+        className: 'custom-panel'
       });
 
-      //saerch bars------------------------------------------------
       map.addControl(panelLayers);
-
-      // map.addControl(new L.Control.Search({
-      //   layer: layer_500230138115kVExistingSubstations_5,
-      //   initial: false,
-      //   textPlaceholder: "Search Existing Substation",
-      //   hideMarkerOnCollapse: false,
-      //   propertyName: 'Title',
-      //   collapsed: true // Set collapsed to true to initially hide the layer
-      // }));
-      // document.getElementsByClassName('search-button')[0].classList.add('kv500-icon');
-
-      // map.addControl(new L.Control.Search({
-      //   layer: layer_500230kVTDPSubstations_6,
-      //   initial: false,
-      //   textPlaceholder: "Search TDP Substation",
-      //   hideMarkerOnCollapse: false,
-      //   propertyName: 'Title',
-      //   collapsed: true // Set collapsed to true to initially hide the layer
-      // }));
-
-      // // Remove the 'fa fa-bolt' class and add the 'tdp-icon' class
-      // var tdpSearchButton = document.getElementsByClassName('search-button')[1];
-      // tdpSearchButton.classList.remove('fa', 'fa-bolt');
-      // tdpSearchButton.classList.add('tdp-icon');
-
-      // map.addControl(new L.Control.Search({
-      //   layer: layer_69kVDULoadendSubstations_4,
-      //   initial: false,
-      //   textPlaceholder: "Search 69kV Substation",
-      //   hideMarkerOnCollapse: false,
-      //   propertyName: 'Title',
-      //   collapsed: true // Set collapsed to true to initially hide the layer
-      // }));
-
-      // // Remove the 'fa fal-bolt' class and add the 'kv69-icon' class
-      // var kv69SearchButton = document.getElementsByClassName('search-button')[2];
-      // kv69SearchButton.classList.remove('fa', 'fal-bolt');
-      // kv69SearchButton.classList.add('kv69-icon');
-
-
-      // map.addControl(new L.Control.Search({
-      //   layer: layer_ServiceContractMap_1,
-      //   initial: false,
-      //   textPlaceholder: "Search Power Project",
-      //   hideMarkerOnCollapse: true,
-      //   propertyName: 'SWG_Projec'
-      // }));
-      // document.getElementsByClassName('search-button')[3].className +=
-      //   ' fa fa-bolt';
 
       var measureControl = new L.Control.Measure({
         position: 'topleft',
