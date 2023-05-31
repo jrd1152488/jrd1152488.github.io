@@ -3,36 +3,94 @@ body {
   padding: 0;
   overflow: hidden;
 }
+#sidebar-toggle-container {
+  margin-right: 20px;
+}
 
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #f0f0f0;
+  margin-bottom: 4px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger-icon.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
 .header {
-  background-color: #202123;
+  /* background-color: #202123; */
+  background: linear-gradient(to right, #001d3d, #164575);
   color: white;
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 6px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 9999;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
-  width: 40px;
+  width: 35px;
   height: auto;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap');
+
 .header-text {
-  font-size: 22px;
-  font-weight: bold;
-  font-family: "Bebas", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto Condensed", Arial, sans-serif;
+}
+
+
+
+.logo-container {
+  margin-left: 15px;
+  margin-right: 8px;
+}
+
+.header-buttons {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.animated-button {
+  margin-left: auto;
 }
 
 
 .content {
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -276,8 +334,9 @@ body {
 }
 
 .sidebar-pane {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
 }
+
 
 /* custom scrollbar */
 ::-webkit-scrollbar {
@@ -312,5 +371,5 @@ body {
 }
 
 .sbheader-text {
-  font-size: 20px;
+  font-size: 22px;
 }
