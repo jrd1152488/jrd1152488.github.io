@@ -2144,7 +2144,6 @@
                 togglePopups();
               });
 
-
               // Create popup
               function handleMapClick(e) {
                 var popupss = L.popup();
@@ -2188,36 +2187,34 @@
         var SLPValuesLayer; // Declare WSValuesLayer variable
 
         fetch(url_to_geotiff_SLP_files)
-          .then(response => response.arrayBuffer())
-          .then(arrayBuffer => {
-            parseGeoraster(arrayBuffer).then(georaster => {
+  .then(response => response.arrayBuffer())
+  .then(arrayBuffer => {
+    parseGeoraster(arrayBuffer).then(georaster => {
+      const min = georaster.mins[0];
+      const max = georaster.maxs[0];
+      const range = georaster.ranges[0];
 
-              const min = georaster.mins[0];
-              const max = georaster.maxs[0];
-              const range = georaster.ranges[0];
+      var scale = chroma.scale("YlGnBu");
 
-              var scale = chroma.scale("YlGnBu");
+      SLPValuesLayer = new GeoRasterLayer({
+        georaster: georaster,
+        opacity: 0.8,
+        resolution: 80,
+        pane: 'SLPValues',
+        pixelValuesToColorFn: function (pixelValues) {
+          var pixelValue = pixelValues[0];
+          if (pixelValue === 0) return "none"; // Return "none" for transparent color
 
-              SLPValuesLayer = new GeoRasterLayer({
-                georaster: georaster,
-                opacity: 0.8,
-                resolution: 80,
-                pane: 'SLPValues',
-                pixelValuesToColorFn: function (pixelValues) {
-                  var pixelValue = pixelValues[0];
-                  if (pixelValue === 0) return null;
+          var maxSlope = 45; // Maximum slope value
+          var minColor = chroma('#fdf0d5'); // Color for lower slope values
+          var maxColor = chroma('#780000'); // Color for higher slope values
 
-                  var maxSlope = 90; // Maximum slope value
-                  var minColor = chroma('lightblue'); // Color for lower slope values
-                  var maxColor = chroma('darkred'); // Color for higher slope values
+          // Calculate the color based on the slope value
+          var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
 
-                  // Calculate the color based on the slope value
-                  var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
-
-                  return color;
-                }
-              });
-
+          return color;
+        }
+      });
 
               // Toggle popups based on checkbox state
               var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
