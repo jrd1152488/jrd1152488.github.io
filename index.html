@@ -138,11 +138,6 @@
 
   <div class="header-container">
     <div class="header">
-      <div id="hamburger-icon" class="hamburger-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
       <div class="logo-container">
         <img src="AP Emblem.png" alt="AP Emblem" class="logo">
       </div>
@@ -159,27 +154,82 @@
         <i class="fas fa-layer-group"></i>
       </button>
     </div>
-  
+
     <div id="suitability" class="suitability">
       <button class="sidemenu-btn btn-secondary sidemenu-button">
         <i class="fas fa-chart-line"></i>
       </button>
     </div>
-  
-    <button class="sidemenu-btn btn-light sidemenu-button">
-      <i class="fas fa-cog"></i>
-    </button>
-  
+    <div id="three" class="three">
+      <button class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-cog"></i>
+      </button>
+    </div>
+
     <hr class="sidebar-spacer">
-  
+
     <button id="uploadButton" class="sidemenu-btn btn-light sidemenu-button">
       <i class="fas fa-file-import"></i>
     </button>
-  
+
+  </div>
+
+
+  <div id="sidebar-layer" class="sidebar-layer">
+    <div class="container">
+      <div class="container custom-scrollbar">
+        <div class="sidebar-tabs">
+          <div class="sidebar-pane" id="geotiff">
+            <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+              <i class="fa-solid fa-calculator sbheader-icon"></i>
+              <span class="sbheader-text">Layer Selection</span>
+            </h1>
+            <div class="d-flex flex-column" style="margin-bottom: 5px;">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
+                  onchange="toggleLayer('layer_GoogleMapsSatellite_1', this.checked)" checked>
+                <label class="form-check-label" for="googSat">Satellite</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
+                  onchange="toggleLayer('layer_GoogleSatelliteHybrid_1', this.checked)">
+                <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
+                  onchange="toggleLayer('layer_GoogleMapsBasic_0', this.checked)">
+                <label class="form-check-label" for="GoogBase">Base Map</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
+                  onchange="toggleLayer('layer_planetNICFI', this.checked)">
+                <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
+              </div>
+            </div>
+            
+
+
+            <hr class="sidebar-spacer">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
 
+  <div id="sidebar-three" class="sidebar-three">
+    <div class="container">
+      <div class="container custom-scrollbar">
+        <div class="sidebar-tabs">
+          <div class="sidebar-pane" id="geotiff">
+            <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+              <i class="fa-solid fa-calculator sbheader-icon"></i>
+              <span class="sbheader-text">Layer Select</span>
+              <!-- <span class="sidebar-close"></span> -->
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="sidebar" class="sidebar" style="padding: 2px;">
@@ -495,7 +545,6 @@
       this.classList.toggle('open');
       sidebar.toggle();
     });
-
     // Function to open the sidebar
     function openSidebar() {
       document.getElementById("sidebar").classList.add("open");
@@ -511,6 +560,48 @@
       overlay.style.display = overlay.style.display === 'none' ? 'flex' : 'none';
     }
     //^^^ End of Sidemenu button for Area Suitability ^^^
+
+    //Sidemenu button for Layer Selection
+    document.getElementById('layers').addEventListener('click', function () {
+      this.classList.toggle('open');
+      sidebarLayer.toggle();
+    });
+    // Function to open the sidebar
+    function openSidebar() {
+      document.getElementById("sidebar-layer").classList.add("open");
+    }
+
+    function showSidebar() {
+      var sidebar = document.getElementById("sidebar-layer");
+      sidebar.classList.toggle("sidebar-open");
+    }
+
+    function toggleForm() {
+      var overlay = document.querySelector('.overlay');
+      overlay.style.display = overlay.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    //Sidemenu button for Third Button
+    document.getElementById('three').addEventListener('click', function () {
+      this.classList.toggle('open');
+      sidebarThree.toggle();
+    });
+    // Function to open the sidebar
+    function openSidebar() {
+      document.getElementById("sidebar-three").classList.add("open");
+    }
+
+    function showSidebar() {
+      var sidebar = document.getElementById("sidebar-three");
+      sidebar.classList.toggle("sidebar-open");
+    }
+
+    function toggleForm() {
+      var overlay = document.querySelector('.overlay');
+      overlay.style.display = overlay.style.display === 'none' ? 'flex' : 'none';
+    }
+
+
 
     function openGitHubLink() {
       var cardWidth = 300;
@@ -617,6 +708,56 @@
 
     function setBounds() {}
 
+    // map.createPane('pane_GoogleMapsBasic_0');
+    // map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
+    // var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    //   pane: 'pane_GoogleMapsBasic_0',
+    //   opacity: 0.671,
+    //   minZoom: 1,
+    //   maxZoom: 28,
+    //   minNativeZoom: 0,
+    //   maxNativeZoom: 18
+    // });
+    // layer_GoogleMapsBasic_0;
+
+    // map.createPane('pane_GoogleMapsSatellite_1');
+    // map.getPane('pane_GoogleMapsSatellite_1').style.zIndex = 100;
+    // var layer_GoogleMapsSatellite_1 = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
+    //   pane: 'pane_GoogleMapsSatellite_1',
+    //   opacity: 1.0,
+    //   minZoom: 1,
+    //   maxZoom: 28,
+    //   minNativeZoom: 0,
+    //   maxNativeZoom: 25
+    // });
+    // layer_GoogleMapsSatellite_1;
+    // map.addLayer(layer_GoogleMapsSatellite_1);
+
+    // map.createPane('pane_GoogleSatelliteHybrid_1');
+    // map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
+    // var layer_GoogleSatelliteHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    //   pane: 'pane_GoogleSatelliteHybrid_1',
+    //   opacity: 1.0,
+    //   minZoom: 1,
+    //   maxZoom: 28,
+    //   minNativeZoom: 0,
+    //   maxNativeZoom: 25
+    // });
+    // layer_GoogleSatelliteHybrid_1;
+
+    // map.createPane('pane_planetNICFI');
+    // map.getPane('pane_planetNICFI').style.zIndex = 100;
+    // var layer_planetNICFI = L.tileLayer(
+    //   'https://tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2023-04_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAK157598af286b421386a7fa8a69f90b85', {
+    //     pane: 'pane_planetNICFI',
+    //     opacity: 1.0,
+    //     minZoom: 1,
+    //     maxZoom: 28,
+    //     minNativeZoom: 0,
+    //     maxNativeZoom: 25
+    //   });
+    // layer_planetNICFI;
+
     map.createPane('pane_GoogleMapsBasic_0');
     map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
     var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -640,7 +781,6 @@
       maxNativeZoom: 25
     });
     layer_GoogleMapsSatellite_1;
-    map.addLayer(layer_GoogleMapsSatellite_1);
 
     map.createPane('pane_GoogleSatelliteHybrid_1');
     map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
@@ -665,7 +805,32 @@
         minNativeZoom: 0,
         maxNativeZoom: 25
       });
-    layer_planetNICFI;
+      layer_planetNICFI;
+
+    map.addLayer(layer_GoogleMapsSatellite_1); // Add Google Satellite as the default layer
+
+    function toggleLayer(layerName, checked) {
+  if (checked) {
+    // Remove all other layers
+    map.eachLayer(function (layer) {
+      if (layer.options.pane !== layerName) {
+        map.removeLayer(layer);
+      }
+    });
+    // Add the selected layer
+    map.addLayer(eval(layerName));
+  } else {
+    // Remove the selected layer
+    map.removeLayer(eval(layerName));
+  }
+}
+
+
+    toggleLayer('layer_GoogleMapsSatellite_1', true);
+    toggleLayer('layer_GoogleSatelliteHybrid_1', false);
+    toggleLayer('layer_GoogleMapsBasic_0', false);
+    toggleLayer('layer_planetNICFI', false);
+
 
     function createTileLayer(name, url) {
       map.createPane(`pane_${name}`);
@@ -698,7 +863,10 @@
       'https://github.github/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
 
     var sidebar = L.control.sidebar('sidebar').addTo(map);
+
     var drawnItems = new L.FeatureGroup().addTo(map);
+    var sidebarLayer = L.control.sidebar('sidebar-layer').addTo(map)
+    var sidebarThree = L.control.sidebar('sidebar-three').addTo(map)
 
     // L.easyButton({
     //   states: [{
@@ -1865,105 +2033,105 @@
     //--------------------------------------------------------------------Draw Polygons------------------------------------------------------------------------//
 
     var drawnItems = new L.FeatureGroup();
-map.addLayer(drawnItems);
-L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
+    map.addLayer(drawnItems);
+    L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
 
-var drawControl = new L.Control.Draw({
-  edit: {
-    featureGroup: drawnItems,
-    poly: {
-      allowIntersection: false
-    }
-  },
-  draw: {
-    polygon: {
-      allowIntersection: false,
-      showArea: true
-    }
-  }
-});
-map.addControl(drawControl);
-
-var _round = function (num, len) {
-  return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
-};
-
-var strLatLng = function (latlng) {
-  return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
-};
-
-var getPopupContent = function (layer) {
-  if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-    return strLatLng(layer.getLatLng());
-  } else if (layer instanceof L.Circle) {
-    var center = layer.getLatLng(),
-      radius = layer.getRadius();
-    return "Center: " + strLatLng(center) + "<br />" +
-      "Radius: ~" + _round(radius, 2) + " m";
-  } else if (layer instanceof L.Polygon) {
-    var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-      area = L.GeometryUtil.geodesicArea(latlngs);
-    return "Area: ~" + L.GeometryUtil.readableArea(area, true);
-  } else if (layer instanceof L.Polyline) {
-    var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-      distance = 0;
-    if (latlngs.length < 2) {
-      return "Distance: N/A";
-    } else {
-      for (var i = 0; i < latlngs.length - 1; i++) {
-        distance += latlngs[i].distanceTo(latlngs[i + 1]);
+    var drawControl = new L.Control.Draw({
+      edit: {
+        featureGroup: drawnItems,
+        poly: {
+          allowIntersection: false
+        }
+      },
+      draw: {
+        polygon: {
+          allowIntersection: false,
+          showArea: true
+        }
       }
-      return "Distance: ~" + _round((distance / 1000), 2) + " km";
-    }
-  }
-  return null;
-};
+    });
+    map.addControl(drawControl);
 
-map.on(L.Draw.Event.CREATED, function (event) {
-  var layer = event.layer;
-  var content = getPopupContent(layer);
-  if (content !== null) {
-    layer.bindPopup(content);
-  }
-  drawnItems.addLayer(layer);
-});
+    var _round = function (num, len) {
+      return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
+    };
 
-map.on(L.Draw.Event.EDITED, function (event) {
-  var layers = event.layers,
-    content = null;
-  layers.eachLayer(function (layer) {
-    content = getPopupContent(layer);
-    if (content !== null) {
-      layer.setPopupContent(content);
-    }
-  });
-});
+    var strLatLng = function (latlng) {
+      return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
+    };
 
-document.getElementById('drawContainer').addEventListener('click', function () {
-  if (drawControl._activeMode === 'draw') {
-    drawControl._map.fire('draw:drawstop');
-  } else {
-    drawControl._map.fire('draw:drawstart');
-  }
-});
+    var getPopupContent = function (layer) {
+      if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+        return strLatLng(layer.getLatLng());
+      } else if (layer instanceof L.Circle) {
+        var center = layer.getLatLng(),
+          radius = layer.getRadius();
+        return "Center: " + strLatLng(center) + "<br />" +
+          "Radius: ~" + _round(radius, 2) + " m";
+      } else if (layer instanceof L.Polygon) {
+        var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
+          area = L.GeometryUtil.geodesicArea(latlngs);
+        return "Area: ~" + L.GeometryUtil.readableArea(area, true);
+      } else if (layer instanceof L.Polyline) {
+        var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
+          distance = 0;
+        if (latlngs.length < 2) {
+          return "Distance: N/A";
+        } else {
+          for (var i = 0; i < latlngs.length - 1; i++) {
+            distance += latlngs[i].distanceTo(latlngs[i + 1]);
+          }
+          return "Distance: ~" + _round((distance / 1000), 2) + " km";
+        }
+      }
+      return null;
+    };
 
-document.getElementById('deleteAllButton').addEventListener('click', function () {
-  drawnItems.clearLayers();
-});
+    map.on(L.Draw.Event.CREATED, function (event) {
+      var layer = event.layer;
+      var content = getPopupContent(layer);
+      if (content !== null) {
+        layer.bindPopup(content);
+      }
+      drawnItems.addLayer(layer);
+    });
 
-document.getElementById('drawContainer').addEventListener('click', function () {
-  if (drawControl._activeMode === 'draw') {
-    drawControl._map.fire('draw:drawstop');
-    drawControl._activeMode = null;
-  } else {
-    drawControl._map.fire('draw:drawstart');
-    drawControl._activeMode = 'draw';
-  }
-});
+    map.on(L.Draw.Event.EDITED, function (event) {
+      var layers = event.layers,
+        content = null;
+      layers.eachLayer(function (layer) {
+        content = getPopupContent(layer);
+        if (content !== null) {
+          layer.setPopupContent(content);
+        }
+      });
+    });
 
-document.getElementById('deleteAllButton').addEventListener('click', function () {
-  drawnItems.clearLayers();
-});
+    document.getElementById('drawContainer').addEventListener('click', function () {
+      if (drawControl._activeMode === 'draw') {
+        drawControl._map.fire('draw:drawstop');
+      } else {
+        drawControl._map.fire('draw:drawstart');
+      }
+    });
+
+    document.getElementById('deleteAllButton').addEventListener('click', function () {
+      drawnItems.clearLayers();
+    });
+
+    document.getElementById('drawContainer').addEventListener('click', function () {
+      if (drawControl._activeMode === 'draw') {
+        drawControl._map.fire('draw:drawstop');
+        drawControl._activeMode = null;
+      } else {
+        drawControl._map.fire('draw:drawstart');
+        drawControl._activeMode = 'draw';
+      }
+    });
+
+    document.getElementById('deleteAllButton').addEventListener('click', function () {
+      drawnItems.clearLayers();
+    });
 
     //--------------------------------------------------------------------End Draw Polygons------------------------------------------------------------------------//
     //Export Polygons---------------------------------------------------------------------------------------------
