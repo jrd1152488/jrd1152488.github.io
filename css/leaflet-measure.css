@@ -2,6 +2,7 @@
 .leaflet-measure-resultpopup h3 {
     margin: 0 0 12px;
     padding-bottom: 10px;
+    font-size: small;
     border-bottom: 1px solid #ddd
 }
 

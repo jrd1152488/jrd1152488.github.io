@@ -175,6 +175,14 @@
       <i class="fas fa-file-import"></i>
     </button>
 
+    <button id="deleteAllButton" class="sidemenu-btn btn-light sidemenu-button">
+      <i class="fas fa-trash"></i>
+    </button>
+
+    <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
+      <i class="fas fa-download"></i>
+    </button>
+
   </div>
 
 
@@ -309,6 +317,178 @@
               </div>
             </div>
 
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+                <label class="form-check-label" for="group4">Area Restrictions</label>
+              </div>
+              <div class="nested-checkboxes ml-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
+                    onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
+                  <label class="form-check-label" for="chk-ServiceContractMap_1">Service Contract Map</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
+                    onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
+                  <label class="form-check-label" for="chk-AncestralDomain_3">Ancestral Domains</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
+                    onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
+                  <label class="form-check-label" for="chk-ProtectedAreas_4">Protected Areas</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
+                    onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
+                  <label class="form-check-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+                <label class="form-check-label" for="group4">Area Restrictions</label>
+              </div>
+              <div class="nested-checkboxes ml-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-RVRWBS"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-RVRWBS">River and Water Bodies</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-FloodHazard_25yrs_6"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-FloodHazard_25yrs_6">Flood Hazard</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-LQFCN" onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-LQFCN">Liquefaction</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-ActiveFault_13"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-ActiveFault_13">Active Fault</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group5" onchange="toggleGroup(this, 'group5')">
+                <label class="form-check-label" for="group5">Hazards - Volcano</label>
+              </div>
+              <div class="nested-checkboxes ml-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-Volcanoes_7">Active Volcano</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-Lahar_6"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-Lahar_6">Lahar</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-Lava_5"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-Lava_5">Lava</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
+                    Projectiles</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-TaalBufferRings_1"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-TaalBufferRings_1">Taal Buffer Rings</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group6" onchange="toggleGroup(this, 'group6')">
+                <label class="form-check-label" for="group6">Others</label>
+              </div>
+              <div class="nested-checkboxes ml-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-Seaports_14"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-Seaports_14">Seaports</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-RDS" onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-RDS">Roads</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-BarangaysMin_1">Barangay</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group7" onchange="toggleGroup(this, 'group7')">
+                <label class="form-check-label" for="group7">Substations and Lines</label>
+              </div>
+              <div class="nested-checkboxes ml-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-ExistingTL_1">Existing Transmission Lines</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-TDPTL_2"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-TDPTL_2">Transmission and Distribution Lines</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-PlantCustomerownedSubstations_3"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-PlantCustomerownedSubstations_3">Plant Customer-owned
+                    Substations</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-69kVDULoadendSubstations_4"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-69kVDULoadendSubstations_4">69kV Distribution Utility
+                    Load-end Substations</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-500230138115kVExistingSubstations_5"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-500230138115kVExistingSubstations_5">500/230/138/11kV
+                    Existing Substations</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-500230kVTDPSubstations_6"
+                    onchange="toggleNestedCheckbox(this);">
+                  <label class="form-check-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP Substations</label>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
           </div>
         </div>
       </div>
@@ -332,7 +512,7 @@
     </div>
   </div>
 
-  <div id="sidebar" class="sidebar" style="padding: 2px;">
+  <div id="sidebar" class="sidebar" style="padding: 2px; width: 400px;">
     <div class="container">
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
@@ -346,7 +526,6 @@
                 <!-- <span class="sidebar-close"></span> -->
               </h1>
 
-              <hr class="sidebar-spacer">
               <div style="display: flex; justify-content: space-between;">
                 <div>
                   <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
@@ -545,6 +724,8 @@
 
                 <tr>
                   <td><label for="result">Result:</label></td>
+
+
                   <td><input type="number" id="result" name="result" readonly class="form-control"></td>
                 </tr>
               </table>
@@ -576,6 +757,19 @@
 
   <!-- Add a layer group for drawn and uploaded polygons -->
   <div id="polygon-layer" class="leaflet-pane leaflet-overlay-pane"></div>
+  <div id="drawContainer">
+    <!-- Content inside the drawContainer div -->
+  </div>
+  <div id="map-container">
+    <div id="map"></div>
+    <div id="drawContainer" class="top-right">
+      <button>Toggle Draw Control</button>
+    </div>
+    <div id="deleteAllContainer" class="top-right">
+      <button>Delete All</button>
+    </div>
+  </div>
+
 
   <script>
     //SPT
@@ -856,74 +1050,71 @@
 
 
     function createTileLayer(name, url) {
-  map.createPane(`pane_${name}`);
-  map.getPane(`pane_${name}`).style.zIndex = 101;
-  const layer = L.tileLayer(url, {
-    pane: `pane_${name}`,
-    opacity: 1,
-    attribution: '',
-    minZoom: 1,
-    maxZoom: 28,
-    minNativeZoom: 4,
-    maxNativeZoom: 14
-  });
-  return layer;
-}
+      map.createPane(`pane_${name}`);
+      map.getPane(`pane_${name}`).style.zIndex = 101;
+      const layer = L.tileLayer(url, {
+        pane: `pane_${name}`,
+        opacity: 1,
+        attribution: '',
+        minZoom: 1,
+        maxZoom: 28,
+        minNativeZoom: 4,
+        maxNativeZoom: 14
+      });
+      return layer;
+    }
 
-const layer_GHISLP = createTileLayer('GHISLP', 'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
-const layer_IRDGHI = createTileLayer('IRDGHI', 'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
-const layer_SLPSLR = createTileLayer('SLPSLR', 'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
-const layer_WSSLP = createTileLayer('WSSLP', 'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
-const layer_WS = createTileLayer('WS', 'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
-const layer_SLPWD = createTileLayer('SLPWD', 'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
-const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+    const layer_GHISLP = createTileLayer('GHISLP',
+      'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
+    const layer_IRDGHI = createTileLayer('IRDGHI',
+      'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
+    const layer_SLPSLR = createTileLayer('SLPSLR',
+      'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
+    const layer_WSSLP = createTileLayer('WSSLP', 'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
+    const layer_WS = createTileLayer('WS', 'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
+    const layer_SLPWD = createTileLayer('SLPWD', 'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
+    const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
 
-function toggleTileLayer(layer, checked) {
-  if (checked) {
-    map.addLayer(layer);
-  } else {
-    map.removeLayer(layer);
-  }
-}
+    function toggleTileLayer(layer, checked) {
+      if (checked) {
+        map.addLayer(layer);
+      } else {
+        map.removeLayer(layer);
+      }
+    }
 
-function toggleGroup(checkbox, groupId) {
-  var nestedCheckboxes = document.querySelectorAll("#" + groupId + " .nested-checkboxes input[type='checkbox']");
-  var isChecked = checkbox.checked;
+    function toggleGroup(checkbox, groupId) {
+      var nestedCheckboxes = document.querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']`);
+      var isChecked = checkbox.checked;
 
-  for (var i = 0; i < nestedCheckboxes.length; i++) {
-    var nestedCheckbox = nestedCheckboxes[i];
-    nestedCheckbox.checked = isChecked;
-    toggleNestedCheckbox(nestedCheckbox);
-  }
-}
+      nestedCheckboxes.forEach(function (nestedCheckbox) {
+        nestedCheckbox.checked = isChecked;
+        toggleNestedCheckbox(nestedCheckbox);
+      });
+    }
 
-function toggleNestedCheckbox(nestedCheckbox) {
-  var layerId = nestedCheckbox.id.replace("chk-", "layer_");
-  var layer = window[layerId];
+    function toggleNestedCheckbox(nestedCheckbox) {
+      var layerId = nestedCheckbox.id.replace("chk-", "layer_");
+      var layer = window[layerId];
 
-  if (layer) {
-    toggleTileLayer(layer, nestedCheckbox.checked);
-  }
-}
+      if (layer) {
+        toggleTileLayer(layer, nestedCheckbox.checked);
+      }
+    }
 
-function toggleMainNest(checkbox, groupId) {
-  var mainNestCheckbox = document.getElementById(groupId);
-  var nestedCheckboxes = document.querySelectorAll("#" + groupId + " .nested-checkboxes input[type='checkbox']");
-  var isChecked = checkbox.checked;
+    function toggleMainNest(checkbox, groupId) {
+      var mainNestCheckbox = document.getElementById(groupId);
+      var nestedCheckboxes = document.querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']`);
+      var isChecked = checkbox.checked;
 
-  for (var i = 0; i < nestedCheckboxes.length; i++) {
-    var nestedCheckbox = nestedCheckboxes[i];
-    nestedCheckbox.checked = isChecked;
-    toggleNestedCheckbox(nestedCheckbox);
-  }
+      nestedCheckboxes.forEach(function (nestedCheckbox) {
+        nestedCheckbox.checked = isChecked;
+        toggleNestedCheckbox(nestedCheckbox);
+      });
 
-  // Check or uncheck the main nest checkbox based on the nested checkboxes' status
-  mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length === document.querySelectorAll("#" + groupId + " .nested-checkboxes input[type='checkbox']:checked").length;
-}
-
-
-
-
+      mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length === document
+        .querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']:checked`).length;
+    }
 
     var overLayers = {
       "GHISLP": layer_GHISLP,
@@ -940,6 +1131,41 @@ function toggleMainNest(checkbox, groupId) {
     var sidebarThree = L.control.sidebar('sidebar-three').addTo(map)
     var drawnItems = new L.FeatureGroup().addTo(map);
 
+    // Get references to the sidebar elements
+    var layerSidebar = document.getElementById('sidebar-layer');
+    var threeSidebar = document.getElementById('sidebar-three');
+    var mainSidebar = document.getElementById('sidebar');
+
+    // Get references to the buttons
+    var layersButton = document.querySelector('#layers button');
+    var suitabilityButton = document.querySelector('#suitability button');
+    var threeButton = document.querySelector('#three button');
+
+    // Add click event listeners to the buttons
+    layersButton.addEventListener('click', function () {
+      closeOtherSidebars(layerSidebar, threeSidebar, mainSidebar);
+    });
+
+    suitabilityButton.addEventListener('click', function () {
+      closeOtherSidebars(suitabilityButton.parentNode, threeSidebar, mainSidebar);
+    });
+
+    threeButton.addEventListener('click', function () {
+      closeOtherSidebars(threeSidebar, layerSidebar, mainSidebar);
+    });
+
+    // Function to close other sidebars
+    function closeOtherSidebars(currentSidebar, ...sidebars) {
+      sidebars.forEach(function (sidebar) {
+        if (sidebar.classList.contains('active')) {
+          sidebar.classList.remove('active');
+        }
+      });
+      currentSidebar.classList.add('active');
+    }
+
+
+
     //Hash-Autolinker
     var hash = new L.Hash(map);
     map.attributionControl.setPrefix(
@@ -952,7 +1178,6 @@ function toggleMainNest(checkbox, groupId) {
       }
     });
 
-
     //Geocoder
     var osmGeocoder = new L.Control.Geocoder({
       collapsed: false,
@@ -962,7 +1187,6 @@ function toggleMainNest(checkbox, groupId) {
     document.getElementsByClassName('leaflet-control-geocoder-icon')[0].className += ' fa fa-map-location-dot';
     document.getElementsByClassName('leaflet-control-geocoder-icon')[0].title +=
       'Search for a place, such as Barangay, Muncipality, etc.';
-
 
     // Custom control for coordinates input
     var CoordinatesInputControl = L.Control.extend({
@@ -1031,8 +1255,31 @@ function toggleMainNest(checkbox, groupId) {
       }
     }
 
-    //------------------------------------------FILE UPLOAD---------------------------------------------------------------------
+    //_____________________________________________________________________________________________________________________________________________
     // Function to handle KML, KMZ, and GeoJSON files
+    // Get the upload button element
+    var uploadButton = document.getElementById('uploadButton');
+
+    // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.kml,.kmz,.geojson';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+
+    // Add event listener to the upload button
+    uploadButton.addEventListener('click', function () {
+      fileInput.click();
+    });
+
+    // Add event listener to the file input element
+    fileInput.addEventListener('change', function () {
+      if (fileInput.files.length > 0) {
+        handleFile(fileInput.files[0]);
+      }
+    });
+
+    // Function to handle the uploaded file
     async function handleFile(file) {
       let geojson;
       if (file.name.endsWith('.kml') || file.name.endsWith('.kmz')) {
@@ -1063,71 +1310,44 @@ function toggleMainNest(checkbox, groupId) {
       }
 
       var layer = L.geoJSON(geojson, {
-        onEachFeature: function (feature, layer) {
-          if (!layer._defaultShape || !layer.getLatLngs) {
-            console.error('Layer is not a valid shape');
-            return;
-          }
-          const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
-            layer
-            ._defaultShape() : layer.getLatLngs())), true);
-          const name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
-        },
-        style: {
-          color: 'yellow',
-          clickable: true,
-          fillOpacity: .1,
-          fillColor: '#fff'
-        },
-        pointToLayer: function (data, latlng) {
-          return L.circleMarker(latlng, {
-            style: {
-              color: 'yellow'
-            }
-          });
-        }
+        // Specify the style and behavior of the uploaded layer
       });
 
-      fileUploaders.addLayer(layer);
+      // Overlay the uploaded layer on the map
+      layer.addTo(map);
       map.fitBounds(layer.getBounds());
     }
-
-    // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
-    const holder_fileInput = document.createElement('input');
-    holder_fileInput.type = 'file';
-    holder_fileInput.accept = '.kml,.kmz,.geojson';
-    holder_fileInput.style.display = 'none';
-    document.body.appendChild(holder_fileInput);
-
-    // Add event listener to the hidden file input element
-    holder_fileInput.addEventListener('change', () => {
-      if (holder_fileInput.files.length > 0) {
-        handleFile(holder_fileInput.files[0]);
-      }
-    });
-
-    document.getElementById("uploadButton").addEventListener("click", function () {
-      holder_fileInput.click();
-    });
-
-
 
     //_____________________________________________________________________________________________________________________________________________
 
 
-    // Create the search button
-    var searchButton = L.easyButton('fa-search', function (btn, map) {
-      var searchContainer = document.getElementById('searchContainer');
-      if (searchContainer.style.display === 'none') {
-        searchContainer.style.display = 'flex';
-      } else {
-        searchContainer.style.display = 'none';
-      }
+    //_____________________________________________________________________________________________________________________________________________
+
+    // Get the export button element
+    var exportButton = document.getElementById('exportButton');
+
+    // Add event listener to the export button
+    exportButton.addEventListener('click', function () {
+      // Extract GeoJSON from featureGroup
+      var data = drawnItems.toGeoJSON();
+
+      // Stringify the GeoJSON
+      var convertedData = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+
+      // Create export link
+      var exportLink = document.createElement('a');
+      exportLink.setAttribute('href', convertedData);
+      exportLink.setAttribute('download', 'data.geojson');
+      exportLink.style.display = 'none';
+      document.body.appendChild(exportLink);
+      exportLink.click();
+      document.body.removeChild(exportLink);
     });
 
-    // Add the search button to the map
-    searchButton.addTo(map);
+    //_____________________________________________________________________________________________________________________________________________
+
+
+
     // Create the search bar and its functionality
     var searchContainer = document.createElement('div');
     searchContainer.id = 'searchContainer';
@@ -1287,6 +1507,19 @@ function toggleMainNest(checkbox, groupId) {
       });
     layer_FloodHazard_25yrs_6;
 
+    //Liquefaction
+    map.createPane('pane_LQFCN');
+    map.getPane('pane_LQFCN').style.zIndex = 112;
+    var layer_LQFCN = L.tileLayer('https://github.com/czrxstrd4/LQFCN/raw/main/LQFCN/{z}/{x}/{y}.png', {
+      pane: 'pane_LQFCN',
+      opacity: 0.6,
+      attribution: '',
+      minZoom: 1,
+      maxZoom: 28,
+      minNativeZoom: 4,
+      maxNativeZoom: 14
+    });
+    layer_LQFCN;
     //Active_Fault
     map.createPane('pane_ActiveFault_13');
     map.getPane('pane_ActiveFault_13').style.zIndex = 121;
@@ -1302,19 +1535,7 @@ function toggleMainNest(checkbox, groupId) {
     });
     bounds_group.addLayer(layer_ActiveFault_13);
 
-    //Liquefaction
-    map.createPane('pane_LQFCN');
-    map.getPane('pane_LQFCN').style.zIndex = 112;
-    var layer_LQFCN = L.tileLayer('https://github.com/czrxstrd4/LQFCN/raw/main/LQFCN/{z}/{x}/{y}.png', {
-      pane: 'pane_LQFCN',
-      opacity: 0.6,
-      attribution: '',
-      minZoom: 1,
-      maxZoom: 28,
-      minNativeZoom: 4,
-      maxNativeZoom: 14
-    });
-    layer_LQFCN;
+
 
     //Active_Volcano
     map.createPane('pane_Volcanoes_7');
@@ -1586,255 +1807,255 @@ function toggleMainNest(checkbox, groupId) {
     layer_500230kVTDPSubstations_6;
 
 
-    var baseLayers = [{
-        name: "Satellite",
-        layer: layer_GoogleMapsSatellite_1
-      },
-      {
-        name: "Satellite-Hybrid",
-        layer: layer_GoogleSatelliteHybrid_1
-      },
-      {
-        name: "Basic",
-        layer: layer_GoogleMapsBasic_0
-      },
-      {
-        name: "Live Satellite (April 2023)",
-        layer: layer_planetNICFI
-      }
-    ];
-    //Over_Layers
-    var overLayers = [{
-        group: "Solar Suitability",
-        collapsed: true,
-        layers: [{
-            name: 'GHI x Slope<br /><img src="legend/GHIxSlope.png" />',
-            layer: layer_GHISLP
-          },
-          {
-            name: 'Irradiance<br /><img src="legend/Irradiance.png" />',
-            layer: layer_IRDGHI
-          },
-          {
-            name: 'Slope Caps - Solar<br /><img src="legend/SlopeCaps-Solar.png" />',
-            layer: layer_SLPSLR
-          }
-        ]
-      },
-      {
-        group: "Wind Suitability",
-        collapsed: true,
-        layers: [{
-            name: 'Wind Speed x Slope<br /><img src="legend/WSxSlope.png" />',
-            layer: layer_WSSLP
-          },
-          {
-            name: 'Wind Speed<br /><img src="legend/WindSpeed.png" />',
-            layer: layer_WS,
+    // var baseLayers = [{
+    //     name: "Satellite",
+    //     layer: layer_GoogleMapsSatellite_1
+    //   },
+    //   {
+    //     name: "Satellite-Hybrid",
+    //     layer: layer_GoogleSatelliteHybrid_1
+    //   },
+    //   {
+    //     name: "Basic",
+    //     layer: layer_GoogleMapsBasic_0
+    //   },
+    //   {
+    //     name: "Live Satellite (April 2023)",
+    //     layer: layer_planetNICFI
+    //   }
+    // ];
+    // //Over_Layers
+    // var overLayers = [{
+    //     group: "Solar Suitability",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: 'GHI x Slope<br /><img src="legend/GHIxSlope.png" />',
+    //         layer: layer_GHISLP
+    //       },
+    //       {
+    //         name: 'Irradiance<br /><img src="legend/Irradiance.png" />',
+    //         layer: layer_IRDGHI
+    //       },
+    //       {
+    //         name: 'Slope Caps - Solar<br /><img src="legend/SlopeCaps-Solar.png" />',
+    //         layer: layer_SLPSLR
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     group: "Wind Suitability",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: 'Wind Speed x Slope<br /><img src="legend/WSxSlope.png" />',
+    //         layer: layer_WSSLP
+    //       },
+    //       {
+    //         name: 'Wind Speed<br /><img src="legend/WindSpeed.png" />',
+    //         layer: layer_WS,
 
-          },
-          {
-            name: 'Slope Caps - Wind<br /><img src="legend/SlopeCaps-Wind.png" />',
-            layer: layer_SLPWD,
+    //       },
+    //       {
+    //         name: 'Slope Caps - Wind<br /><img src="legend/SlopeCaps-Wind.png" />',
+    //         layer: layer_SLPWD,
 
-          }
-        ]
-      },
+    //       }
+    //     ]
+    //   },
 
-      {
-        group: "Area Restrictions",
-        collapsed: true,
-        layers: [{
-            name: 'Service Contract<br /><table><tr><td style="text-align: center;"><img src="legend/Merged_2_Geothermal0.png" /></td><td>Geothermal</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OffshoreWind1.png" /></td><td>Offshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OnshoreWind2.png" /></td><td>Onshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_Solar3.png" /></td><td>Solar</td></tr></table>',
-            layer: layer_ServiceContractMap_1,
-
-
-          },
-          {
-            name: "Ancestral Domains",
-            layer: layer_AncestralDomain_3,
-            icon: '<i class="fa fa-universal-access" aria-hidden="true"></i>'
-          },
-          {
-            name: "Protected Areas",
-            layer: layer_ProtectedAreas_4,
-            icon: '<i class="fa fa-leaf" aria-hidden="true"></i>'
-          },
-          {
-            name: 'Key Biodiversity Areas<br /><img src="legend/KBA.png" />',
-            layer: layer_KeyBiodiversityAreas_5,
-
-          }
-        ]
-      },
-
-      {
-        group: "Hazards",
-        collapsed: true,
-        layers: [{
-            name: "River & Water Bodies",
-            layer: layer_RVRWBS,
-            icon: '<i class="fa fa-tint" aria-hidden="true"></i>'
-
-          },
-          {
-            name: 'Flood Hazard<br /><img src="legend/Flood.png" />',
-            layer: layer_FloodHazard_25yrs_6
-
-          },
-          {
-            name: 'Active Faults<br /><img src="legend/Fault.png" />',
-            layer: layer_ActiveFault_13,
-
-          },
-          {
-            name: 'Liquefaction<br /><img src="legend/Liquefaction.png" />',
-            layer: layer_LQFCN,
-
-          }
-
-        ]
-      },
-
-      {
-        group: "Hazards - Volcano",
-        collapsed: true,
-        layers: [{
-            name: 'Active Volcanoes<br /><img src="legend/Volcanoes.png" />',
-            layer: layer_Volcanoes_7
-          },
-          {
-            name: 'Lahar<br /><img src="legend/Lahar.png" />',
-            layer: layer_Lahar_6
-
-          },
-          {
-            name: "Lava",
-            layer: layer_Lava_5
-
-          },
-          {
-            name: "Pyroclastic Flow",
-            layer: layer_PyroclasticFlow_4
-
-          },
-          {
-            name: "Taal Ballistic Projectiles",
-            layer: layer_TaalBallisticProjectiles_3
-
-          },
-          {
-            name: "Taal Fissuring",
-            layer: layer_TaalFissuring_2
-
-          },
-          {
-            name: 'Taal Buffer Rings<br /><img src="legend/Taal_Buffer.png" />',
-            layer: layer_TaalBufferRings_1
-
-          }
-
-        ]
-      },
-
-      {
-        group: "Added layer",
-        collapsed: true,
-        layers: [{
-            name: "Drawn Layer",
-            layer: drawnItems,
-            icon: '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
-
-          },
-          {
-            name: "Uploaded Layer",
-            layer: fileUploaders,
-            icon: '<i class="fa fa-upload" aria-hidden="true"></i>'
-
-          }
+    //   {
+    //     group: "Area Restrictions",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: 'Service Contract<br /><table><tr><td style="text-align: center;"><img src="legend/Merged_2_Geothermal0.png" /></td><td>Geothermal</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OffshoreWind1.png" /></td><td>Offshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OnshoreWind2.png" /></td><td>Onshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_Solar3.png" /></td><td>Solar</td></tr></table>',
+    //         layer: layer_ServiceContractMap_1,
 
 
-        ]
-      },
+    //       },
+    //       {
+    //         name: "Ancestral Domains",
+    //         layer: layer_AncestralDomain_3,
+    //         icon: '<i class="fa fa-universal-access" aria-hidden="true"></i>'
+    //       },
+    //       {
+    //         name: "Protected Areas",
+    //         layer: layer_ProtectedAreas_4,
+    //         icon: '<i class="fa fa-leaf" aria-hidden="true"></i>'
+    //       },
+    //       {
+    //         name: 'Key Biodiversity Areas<br /><img src="legend/KBA.png" />',
+    //         layer: layer_KeyBiodiversityAreas_5,
 
-      {
-        group: "Others",
-        collapsed: true,
-        layers: [{
-            name: "Seaports",
-            layer: layer_Seaports_14,
-            icon: '<img src="legend/Seaports_14.png" />'
-          },
-          {
-            name: "Roads",
-            layer: layer_RDS,
-            icon: '<img src="legend/Roads.png" />'
-          },
-          {
-            name: "Barangays",
-            layer: layer_BarangaysMin_1,
-            icon: '<img src="legend/BarangaysMin_1.png" />'
-          }
+    //       }
+    //     ]
+    //   },
+
+    //   {
+    //     group: "Hazards",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: "River & Water Bodies",
+    //         layer: layer_RVRWBS,
+    //         icon: '<i class="fa fa-tint" aria-hidden="true"></i>'
+
+    //       },
+    //       {
+    //         name: 'Flood Hazard<br /><img src="legend/Flood.png" />',
+    //         layer: layer_FloodHazard_25yrs_6
+
+    //       },
+    //       {
+    //         name: 'Active Faults<br /><img src="legend/Fault.png" />',
+    //         layer: layer_ActiveFault_13,
+
+    //       },
+    //       {
+    //         name: 'Liquefaction<br /><img src="legend/Liquefaction.png" />',
+    //         layer: layer_LQFCN,
+
+    //       }
+
+    //     ]
+    //   },
+
+    //   {
+    //     group: "Hazards - Volcano",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: 'Active Volcanoes<br /><img src="legend/Volcanoes.png" />',
+    //         layer: layer_Volcanoes_7
+    //       },
+    //       {
+    //         name: 'Lahar<br /><img src="legend/Lahar.png" />',
+    //         layer: layer_Lahar_6
+
+    //       },
+    //       {
+    //         name: "Lava",
+    //         layer: layer_Lava_5
+
+    //       },
+    //       {
+    //         name: "Pyroclastic Flow",
+    //         layer: layer_PyroclasticFlow_4
+
+    //       },
+    //       {
+    //         name: "Taal Ballistic Projectiles",
+    //         layer: layer_TaalBallisticProjectiles_3
+
+    //       },
+    //       {
+    //         name: "Taal Fissuring",
+    //         layer: layer_TaalFissuring_2
+
+    //       },
+    //       {
+    //         name: 'Taal Buffer Rings<br /><img src="legend/Taal_Buffer.png" />',
+    //         layer: layer_TaalBufferRings_1
+
+    //       }
+
+    //     ]
+    //   },
+
+    //   {
+    //     group: "Added layer",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: "Drawn Layer",
+    //         layer: drawnItems,
+    //         icon: '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
+
+    //       },
+    //       {
+    //         name: "Uploaded Layer",
+    //         layer: fileUploaders,
+    //         icon: '<i class="fa fa-upload" aria-hidden="true"></i>'
+
+    //       }
 
 
-        ]
-      },
+    //     ]
+    //   },
 
-      {
-        group: "Transmission SS & TL",
-        collapsed: true,
-        layers: [{
-            name: "Existing SS (Above 69kV)",
-            layer: layer_500230138115kVExistingSubstations_5,
-            icon: '<img src="legend/500230138115kVExistingSubstations_5.png" />'
-          },
-          {
-            name: "TDP SS",
-            layer: layer_500230kVTDPSubstations_6,
-            icon: '<img src="legend/500230kVTDPSubstations_6.png" />'
-          },
-          {
-            name: "Existing SS (69kV)",
-            layer: layer_69kVDULoadendSubstations_4,
-            icon: '<img src="legend/69kVDULoadendSubstations_4.png" />'
-          },
-          {
-            name: "Plant-Owned SS",
-            layer: layer_PlantCustomerownedSubstations_3,
-            icon: '<img src="legend/PlantCustomerownedSubstations_3.png" />'
-          },
-          {
-            name: "Existing TL",
-            layer: layer_ExistingTL_1,
-            icon: '<img src="legend/ExistingTL_1.png" />'
-          },
-          {
-            name: "TDP TL",
-            layer: layer_TDPTL_2,
-            icon: '<img src="legend/TDPTL_2.png" />'
-          }
+    //   {
+    //     group: "Others",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: "Seaports",
+    //         layer: layer_Seaports_14,
+    //         icon: '<img src="legend/Seaports_14.png" />'
+    //       },
+    //       {
+    //         name: "Roads",
+    //         layer: layer_RDS,
+    //         icon: '<img src="legend/Roads.png" />'
+    //       },
+    //       {
+    //         name: "Barangays",
+    //         layer: layer_BarangaysMin_1,
+    //         icon: '<img src="legend/BarangaysMin_1.png" />'
+    //       }
 
 
-        ]
-      },
+    //     ]
+    //   },
 
-    ];
+    //   {
+    //     group: "Transmission SS & TL",
+    //     collapsed: true,
+    //     layers: [{
+    //         name: "Existing SS (Above 69kV)",
+    //         layer: layer_500230138115kVExistingSubstations_5,
+    //         icon: '<img src="legend/500230138115kVExistingSubstations_5.png" />'
+    //       },
+    //       {
+    //         name: "TDP SS",
+    //         layer: layer_500230kVTDPSubstations_6,
+    //         icon: '<img src="legend/500230kVTDPSubstations_6.png" />'
+    //       },
+    //       {
+    //         name: "Existing SS (69kV)",
+    //         layer: layer_69kVDULoadendSubstations_4,
+    //         icon: '<img src="legend/69kVDULoadendSubstations_4.png" />'
+    //       },
+    //       {
+    //         name: "Plant-Owned SS",
+    //         layer: layer_PlantCustomerownedSubstations_3,
+    //         icon: '<img src="legend/PlantCustomerownedSubstations_3.png" />'
+    //       },
+    //       {
+    //         name: "Existing TL",
+    //         layer: layer_ExistingTL_1,
+    //         icon: '<img src="legend/ExistingTL_1.png" />'
+    //       },
+    //       {
+    //         name: "TDP TL",
+    //         layer: layer_TDPTL_2,
+    //         icon: '<img src="legend/TDPTL_2.png" />'
+    //       }
 
-    var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
-      compact: false,
-      collapsed: false,
-      selectorGroup: true,
-      collapsibleGroups: true,
-      className: 'custom-panel'
-    });
 
-    map.addControl(panelLayers);
+    //     ]
+    //   },
+
+    // ];
+
+    // var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
+    //   compact: false,
+    //   collapsed: false,
+    //   selectorGroup: true,
+    //   collapsibleGroups: true,
+    //   className: 'custom-panel'
+    // });
+
+    // map.addControl(panelLayers);
     // Get the container element for panel layers
 
 
     // Measure Button
     var measureControl = new L.Control.Measure({
-      position: 'topleft',
+      position: 'topright',
       primaryLengthUnit: 'meters',
       secondaryLengthUnit: 'kilometers',
       primaryAreaUnit: 'sqmeters',
@@ -1855,6 +2076,7 @@ function toggleMainNest(checkbox, groupId) {
     L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
 
     var drawControl = new L.Control.Draw({
+      position: 'topright',
       edit: {
         featureGroup: drawnItems,
         poly: {
@@ -1937,47 +2159,49 @@ function toggleMainNest(checkbox, groupId) {
       drawnItems.clearLayers();
     });
 
-    // document.getElementById('drawContainer').addEventListener('click', function () {
-    //   if (drawControl._activeMode === 'draw') {
-    //     drawControl._map.fire('draw:drawstop');
-    //     drawControl._activeMode = null;
-    //   } else {
-    //     drawControl._map.fire('draw:drawstart');
-    //     drawControl._activeMode = 'draw';
-    //   }
-    // });
+    document.getElementById('drawContainer').addEventListener('click', function () {
+      if (drawControl._activeMode === 'draw') {
+        drawControl._map.fire('draw:drawstop');
+        drawControl._activeMode = null;
+      } else {
+        drawControl._map.fire('draw:drawstart');
+        drawControl._activeMode = 'draw';
+      }
+    });
 
     document.getElementById('deleteAllButton').addEventListener('click', function () {
       drawnItems.clearLayers();
     });
-
+    // Add CSS class to the container elements
+    document.getElementById('drawContainer').classList.add('top-right');
+    document.getElementById('deleteAllContainer').classList.add('top-right');
     //--------------------------------------------------------------------End Draw Polygons------------------------------------------------------------------------//
     //Export Polygons---------------------------------------------------------------------------------------------
 
-    // Create the export EasyButton
-    var exportButton = L.easyButton({
-      states: [{
-        stateName: 'export',
-        icon: 'fa-download',
-        title: 'Export all polygons',
-        onClick: function (btn, map) {
-          // Extract GeoJson from featureGroup
-          var data = drawnItems.toGeoJSON();
+    // // Create the export EasyButton
+    // var exportButton = L.easyButton({
+    //   states: [{
+    //     stateName: 'export',
+    //     icon: 'fa-download',
+    //     title: 'Export all polygons',
+    //     onClick: function (btn, map) {
+    //       // Extract GeoJson from featureGroup
+    //       var data = drawnItems.toGeoJSON();
 
-          // Stringify the GeoJson
-          var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
+    //       // Stringify the GeoJson
+    //       var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
 
-          // Create export
-          var exportLink = document.createElement('a');
-          exportLink.setAttribute('href', 'data:' + convertedData);
-          exportLink.setAttribute('download', 'data.geojson');
-          exportLink.click();
-        }
-      }]
-    }).addTo(map);
+    //       // Create export
+    //       var exportLink = document.createElement('a');
+    //       exportLink.setAttribute('href', 'data:' + convertedData);
+    //       exportLink.setAttribute('download', 'data.geojson');
+    //       exportLink.click();
+    //     }
+    //   }]
+    // }).addTo(map);
 
-    // Add tooltip when hovering over the button
-    exportButton.button.title = 'Export all polygons';
+    // // Add tooltip when hovering over the button
+    // exportButton.button.title = 'Export all polygons';
 
 
 
@@ -2105,6 +2329,22 @@ function toggleMainNest(checkbox, groupId) {
       }
     }
     //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
+    // Get the upload shapefile button element
+    var uploadShapefileButton = document.getElementById('fileInput');
+
+    // Add event listener to the upload shapefile button
+    uploadShapefileButton.addEventListener('change', function () {
+      if (uploadShapefileButton.files.length > 0) {
+        handleShapefile(uploadShapefileButton.files);
+      }
+    });
+
+    // Function to handle the uploaded shapefile
+    async function handleShapefile(files) {
+      var shapefile = new L.Shapefile(files[0]);
+
+      shapefile.addTo(map);
+    }
 
 
     //--------------------------------------------------------------------GeoBlaze------------------------------------------------------------------------//
@@ -2163,9 +2403,6 @@ function toggleMainNest(checkbox, groupId) {
           toggleCheckbox.addEventListener('change', function () {
             togglePopups();
           });
-
-
-
 
           // Create popup
           function handleMapClick(e) {
