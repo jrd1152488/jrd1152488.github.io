@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="css/leaflet-search.css">
   <link rel="stylesheet" href="css/search-control.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap">
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
@@ -109,6 +111,7 @@
   <script src="data/BarangaysMin_1.js"></script>
 
   <!-- <script src="js/service_contracts.js"></script> -->
+  <script src="js/service_contracts.js"></script>
   <script src="js/ancestral_domains.js"></script>
   <script src="js/protected_areas.js"></script>
   <script src="js/seaports.js"></script>
@@ -142,7 +145,7 @@
         <img src="AP Emblem.png" alt="AP Emblem" class="logo">
       </div>
       <div class="header-content">
-        <span class="header-text" style="color: #f0f0f0;">ARI Market Strategy - SPT</span>
+        <span class="header-text" style="color: #f0f0f0;">ARI MARKET STRATEGY - SPT</span>
       </div>
       <a href="https://lanzrodrigo.github.io/" target="_blank" class="btn btn-primary animated-button">LGU Dir.</a>
     </div>
@@ -175,7 +178,7 @@
   </div>
 
 
-  <div id="sidebar-layer" class="sidebar-layer">
+  <div id="sidebar-layer" class="sidebar-layer" style="width: 400px; padding: 1px;">
     <div class="container">
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
@@ -185,6 +188,7 @@
               <span class="sbheader-text">Layer Selection</span>
             </h1>
             <div class="d-flex flex-column" style="margin-bottom: 5px;">
+
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
                   onchange="toggleLayer('layer_GoogleMapsSatellite_1', this.checked)" checked>
@@ -206,15 +210,111 @@
                 <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
               </div>
             </div>
-            
+
+            <!-- Tile Layers -->
+            <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+              <i class="fa-solid fa-tiles sbheader-icon"></i>
+              <span class="sbheader-text">Tile Layers</span>
+            </h1>
 
 
-            <hr class="sidebar-spacer">
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+                <label class="form-check-label" for="group1">Solar Suitability</label>
+              </div>
+              <div class="nested-checkboxes">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-GHISLP"
+                    onchange="toggleTileLayer(layer_GHISLP, this.checked)">
+                  <label class="form-check-label" for="chk-GHISLP">GHISLP</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
+                    onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
+                  <label class="form-check-label" for="chk-IRDGHI">IRDGHI</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
+                    onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
+                  <label class="form-check-label" for="chk-SLPSLR">SLPSLR</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+                <label class="form-check-label" for="group1">Wind Suitability</label>
+              </div>
+              <div class="nested-checkboxes">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-WSSLP"
+                    onchange="toggleTileLayer(layer_WSSLP, this.checked)">
+                  <label class="form-check-label" for="chk-WSSLP">WSSLP</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-WS"
+                    onchange="toggleTileLayer(layer_WS, this.checked)">
+                  <label class="form-check-label" for="chk-WS">WS</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-SLPWD"
+                    onchange="toggleTileLayer(layer_SLPWD, this.checked)">
+                  <label class="form-check-label" for="chk-SLPWD">SLPWD</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+                <label class="form-check-label" for="group1">Slope Industry</label>
+              </div>
+              <div class="nested-checkboxes">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-SLP"
+                    onchange="toggleTileLayer(layer_SLP, this.checked)">
+                  <label class="form-check-label" for="chk-SLP">SLP</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="group-container">
+              <div class="group-checkbox">
+                <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+                <label class="form-check-label" for="group4">Area Restrictions</label>
+              </div>
+              <div class="nested-checkboxes ml-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
+                    onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
+                  <label class="form-check-label" for="chk-ServiceContractMap_1">Service Contract Map</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
+                    onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
+                  <label class="form-check-label" for="chk-AncestralDomain_3">Ancestral Domains</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
+                    onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
+                  <label class="form-check-label" for="chk-ProtectedAreas_4">Protected Areas</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
+                    onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
+                  <label class="form-check-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas</label>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <div id="sidebar-three" class="sidebar-three">
     <div class="container">
@@ -246,43 +346,14 @@
                 <!-- <span class="sidebar-close"></span> -->
               </h1>
 
-              <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 5px;">
-                <div class="row">
-                  <div class="col-md-4">
-                    <input type="checkbox" class="btn-check" id="toggleCheckbox" autocomplete="off">
-                    <label
-                      class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid d-flex align-items-center justify-content-center"
-                      style="font-size: 14px;" for="toggleCheckbox">Irradiance
-                      Map</label>
-                  </div>
-                  <div class="col-md-4">
-                    <input type="checkbox" class="btn-check" id="WStoggleCheckbox" autocomplete="off">
-                    <label
-                      class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid d-flex align-items-center justify-content-center"
-                      style="font-size: 14px;" for="WStoggleCheckbox">Wind
-                      Speed Map</label>
-                  </div>
-                  <div class="col-md-4">
-                    <input type="checkbox" class="btn-check" id="SLPtoggleCheckbox" autocomplete="off">
-                    <label
-                      class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid d-flex align-items-center justify-content-center"
-                      style="font-size: 14px;" for="SLPtoggleCheckbox">Slope
-                      Map</label>
-                  </div>
-                </div>
-              </div>
-
               <hr class="sidebar-spacer">
-
               <div style="display: flex; justify-content: space-between;">
                 <div>
                   <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
                     onchange="displayFileName()">
                   <label for="fileInput" style="margin-bottom: 10px;" class="btn btn-primary btn-sm">Upload
                     Shapefile</label>
-
                 </div>
-
                 <div>
                   <button id="fetchButton" class="btn btn-primary btn-sm">Calculate
                     Stats</button>
@@ -292,11 +363,9 @@
 
               <body onload="runSequentially()">
                 <pre id="output"></pre>
-
                 <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
                   <div class="loading-bar"></div>
                 </div>
-
                 <div style="display: flex; justify-content: center; align-items: center;">
                   <div class="card" style="width: 24rem;">
                     <ul class="list-group list-group-flush">
@@ -363,10 +432,8 @@
                     </ul>
                   </div>
                 </div>
-
                 <!-- Histogram -->
                 </br><strong>Histogram Results: </strong>
-
                 <div class="card text-center">
                   <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs justify-content-center"
@@ -443,7 +510,6 @@
           <h1 class="sidebar-header common-header">
             <i class="fa-solid fa-database sbheader-icon"></i>
             <span class="sbheader-text">HLA Calculator</span>
-            <!-- <span class="sidebar-close"></span> -->
           </h1>
           <div>
             <div>
@@ -458,7 +524,8 @@
                 </tr>
                 <tr>
                   <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
-                  <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control"></td>
+                  <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control">
+                  </td>
                 </tr>
                 <tr>
                   <td><label for="purchase_price">Purchase Price
@@ -488,7 +555,6 @@
     </div>
   </div>
 
-
   <div class="content">
     <div id="map" style="width: 100%; height: 100%;"></div>
     <div id="searchContainer" class="search-container">
@@ -501,8 +567,6 @@
       <ul id="searchDropdown" class="search-dropdown dropdown-menu"></ul>
     </div>
   </div>
-
-
 
   <style>
 
@@ -519,7 +583,6 @@
 
     function highlightFeature(e) {
       highlightLayer = e.target;
-
       if (e.target.feature.geometry.type === 'LineString') {
         highlightLayer.setStyle({
           color: '#ffff00',
@@ -601,8 +664,7 @@
       overlay.style.display = overlay.style.display === 'none' ? 'flex' : 'none';
     }
 
-
-
+    // Link to LGU Directory
     function openGitHubLink() {
       var cardWidth = 300;
       var cardHeight = 200;
@@ -621,6 +683,18 @@
         location: 'smart'
       }
     });
+
+    // Function to toggle the nested layers
+    function toggleNestedLayers(collapseId, checked) {
+      var layers = document.getElementById(collapseId).querySelectorAll('input[type="checkbox"]');
+      for (var i = 0; i < layers.length; i++) {
+        layers[i].checked = checked;
+        toggleLayer(layers[i].id, checked);
+      }
+    }
+
+    // Function to toggle individual layers
+    function toggleLayer(layerId, checked) {}
 
     function toggleButton(buttonId) {
       var button = document.getElementById(buttonId);
@@ -708,56 +782,6 @@
 
     function setBounds() {}
 
-    // map.createPane('pane_GoogleMapsBasic_0');
-    // map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
-    // var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-    //   pane: 'pane_GoogleMapsBasic_0',
-    //   opacity: 0.671,
-    //   minZoom: 1,
-    //   maxZoom: 28,
-    //   minNativeZoom: 0,
-    //   maxNativeZoom: 18
-    // });
-    // layer_GoogleMapsBasic_0;
-
-    // map.createPane('pane_GoogleMapsSatellite_1');
-    // map.getPane('pane_GoogleMapsSatellite_1').style.zIndex = 100;
-    // var layer_GoogleMapsSatellite_1 = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
-    //   pane: 'pane_GoogleMapsSatellite_1',
-    //   opacity: 1.0,
-    //   minZoom: 1,
-    //   maxZoom: 28,
-    //   minNativeZoom: 0,
-    //   maxNativeZoom: 25
-    // });
-    // layer_GoogleMapsSatellite_1;
-    // map.addLayer(layer_GoogleMapsSatellite_1);
-
-    // map.createPane('pane_GoogleSatelliteHybrid_1');
-    // map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
-    // var layer_GoogleSatelliteHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-    //   pane: 'pane_GoogleSatelliteHybrid_1',
-    //   opacity: 1.0,
-    //   minZoom: 1,
-    //   maxZoom: 28,
-    //   minNativeZoom: 0,
-    //   maxNativeZoom: 25
-    // });
-    // layer_GoogleSatelliteHybrid_1;
-
-    // map.createPane('pane_planetNICFI');
-    // map.getPane('pane_planetNICFI').style.zIndex = 100;
-    // var layer_planetNICFI = L.tileLayer(
-    //   'https://tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2023-04_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAK157598af286b421386a7fa8a69f90b85', {
-    //     pane: 'pane_planetNICFI',
-    //     opacity: 1.0,
-    //     minZoom: 1,
-    //     maxZoom: 28,
-    //     minNativeZoom: 0,
-    //     maxNativeZoom: 25
-    //   });
-    // layer_planetNICFI;
-
     map.createPane('pane_GoogleMapsBasic_0');
     map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
     var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -805,26 +829,25 @@
         minNativeZoom: 0,
         maxNativeZoom: 25
       });
-      layer_planetNICFI;
+    layer_planetNICFI;
 
     map.addLayer(layer_GoogleMapsSatellite_1); // Add Google Satellite as the default layer
 
     function toggleLayer(layerName, checked) {
-  if (checked) {
-    // Remove all other layers
-    map.eachLayer(function (layer) {
-      if (layer.options.pane !== layerName) {
-        map.removeLayer(layer);
+      if (checked) {
+        // Remove all other layers
+        map.eachLayer(function (layer) {
+          if (layer.options.pane !== layerName) {
+            map.removeLayer(layer);
+          }
+        });
+        // Add the selected layer
+        map.addLayer(eval(layerName));
+      } else {
+        // Remove the selected layer
+        map.removeLayer(eval(layerName));
       }
-    });
-    // Add the selected layer
-    map.addLayer(eval(layerName));
-  } else {
-    // Remove the selected layer
-    map.removeLayer(eval(layerName));
-  }
-}
-
+    }
 
     toggleLayer('layer_GoogleMapsSatellite_1', true);
     toggleLayer('layer_GoogleSatelliteHybrid_1', false);
@@ -833,51 +856,89 @@
 
 
     function createTileLayer(name, url) {
-      map.createPane(`pane_${name}`);
-      map.getPane(`pane_${name}`).style.zIndex = 101;
-      const layer = L.tileLayer(url, {
-        pane: `pane_${name}`,
-        opacity: 1,
-        attribution: '',
-        minZoom: 1,
-        maxZoom: 28,
-        minNativeZoom: 4,
-        maxNativeZoom: 14
-      });
-      return layer;
-    }
+  map.createPane(`pane_${name}`);
+  map.getPane(`pane_${name}`).style.zIndex = 101;
+  const layer = L.tileLayer(url, {
+    pane: `pane_${name}`,
+    opacity: 1,
+    attribution: '',
+    minZoom: 1,
+    maxZoom: 28,
+    minNativeZoom: 4,
+    maxNativeZoom: 14
+  });
+  return layer;
+}
 
-    const layer_GHISLP = createTileLayer('GHISLP',
-      'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
-    const layer_IRDGHI = createTileLayer('IRDGHI',
-      'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
-    const layer_SLPSLR = createTileLayer('SLPSLR',
-      'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
-    const layer_WSSLP = createTileLayer('WSSLP',
-      'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
-    const layer_WS = createTileLayer('WS',
-      'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
-    const layer_SLPWD = createTileLayer('SLPWD',
-      'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
-    const layer_SLP = createTileLayer('SLP',
-      'https://github.github/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+const layer_GHISLP = createTileLayer('GHISLP', 'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
+const layer_IRDGHI = createTileLayer('IRDGHI', 'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
+const layer_SLPSLR = createTileLayer('SLPSLR', 'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
+const layer_WSSLP = createTileLayer('WSSLP', 'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
+const layer_WS = createTileLayer('WS', 'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
+const layer_SLPWD = createTileLayer('SLPWD', 'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
+const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+
+function toggleTileLayer(layer, checked) {
+  if (checked) {
+    map.addLayer(layer);
+  } else {
+    map.removeLayer(layer);
+  }
+}
+
+function toggleGroup(checkbox, groupId) {
+  var nestedCheckboxes = document.querySelectorAll("#" + groupId + " .nested-checkboxes input[type='checkbox']");
+  var isChecked = checkbox.checked;
+
+  for (var i = 0; i < nestedCheckboxes.length; i++) {
+    var nestedCheckbox = nestedCheckboxes[i];
+    nestedCheckbox.checked = isChecked;
+    toggleNestedCheckbox(nestedCheckbox);
+  }
+}
+
+function toggleNestedCheckbox(nestedCheckbox) {
+  var layerId = nestedCheckbox.id.replace("chk-", "layer_");
+  var layer = window[layerId];
+
+  if (layer) {
+    toggleTileLayer(layer, nestedCheckbox.checked);
+  }
+}
+
+function toggleMainNest(checkbox, groupId) {
+  var mainNestCheckbox = document.getElementById(groupId);
+  var nestedCheckboxes = document.querySelectorAll("#" + groupId + " .nested-checkboxes input[type='checkbox']");
+  var isChecked = checkbox.checked;
+
+  for (var i = 0; i < nestedCheckboxes.length; i++) {
+    var nestedCheckbox = nestedCheckboxes[i];
+    nestedCheckbox.checked = isChecked;
+    toggleNestedCheckbox(nestedCheckbox);
+  }
+
+  // Check or uncheck the main nest checkbox based on the nested checkboxes' status
+  mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length === document.querySelectorAll("#" + groupId + " .nested-checkboxes input[type='checkbox']:checked").length;
+}
+
+
+
+
+
+    var overLayers = {
+      "GHISLP": layer_GHISLP,
+      "IRDGHI": layer_IRDGHI,
+      "SLPSLR": layer_SLPSLR,
+      "WSSLP": layer_WSSLP,
+      "WS": layer_WS,
+      "SLPWD": layer_SLPWD,
+      "SLP": layer_SLP
+    };
 
     var sidebar = L.control.sidebar('sidebar').addTo(map);
-
-    var drawnItems = new L.FeatureGroup().addTo(map);
     var sidebarLayer = L.control.sidebar('sidebar-layer').addTo(map)
     var sidebarThree = L.control.sidebar('sidebar-three').addTo(map)
-
-    // L.easyButton({
-    //   states: [{
-    //     stateName: 'toggle-sidebar',
-    //     icon: 'fa-bars',
-    //     title: 'Toggle Sidebar',
-    //     onClick: function (control) {
-    //       sidebar.toggle();
-    //     }
-    //   }]
-    // }).addTo(map);
+    var drawnItems = new L.FeatureGroup().addTo(map);
 
     //Hash-Autolinker
     var hash = new L.Hash(map);
@@ -970,37 +1031,6 @@
       }
     }
 
-    // // Add initial layer to the map
-    // layer_GoogleMapsSatellite_1.addTo(map);
-
-    // // Add event listeners to change the map layer when a button is clicked
-    // document.getElementById('google-maps-basic-button').addEventListener('click', function () {
-    //   map.eachLayer(function (layer) {
-    //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
-    //       map.removeLayer(layer);
-    //     }
-    //   });
-    //   layer_GoogleMapsBasic_0.addTo(map);
-    // });
-
-    // document.getElementById('google-maps-satellite-button').addEventListener('click', function () {
-    //   map.eachLayer(function (layer) {
-    //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
-    //       map.removeLayer(layer);
-    //     }
-    //   });
-    //   layer_GoogleMapsSatellite_1.addTo(map);
-    // });
-
-    // document.getElementById('google-satellite-hybrid-button').addEventListener('click', function () {
-    //   map.eachLayer(function (layer) {
-    //     if (layer._pane && layer._pane.id.includes('GoogleMaps')) {
-    //       map.removeLayer(layer);
-    //     }
-    //   });
-    //   layer_GoogleSatelliteHybrid_1.addTo(map);
-    // });
-
     //------------------------------------------FILE UPLOAD---------------------------------------------------------------------
     // Function to handle KML, KMZ, and GeoJSON files
     async function handleFile(file) {
@@ -1059,7 +1089,6 @@
         }
       });
 
-
       fileUploaders.addLayer(layer);
       map.fitBounds(layer.getBounds());
     }
@@ -1077,18 +1106,6 @@
         handleFile(holder_fileInput.files[0]);
       }
     });
-
-    // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-    // L.easyButton({
-    //   states: [{
-    //     stateName: 'upload-file',
-    //     icon: 'fa-file-import',
-    //     title: 'Upload KML/KMZ/GeoJSON',
-    //     onClick: function (control) {
-    //       holder_fileInput.click();
-    //     }
-    //   }]
-    // }).addTo(map);
 
     document.getElementById("uploadButton").addEventListener("click", function () {
       holder_fileInput.click();
@@ -1176,181 +1193,7 @@
       });
     layer_EsriTopo;
 
-    function pop_ServiceContractMap_1(feature, layer) {
-      layer.on({
-        mouseout: function (e) {
-          for (i in e.target._eventParents) {
-            e.target._eventParents[i].resetStyle(e.target);
-          }
-        },
-        mouseover: highlightFeature,
-      });
-      var popupContent = '<table>\
-                    <tr>\
-                        <th scope="row">ID</th>\
-                        <td>' + (feature.properties['ID'] !== null ? autolinker.link(feature.properties['ID']
-        .toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Project Name</th>\
-                        <td>' + (feature.properties['sc_Project Name'] !== null ? autolinker.link(feature.properties[
-        'sc_Project Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">SPV</th>\
-                        <td>' + (feature.properties['sc_SPV'] !== null ? autolinker.link(feature.properties['sc_SPV']
-        .toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Parent Company</th>\
-                        <td>' + (feature.properties['sc_Parent Company'] !== null ? autolinker.link(feature.properties[
-        'sc_Parent Company'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Resource Type</th>\
-                        <td>' + (feature.properties['sc_Resource'] !== null ? autolinker.link(feature.properties[
-        'sc_Resource'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Technology Type</th>\
-                        <td>' + (feature.properties['sc_Technology Type'] !== null ? autolinker.link(feature
-        .properties['sc_Technology Type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Capacity (MW)</th>\
-                        <td>' + (feature.properties['sc_Capacity (MW)'] !== null ? autolinker.link(feature.properties[
-        'sc_Capacity (MW)'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">COD</th>\
-                        <td>' + (feature.properties['sc_COD'] !== null ? autolinker.link(feature.properties['sc_COD']
-        .toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Status</th>\
-                        <td>' + (feature.properties['sc_Status'] !== null ? autolinker.link(feature.properties[
-        'sc_Status'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Resource Value</th>\
-                        <td>' + (feature.properties['sc_Resource Value'] !== null ? autolinker.link(feature.properties[
-        'sc_Resource Value'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Terrain Grade</th>\
-                        <td>' + (feature.properties['sc_Terrain Grade'] !== null ? autolinker.link(feature.properties[
-        'sc_Terrain Grade'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Nearest Substation</th>\
-                        <td>' + (feature.properties['sc_Nearest Substation'] !== null ? autolinker.link(feature
-        .properties['sc_Nearest Substation'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Est. TL Length (km)</th>\
-                        <td>' + (feature.properties['sc_Est. TL Length (km)'] !== null ? autolinker.link(feature
-        .properties['sc_Est. TL Length (km)'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-      layer.bindPopup(popupContent, {
-        maxHeight: 400
-      });
-    }
 
-    function style_ServiceContractMap_1_0(feature) {
-      switch (String(feature.properties['sc_Technology Type'])) {
-        case '-':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(0,182,0,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Offshore':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(0,0,200,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Onshore':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(0,226,233,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Floating':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(255,158,1,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Rooftop':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(255,238,1,0.6)',
-              interactive: true,
-          }
-          break;
-        case 'Ground mounted':
-          return {
-            pane: 'pane_ServiceContractMap_1',
-              opacity: 1,
-              color: 'rgba(35,35,35,1.0)',
-              dashArray: '',
-              lineCap: 'butt',
-              lineJoin: 'miter',
-              weight: 1.0,
-              fill: true,
-              fillOpacity: 1,
-              fillColor: 'rgba(255,94,0,0.6)',
-              interactive: true,
-          }
-          break;
-      }
-    }
     map.createPane('pane_ServiceContractMap_1');
     map.getPane('pane_ServiceContractMap_1').style.zIndex = 110;
     map.getPane('pane_ServiceContractMap_1').style['mix-blend-mode'] = 'normal';
@@ -1742,10 +1585,7 @@
     });
     layer_500230kVTDPSubstations_6;
 
-    // var map = L.map('map').setView([0, 0], 2);
 
-
-    //Base_Layers
     var baseLayers = [{
         name: "Satellite",
         layer: layer_GoogleMapsSatellite_1
@@ -1989,6 +1829,7 @@
     });
 
     map.addControl(panelLayers);
+    // Get the container element for panel layers
 
 
     // Measure Button
@@ -2004,29 +1845,6 @@
       .innerHTML = '';
     document.getElementsByClassName('leaflet-control-measure-toggle')[0]
       .className += ' fas fa-ruler';
-
-    // // Initialize measureControl and add it to the map
-    // var measureControl = new L.Control.Measure({
-    //   position: 'topleft',
-    //   primaryLengthUnit: 'meters',
-    //   secondaryLengthUnit: 'kilometers',
-    //   primaryAreaUnit: 'sqmeters',
-    //   secondaryAreaUnit: 'hectares'
-    // });
-
-    // // Create a container div for the measure control
-    // var measureContainer = L.DomUtil.create('div', 'measure-container');
-    // measureContainer.appendChild(measureControl.onAdd(map));
-
-    // // Add the measure control to the sidemenu
-    // var sidemenu = document.getElementById('sidemenu');
-    // sidemenu.appendChild(measureContainer);
-
-    // // Update the measure button icon
-    // var measureToggle = document.getElementsByClassName('leaflet-control-measure-toggle')[0];
-    // measureToggle.innerHTML = '<i class="fas fa-ruler"></i>';
-
-
 
     //----------------------------------------------------------
 
@@ -2119,15 +1937,15 @@
       drawnItems.clearLayers();
     });
 
-    document.getElementById('drawContainer').addEventListener('click', function () {
-      if (drawControl._activeMode === 'draw') {
-        drawControl._map.fire('draw:drawstop');
-        drawControl._activeMode = null;
-      } else {
-        drawControl._map.fire('draw:drawstart');
-        drawControl._activeMode = 'draw';
-      }
-    });
+    // document.getElementById('drawContainer').addEventListener('click', function () {
+    //   if (drawControl._activeMode === 'draw') {
+    //     drawControl._map.fire('draw:drawstop');
+    //     drawControl._activeMode = null;
+    //   } else {
+    //     drawControl._map.fire('draw:drawstart');
+    //     drawControl._activeMode = 'draw';
+    //   }
+    // });
 
     document.getElementById('deleteAllButton').addEventListener('click', function () {
       drawnItems.clearLayers();
@@ -2548,7 +2366,6 @@
     function runSequentially() {
       var codeBlocks = [{
           code: function () {
-
 
             var fileInput = document.getElementById('fileInput');
             var file = fileInput.files[0];
