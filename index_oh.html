@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- CSS/JS -->
+    <title>ARI MS SPT</title>
+
+    <link rel="stylesheet" href="css/leaflet.css">
+    <link rel="stylesheet" href="js/src/leaflet.draw.css">
+    <link rel="stylesheet" href="css/leaflet-measure.css">
+    <link rel="stylesheet" href="css/L.Control.Sidebar.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <link rel="stylesheet" href="css/leaflet-panel-layers.css">
+    <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+    <link rel="stylesheet" href="css/leaflet-search.css">
+    <link rel="stylesheet" href="css/search-control.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-svg-shape-markers.min.js"></script>
+    <script src="js/leaflet.rotatedMarker.js"></script>
+    <script src="js/leaflet.pattern.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+    <script src="js/leaflet-measure-path.js"></script>
+    <script src="js/L.Control.Sidebar.js"></script>
+    <script src="https://unpkg.com/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
+    <script src="js/leaflet-geotiff.js"></script>
+    <script src="https://unpkg.com/geotiff@2.0.7/dist-browser/geotiff.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+    <script src="js/leaflet-search.js"></script>
+    <script src="js/leaflet-measure.js"></script>
+    <script src="js/leaflet-panel-layers.js"></script>
+    <script src="js/leaflet.wms.js"></script>
+
+    <script src="js/leaflet-hash.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://unpkg.com/togeojson@0.14.2"></script>
+
+    <script src="js/L.KML.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+
+    <script src="js/leaflet.filelayer.js"></script>
+    <script src="https://unpkg.com/file-saver/dist/FileSaver.js"></script>
+
+    <script src="js/src/Leaflet.Draw.Event.js"></script>
+    <script src="js/src/Toolbar.js"></script>
+    <script src="js/src/Tooltip.js"></script>
+
+    <!-- Geoblaze -->
+    <script src="https://unpkg.com/georaster"></script>
+    <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+    <script src="https://unpkg.com/geoblaze"></script>
+    <script src="https://unpkg.com/chroma-js@2.4.2/chroma.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+
+    <!-- GeoJSON data -->
+    <script src="data/ServiceContractMap_1.js"></script>
+    <script src="data/AncestralDomain_3.js"></script>
+    <script src="data/ProtectedAreas_4.js"></script>
+    <!-- <script src="data/Liquefaction_South_7.js"></script>
+  <script src="data/Liquefaction_North_8.js"></script> -->
+    <script src="data/ActiveFault_13.js"></script>
+    <script src="data/Seaports_14.js"></script>
+
+    <script src="data/TaalBufferRings_1.js"></script>
+    <script src="data/TaalFissuring_2.js"></script>
+    <script src="data/TaalBallisticProjectiles_3.js"></script>
+    <script src="data/PyroclasticFlow_4.js"></script>
+    <script src="data/Lava_5.js"></script>
+    <script src="data/Lahar_6.js"></script>
+    <script src="data/Volcanoes_7.js"></script>
+    <script src="data/ExistingTL_1.js"></script>
+    <script src="data/TDPTL_2.js"></script>
+    <script src="data/PlantCustomerownedSubstations_3.js"></script>
+    <script src="data/69kVDULoadendSubstations_4.js"></script>
+    <script src="data/500230138115kVExistingSubstations_5.js"></script>
+    <script src="data/500230kVTDPSubstations_6.js"></script>
+
+    <script src="data/BarangaysMin_1.js"></script>
+
+    <!-- <script src="js/service_contracts.js"></script> -->
+    <script src="js/ancestral_domains.js"></script>
+    <script src="js/protected_areas.js"></script>
+    <script src="js/seaports.js"></script>
+    <script src="js/protected_areas.js"></script>
+    <script src="js/active_fault.js"></script>
+    <script src="js/taal_hazards.js"></script>
+    <script src="js/volcano.js"></script>
+    <script src="js/lahar.js"></script>
+    <script src="js/lava.js"></script>
+    <script src="js/pyroclastic_flow.js"></script>
+    <script src="js/barangay_layer.js"></script>
+    <script src="js/plant_owned_substations.js"></script>
+    <script src="js/existing_69_substations.js"></script>
+    <script src="js/existing_230_substations.js"></script>
+    <script src="js/tdp_substations.js"></script>
+    <script src="js/existing_tl.js"></script>
+    <script src="js/tdp_tl.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* overflow: hidden; */
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Header */
+        .header-container {
+            background-color: #202123;
+            /* background: linear-gradient(to right, #001d3d, #164575); */
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Nav-Bar */
+        .header {
+            background-color: #333;
+            /* background-color: #202123; */
+            /* background: linear-gradient(to right, #001d3d, #164575); */
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            width: 35px;
+            height: auto;
+            margin-right: 5px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap');
+
+        .header-text {
+            font-size: 24px;
+            font-weight: 400;
+            font-family: "Roboto Condensed", Arial, sans-serif;
+        }
+
+        .logo-container {
+            margin-left: 15px;
+            margin-right: 8px;
+        }
+
+        .header-buttons {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        .animated-button {
+            margin-left: auto;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* END Nav-Bar */
+
+        #sidemenu {
+            position: fixed;
+            top: 43px;
+            left: 0;
+            height: 100vh;
+            width: 60px;
+            transition: width 0.5s;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #sidemenu.expanded {
+            width: 250px;
+        }
+
+        .sidemenu-button {
+            margin-bottom: 10px;
+            width: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        /* Content */
+        .content {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Hamburger Menu */
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .hamburger-icon span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: #f0f0f0;
+            margin-bottom: 4px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .hamburger-icon.open span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-icon.open span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        /* custom scrollbar */
+        .container.custom-scrollbar {
+            position: relative;
+            overflow: auto;
+            padding: 5px;
+            margin: 0;
+        }
+
+        .container.custom-scrollbar h1 {
+            margin: 0;
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #d6dee1;
+            border-radius: 20px;
+            border: 6px solid transparent;
+            background-clip: content-box;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #a8bbbf;
+        }
+
+        /* Sidecard */
+        /* Sidecard */
+        .sidecard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f9fa;
+            width: 400px;
+            position: fixed;
+            left: -400px;
+            top: 70px;
+            height: 90vh;
+            z-index: 1000;
+            transition: left 0.3s ease-in-out;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .sidecard.open {
+            left: 80px;
+        }
+
+        .sidebar-header {
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            margin: 0;
+            /* margin-bottom: 20px;
+            margin-top: 5px; */
+        }
+
+        .sbheader-icon {
+            margin-right: 10px;
+        }
+
+        .sbheader-text {
+            font-size: 1.5rem;
+        }
+
+        .sidecard-content {
+            /* display: flex; */
+            /* flex-direction: column; */
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        /* .sidecard-content>div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        } */
+
+        #fileName {
+            font-weight: bold;
+        }
+
+        #output {
+            white-space: pre-wrap;
+        }
+
+        .custom-button-grid {
+            display: grid;
+            align-items: center;
+            height: 50px;
+        }
+
+        .custom-button span {
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .custom-button.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .custom-icon {
+            font-size: 12px;
+        }
+
+        .custom-text {
+            font-size: 12px;
+        }
+
+        .custom-heading {
+            margin: 0;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 0.6;
+            margin-bottom: 3px;
+        }
+
+        .list-group-item {
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .loading-bar::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 100%;
+            background-color: #00aaff;
+            position: absolute;
+            animation: loading-animation 2s infinite;
+        }
+
+        .custom-panel {
+            background-color: rgba(245, 245, 245, 0.6);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .custom-panel .form-check-label {
+            padding-left: 10px;
+        }
+
+        .custom-panel .form-check-input {
+            margin-right: 5px;
+        }
+
+        @keyframes loading-animation {
+            0% {
+                width: 0;
+            }
+
+            50% {
+                width: 50%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header-container">
+        <div class="header">
+            <!-- <div id="hamburger-icon" class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div> -->
+            <div class="logo-container">
+                <img src="AP Emblem.png" alt="AP Emblem" class="logo">
+            </div>
+            <div class="header-content">
+                <span class="header-text" style="color: #f0f0f0;">ARI Market
+                    Strategy - SPT</span>
+            </div>
+            <a href="https://lanzrodrigo.github.io/" target="_blank" class="btn btn-primary animated-button">LGU
+                Dir.</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="map" style="width: 100%; height: 100%;"></div>
+
+        <div id="sidemenu">
+            <button class="btn btn-light sidemenu-button">
+                <i class="fas fa-layer-group"></i>
+            </button>
+            <button class="btn btn-light sidemenu-button" onclick="showSidecardCalc()">
+                <i class="fas fa-chart-line"></i>
+            </button>
+            <button class="btn btn-light sidemenu-button">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+
+        <!-- Sliding Sidecard -->
+        <div id="sidecard-calc" class="sidecard" style="padding: 1px;">
+            <div class="container">
+                <div class="container custom-scrollbar">
+                    <div class="sidebar-tabs">
+                        <div class="sidebar-pane" id="geotiff">
+
+                            <!-- Raster Calculator -->
+                            <div class="sidebar-pane" id="geotiff">
+                                <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+                                    <i class="fa-solid fa-calculator sbheader-icon"></i>
+                                    <span class="sbheader-text">Suitability Calculator</span>
+                                    <!-- <span class="sidebar-close"></span> -->
+                                </h1>
+
+                                <div class="d-flex justify-content-center align-items-center"
+                                    style="margin-bottom: 5px;">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="checkbox" class="btn-check" id="toggleCheckbox"
+                                                autocomplete="off">
+                                            <label
+                                                class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid d-flex align-items-center justify-content-center"
+                                                style="font-size: 14px;" for="toggleCheckbox">Irradiance
+                                                Map</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="checkbox" class="btn-check" id="WStoggleCheckbox"
+                                                autocomplete="off">
+                                            <label
+                                                class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid d-flex align-items-center justify-content-center"
+                                                style="font-size: 14px;" for="WStoggleCheckbox">Wind
+                                                Speed Map</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="checkbox" class="btn-check" id="SLPtoggleCheckbox"
+                                                autocomplete="off">
+                                            <label
+                                                class="btn btn-outline-primary btn-block mb-2 custom-button custom-button-grid d-flex align-items-center justify-content-center"
+                                                style="font-size: 14px;" for="SLPtoggleCheckbox">Slope
+                                                Map</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="sidebar-spacer">
+
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div>
+                                        <input type="file" id="fileInput" accept=".geojson" multiple
+                                            style="display: none;" onchange="displayFileName()">
+                                        <label for="fileInput" style="margin-bottom: 10px;"
+                                            class="btn btn-primary btn-sm">Upload
+                                            Shapefile</label>
+
+                                    </div>
+
+                                    <div>
+                                        <button id="fetchButton" class="btn btn-primary btn-sm">Calculate
+                                            Stats</button>
+                                    </div>
+                                </div>
+                                <strong>Assessed Area: </strong><span id="fileName"></span>
+
+                                <body onload="runSequentially()">
+                                    <pre id="output"></pre>
+
+                                    <div id="loading-prompt" class="loading-prompt"
+                                        style="display: none; margin-top: 10px">
+                                        <div class="loading-bar"></div>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <div class="card" style="width: 24rem;">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-regular fa-sun custom-icon"></i>
+                                                        <span class="custom-heading">Irradiance:</span>
+                                                    </p>
+                                                    <span id="GHIstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-wind custom-icon"></i>
+                                                        <span class="custom-heading">Wind
+                                                            Speed:</span>
+                                                    </p>
+                                                    <span id="WSstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-mountain custom-icon"></i>
+                                                        <span class="custom-heading">Slope:</span>
+                                                    </p>
+                                                    <span id="SLPstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-compass custom-icon"></i>
+                                                        <span class="custom-heading">Azimuth:</span>
+                                                    </p>
+                                                    <span id="Azmtstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-file-contract custom-icon"></i>
+                                                        <span class="custom-heading">Service
+                                                            Contract:</span></p>
+                                                    <span id="SCstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-earth-asia custom-icon"></i>
+                                                        <span class="custom-heading">Ancestral
+                                                            Domains:</span></p>
+                                                    <span id="ADstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-water custom-icon"></i>
+                                                        <span class="custom-heading">Irrigated
+                                                            Land:</span></p>
+                                                    <span id="Irgtnstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-kiwi-bird custom-icon"></i>
+                                                        <span class="custom-heading">Protected
+                                                            Areas:</span></p>
+                                                    <span id="PrtdArsstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-house-crack custom-icon"></i>
+                                                        <span class="custom-heading">Active
+                                                            Fault:</span></p>
+                                                    <span id="Fltstatisticss" class="custom-text"></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <p><i class="fa-solid fa-triangle-exclamation custom-icon"></i>
+                                                        <span class="custom-heading">Floods:</span></p>
+                                                    <span id="FldBistatisticss" class="custom-text"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Histogram -->
+                                    </br><strong>Histogram Results: </strong>
+
+                                    <div class="card text-center">
+                                        <div class="card-header">
+                                            <ul class="nav nav-tabs card-header-tabs justify-content-center"
+                                                style="font-size: smaller; padding: 1px;">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" aria-current="true" href="#solarslopeTab"
+                                                        data-bs-toggle="tab">SLRxSLP</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#windslopeTab"
+                                                        data-bs-toggle="tab">WNDxSLP</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#solarTab" data-bs-toggle="tab">SLR</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#windTab" data-bs-toggle="tab">WND</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#slopeTab" data-bs-toggle="tab">SLP</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#liquefactionTab"
+                                                        data-bs-toggle="tab">LIQ</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#floodTab" data-bs-toggle="tab">FLD</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade show active" id="solarslopeTab">
+                                                    <!-- SolarxSlope content -->
+                                                    <!-- Add your content here -->
+                                                </div>
+                                                <div class="tab-pane fade" id="windslopeTab">
+                                                    <!-- WindxSlope content -->
+                                                    <!-- Add your content here -->
+                                                </div>
+                                                <div class="tab-pane fade" id="solarTab">
+                                                    <!-- Solar content -->
+                                                    <!-- Add your content here -->
+                                                </div>
+                                                <div class="tab-pane fade" id="windTab">
+                                                    <!-- Wind content -->
+                                                    <!-- Add your content here -->
+                                                </div>
+                                                <div class="tab-pane fade" id="slopeTab">
+                                                    <canvas id="histogramChart"></canvas>
+                                                </div>
+                                                <div class="tab-pane fade" id="liquefactionTab">
+                                                    <!-- Liquefaction content -->
+                                                    <!-- Add your content here -->
+                                                </div>
+                                                <div class="tab-pane fade" id="floodTab">
+                                                    <!-- Flood content -->
+                                                    <!-- Add your content here -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        </br>
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                            <button id="clearResultsBtn" class="btn btn-warning btn-sm">Clear
+                                Results</button>
+                        </div>
+
+                    </div>
+
+                    <hr class="sidebar-spacer">
+
+                    <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
+                        <h1 class="sidebar-header common-header">
+                            <i class="fa-solid fa-database sbheader-icon"></i>
+                            <span class="sbheader-text">HLA Calculator</span>
+                            <!-- <span class="sidebar-close"></span> -->
+                        </h1>
+                        <div>
+                            <div>
+                                <table class="table">
+                                    <tr>
+                                        <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
+                                        <td><input type="number" id="ghi" name="ghi" step="any" class="form-control">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="slope">Mean Slope, Percent:</label></td>
+                                        <td><input type="number" id="slope" name="slope" step="any"
+                                                class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
+                                        <td><input type="number" id="tl_distance" name="tl_distance" step="any"
+                                                class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="purchase_price">Purchase Price
+                                                (Net/sqm):</label></td>
+                                        <td><input type="number" id="purchase_price" name="purchase_price" step="any"
+                                                class="form-control">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="total_area">Total Area in Ha:</label></td>
+                                        <td><input type="number" id="total_area" name="total_area" step="any"
+                                                class="form-control"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2" style="text-align:center; padding: 10px 0;">
+                                            <button onclick="calculate()" class="btn btn-primary">Calculate</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><label for="result">Result:</label></td>
+                                        <td><input type="number" id="result" name="result" readonly
+                                                class="form-control"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script>
+        var map = L.map('map', {
+            zoomControl: false,
+            maxZoom: 28,
+            minZoom: 1
+        });
+
+        var philippines = L.latLng(12.8797, 121.7740);
+        map.setView(philippines, 6);
+
+        map.createPane('pane_GoogleMapsBasic_0');
+        map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
+        var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleMapsBasic_0',
+            opacity: 0.671,
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleMapsBasic_0.addTo(map);
+
+        //Highlight Feature
+        var highlightLayer;
+
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+                highlightLayer.setStyle({
+                    color: '#ffff00',
+                });
+            } else {
+                highlightLayer.setStyle({
+                    fillColor: '#ffff00',
+                    fillOpacity: 1
+                });
+            }
+        }
+
+        function showSidecardCalc() {
+            var sidecard = document.getElementById("sidecard-calc");
+            sidecard.classList.toggle("open");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Web Page Example</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #content {
+      flex-grow: 1;
+      display: flex;
+      overflow: hidden;
+    }
+    #sidemenu {
+      width: 80px;
+      transition: width 0.5s;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #sidemenu.expanded {
+      width: 250px;
+    }
+    .sidemenu-button {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    #map {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Top Nav Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><i class="fas fa-map-marker-alt"></i> Map Title</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0 mx-auto">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <div id="content">
+      <!-- sidemenu -->
+      <div id="sidemenu">
+        <div class="minimize-sidemenu">
+          <i class="fas fa-bars fa-lg"></i>
+        </div>
+        <button class="btn btn-light sidemenu-button">
+          <i class="fas fa-home"></i>
+        </button>
+        <button class="btn btn-light sidemenu-button">
+          <i class="fas fa-user"></i>
+        </button>
+        <button class="btn btn-light sidemenu-button">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+
+      <!-- Map -->
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <script src="./js/all.min.js"></script>
+
+  <!-- Include Leaflet library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script>
+    const sidemenu = document.getElementById('sidemenu');
+    const minimizesidemenu = document.querySelector('.minimize-sidemenu');
+
+    minimizesidemenu.addEventListener('click', () => {
+      sidemenu.classList.toggle('expanded');
+    });
+
+    var map = L.map('map').setView([12.8797, 121.7740], 6);
+
+    L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      opacity: 0.671,
+      minZoom: 1,
+      maxZoom: 28,
+      minNativeZoom: 0,
+      maxNativeZoom: 18
+    }).addTo(map);
+  </script>
+</body>
+</html>

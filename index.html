@@ -171,6 +171,21 @@
 
     <div class="content">
       <div id="map" style="width: 100%; height: 100%;"></div>
+
+      <div id="sidemenu">
+          <button class="btn btn-light sidemenu-button">
+              <i class="fas fa-layer-group"></i>
+          </button>
+          <button class="btn btn-light sidemenu-button" onclick="showSidecardCalc()">
+              <i class="fas fa-chart-line"></i>
+          </button>
+          <button class="btn btn-light sidemenu-button">
+              <i class="fas fa-cog"></i>
+          </button>
+      </div>
+
+    <!-- <div class="content"> -->
+      <div id="map" style="width: 100%; height: 100%;"></div>
       <div id="searchContainer" class="search-container">
         <div class="input-group">
           <input id="searchInput" class="form-control search-input"
@@ -185,7 +200,7 @@
         <ul id="searchDropdown" class="search-dropdown dropdown-menu"></ul>
       </div>
 
-      <div id="sidebar" class="sidebar" style="padding: 1px;">
+      <div id="sidebar" class="sidebar" style="padding: 1px; margin-left: 50px;">
         <div class="container">
           <div class="container custom-scrollbar">
             <div class="sidebar-tabs">
@@ -197,7 +212,7 @@
                     style="margin-bottom: 20px; margin-top: 30px;">
                     <i class="fa-solid fa-calculator sbheader-icon"></i>
                     <span class="sbheader-text">Suitability Calculator</span>
-                    <span class="sidebar-close"></span>
+                    <!-- <span class="sidebar-close"></span> -->
                   </h1>
 
                   <div
@@ -430,7 +445,7 @@
             <h1 class="sidebar-header common-header">
               <i class="fa-solid fa-database sbheader-icon"></i>
               <span class="sbheader-text">HLA Calculator</span>
-              <span class="sidebar-close"></span>
+              <!-- <span class="sidebar-close"></span> -->
             </h1>
             <div>
               <div>
@@ -942,6 +957,8 @@ document.getElementById('hamburger-icon').addEventListener('click', function() {
             }
           }]
         }).addTo(map);
+
+
 
         //_____________________________________________________________________________________________________________________________________________
 
