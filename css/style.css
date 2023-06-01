@@ -4,9 +4,7 @@ body {
   overflow: hidden;
 }
 
-#sidebar-toggle-container {
-  margin-right: 20px;
-}
+
 
 .hamburger-icon {
   display: flex;
@@ -103,8 +101,7 @@ body {
 #map {
   width: 100%;
   height: 100%;
-  margin-left: 48px;
-  margin-top: 50px;
+  overflow: hidden;
 }
 
 .coordinates-input-control {
@@ -337,9 +334,6 @@ body {
   }
 }
 
-.sidebar-pane {
-  background-color: rgba(255, 255, 255, 0.6);
-}
 
 
 /* custom scrollbar */
@@ -413,15 +407,34 @@ body {
 
 .sidemenu-button i {
   margin: 0; /* Remove margin to center the icon within the button */
+  font-size: 14px; /* Adjust the font-size to make the icons smaller */
+  line-height: 1; /* Adjust the line-height to vertically center the icon */
+}
+
+.sidebar {
+ /* left: 50px; */
+ /* top: 20px; */
+ border-radius: 8px;
+}
+.sidebar-pane {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 /* Content */
 .content {
-  position: relative;
-  height: 100vh;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  /* height: 100vh; */
   overflow: hidden;
 }
 
 .sidebar-open {
   transform: translateX(0); /* Show the sidebar when it has the "sidebar-open" class */
+}
+.measure-container, .draw-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
 }
