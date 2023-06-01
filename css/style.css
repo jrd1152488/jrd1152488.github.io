@@ -97,7 +97,7 @@ body {
   right: 0;
   bottom: 0;
   padding: 0;
-  overflow: auto;
+  overflow: hidden;
 }
 
 #map {
@@ -228,10 +228,10 @@ body {
   font-size: small;
 }
 
-.btn-custom {
+/* .btn-custom {
   font-size: 12px;
-  padding: 6px 20 px;
-}
+  padding: 2px 20 px;
+} */
 
 #calculator table td {
   vertical-align: middle;
@@ -387,26 +387,33 @@ body {
   transition: width 0.5s;
   background-color: #001d3d;
   color: #fff;
-  padding: 20px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 #sidemenu.expanded {
-  width: 250px;
+  width: 150px;
 }
 
 .sidemenu-button {
-  margin-bottom: 10px;
-  width: 70%;
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+  width: 30px; /* Set width and height to desired square dimensions */
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  padding: 0; /* Remove padding to make it a square button */
 }
 
-
+.sidemenu-button i {
+  margin: 0; /* Remove margin to center the icon within the button */
+}
 
 /* Content */
 .content {
