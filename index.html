@@ -17,18 +17,14 @@
   <link rel="stylesheet" href="css/search-control.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap">
-
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
   </script>
-
   <script src="js/leaflet.js"></script>
   <script src="js/leaflet-svg-shape-markers.min.js"></script>
   <script src="js/leaflet.rotatedMarker.js"></script>
@@ -147,331 +143,281 @@
       <div class="header-content">
         <span class="header-text" style="color: #f0f0f0;">ARI MARKET STRATEGY - SPT</span>
       </div>
-      <a href="https://lanzrodrigo.github.io/" target="_blank" class="btn btn-primary animated-button">LGU Dir.</a>
+      <div id="right-bar" class="right-bar">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- <a href="https://lanzrodrigo.github.io/" target="_blank" class="btn btn-primary animated-button">LGU Dir.</a> -->
     </div>
   </div>
 
   <div id="right-menu">
-    <div id="layers" class="layers">
-      <button class="sidemenu-btn btn-primary sidemenu-button">
-        <i class="fas fa-layer-group"></i>
-      </button>
+    <div id="right-bar" class="right-bar">
+      <i class="fas fa-bars"></i>
     </div>
   </div>
 
 
+  <div id="floating-card" class="floating-card">
+    <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+      <i class="fa-solid fa-calculator sbheader-icon"></i>
+      <span class="sbheader-text">Layer Selection</span>
+    </h1>
+    <div class="d-flex flex-column" style="margin-bottom: 5px;">
 
-  <div id="sidemenu">
-    <div class="sidemenu">
-
-
-      <div id="suitability" class="suitability">
-        <button class="sidemenu-btn btn-secondary sidemenu-button">
-          <i class="fas fa-chart-line"></i>
-        </button>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
+          onchange="toggleLayer('layer_GoogleMapsSatellite_1', this.checked)" checked>
+        <label class="form-check-label" for="googSat">Satellite</label>
       </div>
-      <div id="three" class="three">
-        <button class="sidemenu-btn btn-light sidemenu-button">
-          <i class="fas fa-cog"></i>
-        </button>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
+          onchange="toggleLayer('layer_GoogleSatelliteHybrid_1', this.checked)">
+        <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
       </div>
-
-      <hr class="sidebar-spacer">
-
-      <button id="uploadButton" class="sidemenu-btn btn-light sidemenu-button">
-        <i class="fas fa-file-import"></i>
-      </button>
-
-      <button id="deleteAllButton" class="sidemenu-btn btn-light sidemenu-button">
-        <i class="fas fa-trash"></i>
-      </button>
-
-      <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
-        <i class="fas fa-download"></i>
-      </button>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
+          onchange="toggleLayer('layer_GoogleMapsBasic_0', this.checked)">
+        <label class="form-check-label" for="GoogBase">Base Map</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
+          onchange="toggleLayer('layer_planetNICFI', this.checked)">
+        <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
+      </div>
     </div>
-  </div>
+
+    <!-- Tile Layers -->
+    <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+      <i class="fa-solid fa-tiles sbheader-icon"></i>
+      <span class="sbheader-text">Tile Layers</span>
+    </h1>
 
 
-  <div id="sidebar-layer" class="sidebar-layer slide-from-right" style="width: 300px; padding: 1px;">
-    <div class="container">
-      <div class="container custom-scrollbar">
-        <div class="sidebar-tabs">
-          <div class="sidebar-pane" id="geotiff">
-            <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
-              <i class="fa-solid fa-calculator sbheader-icon"></i>
-              <span class="sbheader-text">Layer Selection</span>
-            </h1>
-            <div class="d-flex flex-column" style="margin-bottom: 5px;">
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+        <label class="form-check-label" for="group1">Solar Suitability</label>
+      </div>
+      <div class="nested-checkboxes">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-GHISLP"
+            onchange="toggleTileLayer(layer_GHISLP, this.checked)">
+          <label class="form-check-label" for="chk-GHISLP">GHISLP</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
+            onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
+          <label class="form-check-label" for="chk-IRDGHI">IRDGHI</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
+            onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
+          <label class="form-check-label" for="chk-SLPSLR">SLPSLR</label>
+        </div>
+      </div>
+    </div>
 
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
-                  onchange="toggleLayer('layer_GoogleMapsSatellite_1', this.checked)" checked>
-                <label class="form-check-label" for="googSat">Satellite</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
-                  onchange="toggleLayer('layer_GoogleSatelliteHybrid_1', this.checked)">
-                <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
-                  onchange="toggleLayer('layer_GoogleMapsBasic_0', this.checked)">
-                <label class="form-check-label" for="GoogBase">Base Map</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
-                  onchange="toggleLayer('layer_planetNICFI', this.checked)">
-                <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
-              </div>
-            </div>
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+        <label class="form-check-label" for="group1">Wind Suitability</label>
+      </div>
+      <div class="nested-checkboxes">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-WSSLP"
+            onchange="toggleTileLayer(layer_WSSLP, this.checked)">
+          <label class="form-check-label" for="chk-WSSLP">WSSLP</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-WS"
+            onchange="toggleTileLayer(layer_WS, this.checked)">
+          <label class="form-check-label" for="chk-WS">WS</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-SLPWD"
+            onchange="toggleTileLayer(layer_SLPWD, this.checked)">
+          <label class="form-check-label" for="chk-SLPWD">SLPWD</label>
+        </div>
+      </div>
+    </div>
 
-            <!-- Tile Layers -->
-            <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
-              <i class="fa-solid fa-tiles sbheader-icon"></i>
-              <span class="sbheader-text">Tile Layers</span>
-            </h1>
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+        <label class="form-check-label" for="group1">Slope Industry</label>
+      </div>
+      <div class="nested-checkboxes">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-SLP"
+            onchange="toggleTileLayer(layer_SLP, this.checked)">
+          <label class="form-check-label" for="chk-SLP">SLP</label>
+        </div>
+      </div>
+    </div>
 
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+        <label class="form-check-label" for="group4">Area Restrictions</label>
+      </div>
+      <div class="nested-checkboxes ml-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
+            onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
+          <label class="form-check-label" for="chk-ServiceContractMap_1">Service Contract Map</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
+            onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
+          <label class="form-check-label" for="chk-AncestralDomain_3">Ancestral Domains</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
+            onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
+          <label class="form-check-label" for="chk-ProtectedAreas_4">Protected Areas</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
+            onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
+          <label class="form-check-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas</label>
+        </div>
+      </div>
+    </div>
 
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
-                <label class="form-check-label" for="group1">Solar Suitability</label>
-              </div>
-              <div class="nested-checkboxes">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-GHISLP"
-                    onchange="toggleTileLayer(layer_GHISLP, this.checked)">
-                  <label class="form-check-label" for="chk-GHISLP">GHISLP</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
-                    onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
-                  <label class="form-check-label" for="chk-IRDGHI">IRDGHI</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
-                    onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
-                  <label class="form-check-label" for="chk-SLPSLR">SLPSLR</label>
-                </div>
-              </div>
-            </div>
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+        <label class="form-check-label" for="group4">Area Restrictions</label>
+      </div>
+      <div class="nested-checkboxes ml-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-RVRWBS" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-RVRWBS">River and Water Bodies</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-FloodHazard_25yrs_6"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-FloodHazard_25yrs_6">Flood Hazard</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-LQFCN" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-LQFCN">Liquefaction</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-ActiveFault_13"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-ActiveFault_13">Active Fault</label>
+        </div>
+      </div>
+    </div>
 
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
-                <label class="form-check-label" for="group1">Wind Suitability</label>
-              </div>
-              <div class="nested-checkboxes">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-WSSLP"
-                    onchange="toggleTileLayer(layer_WSSLP, this.checked)">
-                  <label class="form-check-label" for="chk-WSSLP">WSSLP</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-WS"
-                    onchange="toggleTileLayer(layer_WS, this.checked)">
-                  <label class="form-check-label" for="chk-WS">WS</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-SLPWD"
-                    onchange="toggleTileLayer(layer_SLPWD, this.checked)">
-                  <label class="form-check-label" for="chk-SLPWD">SLPWD</label>
-                </div>
-              </div>
-            </div>
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group5" onchange="toggleGroup(this, 'group5')">
+        <label class="form-check-label" for="group5">Hazards - Volcano</label>
+      </div>
+      <div class="nested-checkboxes ml-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-Volcanoes_7">Active Volcano</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-Lahar_6" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-Lahar_6">Lahar</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-Lava_5" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-Lava_5">Lava</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
+            Projectiles</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-TaalBufferRings_1"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-TaalBufferRings_1">Taal Buffer Rings</label>
+        </div>
+      </div>
+    </div>
 
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
-                <label class="form-check-label" for="group1">Slope Industry</label>
-              </div>
-              <div class="nested-checkboxes">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-SLP"
-                    onchange="toggleTileLayer(layer_SLP, this.checked)">
-                  <label class="form-check-label" for="chk-SLP">SLP</label>
-                </div>
-              </div>
-            </div>
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group6" onchange="toggleGroup(this, 'group6')">
+        <label class="form-check-label" for="group6">Others</label>
+      </div>
+      <div class="nested-checkboxes ml-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-Seaports_14" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-Seaports_14">Seaports</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-RDS" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-RDS">Roads</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-BarangaysMin_1">Barangay</label>
+        </div>
+      </div>
+    </div>
 
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
-                <label class="form-check-label" for="group4">Area Restrictions</label>
-              </div>
-              <div class="nested-checkboxes ml-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
-                    onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
-                  <label class="form-check-label" for="chk-ServiceContractMap_1">Service Contract Map</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
-                    onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
-                  <label class="form-check-label" for="chk-AncestralDomain_3">Ancestral Domains</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
-                    onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
-                  <label class="form-check-label" for="chk-ProtectedAreas_4">Protected Areas</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
-                    onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
-                  <label class="form-check-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
-                <label class="form-check-label" for="group4">Area Restrictions</label>
-              </div>
-              <div class="nested-checkboxes ml-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-RVRWBS"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-RVRWBS">River and Water Bodies</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-FloodHazard_25yrs_6"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-FloodHazard_25yrs_6">Flood Hazard</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-LQFCN" onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-LQFCN">Liquefaction</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-ActiveFault_13"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-ActiveFault_13">Active Fault</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group5" onchange="toggleGroup(this, 'group5')">
-                <label class="form-check-label" for="group5">Hazards - Volcano</label>
-              </div>
-              <div class="nested-checkboxes ml-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-Volcanoes_7">Active Volcano</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-Lahar_6"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-Lahar_6">Lahar</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-Lava_5"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-Lava_5">Lava</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
-                    Projectiles</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-TaalBufferRings_1"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-TaalBufferRings_1">Taal Buffer Rings</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group6" onchange="toggleGroup(this, 'group6')">
-                <label class="form-check-label" for="group6">Others</label>
-              </div>
-              <div class="nested-checkboxes ml-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-Seaports_14"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-Seaports_14">Seaports</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-RDS" onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-RDS">Roads</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-BarangaysMin_1">Barangay</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="group-container">
-              <div class="group-checkbox">
-                <input class="form-check-input" type="checkbox" id="group7" onchange="toggleGroup(this, 'group7')">
-                <label class="form-check-label" for="group7">Substations and Lines</label>
-              </div>
-              <div class="nested-checkboxes ml-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-ExistingTL_1">Existing Transmission Lines</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-TDPTL_2"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-TDPTL_2">Transmission and Distribution Lines</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-PlantCustomerownedSubstations_3"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-PlantCustomerownedSubstations_3">Plant Customer-owned
-                    Substations</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-69kVDULoadendSubstations_4"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-69kVDULoadendSubstations_4">69kV Distribution Utility
-                    Load-end Substations</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-500230138115kVExistingSubstations_5"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-500230138115kVExistingSubstations_5">500/230/138/11kV
-                    Existing Substations</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="chk-500230kVTDPSubstations_6"
-                    onchange="toggleNestedCheckbox(this);">
-                  <label class="form-check-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP Substations</label>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-          </div>
+    <div class="group-container">
+      <div class="group-checkbox">
+        <input class="form-check-input" type="checkbox" id="group7" onchange="toggleGroup(this, 'group7')">
+        <label class="form-check-label" for="group7">Substations and Lines</label>
+      </div>
+      <div class="nested-checkboxes ml-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-ExistingTL_1">Existing Transmission Lines</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-TDPTL_2" onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-TDPTL_2">Transmission and Distribution Lines</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-PlantCustomerownedSubstations_3"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-PlantCustomerownedSubstations_3">Plant Customer-owned
+            Substations</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-69kVDULoadendSubstations_4"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-69kVDULoadendSubstations_4">69kV Distribution Utility
+            Load-end Substations</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-500230138115kVExistingSubstations_5"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-500230138115kVExistingSubstations_5">500/230/138/11kV
+            Existing Substations</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="chk-500230kVTDPSubstations_6"
+            onchange="toggleNestedCheckbox(this);">
+          <label class="form-check-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP Substations</label>
         </div>
       </div>
     </div>
   </div>
+
 
 
   <div id="sidebar-three" class="sidebar-three">
@@ -725,12 +671,33 @@
       </div>
       <ul id="searchDropdown" class="search-dropdown dropdown-menu"></ul>
     </div>
-  </div>
+    <div id="sidemenu">
+      <div id="suitability" class="suitability">
+        <button class="sidemenu-btn btn-secondary sidemenu-button">
+          <i class="fas fa-chart-line"></i>
+        </button>
+      </div>
+      <div id="three" class="three">
+        <button class="sidemenu-btn btn-light sidemenu-button">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
 
-  <style>
+      <hr class="sidebar-spacer">
 
-  </style>
+      <button id="uploadButton" class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-file-import"></i>
+      </button>
 
+      <button id="deleteAllButton" class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-trash"></i>
+      </button>
+
+      <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-download"></i>
+      </button>
+
+    </div>
   </div>
 
   <!-- Add a layer group for drawn and uploaded polygons -->
@@ -739,6 +706,7 @@
     <!-- Content inside the drawContainer div -->
   </div>
   <div id="map-container">
+
     <div id="map"></div>
     <div id="drawContainer" class="top-right">
       <button>Toggle Draw Control</button>
@@ -746,6 +714,8 @@
     <div id="deleteAllContainer" class="top-right">
       <button>Delete All</button>
     </div>
+
+
   </div>
 
 
@@ -796,26 +766,7 @@
     }
     //^^^ End of Sidemenu button for Area Suitability ^^^
 
-    //Sidemenu button for Layer Selection
-    document.getElementById('layers').addEventListener('click', function () {
-      this.classList.toggle('open');
-      sidebarLayer.toggle();
-    });
-    // Function to open the sidebar
-    function openSidebar() {
-      document.getElementById("sidebar-layer").classList.add("open");
-    }
-
-    function showSidebar() {
-      var sidebar = document.getElementById("sidebar-layer");
-      sidebar.classList.toggle("sidebar-open");
-    }
-
-    function toggleForm() {
-      var overlay = document.querySelector('.overlay');
-      overlay.style.display = overlay.style.display === 'none' ? 'flex' : 'none';
-    }
-
+    
     //Sidemenu button for Third Button
     document.getElementById('three').addEventListener('click', function () {
       this.classList.toggle('open');
@@ -837,30 +788,14 @@
     }
 
     // Link to LGU Directory
-    function openGitHubLink() {
-      var cardWidth = 300;
-      var cardHeight = 200;
-      var left = (window.innerWidth - cardWidth) / 2;
-      var top = (window.innerHeight - cardHeight) / 2;
-      window.open('https://lanzrodrigo.github.io/', '_blank',
-        `width=${cardWidth},height=${cardHeight},left=${left},top=${top}`);
-    }
-
-    document.getElementById('layers').addEventListener('click', toggleRightSidebar);
-
-    // Toggle Right Sidebar
-    function toggleRightSidebar() {
-      var sidebarLayer = document.getElementById("sidebar-layer");
-      sidebarLayer.classList.toggle("slide-from-right");
-    }
-
-    // Hide the sidebar when the page loads
-    window.addEventListener('DOMContentLoaded', function () {
-      var sidebarLayer = document.getElementById("sidebar-layer");
-      sidebarLayer.classList.remove("slide-from-right");
-    });
-    // End of Toggle Right Sidebar
-
+    // function openGitHubLink() {
+    //   var cardWidth = 300;
+    //   var cardHeight = 200;
+    //   var left = (window.innerWidth - cardWidth) / 2;
+    //   var top = (window.innerHeight - cardHeight) / 2;
+    //   window.open('https://lanzrodrigo.github.io/', '_blank',
+    //     `width=${cardWidth},height=${cardHeight},left=${left},top=${top}`);
+    // }
 
     var fileUploaders = new L.FeatureGroup();
     map.addLayer(fileUploaders);
@@ -889,8 +824,22 @@
       button.classList.toggle("active");
     }
 
+    // Floating Card
+    document.getElementById('right-bar').addEventListener('click', function () {
+      this.classList.toggle('open');
+      toggleSidebar();
+    });
+
+    function toggleSidebar() {
+      var floatingCard = document.getElementById('floating-card');
+      floatingCard.classList.toggle('active');
+
+      var rightBar = document.getElementById('right-bar');
+      rightBar.classList.toggle('active');
+    }
 
 
+    // End of Floating Card
 
     // Clear Sidebar Values
 
@@ -1124,7 +1073,7 @@
     };
 
     var sidebar = L.control.sidebar('sidebar').addTo(map);
-    var sidebarLayer = L.control.sidebar('sidebar-layer').addTo(map)
+    // var sidebarLayer = L.control.sidebar('sidebar-layer').addTo(map)
     var sidebarThree = L.control.sidebar('sidebar-three').addTo(map)
     var drawnItems = new L.FeatureGroup().addTo(map);
 
@@ -1134,14 +1083,9 @@
     var mainSidebar = document.getElementById('sidebar');
 
     // Get references to the buttons
-    var layersButton = document.querySelector('#layers button');
+    // var layersButton = document.querySelector('#layers button');
     var suitabilityButton = document.querySelector('#suitability button');
     var threeButton = document.querySelector('#three button');
-
-    // Add click event listeners to the buttons
-    layersButton.addEventListener('click', function () {
-      closeOtherSidebars(layerSidebar, threeSidebar, mainSidebar);
-    });
 
     suitabilityButton.addEventListener('click', function () {
       closeOtherSidebars(suitabilityButton.parentNode, threeSidebar, mainSidebar);
@@ -1306,34 +1250,34 @@
         return;
       }
 
-      
+
 
       var layer = L.geoJSON(geojson, {
         onEachFeature: function (feature, layer) {
-            if (!layer._defaultShape || !layer.getLatLngs) {
-              console.error('Layer is not a valid shape');
-              return;
-            }
-            const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
-              layer
-              ._defaultShape() : layer.getLatLngs())), true);
-            const name = feature.properties.name || 'Unnamed feature';
-            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
-          },
-          style: {
-            color: 'yellow',
-            clickable: true,
-            fillOpacity: .1,
-            fillColor: '#fff'
-          },
-          pointToLayer: function (data, latlng) {
-            return L.circleMarker(latlng, {
-              style: {
-                color: 'yellow'
-              }
-            });
+          if (!layer._defaultShape || !layer.getLatLngs) {
+            console.error('Layer is not a valid shape');
+            return;
           }
-        });
+          const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+            layer
+            ._defaultShape() : layer.getLatLngs())), true);
+          const name = feature.properties.name || 'Unnamed feature';
+          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+        },
+        style: {
+          color: 'yellow',
+          clickable: true,
+          fillOpacity: .1,
+          fillColor: '#fff'
+        },
+        pointToLayer: function (data, latlng) {
+          return L.circleMarker(latlng, {
+            style: {
+              color: 'yellow'
+            }
+          });
+        }
+      });
       // Overlay the uploaded layer on the map
       layer.addTo(map);
       map.fitBounds(layer.getBounds());
@@ -2372,237 +2316,245 @@
 
     // Display the GHI Map with identify function
 
-    // //Display filename for shapefile input
-    // function displayFileName() {
-    //   var fileInput = document.getElementById('fileInput');
-    //   var fileNameSpan = document.getElementById('fileName');
-    //   fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
-    // }
+    //Display filename for shapefile input
+    function displayFileName() {
+      var fileInput = document.getElementById('fileInput');
+      var fileNameSpan = document.getElementById('fileName');
+      fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+    }
 
-    // //Create map values for GHI and WS
-    // map.createPane('GHIValues');
-    // map.getPane('GHIValues').style.zIndex = 102;
+    //Create map values for GHI and WS
+    map.createPane('GHIValues');
+    map.getPane('GHIValues').style.zIndex = 102;
 
-    // var url_to_geotiff_GHI_files = "https://czrxstrd4.github.io/avemn/GHI.tif";
+    var url_to_geotiff_GHI_files = "https://czrxstrd4.github.io/avemn/GHI.tif";
 
-    // var GHIValuesLayer; // Declare GHIValuesLayer variable
+    var GHIValuesLayer; // Declare GHIValuesLayer variable
 
-    // fetch(url_to_geotiff_GHI_files)
-    //   .then(response => response.arrayBuffer())
-    //   .then(arrayBuffer => {
-    //     parseGeoraster(arrayBuffer).then(georaster => {
+    fetch(url_to_geotiff_GHI_files)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
 
-    //       const min = georaster.mins[0];
-    //       const max = georaster.maxs[0];
-    //       const range = georaster.ranges[0];
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
 
-    //       var scale = chroma.scale("Viridis");
+          console.log("max:", max);
+          console.log("min:", min);
+          console.log("range:", range);
 
-    //       GHIValuesLayer = new GeoRasterLayer({
-    //         georaster: georaster,
-    //         opacity: 0.4,
-    //         pane: 'GHIValues',
-    //         pixelValuesToColorFn: function (pixelValues) {
-    //           var pixelValue = pixelValues[0];
+          var scale = chroma.scale("Viridis");
 
-    //           if (pixelValue === 0) return null;
+          GHIValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.4,
+            pane: 'GHIValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
 
-    //           var scaledPixelValue = (pixelValue - min) / range;
+              if (pixelValue === 0) return null;
 
-    //           var color = scale(scaledPixelValue).hex();
+              var scaledPixelValue = (pixelValue - min) / range;
 
-    //           return color;
-    //         }
-    //       });
+              var color = scale(scaledPixelValue).hex();
 
-    //       // Toggle popups based on checkbox state
-    //       var toggleCheckbox = document.getElementById('toggleCheckbox');
-    //       toggleCheckbox.addEventListener('change', function () {
-    //         togglePopups();
-    //       });
+              return color;
+            }
+          });
 
-    //       // Create popup
-    //       function handleMapClick(e) {
-    //         var popupss = L.popup();
+          // Toggle popups based on checkbox state
+          var toggleCheckbox = document.getElementById('toggleCheckbox');
+          toggleCheckbox.addEventListener('change', function () {
+            togglePopups();
+          });
 
-    //         var latlng = e.latlng;
+          // Create popup
+          function handleMapClick(e) {
+            var popupss = L.popup();
 
-    //         var identifyResultGHIs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-    //         var GHIValues = (identifyResultGHIs / 1000) * 1000;
+            var latlng = e.latlng;
 
-    //         popupss
-    //           .setLatLng(latlng)
-    //           .setContent("GHI: " + GHIValues.toFixed(2) + " kWh/m²")
-    //           .openOn(map);
-    //       }
+            var identifyResultGHIs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+            var GHIValues = (identifyResultGHIs / 1000) * 1000;
 
-
-    //       function togglePopups() {
-    //         if (GHIValuesLayer) {
-    //           if (map.hasLayer(GHIValuesLayer)) {
-    //             map.removeLayer(GHIValuesLayer);
-    //             map.off('click', handleMapClick);
-    //           } else {
-    //             map.addLayer(GHIValuesLayer);
-    //             map.on('click', handleMapClick);
-    //           }
-    //         }
-    //       }
-
-    //     });
-    //   });
-
-    // // Display the Wind Map with identify function
-    // map.createPane('WSValues');
-    // map.getPane('WSValues').style.zIndex = 102;
-
-    // var url_to_geotiff_WS_files = "https://czrxstrd4.github.io/avemn/WS.tif";
-
-    // var WSValuesLayer; // Declare WSValuesLayer variable
-
-    // fetch(url_to_geotiff_WS_files)
-    //   .then(response => response.arrayBuffer())
-    //   .then(arrayBuffer => {
-    //     parseGeoraster(arrayBuffer).then(georaster => {
-
-    //       const min = georaster.mins[0];
-    //       const max = georaster.maxs[0];
-    //       const range = georaster.ranges[0];
-
-    //       var scale = chroma.scale("YlGnBu");
-
-    //       WSValuesLayer = new GeoRasterLayer({
-    //         georaster: georaster,
-    //         opacity: 0.6,
-    //         resolution: 80,
-    //         pane: 'WSValues',
-    //         pixelValuesToColorFn: function (pixelValues) {
-    //           var pixelValue = pixelValues[0];
-    //           if (pixelValue === 0) return null;
-    //           var scaledPixelValue = (pixelValue - min) / range;
-    //           var color = scale(scaledPixelValue).hex();
-    //           return color;
-    //         }
-    //       });
-
-    //       // Toggle popups based on checkbox state
-    //       var WStoggleCheckbox = document.getElementById('WStoggleCheckbox');
-    //       WStoggleCheckbox.addEventListener('change', function () {
-    //         togglePopups();
-    //       });
-
-    //       // Create popup
-    //       function handleMapClick(e) {
-    //         var popupss = L.popup();
-    //         var latlng = e.latlng;
-    //         var identifyResultWSs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-    //         var WSValues = (identifyResultWSs / 1000) * 1000;
-
-    //         if (WSValues > 0) {
-    //           popupss
-    //             .setLatLng(latlng)
-    //             .setContent("Wind Speed: " + WSValues.toFixed(2) + " m/s")
-    //             .openOn(map);
-    //         } else {
-    //           popupss
-    //             .setLatLng(latlng)
-    //             .setContent("Wind Speed: NaN m/s")
-    //             .openOn(map);
-    //         }
-    //       }
-
-    //       function togglePopups() {
-    //         if (WSValuesLayer) {
-    //           if (map.hasLayer(WSValuesLayer)) {
-    //             map.removeLayer(WSValuesLayer);
-    //             map.off('click', handleMapClick);
-    //           } else {
-    //             map.addLayer(WSValuesLayer);
-    //             map.on('click', handleMapClick);
-    //           }
-    //         }
-    //       }
-    //     });
-    //   });
-
-    // // Display the Slope Map with identify function
-    // map.createPane('SLPValues');
-    // map.getPane('SLPValues').style.zIndex = 103;
-
-    // var url_to_geotiff_SLP_files = "https://czrxstrd4.github.io/avemn/SLP.tif";
-
-    // var SLPValuesLayer; // Declare WSValuesLayer variable
-
-    // fetch(url_to_geotiff_SLP_files)
-    //   .then(response => response.arrayBuffer())
-    //   .then(arrayBuffer => {
-    //     parseGeoraster(arrayBuffer).then(georaster => {
-    //       const min = georaster.mins[0];
-    //       const max = georaster.maxs[0];
-    //       const range = georaster.ranges[0];
-
-    //       var scale = chroma.scale("YlGnBu");
-
-    //       SLPValuesLayer = new GeoRasterLayer({
-    //         georaster: georaster,
-    //         opacity: 0.8,
-    //         resolution: 80,
-    //         pane: 'SLPValues',
-    //         pixelValuesToColorFn: function (pixelValues) {
-    //           var pixelValue = pixelValues[0];
-    //           if (pixelValue === 0) return "none"; // Return "none" for transparent color
-
-    //           var maxSlope = 45; // Maximum slope value
-    //           var minColor = chroma('#fdf0d5'); // Color for lower slope values
-    //           var maxColor = chroma('#780000'); // Color for higher slope values
-
-    //           // Calculate the color based on the slope value
-    //           var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
-
-    //           return color;
-    //         }
-    //       });
-
-    //       // Toggle popups based on checkbox state
-    //       var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
-    //       SLPtoggleCheckbox.addEventListener('change', function () {
-    //         togglePopups();
-    //       });
+            popupss
+              .setLatLng(latlng)
+              .setContent("GHI: " + GHIValues.toFixed(2) + " kWh/m²")
+              .openOn(map);
+          }
 
 
-    //       // Create popup
-    //       function handleMapClick(e) {
-    //         var popupss = L.popup();
-    //         var latlng = e.latlng;
-    //         var identifyResultSLPs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
-    //         var SLPValues = (identifyResultSLPs / 1000) * 1000;
+          function togglePopups() {
+            if (GHIValuesLayer) {
+              if (map.hasLayer(GHIValuesLayer)) {
+                map.removeLayer(GHIValuesLayer);
+                map.off('click', handleMapClick);
+              } else {
+                map.addLayer(GHIValuesLayer);
+                map.on('click', handleMapClick);
+              }
+            }
+          }
 
-    //         if (SLPValues > 0) {
-    //           popupss
-    //             .setLatLng(latlng)
-    //             .setContent("Slope: " + SLPValues.toFixed(2) + " %")
-    //             .openOn(map);
-    //         } else {
-    //           popupss
-    //             .setLatLng(latlng)
-    //             .setContent("Slope: NaN m/s")
-    //             .openOn(map);
-    //         }
-    //       }
+        });
+      });
 
-    //       function togglePopups() {
-    //         if (SLPValuesLayer) {
-    //           if (map.hasLayer(SLPValuesLayer)) {
-    //             map.removeLayer(SLPValuesLayer);
-    //             map.off('click', handleMapClick);
-    //           } else {
-    //             map.addLayer(SLPValuesLayer);
-    //             map.on('click', handleMapClick);
-    //           }
-    //         }
-    //       }
-    //     });
-    //   });
+    // Display the Wind Map with identify function
+    map.createPane('WSValues');
+    map.getPane('WSValues').style.zIndex = 102;
+
+    var url_to_geotiff_WS_files = "https://czrxstrd4.github.io/avemn/WS.tif";
+
+    var WSValuesLayer; // Declare WSValuesLayer variable
+
+    fetch(url_to_geotiff_WS_files)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
+
+          console.log("max:", max);
+          console.log("min:", min);
+          console.log("range:", range);
+
+          var scale = chroma.scale("YlGnBu");
+
+          WSValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.6,
+            resolution: 80,
+            pane: 'WSValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
+              if (pixelValue === 0) return null;
+              var scaledPixelValue = (pixelValue - min) / range;
+              var color = scale(scaledPixelValue).hex();
+              return color;
+            }
+          });
+
+          // Toggle popups based on checkbox state
+          var WStoggleCheckbox = document.getElementById('WStoggleCheckbox');
+          WStoggleCheckbox.addEventListener('change', function () {
+            togglePopups();
+          });
+
+          // Create popup
+          function handleMapClick(e) {
+            var popupss = L.popup();
+            var latlng = e.latlng;
+            var identifyResultWSs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+            var WSValues = (identifyResultWSs / 1000) * 1000;
+
+            if (WSValues > 0) {
+              popupss
+                .setLatLng(latlng)
+                .setContent("Wind Speed: " + WSValues.toFixed(2) + " m/s")
+                .openOn(map);
+            } else {
+              popupss
+                .setLatLng(latlng)
+                .setContent("Wind Speed: NaN m/s")
+                .openOn(map);
+            }
+          }
+
+          function togglePopups() {
+            if (WSValuesLayer) {
+              if (map.hasLayer(WSValuesLayer)) {
+                map.removeLayer(WSValuesLayer);
+                map.off('click', handleMapClick);
+              } else {
+                map.addLayer(WSValuesLayer);
+                map.on('click', handleMapClick);
+              }
+            }
+          }
+        });
+      });
+
+    // Display the Slope Map with identify function
+    map.createPane('SLPValues');
+    map.getPane('SLPValues').style.zIndex = 103;
+
+    var url_to_geotiff_SLP_files = "https://czrxstrd4.github.io/avemn/SLP.tif";
+
+    var SLPValuesLayer; // Declare WSValuesLayer variable
+
+    fetch(url_to_geotiff_SLP_files)
+      .then(response => response.arrayBuffer())
+      .then(arrayBuffer => {
+        parseGeoraster(arrayBuffer).then(georaster => {
+          const min = georaster.mins[0];
+          const max = georaster.maxs[0];
+          const range = georaster.ranges[0];
+
+          var scale = chroma.scale("YlGnBu");
+
+          SLPValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.8,
+            resolution: 80,
+            pane: 'SLPValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
+              if (pixelValue === 0) return "none"; // Return "none" for transparent color
+
+              var maxSlope = 45; // Maximum slope value
+              var minColor = chroma('#fdf0d5'); // Color for lower slope values
+              var maxColor = chroma('#780000'); // Color for higher slope values
+
+              // Calculate the color based on the slope value
+              var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
+
+              return color;
+            }
+          });
+
+          // Toggle popups based on checkbox state
+          var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
+          SLPtoggleCheckbox.addEventListener('change', function () {
+            togglePopups();
+          });
+
+
+          // Create popup
+          function handleMapClick(e) {
+            var popupss = L.popup();
+            var latlng = e.latlng;
+            var identifyResultSLPs = geoblaze.identify(georaster, [latlng.lng, latlng.lat]);
+            var SLPValues = (identifyResultSLPs / 1000) * 1000;
+
+            if (SLPValues > 0) {
+              popupss
+                .setLatLng(latlng)
+                .setContent("Slope: " + SLPValues.toFixed(2) + " %")
+                .openOn(map);
+            } else {
+              popupss
+                .setLatLng(latlng)
+                .setContent("Slope: NaN m/s")
+                .openOn(map);
+            }
+          }
+
+          function togglePopups() {
+            if (SLPValuesLayer) {
+              if (map.hasLayer(SLPValuesLayer)) {
+                map.removeLayer(SLPValuesLayer);
+                map.off('click', handleMapClick);
+              } else {
+                map.addLayer(SLPValuesLayer);
+                map.on('click', handleMapClick);
+              }
+            }
+          }
+        });
+      });
 
 
     // End of create map layer for GHI & WS
@@ -2810,7 +2762,7 @@
                                     .dataIndex];
 
                                 // Return the label string for the tooltip
-                                return `Area (has.): ${multipliedValue}, Coverage: ${percentage}%`;
+                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
                               }
                             }
                           }
