@@ -440,3 +440,9 @@ body {
 .sidebar-calc.open {
   left: 50px;
 }
+
+#settings-button {
+  position: absolute;
+  top: 700px; /* Adjust the top position in pixels */
+  left: 2px; /* Adjust the left position in pixels */
+}
