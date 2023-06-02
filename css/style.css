@@ -10,6 +10,12 @@ body {
   overflow: hidden;
 }
 
+.map-container {
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
 .header {
   background-color: #001d3d;
   /* background: linear-gradient(to right, #001d3d, #164575); */
@@ -355,6 +361,18 @@ body {
   z-index: 9999;
 }
 
+/* .sidemenu {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 30px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+} */
+
+
 #sidemenu.expanded {
   width: 150px;
 }
@@ -387,15 +405,15 @@ body {
  /* top: 20px; */
  border-radius: 8px;
 }
-.sidebar-pane {
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-
 
 .sidebar-open {
   transform: translateX(0); /* Show the sidebar when it has the "sidebar-open" class */
 }
+
+.sidebar-pane {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
 .measure-container, .draw-container {
   display: flex;
   align-items: center;
