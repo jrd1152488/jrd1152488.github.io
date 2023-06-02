@@ -1699,5 +1699,5 @@
 }, function (e, t, r) {
     e.exports = '<h3>Linear measurement</h3> <p>{{ model.lengthDisplay }}</p> <ul class=tasks> <li><a href=# class="js-zoomto zoomto">Center on this line</a></li> <li><a href=# class="js-deletemarkup deletemarkup">Delete</a></li> </ul> '
 }, function (e, t, r) {
-    e.exports = '<h3>Area measurement</h3> <p>{{ model.areaDisplay }}</p> <p>{{ model.lengthDisplay }} Perimeter</p> <ul class=tasks> <li><a href=# class="js-zoomto zoomto">Center on this area</a></li> <li><a href=# class="js-deletemarkup deletemarkup">Delete</a></li> </ul> '
+    e.exports = '<h3>Area measurement</h3> <p>Area: {{ model.areaDisplay }}</p> <p>Perimeter: {{ model.lengthDisplay }} </p> <ul class=tasks> <li><a href=# class="js-zoomto zoomto">Center on this area</a></li> <li><a href=# class="js-deletemarkup deletemarkup">Delete</a></li> </ul> '
 }]);

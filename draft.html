@@ -1,0 +1,274 @@
+<div id="sidebar-layer" class="sidebar-layer">
+    <div class="container"></div>
+    <div class="container custom-scrollbar">
+      <div class="sidebar-tabs">
+        <div class="sidebar-pane" id="geotiff">
+          <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+            <i class="fa-solid fa-calculator sbheader-icon"></i>
+            <span class="sbheader-text">Layer Selection</span>
+          </h1>
+          <div class="d-flex flex-column" style="margin-bottom: 5px;">
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
+                onchange="toggleLayer('layer_GoogleMapsSatellite_1', this.checked)" checked>
+              <label class="form-check-label" for="googSat">Satellite</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
+                onchange="toggleLayer('layer_GoogleSatelliteHybrid_1', this.checked)">
+              <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
+                onchange="toggleLayer('layer_GoogleMapsBasic_0', this.checked)">
+              <label class="form-check-label" for="GoogBase">Base Map</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
+                onchange="toggleLayer('layer_planetNICFI', this.checked)">
+              <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
+            </div>
+          </div>
+
+          <!-- Tile Layers -->
+          <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
+            <i class="fa-solid fa-tiles sbheader-icon"></i>
+            <span class="sbheader-text">Tile Layers</span>
+          </h1>
+
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+              <label class="form-check-label" for="group1">Solar Suitability</label>
+            </div>
+            <div class="nested-checkboxes">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-GHISLP"
+                  onchange="toggleTileLayer(layer_GHISLP, this.checked)">
+                <label class="form-check-label" for="chk-GHISLP">GHISLP</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
+                  onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
+                <label class="form-check-label" for="chk-IRDGHI">IRDGHI</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
+                  onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
+                <label class="form-check-label" for="chk-SLPSLR">SLPSLR</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+              <label class="form-check-label" for="group1">Wind Suitability</label>
+            </div>
+            <div class="nested-checkboxes">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-WSSLP"
+                  onchange="toggleTileLayer(layer_WSSLP, this.checked)">
+                <label class="form-check-label" for="chk-WSSLP">WSSLP</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-WS"
+                  onchange="toggleTileLayer(layer_WS, this.checked)">
+                <label class="form-check-label" for="chk-WS">WS</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-SLPWD"
+                  onchange="toggleTileLayer(layer_SLPWD, this.checked)">
+                <label class="form-check-label" for="chk-SLPWD">SLPWD</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group1" onchange="toggleMainNest(this, 'group1')">
+              <label class="form-check-label" for="group1">Slope Industry</label>
+            </div>
+            <div class="nested-checkboxes">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-SLP"
+                  onchange="toggleTileLayer(layer_SLP, this.checked)">
+                <label class="form-check-label" for="chk-SLP">SLP</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+              <label class="form-check-label" for="group4">Area Restrictions</label>
+            </div>
+            <div class="nested-checkboxes ml-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
+                  onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
+                <label class="form-check-label" for="chk-ServiceContractMap_1">Service Contract Map</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
+                  onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
+                <label class="form-check-label" for="chk-AncestralDomain_3">Ancestral Domains</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
+                  onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
+                <label class="form-check-label" for="chk-ProtectedAreas_4">Protected Areas</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
+                  onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
+                <label class="form-check-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group4" onchange="toggleGroup(this, 'group4')">
+              <label class="form-check-label" for="group4">Area Restrictions</label>
+            </div>
+            <div class="nested-checkboxes ml-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-RVRWBS"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-RVRWBS">River and Water Bodies</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-FloodHazard_25yrs_6"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-FloodHazard_25yrs_6">Flood Hazard</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-LQFCN" onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-LQFCN">Liquefaction</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-ActiveFault_13"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-ActiveFault_13">Active Fault</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group5" onchange="toggleGroup(this, 'group5')">
+              <label class="form-check-label" for="group5">Hazards - Volcano</label>
+            </div>
+            <div class="nested-checkboxes ml-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-Volcanoes_7">Active Volcano</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-Lahar_6"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-Lahar_6">Lahar</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-Lava_5"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-Lava_5">Lava</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
+                  Projectiles</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-TaalBufferRings_1"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-TaalBufferRings_1">Taal Buffer Rings</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group6" onchange="toggleGroup(this, 'group6')">
+              <label class="form-check-label" for="group6">Others</label>
+            </div>
+            <div class="nested-checkboxes ml-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-Seaports_14"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-Seaports_14">Seaports</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-RDS" onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-RDS">Roads</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-BarangaysMin_1">Barangay</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="group-container">
+            <div class="group-checkbox">
+              <input class="form-check-input" type="checkbox" id="group7" onchange="toggleGroup(this, 'group7')">
+              <label class="form-check-label" for="group7">Substations and Lines</label>
+            </div>
+            <div class="nested-checkboxes ml-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-ExistingTL_1">Existing Transmission Lines</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-TDPTL_2"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-TDPTL_2">Transmission and Distribution Lines</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-PlantCustomerownedSubstations_3"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-PlantCustomerownedSubstations_3">Plant Customer-owned
+                  Substations</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-69kVDULoadendSubstations_4"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-69kVDULoadendSubstations_4">69kV Distribution Utility
+                  Load-end Substations</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-500230138115kVExistingSubstations_5"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-500230138115kVExistingSubstations_5">500/230/138/11kV
+                  Existing Substations</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="chk-500230kVTDPSubstations_6"
+                  onchange="toggleNestedCheckbox(this);">
+                <label class="form-check-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP Substations</label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

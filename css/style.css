@@ -2,18 +2,13 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-    font-family: "Roboto", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
 }
+
 #map {
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-.map-container {
-  flex-grow: 1;
-  position: relative;
-  z-index: 1;
 }
 
 .header {
@@ -73,46 +68,7 @@ body {
   padding: 0;
   overflow: hidden;
 }
-/* Content */
-.content {
-  position: fixed;
-  top: 50px;
-  left: 0;
-  overflow: hidden;
-}
-
-
-
-.coordinates-input-control {
-  position: absolute;
-  width: 230px;
-  bottom: 35px;
-  left: 0px;
-  z-index: 999;
-  background-color: #fff;
-  border: 1px solid #ffffff;
-  border-radius: 0px;
-  padding: 2px;
-  box-shadow: 2px 1px 4px rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-}
-
-.coordinates-input-control input {
-  flex: 1;
-  height: 18px;
-  border: none;
-  outline: none;
-  font-size: 11.5px;
-  padding: 3px 3px 3px 24px;
-  align-items: center;
-  justify-content: center;
-  background-image: url('https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_location_on_48px-512.png');
-  background-repeat: no-repeat;
-  background-position: 1px left;
-  background-size: 16px 16px;
-}
-
+/* 
 .easy-button {
   display: inline-block;
   background-color: #4caf50;
@@ -144,65 +100,7 @@ body {
 
 .easy-button-map-raster.selected {
   background-color: green;
-}
-
-.search-container {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: none;
-  z-index: 1000;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 5px;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.search-input {
-  flex: 1;
-  height: 20px;
-  margin-right: 5px;
-  font-size: small;
-}
-
-.search-button {
-  height: 20px;
-  padding: 0 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.search-button:hover {
-  background-color: #0069d9;
-}
-
-.search-dropdown {
-  font-size: small;
-  opacity: .8;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  margin-top: 5px;
-  padding: 0;
-  list-style-type: none;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  max-height: 200px;
-  overflow-y: auto;
-  font-size: small;
-}
+} */
 
 #calculator table td {
   vertical-align: middle;
@@ -361,18 +259,6 @@ body {
   z-index: 9999;
 }
 
-/* .sidemenu {
-  position: absolute;
-  top: 0;
-  left: 0px;
-  width: 30px;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-} */
-
-
 #sidemenu.expanded {
   width: 150px;
 }
@@ -394,32 +280,45 @@ body {
 }
 
 .sidemenu-button i {
-  margin: 0; /* Remove margin to center the icon within the button */
-  font-size: 13px; /* Adjust the font-size to make the icons smaller */
-  line-height: 1; /* Adjust the line-height to vertically center the icon */
-}
-
-
-.sidebar {
- left: 50px;
- /* top: 20px; */
- border-radius: 8px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1;
 }
 
 .sidebar-open {
-  transform: translateX(0); /* Show the sidebar when it has the "sidebar-open" class */
+  transform: translateX(0);
 }
 
 .sidebar-pane {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.measure-container, .draw-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 10px;
+
+.leaflet-top.leaflet-left {
+  position: relative;
+  margin-top: 10px;
+  z-index: 9999;
+  text-align: left;
 }
+
+#drawContainer,
+#deleteAllContainer,
+#measureContainer {
+  text-align: left;
+  margin-top: 10px;
+}
+
+#drawContainer button.btn,
+#deleteAllContainer button.btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
 .group-container {
   margin-bottom: 10px;
 }
@@ -437,39 +336,33 @@ body {
   margin-left: 20px;
 }
 
-.top-right {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-/* Change the stroke color */
-.leaflet-draw-draw-polygon {
-  stroke: #00ff00 !important; /* Neon green color */
-}
-
-/* Change the fill color */
-.leaflet-draw-draw-polygon {
-  fill: #00ff00 !important; /* Neon green color */
-}
-
 .easy-button i {
   line-height: 0;
 }
 
 .floating-card {
   position: fixed;
-  top: 60px;
+  top: 70px;
   right: -300px;
   width: 300px;
-  height: calc(100% - 40px); /* Subtract the button height */
+  height: 800px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease;
   z-index: 9998;
-  overflow-y: auto; /* Add scrollbar if content exceeds height */
+  overflow-y: auto;
   padding: 20px;
 }
+
+#floating-card .sbheader-text {
+  font-size: 18px;
+}
+
+#floating-card .form-check-label {
+  font-size: 12px;
+}
+
 
 .sidebar-layer {
   padding: 20px;
@@ -477,7 +370,6 @@ body {
 
 .sidebar-header {
   margin-bottom: 20px;
-  margin-top: 30px;
 }
 
 .sbheader-icon {
@@ -485,7 +377,7 @@ body {
 }
 
 .sbheader-text {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .floating-card.active {
@@ -494,17 +386,18 @@ body {
 
 .right-buttons {
   margin-top: 50px;
-  margin-bottom: 10px; /* Add some spacing between the buttons */
+  margin-bottom: 10px;
 }
 
 .right-bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* Updated: Align center */
+  align-items: center;
   width: 40px;
   height: 40px;
   cursor: pointer;
+  margin-top: 5px;
   margin-left: auto;
   margin-right: 10px;
 }
@@ -529,4 +422,22 @@ body {
 
 .right-bar.open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+
+.sidebar-three {
+  position: fixed;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 9998;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.sidebar-three.open {
+  left: 20px;
 }
