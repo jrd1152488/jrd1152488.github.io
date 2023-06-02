@@ -106,23 +106,6 @@ body {
   vertical-align: middle;
 }
 
-.easy-button {
-  display: inline-block;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.easy-button:hover {
-  background-color: #45a049;
-}
-
 .custom-button-grid {
   display: grid;
   align-items: center;
@@ -295,8 +278,8 @@ body {
 
 
 .leaflet-top.leaflet-left {
-  position: relative;
-  margin-top: 10px;
+  position: fixed;
+  margin-top: 60px;
   z-index: 9999;
   text-align: left;
 }
@@ -336,9 +319,6 @@ body {
   margin-left: 20px;
 }
 
-.easy-button i {
-  line-height: 0;
-}
 
 .floating-card {
   position: fixed;
@@ -426,9 +406,9 @@ body {
 
 .sidebar-three {
   position: fixed;
-  left: -300px;
-  width: 300px;
-  height: 100vh;
+  left: -400px;
+  width: 400px;
+  height: 85vh;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
@@ -439,5 +419,24 @@ body {
 }
 
 .sidebar-three.open {
-  left: 20px;
+  left: 50px;
+}
+
+
+.sidebar-calc {
+  position: fixed;
+  left: -400px;
+  width: 400px;
+  height: 85vh;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease;
+  z-index: 9998;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.sidebar-calc.open {
+  left: 50px;
 }

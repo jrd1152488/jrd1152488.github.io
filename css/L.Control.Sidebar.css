@@ -125,7 +125,7 @@
   }
 
   .leaflet-sidebar.left.visible~.leaflet-left {
-    left: 460px;
+    left: 410px;
   }
 
   .leaflet-sidebar.right.visible~.leaflet-right {

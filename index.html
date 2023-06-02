@@ -66,6 +66,7 @@
   <script src="https://unpkg.com/geoblaze"></script>
   <script src="https://unpkg.com/chroma-js@2.4.2/chroma.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+  <script src="https://unpkg.com/leaflet-geometryutil"></script>
 
   <!-- Bootstrap CSS -->
 
@@ -422,19 +423,19 @@
 
   <div id="sidebar-three" class="sidebar-three">
     <!-- <div class="container"> -->
-      <div class="container custom-scrollbar">
-        <h1 class="sidebar-header common-header">
-          <i class="fa-solid fa-calculator sbheader-icon"></i>
-          <span class="sbheader-text">Layer Select</span>
-          <!-- <span class="sidebar-close"></span> -->
-        </h1>
-        <!-- Add additional content here -->
-      </div>
+    <div class="container custom-scrollbar">
+      <h1 class="sidebar-header common-header">
+        <i class="fa-solid fa-calculator sbheader-icon"></i>
+        <span class="sbheader-text">Layer Select</span>
+        <!-- <span class="sidebar-close"></span> -->
+      </h1>
+      <!-- Add additional content here -->
     </div>
+  </div>
   </div>
 
 
-  <div id="sidebar" class="sidebar" style="padding: 2px; width: 400px;">
+  <div id="sidebar-calc" class="sidebar-calc" style="padding: 2px; width: 400px;">
     <div class="container">
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
@@ -660,8 +661,8 @@
   <div class="content">
     <div id="map" style="width: 100%; height: 100%;">
 
-      <!-- <div id="sidemenu">
-        <div id="suitability" class="suitability">
+      <div id="sidemenu">
+        <!-- <div id="suitability" class="suitability">
           <button class="sidemenu-btn btn-secondary sidemenu-button">
             <i class="fas fa-chart-line"></i>
           </button>
@@ -684,8 +685,8 @@
 
         <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
           <i class="fas fa-download"></i>
-        </button>
-      </div> -->
+        </button> -->
+      </div>
 
 
 
@@ -739,10 +740,12 @@
           icon: 'fa-bars',
           title: 'Toggle Sidebar',
           onClick: function (control) {
-            sidebar.toggle();
+            var sidebar = document.getElementById('sidebar-calc');
+            sidebar.classList.toggle('open');
           }
         }]
       }).addTo(map);
+
 
 
 
@@ -758,18 +761,26 @@
         }]
       }).addTo(map);
 
-// Create the settings-card EasyButton
-L.easyButton({
-  states: [{
-    stateName: 'toggle-settings',
-    icon: 'fa-cogs',
-    title: 'Toggle Settings',
-    onClick: function (control) {
-      var sidebar = document.getElementById('sidebar-three');
-      sidebar.classList.toggle('open');
-    }
-  }]
-}).addTo(map);
+      // Create the settings-card EasyButton
+      L.easyButton({
+        id: 'settings-button',
+        states: [{
+          stateName: 'toggle-settings',
+          icon: 'fa-cogs',
+          title: 'Toggle Settings',
+          onClick: function (control) {
+            var sidebar = document.getElementById('sidebar-three');
+            sidebar.classList.toggle('open');
+          }
+        }]
+      }).addTo(map);
+
+      var easyButtonElement = document.querySelector('#settings-button.leaflet-bar');
+      if (easyButtonElement) {
+        easyButtonElement.style.position = 'absolute';
+        easyButtonElement.style.top = '800px'; // Adjust the top position in pixels
+        easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
+      }
 
 
 
@@ -790,8 +801,6 @@ L.easyButton({
 
 
 
-
-      
       var fileUploaders = new L.FeatureGroup();
       map.addLayer(fileUploaders);
 
@@ -1067,7 +1076,7 @@ L.easyButton({
         "SLP": layer_SLP
       };
 
-      var sidebar = L.control.sidebar('sidebar').addTo(map);
+      // var sidebar = L.control.sidebar('sidebar').addTo(map);
       var drawnItems = new L.FeatureGroup().addTo(map);
 
       //Hash-Autolinker
@@ -1352,7 +1361,7 @@ L.easyButton({
 
       //_____________________________________________________________________________________________________________________________________________
 
-  
+
       //_____________________________________________________________________________________________________________________________________________
 
       $(document).ready(function () {
@@ -2444,33 +2453,81 @@ L.easyButton({
       }
       //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
       // Get the upload shapefile button element
-      var uploadShapefileButton = document.getElementById('fileInput');
+      // var uploadShapefileButton = document.getElementById('fileInput');
 
-      // Add event listener to the upload shapefile button
-      uploadShapefileButton.addEventListener('change', function () {
-        if (uploadShapefileButton.files.length > 0) {
-          handleShapefile(uploadShapefileButton.files);
-        }
-      });
+      // // Add event listener to the upload shapefile button
+      // uploadShapefileButton.addEventListener('change', function () {
+      //   if (uploadShapefileButton.files.length > 0) {
+      //     handleShapefile(uploadShapefileButton.files);
+      //   }
+      // });
 
-      // Function to handle the uploaded shapefile
-      async function handleShapefile(files) {
-        var shapefile = new L.Shapefile(files[0]);
+      // // Function to handle the uploaded shapefile
+      // async function handleShapefile(files) {
+      //   var shapefile = new L.Shapefile(files[0]);
 
-        shapefile.addTo(map);
-      }
-
+      //   shapefile.addTo(map);
+      // }
 
       //--------------------------------------------------------------------GeoBlaze------------------------------------------------------------------------//
 
       // Display the GHI Map with identify function
 
       //Display filename for shapefile input
+      // function displayFileName() {
+      //   var fileInput = document.getElementById('fileInput');
+      //   var fileNameSpan = document.getElementById('fileName');
+      //   fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+      // }
+
       function displayFileName() {
         var fileInput = document.getElementById('fileInput');
         var fileNameSpan = document.getElementById('fileName');
-        fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+        var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "";
+
+        fileNameSpan.textContent = fileName;
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          var geojson = JSON.parse(e.target.result);
+
+          var layer = L.geoJSON(geojson, {
+            onEachFeature: function (feature, layer) {
+              if (!layer._defaultShape || !layer.getLatLngs) {
+                console.error('Layer is not a valid shape');
+                return;
+              }
+              const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ? layer
+                ._defaultShape() : layer.getLatLngs())), true);
+              const name = feature.properties.name || 'Unnamed feature';
+              layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+            },
+            style: {
+              color: 'yellow',
+              clickable: true,
+              fillOpacity: .1,
+              fillColor: '#fff'
+            },
+            pointToLayer: function (data, latlng) {
+              return L.circleMarker(latlng, {
+                style: {
+                  color: 'yellow'
+                }
+              });
+            }
+          });
+
+          // Overlay the uploaded layer on the map
+          layer.addTo(map);
+          map.fitBounds(layer.getBounds());
+        };
+
+        reader.readAsText(fileInput.files[0]);
       }
+
+
+
 
       //Create map values for GHI and WS
       map.createPane('GHIValues');
