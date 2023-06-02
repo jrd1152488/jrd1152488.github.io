@@ -151,43 +151,49 @@
     </div>
   </div>
 
-  <div id="sidemenu">
-    <div class="sidemenu">
+  <div id="right-menu">
     <div id="layers" class="layers">
       <button class="sidemenu-btn btn-primary sidemenu-button">
         <i class="fas fa-layer-group"></i>
       </button>
     </div>
-
-    <div id="suitability" class="suitability">
-      <button class="sidemenu-btn btn-secondary sidemenu-button">
-        <i class="fas fa-chart-line"></i>
-      </button>
-    </div>
-    <div id="three" class="three">
-      <button class="sidemenu-btn btn-light sidemenu-button">
-        <i class="fas fa-cog"></i>
-      </button>
-    </div>
-
-    <hr class="sidebar-spacer">
-
-    <button id="uploadButton" class="sidemenu-btn btn-light sidemenu-button">
-      <i class="fas fa-file-import"></i>
-    </button>
-
-    <button id="deleteAllButton" class="sidemenu-btn btn-light sidemenu-button">
-      <i class="fas fa-trash"></i>
-    </button>
-
-    <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
-      <i class="fas fa-download"></i>
-    </button>
-  </div>
   </div>
 
 
-  <div id="sidebar-layer" class="sidebar-layer" style="width: 300px; padding: 1px;">
+
+  <div id="sidemenu">
+    <div class="sidemenu">
+
+
+      <div id="suitability" class="suitability">
+        <button class="sidemenu-btn btn-secondary sidemenu-button">
+          <i class="fas fa-chart-line"></i>
+        </button>
+      </div>
+      <div id="three" class="three">
+        <button class="sidemenu-btn btn-light sidemenu-button">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+
+      <hr class="sidebar-spacer">
+
+      <button id="uploadButton" class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-file-import"></i>
+      </button>
+
+      <button id="deleteAllButton" class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-trash"></i>
+      </button>
+
+      <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
+        <i class="fas fa-download"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <div id="sidebar-layer" class="sidebar-layer slide-from-right" style="width: 300px; padding: 1px;">
     <div class="container">
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
@@ -840,6 +846,22 @@
         `width=${cardWidth},height=${cardHeight},left=${left},top=${top}`);
     }
 
+    document.getElementById('layers').addEventListener('click', toggleRightSidebar);
+
+    // Toggle Right Sidebar
+    function toggleRightSidebar() {
+      var sidebarLayer = document.getElementById("sidebar-layer");
+      sidebarLayer.classList.toggle("slide-from-right");
+    }
+
+    // Hide the sidebar when the page loads
+    window.addEventListener('DOMContentLoaded', function () {
+      var sidebarLayer = document.getElementById("sidebar-layer");
+      sidebarLayer.classList.remove("slide-from-right");
+    });
+    // End of Toggle Right Sidebar
+
+
     var fileUploaders = new L.FeatureGroup();
     map.addLayer(fileUploaders);
 
@@ -866,6 +888,9 @@
       var button = document.getElementById(buttonId);
       button.classList.toggle("active");
     }
+
+
+
 
     // Clear Sidebar Values
 
@@ -1281,10 +1306,34 @@
         return;
       }
 
-      var layer = L.geoJSON(geojson, {
-        // Specify the style and behavior of the uploaded layer
-      });
+      
 
+      var layer = L.geoJSON(geojson, {
+        onEachFeature: function (feature, layer) {
+            if (!layer._defaultShape || !layer.getLatLngs) {
+              console.error('Layer is not a valid shape');
+              return;
+            }
+            const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+              layer
+              ._defaultShape() : layer.getLatLngs())), true);
+            const name = feature.properties.name || 'Unnamed feature';
+            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+          },
+          style: {
+            color: 'yellow',
+            clickable: true,
+            fillOpacity: .1,
+            fillColor: '#fff'
+          },
+          pointToLayer: function (data, latlng) {
+            return L.circleMarker(latlng, {
+              style: {
+                color: 'yellow'
+              }
+            });
+          }
+        });
       // Overlay the uploaded layer on the map
       layer.addTo(map);
       map.fitBounds(layer.getBounds());

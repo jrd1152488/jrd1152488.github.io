@@ -2,17 +2,142 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-    font-family: "Roboto", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
 }
+
 #map {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  transition: transform 0.5s; /* Add transition property */
 }
 
+.sidebar-header {
+  display: flex;
+  align-items: center;
+}
+
+.sbheader-icon {
+  display: inline-block;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.sbheader-text {
+  font-size: 22px;
+}
+
+#right-menu {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+}
+
+.sidebar-layer {
+  border-radius: 8px;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  transform: translateX(100%); /* Start with sidebar hidden */
+  transition: transform 0.5s; /* Add transition property */
+}
+
+.sidebar-layer.slide-from-right {
+  animation: slideFromRight 0.5s ease-in-out forwards;
+}
+
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sidebar {
+  border-radius: 8px;
+}
+
+.sidebar-pane {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar-open {
+  transform: translateX(-300px); /* Move the map to the left when left sidebar is open */
+}
+
+.sidebar-open .sidebar-layer {
+  transform: translateX(0); /* Keep the sidebar-layer in place when sidebar is open */
+}
+
+.sidebar-open-right {
+  transform: translateX(300px); /* Move the map to the right when right sidebar is open */
+  animation: slideFromRight 0.5s ease-in-out forwards;
+}
+
+.sidebar-open-right .sidebar-layer {
+  transform: translateX(0); /* Keep the sidebar-layer in place when sidebar is open */
+}
+
+.sidemenu {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: 100vh;
+  width: 50px;
+  transition: width 0.5s;
+  background-color: transparent;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9999;
+}
+
+#sidemenu {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  height: 100vh;
+  width: 50px;
+  transition: width 0.5s;
+  background-color: rgba(255, 255, 255, 0.3); /* Transparent background */
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9999;
+}
+
+#sidemenu.expanded {
+  width: 150px;
+}
+
+.sidemenu-button {
+  margin-top: 20px;
+  width: 30px; /* Set width and height to desired square dimensions */
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  padding: 0; /* Remove padding to make it a square button */
+}
+
+.sidemenu-button i {
+  margin: 0; /* Remove margin to center the icon within the button */
+  font-size: 14px; /* Adjust the font-size to make the icons smaller */
+  line-height: 1; /* Adjust the line-height to vertically center the icon */
+}
+
+/* Header Group */
 .header {
   background-color: #001d3d;
-  /* background: linear-gradient(to right, #001d3d, #164575); */
   color: white;
   display: flex;
   align-items: center;
@@ -22,8 +147,6 @@ body {
   left: 0;
   width: 100%;
   z-index: 9999;
-  display: flex;
-  align-items: center;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -57,7 +180,6 @@ body {
   margin-left: auto;
 }
 
-
 .content {
   position: absolute;
   top: 50px;
@@ -67,16 +189,6 @@ body {
   padding: 0;
   overflow: hidden;
 }
-/* Content */
-.content {
-  position: fixed;
-  top: 50px;
-  left: 0;
-  /* height: 100vh; */
-  overflow: hidden;
-}
-
-
 
 .coordinates-input-control {
   position: absolute;
@@ -140,7 +252,6 @@ body {
 .easy-button-map-raster.selected {
   background-color: green;
 }
-
 .search-container {
   position: absolute;
   top: 10px;
@@ -303,9 +414,7 @@ body {
   }
 }
 
-
-
-/* custom scrollbar */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 20px;
 }
@@ -326,101 +435,14 @@ body {
 }
 
 
-.sidebar-header {
-  display: flex;
-  align-items: center;
-}
-
-.sbheader-icon {
-  display: inline-block;
-  font-size: 24px;
-  margin-right: 10px;
-}
-
-.sbheader-text {
-  font-size: 22px;
-}
-
-.sidemenu {
-  position: fixed;
-  top: 50px;
-  left: 0;
-  height: 100vh;
-  width: 50px;
-  transition: width 0.5s;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 9999;
-}
-
-#sidemenu {
-  position: fixed;
-  top: 50px;
-  left: 0;
-  height: 100vh;
-  width: 50px;
-  transition: width 0.5s;
-  background-color: rgba(255, 255, 255, 0.3); /* Transparent background */
-  /* color: #fff; */
-  padding: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 9999;
-}
-
-#sidemenu.expanded {
-  width: 150px;
-}
-
-.sidemenu-button {
-  margin-top: 20px;
-  /* margin-bottom: 10px; */
-  width: 30px; /* Set width and height to desired square dimensions */
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: 8px;
-  padding: 0; /* Remove padding to make it a square button */
-}
-
-.sidemenu-button i {
-  margin: 0; /* Remove margin to center the icon within the button */
-  font-size: 14px; /* Adjust the font-size to make the icons smaller */
-  line-height: 1; /* Adjust the line-height to vertically center the icon */
-}
-
-.sidebar {
- /* left: 50px; */
- /* top: 20px; */
- border-radius: 8px;
-}
-.sidebar-layer {
-  /* left: 50px; */
-  /* top: 20px; */
-  border-radius: 8px;
-  
- }
-.sidebar-pane {
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-
-
-.sidebar-open {
-  transform: translateX(0); /* Show the sidebar when it has the "sidebar-open" class */
-}
-.measure-container, .draw-container {
+.measure-container,
+.draw-container {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 10px;
 }
+
 .group-container {
   margin-bottom: 10px;
 }
@@ -443,13 +465,9 @@ body {
   top: 10px;
   right: 10px;
 }
-/* Change the stroke color */
+
 .leaflet-draw-draw-polygon {
   stroke: #00ff00 !important; /* Neon green color */
-}
-
-/* Change the fill color */
-.leaflet-draw-draw-polygon {
   fill: #00ff00 !important; /* Neon green color */
 }
 
@@ -457,7 +475,7 @@ body {
   height: 300px;
 }
 
-element.style {
+.element.style {
   display: block;
   box-sizing: border-box;
   height: 200px;
