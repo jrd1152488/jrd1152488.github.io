@@ -23,8 +23,6 @@ body {
   left: 0;
   width: 100%;
   z-index: 9999;
-  display: flex;
-  align-items: center;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -450,11 +448,14 @@ body {
 
 /* Search bar */
 .search-bar {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the search bar horizontally */
-  height: 30px; /* Adjust the height as desired */
+  justify-content: center;
+  height: 20px; /* Adjust the height as desired */
   padding: 0; /* Remove padding */
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 .form-select {
@@ -470,6 +471,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center; /* Center the text horizontally within the button */
-  height: 30px;
+  height: 40px;
   /* padding: 0 10px; */
 }
