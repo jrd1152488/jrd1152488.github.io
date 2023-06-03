@@ -446,3 +446,30 @@ body {
   top: 700px; /* Adjust the top position in pixels */
   left: 2px; /* Adjust the left position in pixels */
 }
+
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the search bar horizontally */
+  height: 30px; /* Adjust the height as desired */
+  padding: 0; /* Remove padding */
+}
+
+.form-select {
+  width: 100px;
+
+}
+
+.form-control {
+  width: 300px;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the text horizontally within the button */
+  height: 30px;
+  /* padding: 0 10px; */
+}
