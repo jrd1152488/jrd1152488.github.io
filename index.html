@@ -568,9 +568,9 @@
 
             <!-- Raster Calculator -->
             <div class="sidebar-pane" id="geotiff">
-              <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;">
-                <i class="fa-solid fa-calculator sbheader-icon"></i>
-                <span class="sbheader-text">Suitability Calculator</span>
+              <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;;">
+                <i class="fa-solid fa-layer-group sbheader-icon"></i>
+                <span style="font-size: 22px;" class="sbheader-text">Area Suitability</span>
               </h1>
 
               <div style="display: flex; justify-content: space-between;">
@@ -592,130 +592,120 @@
                 <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
                   <div class="loading-bar"></div>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center;">
-                  <div class="card" style="width: 24rem;">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">
-                        <p><i class="fa-regular fa-sun custom-icon"></i>
-                          <span class="custom-heading">Irradiance:</span>
-                        </p>
-                        <span id="GHIstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-wind custom-icon"></i>
-                          <span class="custom-heading">Wind
-                            Speed:</span>
-                        </p>
-                        <span id="WSstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-mountain custom-icon"></i>
-                          <span class="custom-heading">Slope:</span>
-                        </p>
-                        <span id="SLPstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-compass custom-icon"></i>
-                          <span class="custom-heading">Azimuth:</span>
-                        </p>
-                        <span id="Azmtstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-file-contract custom-icon"></i>
-                          <span class="custom-heading">Service
-                            Contract:</span></p>
-                        <span id="SCstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-earth-asia custom-icon"></i>
-                          <span class="custom-heading">Ancestral
-                            Domains:</span></p>
-                        <span id="ADstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-water custom-icon"></i>
-                          <span class="custom-heading">Irrigated
-                            Land:</span></p>
-                        <span id="Irgtnstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-kiwi-bird custom-icon"></i>
-                          <span class="custom-heading">Protected
-                            Areas:</span></p>
-                        <span id="PrtdArsstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-house-crack custom-icon"></i>
-                          <span class="custom-heading">Active
-                            Fault:</span></p>
-                        <span id="Fltstatisticss" class="custom-text"></span>
-                      </li>
-                      <li class="list-group-item">
-                        <p><i class="fa-solid fa-triangle-exclamation custom-icon"></i>
-                          <span class="custom-heading">Floods:</span></p>
-                        <span id="FldBistatisticss" class="custom-text"></span>
-                      </li>
-                    </ul>
+                <div class="suitability-content">
+                  <div style="display: flex; justify-content: left; align-items: center; font-size: 12px;">
+                    <div class="card" style="width: 24rem;">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                          <p><i class="fa-regular fa-sun custom-icon"></i>
+                            <span class="custom-heading">Irradiance:</span>
+                          </p>
+                          <span id="GHIstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-wind custom-icon"></i>
+                            <span class="custom-heading">Wind Speed:</span>
+                          </p>
+                          <span id="WSstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-mountain custom-icon"></i>
+                            <span class="custom-heading">Slope:</span>
+                          </p>
+                          <span id="SLPstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-compass custom-icon"></i>
+                            <span class="custom-heading">Azimuth:</span>
+                          </p>
+                          <span id="Azmtstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-file-contract custom-icon"></i>
+                            <span class="custom-heading">Service Contract:</span></p>
+                          <span id="SCstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-earth-asia custom-icon"></i>
+                            <span class="custom-heading">Ancestral Domains:</span></p>
+                          <span id="ADstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-water custom-icon"></i>
+                            <span class="custom-heading">Irrigated Land:</span></p>
+                          <span id="Irgtnstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-kiwi-bird custom-icon"></i>
+                            <span class="custom-heading">Protected Areas:</span></p>
+                          <span id="PrtdArsstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-house-crack custom-icon"></i>
+                            <span class="custom-heading">Active Fault:</span></p>
+                          <span id="Fltstatisticss" class="custom-text"></span>
+                        </li>
+                        <li class="list-group-item">
+                          <p><i class="fa-solid fa-triangle-exclamation custom-icon"></i>
+                            <span class="custom-heading">Flood Hazard:</span></p>
+                          <span id="FldBistatisticss" class="custom-text"></span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-                <!-- Histogram -->
-                </br><strong>Histogram Results: </strong>
-                <div class="card text-center">
-                  <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs justify-content-center"
-                      style="font-size: smaller; padding: 1px;">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="true" href="#solarslopeTab"
-                          data-bs-toggle="tab">SLRxSLP</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#windslopeTab" data-bs-toggle="tab">WNDxSLP</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#solarTab" data-bs-toggle="tab">SLR</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#windTab" data-bs-toggle="tab">WND</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#slopeTab" data-bs-toggle="tab">SLP</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#liquefactionTab" data-bs-toggle="tab">LIQ</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#floodTab" data-bs-toggle="tab">FLD</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="card-body">
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="solarslopeTab">
-                        <!-- SolarxSlope content -->
-                        <!-- Add your content here -->
-                      </div>
-                      <div class="tab-pane fade" id="windslopeTab">
-                        <!-- WindxSlope content -->
-                        <!-- Add your content here -->
-                      </div>
-                      <div class="tab-pane fade" id="solarTab">
-                        <!-- Solar content -->
-                        <!-- Add your content here -->
-                      </div>
-                      <div class="tab-pane fade" id="windTab">
-                        <!-- Wind content -->
-                        <!-- Add your content here -->
-                      </div>
-                      <div class="tab-pane fade" id="slopeTab">
-                        <canvas id="histogramChart"></canvas>
-                      </div>
-                      <div class="tab-pane fade" id="liquefactionTab">
-                        <!-- Liquefaction content -->
-                        <!-- Add your content here -->
-                      </div>
-                      <div class="tab-pane fade" id="floodTab">
-                        <!-- Flood content -->
-                        <!-- Add your content here -->
+                  <!-- Histogram -->
+                  </br><strong>Histogram Results: </strong>
+                  <div class="card text-center">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs justify-content-center"
+                        style="font-size: smaller; padding: 1px;">
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="true" href="#solarslopeTab"
+                            data-bs-toggle="tab">SLRxSLP</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#windslopeTab" data-bs-toggle="tab">WNDxSLP</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#solarTab" data-bs-toggle="tab">SLR</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#windTab" data-bs-toggle="tab">WND</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#slopeTab" data-bs-toggle="tab">SLP</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#liquefactionTab" data-bs-toggle="tab">LIQ</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#floodTab" data-bs-toggle="tab">FLD</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content">
+                        <div class="tab-pane fade show active" id="solarslopeTab">
+                          <canvas id="GHISLP124Histo"></canvas>
+                        </div>
+                        <div class="tab-pane fade" id="windslopeTab">
+                          <canvas id="WSSLP123Histo"></canvas>
+                        </div>
+                        <div class="tab-pane fade" id="solarTab">
+                          <canvas id="GHI123Histo"></canvas>
+                        </div>
+                        <div class="tab-pane fade" id="windTab">
+                          <canvas id="WS12Histo"></canvas>
+                        </div>
+                        <div class="tab-pane fade" id="slopeTab">
+                          <canvas id="SLPHisto"></canvas>
+                        </div>
+                        <div class="tab-pane fade" id="liquefactionTab">
+                          <canvas id="LqfHisto"></canvas>
+                        </div>
+                        <div class="tab-pane fade" id="floodTab">
+                          <canvas id="FldHisto"></canvas>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -735,7 +725,7 @@
         <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
           <h1 class="sidebar-header common-header">
             <i class="fa-solid fa-database sbheader-icon"></i>
-            <span class="sbheader-text">HLA Calculator</span>
+            <span class="sbheader-text">HLA Calculator (Solar)</span>
           </h1>
           <div>
             <div>
@@ -771,8 +761,6 @@
 
                 <tr>
                   <td><label for="result">Result:</label></td>
-
-
                   <td><input type="number" id="result" name="result" readonly class="form-control"></td>
                 </tr>
               </table>
@@ -1402,7 +1390,7 @@
       // });
 
 
-      //Calculator--------------------------------------------------------------------------------------------------
+      //HLA Calculator--------------------------------------------------------------------------------------------------
       function calculate() {
         var ghi = parseFloat(document.getElementById("ghi").value);
         var slope = parseFloat(document.getElementById("slope").value);
@@ -1411,30 +1399,25 @@
         var total_area = parseFloat(document.getElementById("total_area").value);
 
         if (ghi > 0 && slope > 0 && tl_distance > 0 && purchase_price > 0 && total_area > 0) {
-          var result = Math.round((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 +
-            (
-              slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
+          var result = ((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 +
+            (slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
               tl_distance)) / 10) + 1)) * 0.2329 + (purchase_price < 150 ? 10 : purchase_price > 350 ? 1 : (((
-              9 *
-              (
-                350 -
-                purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 : ((-
+              9 * (350 - purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 : ((-
                 0.000000000122212 * Math.pow(total_area, 5)) + (0.000000127783385 * Math.pow(total_area, 4)) -
-              (
-                0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) -
-              (
-                0.818987139682201 * total_area) + 24.612688789833400)) * 0.3414, 1);
+              (0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) -
+              (0.818987139682201 * total_area) + 24.612688789833400)) * 0.3414).toFixed(3);
           document.getElementById("result").value = result;
         } else {
           alert("Please enter valid input values for all fields!");
         }
       }
 
+
       //_____________________________________________________________________________________________________________________________________________
       // Function to handle KML, KMZ, and GeoJSON files
 
       //  // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-       L.easyButton({
+      L.easyButton({
         states: [{
           stateName: 'upload-file',
           icon: 'fa-file-import',
@@ -3040,22 +3023,334 @@
             delay: 5000 // Delay for code block 3 in milliseconds
           },
           {
+            //Azimuth Score
             code: function () {
 
-              // Calculate Slope Histogram
+              var url_to_geotiff_Azmt_file = "https://czrxstrd4.github.io/avemn/Azmt.tif";
 
-              var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLPClass.tif";
+              fetch(url_to_geotiff_Azmt_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
 
-              fetch(url_to_geotiff_SLP_file)
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = Number(meanss).toFixed(2);
+                    let notes;
+
+                    if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
+                      notes = "North, " + mn + "°";
+                    } else if (mn >= 22.51 && mn <= 67.5) {
+                      notes = "NorthEast, " + mn + "°";
+                    } else if (mn >= 67.51 && mn <= 112.5) {
+                      notes = "East, " + mn + "°";
+                    } else if (mn >= 112.51 && mn <= 157.5) {
+                      notes = "SouthEast, " + mn + "°";
+                    } else if (mn >= 157.51 && mn <= 202.5) {
+                      notes = "South, " + mn + "°";
+                    } else if (mn >= 202.51 && mn <= 247.5) {
+                      notes = "SouthWest, " + mn + "°";
+                    } else if (mn >= 247.51 && mn <= 292.5) {
+                      notes = "West, " + mn + "°";
+                    } else if (mn >= 292.51 && mn <= 337.5) {
+                      notes = "NorthWest, " + mn + "°";
+                    } else {
+                      notes = "N/A";
+                    }
+                    document.getElementById("Azmtstatisticss").innerHTML = notes;
+                    georaster = null;
+                  });
+                });
+            },
+            delay: 5000 // Delay for code block 3 in milliseconds
+          }, {
+            code: function () {
+              // Calculate Service Contract Statistics
+
+              var url_to_geotiff_SC_file = "https://czrxstrd4.github.io/avemn/SC.tif";
+
+              fetch(url_to_geotiff_SC_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+                    document.getElementById("SCstatisticss").innerHTML = notes;
+                    document.getElementById("SCstatisticss").style.color =
+                      fontColor;
+                    georaster = null;
+
+                  });
+                });
+
+
+            },
+            delay: 5000 // Delay for code block 3 in milliseconds
+          }, {
+            code: function () {
+              // Calculate Ancestral Domain Statistics
+
+              var url_to_geotiff_AD_file = "https://czrxstrd4.github.io/avemn/AncstrlD.tif";
+              fetch(url_to_geotiff_AD_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    let notes;
+                    let fontColor;
+
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("ADstatisticss").innerHTML = notes;
+                    document.getElementById("ADstatisticss").style.color =
+                      fontColor;
+
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+              // Calculate Irrigation Statistics
+
+              var url_to_geotiff_Irgtn_file = "https://czrxstrd4.github.io/avemn/Irrgtn.tif";
+
+
+              fetch(url_to_geotiff_Irgtn_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+                    document.getElementById("Irgtnstatisticss").innerHTML = notes;
+                    document.getElementById("Irgtnstatisticss").style.color =
+                      fontColor;
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 2000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+              // Calculate Protected Area Statistics
+
+              var url_to_geotiff_PrtdArs_file = "https://czrxstrd4.github.io/avemn/PrtdArs.tif";
+
+              fetch(url_to_geotiff_PrtdArs_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    console.log("Mean:", meanss);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("PrtdArsstatisticss").innerHTML = notes;
+                    document.getElementById("PrtdArsstatisticss").style.color =
+                      fontColor;
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+
+              // Calculate Active Fault Statistics
+
+              var url_to_geotiff_Flt_file = "https://czrxstrd4.github.io/avemn/Flt.tif";
+              fetch(url_to_geotiff_Flt_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster, coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    console.log("Mean:", meanss);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
+                      fontColor = "red";
+                    } else {
+
+                      notes = "No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("Fltstatisticss").innerHTML = notes;
+                    document.getElementById("Fltstatisticss").style.color =
+                      fontColor;
+
+
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 2000 // Delay for code block 3 in milliseconds
+          }, {
+            code: function () {
+
+              // Calculate Flood Hazard Statistics
+
+              var url_to_geotiff_FldBi_file =
+                "https://czrxstrd4.github.io/avemn/FldBi.tif";
+
+
+              fetch(url_to_geotiff_FldBi_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+                    const meanss = geoblaze.mean(georaster,
+                      coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    console.log("Mean:", meanss);
+                    let notes;
+                    let fontColor;
+
+                    if (mn > 0) {
+
+                      notes =
+                        "Flood Hazard: With Potential Overlap. Contact the owner/broker/LGU to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+
+                      notes =
+                        "Flood Hazard: No potential overlap.";
+                      fontColor = "green";
+                    }
+
+                    document.getElementById("FldBistatisticss")
+                      .innerHTML = notes;
+                    document.getElementById("FldBistatisticss")
+                      .style.color =
+                      fontColor;
+
+
+                    georaster = null;
+
+                  });
+                });
+            },
+            delay: 2000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+              // Calculate Liquefaction Overlap Statistics
+              var url_to_geotiff_LqfBi_file =
+                "https://czrxstrd4.github.io/avemn/LqfBi.tif";
+              fetch(url_to_geotiff_LqfBi_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+                    const meanss = geoblaze.mean(georaster,
+                      coordinates);
+                    const mn = (Number(meanss) * 100).toFixed(2);
+                    console.log("Mean:", meanss);
+                    let notes;
+                    let fontColor;
+                    if (mn > 0) {
+                      notes =
+                        "Liquefaction: With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
+                        mn + "%";
+                      fontColor = "red";
+                    } else {
+                      notes =
+                        "Liquefaction: No potential overlap.";
+                      fontColor = "green";
+                    }
+                    document.getElementById("LqfBistatisticss")
+                      .innerHTML = notes;
+                    document.getElementById("LqfBistatisticss")
+                      .style.color =
+                      fontColor;
+                    georaster = null;
+                  });
+                });
+            },
+            delay: 2000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+
+              // Calculate SLRxSLP Histogram
+
+              var url_to_geotiff_GHISLP124_file = "https://czrxstrd4.github.io/avemn/GHISLP124.tif";
+
+              fetch(url_to_geotiff_GHISLP124_file)
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
 
-                    const SLPHisto = geoblaze.histogram(georaster, coordinates, {
-                      scaleType: "nominal"
-                    });
-                    console.log(SLPHisto);
+                    const GHISLP124Histo = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+                    console.log(GHISLP124Histo);
 
 
                     const histogramData = geoblaze.histogram(georaster,
@@ -3077,27 +3372,29 @@
 
                       // Assign custom labels based on the actual labels
 
+
+
                       const customLabels = Object.keys(histogramData[0]).map(
                         key => {
-                          if (key === "1") {
-                            return "Level";
+                          if (key === "0") {
+                            return "Zone 0 - No Go";
+                          } else if (key === "1") {
+                            return "Zone 1 - Assess Further";
                           } else if (key === "2") {
-                            return "Level to Undulating";
+                            return "Zone 2 - Go";
                           } else if (key === "3") {
-                            return "Undulating to Rolling";
+                            return "Zone 3 - Go!";
                           } else if (key === "4") {
-                            return "Rolling to Hilly";
-                          } else if (key === "5") {
-                            return "Hilly to Mountainous";
-                          } else if (key === "6") {
-                            return "Mountainous";
+                            return "Zone 4 - Go!!!";
                           } else {
                             return `Label ${key}`;
                           }
                         });
 
                       // Create the histogram chart
-                      var ctx = document.getElementById('histogramChart')
+                      var canvas = document.getElementById('GHISLP124Histo');
+                      canvas.height = 300; // Adjust the height value as desired
+                      var ctx = document.getElementById('GHISLP124Histo')
                         .getContext('2d');
                       var histogramChart = new Chart(ctx, {
                         type: 'bar',
@@ -3170,248 +3467,724 @@
 
                   });
                 });
-            },
-            delay: 1000 // Delay for code block 2 in milliseconds
-          },
-          {
-            //Azimuth Score
-            code: function () {
-
-              var url_to_geotiff_Azmt_file = "https://czrxstrd4.github.io/avemn/Azmt.tif";
-
-              fetch(url_to_geotiff_Azmt_file)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                  parseGeoraster(arrayBuffer).then(georaster => {
-
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = Number(meanss).toFixed(2);
-                    let notes;
-
-                    if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
-                      notes = "North, " + mn + "°";
-                    } else if (mn >= 22.51 && mn <= 67.5) {
-                      notes = "NorthEast, " + mn + "°";
-                    } else if (mn >= 67.51 && mn <= 112.5) {
-                      notes = "East, " + mn + "°";
-                    } else if (mn >= 112.51 && mn <= 157.5) {
-                      notes = "SouthEast, " + mn + "°";
-                    } else if (mn >= 157.51 && mn <= 202.5) {
-                      notes = "South, " + mn + "°";
-                    } else if (mn >= 202.51 && mn <= 247.5) {
-                      notes = "SouthWest, " + mn + "°";
-                    } else if (mn >= 247.51 && mn <= 292.5) {
-                      notes = "West, " + mn + "°";
-                    } else if (mn >= 292.51 && mn <= 337.5) {
-                      notes = "NorthWest, " + mn + "°";
-                    } else {
-                      notes = "N/A";
-                    }
-                    document.getElementById("Azmtstatisticss").innerHTML = notes;
-                    georaster = null;
-                  });
-                });
-            },
-            delay: 5000 // Delay for code block 3 in milliseconds
-          },
-          {
-            code: function () {
-              // Calculate Service Contract Statistics
-
-              var url_to_geotiff_SC_file = "https://czrxstrd4.github.io/avemn/SC.tif";
-
-              fetch(url_to_geotiff_SC_file)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                  parseGeoraster(arrayBuffer).then(georaster => {
-
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-                    let notes;
-                    let fontColor;
-
-                    if (mn > 0) {
-                      notes =
-                        "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
-                        mn + "%";
-                      fontColor = "red";
-                    } else {
-
-                      notes = "No potential overlap.";
-                      fontColor = "green";
-                    }
-                    document.getElementById("SCstatisticss").innerHTML = notes;
-                    document.getElementById("SCstatisticss").style.color =
-                      fontColor;
-                    georaster = null;
-
-                  });
-                });
 
 
-            },
-            delay: 5000 // Delay for code block 3 in milliseconds
-          },
-          {
-            code: function () {
-              // Calculate Ancestral Domain Statistics
-
-              var url_to_geotiff_AD_file = "https://czrxstrd4.github.io/avemn/AncstrlD.tif";
-              fetch(url_to_geotiff_AD_file)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                  parseGeoraster(arrayBuffer).then(georaster => {
-
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-                    let notes;
-                    let fontColor;
 
 
-                    if (mn > 0) {
 
-                      notes =
-                        "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
-                        mn + "%";
-                      fontColor = "red";
-                    } else {
-
-                      notes = "No potential overlap.";
-                      fontColor = "green";
-                    }
-
-                    document.getElementById("ADstatisticss").innerHTML = notes;
-                    document.getElementById("ADstatisticss").style.color =
-                      fontColor;
-
-                    georaster = null;
-
-                  });
-                });
             },
             delay: 3000 // Delay for code block 2 in milliseconds
-          },
-          {
+          }, {
             code: function () {
-              // Calculate Irrigation Statistics
 
-              var url_to_geotiff_Irgtn_file = "https://czrxstrd4.github.io/avemn/Irrgtn.tif";
+              // Calculate WNDxSLP Histogram
 
+              var url_to_geotiff_WSSLP123_file = "https://czrxstrd4.github.io/avemn/WSSLP123.tif";
 
-              fetch(url_to_geotiff_Irgtn_file)
+              fetch(url_to_geotiff_WSSLP123_file)
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-                    let notes;
-                    let fontColor;
 
-                    if (mn > 0) {
+                    const WSSLP123Histo = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+                    console.log(WSSLP123Histo);
 
-                      notes =
-                        "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
-                        mn + "%";
-                      fontColor = "red";
+
+                    const histogramData = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+
+                    if (Array.isArray(histogramData) && histogramData.length > 0) {
+                      // Access the first (and only) object in the array
+                      const histogramValues = Object.values(histogramData[0]);
+
+                      // Calculate the total sum of data
+                      const sum = histogramValues.reduce((total, value) => total +
+                        value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = histogramValues.map(value => ((value /
+                        sum) * 100).toFixed(2));
+
+                      // Assign custom labels based on the actual labels
+
+
+
+                      const customLabels = Object.keys(histogramData[0]).map(
+                        key => {
+                          if (key === "0") {
+                            return "Zone 0 - No Go";
+                          } else if (key === "1") {
+                            return "Zone 1 - Assess Further";
+                          } else if (key === "2") {
+                            return "Zone 2 - Go";
+                          } else if (key === "3") {
+                            return "Zone 3 - Go!!!";
+                          } else {
+                            return `Label ${key}`;
+                          }
+                        });
+
+                      // Create the histogram chart
+                      var canvas = document.getElementById('WSSLP123Histo');
+                      canvas.height = 300;
+                      var ctx = document.getElementById('WSSLP123Histo')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: histogramValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    Number(
+                                      originalValue *
+                                      4.015).toFixed(
+                                      2);
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true,
+                              title: {
+                                display: true,
+                                text: 'Hectares',
+                                font: {
+                                  size: 14
+                                }
+                              },
+
+                              ticks: {
+                                callback: function (value) {
+                                  return (value * 4.015)
+                                    .toFixed(0);
+                                }
+                              }
+
+                            }
+                          }
+                        }
+                      });
                     } else {
-
-                      notes = "No potential overlap.";
-                      fontColor = "green";
+                      console.error("Invalid data for histogram");
                     }
-                    document.getElementById("Irgtnstatisticss").innerHTML = notes;
-                    document.getElementById("Irgtnstatisticss").style.color =
-                      fontColor;
+
+
+
+
                     georaster = null;
 
                   });
                 });
-            },
-            delay: 2000 // Delay for code block 2 in milliseconds
-          },
-          {
-            code: function () {
-              // Calculate Protected Area Statistics
 
-              var url_to_geotiff_PrtdArs_file = "https://czrxstrd4.github.io/avemn/PrtdArs.tif";
 
-              fetch(url_to_geotiff_PrtdArs_file)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                  parseGeoraster(arrayBuffer).then(georaster => {
 
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-                    console.log("Mean:", meanss);
-                    let notes;
-                    let fontColor;
 
-                    if (mn > 0) {
 
-                      notes =
-                        "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
-                        mn + "%";
-                      fontColor = "red";
-                    } else {
-
-                      notes = "No potential overlap.";
-                      fontColor = "green";
-                    }
-
-                    document.getElementById("PrtdArsstatisticss").innerHTML = notes;
-                    document.getElementById("PrtdArsstatisticss").style.color =
-                      fontColor;
-                    georaster = null;
-
-                  });
-                });
             },
             delay: 3000 // Delay for code block 2 in milliseconds
-          },
-          {
+          }, {
             code: function () {
 
-              // Calculate Active Fault Statistics
+              // Calculate Solar Histogram
 
-              var url_to_geotiff_Flt_file = "https://czrxstrd4.github.io/avemn/Flt.tif";
-              fetch(url_to_geotiff_Flt_file)
+              var url_to_geotiff_GHI123_file = "https://czrxstrd4.github.io/avemn/GHI123.tif";
+
+              fetch(url_to_geotiff_GHI123_file)
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-                    console.log("Mean:", meanss);
-                    let notes;
-                    let fontColor;
 
-                    if (mn > 0) {
+                    const GHI123Histo = geoblaze.histogram(georaster, coordinates, {
+                      scaleType: "nominal"
+                    });
+                    console.log(GHI123Histo);
 
-                      notes =
-                        "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
-                      fontColor = "red";
+
+                    const histogramData = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+
+                    if (Array.isArray(histogramData) && histogramData.length > 0) {
+                      // Access the first (and only) object in the array
+                      const histogramValues = Object.values(histogramData[0]);
+
+                      // Calculate the total sum of data
+                      const sum = histogramValues.reduce((total, value) => total +
+                        value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = histogramValues.map(value => ((value /
+                        sum) * 100).toFixed(2));
+
+                      // Assign custom labels based on the actual labels
+
+
+
+                      const customLabels = Object.keys(histogramData[0]).map(
+                        key => {
+                          if (key === "0") {
+                            return "Zone 0, <1700";
+                          } else if (key === "1") {
+                            return "Zone 1, 1700 to <1775";
+                          } else if (key === "2") {
+                            return "Zone 2, 1775 to <=1875";
+                          } else if (key === "3") {
+                            return "Zone 3, >1875";
+                          } else {
+                            return `Label ${key}`;
+                          }
+                        });
+
+                      // Create the histogram chart
+                      var canvas = document.getElementById('GHI123Histo');
+                      canvas.height = 300;
+                      var ctx = document.getElementById('GHI123Histo')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: histogramValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    Number(
+                                      originalValue *
+                                      4.015).toFixed(
+                                      2);
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true,
+                              title: {
+                                display: true,
+                                text: 'Hectares',
+                                font: {
+                                  size: 14
+                                }
+                              },
+
+                              ticks: {
+                                callback: function (value) {
+                                  return (value * 4.015)
+                                    .toFixed(0);
+                                }
+                              }
+
+                            }
+                          }
+                        }
+                      });
                     } else {
-
-                      notes = "No potential overlap.";
-                      fontColor = "green";
+                      console.error("Invalid data for histogram");
                     }
 
-                    document.getElementById("Fltstatisticss").innerHTML = notes;
-                    document.getElementById("Fltstatisticss").style.color =
-                      fontColor;
+
 
 
                     georaster = null;
 
                   });
                 });
+
+
+
+
+
             },
-            delay: 2000 // Delay for code block 3 in milliseconds
-          },
-          {
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
             code: function () {
 
-              // Calculate Flood Hazard Classified Statistics
+              // Calculate Wind Histogram
+
+              var url_to_geotiff_WS12_file = "https://czrxstrd4.github.io/avemn/WS12.tif";
+
+              fetch(url_to_geotiff_WS12_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+
+                    const WS12Histo = geoblaze.histogram(georaster, coordinates, {
+                      scaleType: "nominal"
+                    });
+                    console.log(WS12Histo);
+
+
+                    const histogramData = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+
+                    if (Array.isArray(histogramData) && histogramData.length > 0) {
+                      // Access the first (and only) object in the array
+                      const histogramValues = Object.values(histogramData[0]);
+
+                      // Calculate the total sum of data
+                      const sum = histogramValues.reduce((total, value) => total +
+                        value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = histogramValues.map(value => ((value /
+                        sum) * 100).toFixed(2));
+
+                      // Assign custom labels based on the actual labels
+
+
+
+                      const customLabels = Object.keys(histogramData[0]).map(
+                        key => {
+                          if (key === "0") {
+                            return "Zone 0, <6.54";
+                          } else if (key === "1") {
+                            return "Zone 1, 6.54 to <=8";
+                          } else if (key === "2") {
+                            return "Zone 2, >8";
+                          } else {
+                            return `Label ${key}`;
+                          }
+                        });
+
+                      // Create the histogram chart
+                      var canvas = document.getElementById('WS12Histo');
+                      canvas.height = 300;
+                      var ctx = document.getElementById('WS12Histo')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: histogramValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    Number(
+                                      originalValue *
+                                      4.015).toFixed(
+                                      2);
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true,
+                              title: {
+                                display: true,
+                                text: 'Hectares',
+                                font: {
+                                  size: 14
+                                }
+                              },
+
+                              ticks: {
+                                callback: function (value) {
+                                  return (value * 4.015)
+                                    .toFixed(0);
+                                }
+                              }
+
+                            }
+                          }
+                        }
+                      });
+                    } else {
+                      console.error("Invalid data for histogram");
+                    }
+
+
+
+
+                    georaster = null;
+
+                  });
+                });
+
+
+
+
+
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+
+              // Calculate Slope Histogram
+
+              var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLPClass.tif";
+
+              fetch(url_to_geotiff_SLP_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+
+                    const SLPHisto = geoblaze.histogram(georaster, coordinates, {
+                      scaleType: "nominal"
+                    });
+                    console.log(SLPHisto);
+
+
+                    const histogramData = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+
+                    if (Array.isArray(histogramData) && histogramData.length > 0) {
+                      // Access the first (and only) object in the array
+                      const histogramValues = Object.values(histogramData[0]);
+
+                      // Calculate the total sum of data
+                      const sum = histogramValues.reduce((total, value) => total +
+                        value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = histogramValues.map(value => ((value /
+                        sum) * 100).toFixed(2));
+
+                      // Assign custom labels based on the actual labels
+
+
+
+                      const customLabels = Object.keys(histogramData[0]).map(
+                        key => {
+                          if (key === "1") {
+                            return "Level";
+                          } else if (key === "2") {
+                            return "Level to Undulating";
+                          } else if (key === "3") {
+                            return "Undulating to Rolling";
+                          } else if (key === "4") {
+                            return "Rolling to Hilly";
+                          } else if (key === "5") {
+                            return "Hilly to Mountainous";
+                          } else if (key === "6") {
+                            return "Mountainous";
+                          } else {
+                            return `Label ${key}`;
+                          }
+                        });
+
+                      // Create the histogram chart
+                      var canvas = document.getElementById('SLPHisto');
+                      canvas.height = 300;
+                      var ctx = document.getElementById('SLPHisto')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: histogramValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    Number(
+                                      originalValue *
+                                      4.015).toFixed(
+                                      2);
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true,
+                              title: {
+                                display: true,
+                                text: 'Hectares',
+                                font: {
+                                  size: 14
+                                }
+                              },
+
+                              ticks: {
+                                callback: function (value) {
+                                  return (value * 4.015)
+                                    .toFixed(0);
+                                }
+                              }
+
+                            }
+                          }
+                        }
+                      });
+                    } else {
+                      console.error("Invalid data for histogram");
+                    }
+                    georaster = null;
+
+                  });
+                });
+
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+
+              // Calculate Liquefaction Histogram
+
+              var url_to_geotiff_Lqf_file = "https://czrxstrd4.github.io/avemn/Lqf.tif";
+
+              fetch(url_to_geotiff_Lqf_file)
+                .then(response => response.arrayBuffer())
+                .then(arrayBuffer => {
+                  parseGeoraster(arrayBuffer).then(georaster => {
+
+
+                    const LqfHisto = geoblaze.histogram(georaster, coordinates, {
+                      scaleType: "nominal"
+                    });
+                    console.log(LqfHisto);
+
+
+                    const histogramData = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
+
+                    if (Array.isArray(histogramData) && histogramData.length > 0) {
+                      // Access the first (and only) object in the array
+                      const histogramValues = Object.values(histogramData[0]);
+
+                      // Calculate the total sum of data
+                      const sum = histogramValues.reduce((total, value) => total +
+                        value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = histogramValues.map(value => ((value /
+                        sum) * 100).toFixed(2));
+
+                      // Assign custom labels based on the actual labels
+
+
+
+                      const customLabels = Object.keys(histogramData[0]).map(
+                        key => {
+                          if (key === "0") {
+                            return "No Overlap";
+                          } else if (key === "1") {
+                            return "Least Susceptible";
+                          } else if (key === "2") {
+                            return "Generally Susceptible";
+                          } else if (key === "3") {
+                            return "Moderately Susceptible";
+                          } else if (key === "4") {
+                            return "Highly Susceptible";
+                          } else {
+                            return `Label ${key}`;
+                          }
+                        });
+
+                      // Create the histogram chart
+                      var canvas = document.getElementById('LqfHisto');
+                      canvas.height = 300;
+                      var ctx = document.getElementById('LqfHisto')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: histogramValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    Number(
+                                      originalValue *
+                                      4.015).toFixed(
+                                      2);
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true,
+                              title: {
+                                display: true,
+                                text: 'Hectares',
+                                font: {
+                                  size: 14
+                                }
+                              },
+
+                              ticks: {
+                                callback: function (value) {
+                                  return (value * 4.015)
+                                    .toFixed(0);
+                                }
+                              }
+
+                            }
+                          }
+                        }
+                      });
+                    } else {
+                      console.error("Invalid data for histogram");
+                    }
+
+
+
+
+                    georaster = null;
+
+                  });
+                });
+
+
+
+
+
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
+            code: function () {
+
+              // Calculate Flood Histogram
 
               var url_to_geotiff_Fld_file = "https://czrxstrd4.github.io/avemn/Fld.tif";
 
@@ -3419,82 +4192,138 @@
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-
-                    const sumss = geoblaze.sum(georaster, coordinates);
-                    FldSumstat = (Number(sumss)).toFixed(2);
-                    georaster = null;
-
-                  });
-                });
-            },
-            delay: 3000 // Delay for code block 2 in milliseconds
-          },
-          {
-            code: function () {
 
 
-              // Calculate Flood Hazard Binary Statistics
-              var url_to_geotiff_FldBi_file = "https://czrxstrd4.github.io/avemn/FldBi.tif";
-              let FldBiSumstat;
-
-              fetch(url_to_geotiff_FldBi_file)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                  parseGeoraster(arrayBuffer).then(georaster => {
-
-                    const meanss = geoblaze.mean(georaster, coordinates);
-                    const mn = (Number(meanss) * 100).toFixed(2);
-
-                    const sumss = geoblaze.sum(georaster, coordinates);
-
-                    let notes;
-                    let fontColor;
-
-                    if (mn > 0) {
+                    const FldHisto = geoblaze.histogram(georaster, coordinates, {
+                      scaleType: "nominal"
+                    });
+                    console.log(FldHisto);
 
 
-                      if ((FldSumstat / ((Number(sumss)).toFixed(2))) < 1.67) {
+                    const histogramData = geoblaze.histogram(georaster,
+                      coordinates, {
+                        scaleType: "nominal"
+                      });
 
-                        notes = "Overlap at ~" + mn +
-                          "%, & Susceptibility Level at Low Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
-                        fontColor = "red";
-                      } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >=
-                        1.67 && (FldSumstat / ((Number(sumss)).toFixed(2))) <=
-                        2.33) {
-                        notes = "Overlap at ~" + mn +
-                          "%, & Susceptibility Level at Medium Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
-                        fontColor = "red";
-                      } else if ((FldSumstat / ((Number(sumss)).toFixed(2))) >
-                        2.33) {
-                        notes = "Overlap at ~" + mn +
-                          "%, & Susceptibility Level at High Susceptibility. Check the maps and Contact the Owner/Broker/LGU to confirm.";
-                        fontColor = "red";
-                      }
+                    if (Array.isArray(histogramData) && histogramData.length > 0) {
+                      // Access the first (and only) object in the array
+                      const histogramValues = Object.values(histogramData[0]);
+
+                      // Calculate the total sum of data
+                      const sum = histogramValues.reduce((total, value) => total +
+                        value, 0);
+
+                      // Calculate the percentage of each data point
+                      const percentages = histogramValues.map(value => ((value /
+                        sum) * 100).toFixed(2));
+
+                      // Assign custom labels based on the actual labels
 
 
+
+                      const customLabels = Object.keys(histogramData[0]).map(
+                        key => {
+                          if (key === "0") {
+                            return "No Overlap";
+                          } else if (key === "1") {
+                            return "Low Susceptibility";
+                          } else if (key === "2") {
+                            return "Medium Susceptibility";
+                          } else if (key === "3") {
+                            return "High Susceptibility";
+                          } else {
+                            return `Label ${key}`;
+                          }
+                        });
+
+                      // Create the histogram chart
+                      var canvas = document.getElementById('FldHisto');
+                      canvas.height = 300;
+                      var ctx = document.getElementById('FldHisto')
+                        .getContext('2d');
+                      var histogramChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: customLabels,
+                          datasets: [{
+                            label: 'Histogram',
+                            data: histogramValues,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          plugins: {
+                            tooltip: {
+                              callbacks: {
+                                label: function (context) {
+                                  // Retrieve the original data point
+                                  const originalValue =
+                                    context.parsed.y;
+
+                                  // Calculate the multiplied value
+                                  const multipliedValue =
+                                    Number(
+                                      originalValue *
+                                      4.015).toFixed(
+                                      2);
+
+                                  // Retrieve the percentage
+                                  const percentage =
+                                    percentages[context
+                                      .dataIndex];
+
+                                  // Return the label string for the tooltip
+                                  return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            x: {
+                              beginAtZero: true
+                            },
+                            y: {
+                              beginAtZero: true,
+                              title: {
+                                display: true,
+                                text: 'Hectares',
+                                font: {
+                                  size: 14
+                                }
+                              },
+
+                              ticks: {
+                                callback: function (value) {
+                                  return (value * 4.015)
+                                    .toFixed(0);
+                                }
+                              }
+
+                            }
+                          }
+                        }
+                      });
                     } else {
-
-                      notes = "No potential overlap.";
-                      fontColor = "green";
+                      console.error("Invalid data for histogram");
                     }
 
 
-                    document.getElementById("FldBistatisticss").innerHTML = notes;
-                    document.getElementById("FldBistatisticss").style.color =
-                      fontColor;
 
 
                     georaster = null;
 
                   });
                 });
-            },
-            delay: 3000 // Delay for code block 3 in milliseconds
-          },
 
-          {
+
+
+
+
+            },
+            delay: 3000 // Delay for code block 2 in milliseconds
+          }, {
             code: function () {
               loadingPrompt.style.display = 'none';
             },
@@ -3511,7 +4340,8 @@
               codeBlock.code(); // Execute the code block
 
               index++;
-              setTimeout(executeNext, codeBlock.delay); // Delay before executing the next code block
+              setTimeout(executeNext, codeBlock
+                .delay); // Delay before executing the next code block
             }
           }
 

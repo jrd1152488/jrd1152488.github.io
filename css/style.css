@@ -120,15 +120,26 @@ body {
   overflow: hidden;
 }
 
+.suitability-content {
+font-size: 12px;
+font-family: "Roboto", Arial, sans-serif;
+}
+
 #calculator table td {
   vertical-align: middle;
 }
 
 
-.list-group-item {
-  padding: 5px;
+#list-group-item {
+  padding: 2px;
   line-height: 1;
+  left: 0px;
 }
+
+/* .list-group {
+  padding: 2px;
+  line-height: 1;
+} */
 
 .loading-bar {
   width: 100%;

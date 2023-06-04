@@ -7,114 +7,112 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <style>
         #map {
-          height: 400px;
-          width: 100%;
+            height: 400px;
+            width: 100%;
         }
+
         #searchInput {
-          width: 300px;
+            width: 300px;
         }
+
         #suggestions {
-          position: absolute;
-          width: 300px;
-          margin-top: 40px;
-          background-color: #fff;
-          border: 1px solid #ced4da;
-          border-radius: 4px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-          z-index: 1000;
+            position: absolute;
+            width: 300px;
+            margin-top: 40px;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
         }
+
         .suggestion-item {
-          padding: 10px;
-          cursor: pointer;
+            padding: 10px;
+            cursor: pointer;
         }
+
         .suggestion-item:hover {
-          background-color: #f8f9fa;
+            background-color: #f8f9fa;
         }
-      </style>
+    </style>
 </head>
 
 <body>
     <div class="input-group">
         <select class="form-select" id="searchOption">
-          <option selected>Select options</option>
-          <option value="coordinates">Coordinates</option>
-          <option value="location">Location</option>
-          <option value="substation">Substation</option>
+            <option selected>Select options</option>
+            <option value="coordinates">Coordinates</option>
+            <option value="location">Location</option>
+            <option value="substation">Substation</option>
         </select>
-  
+
         <form class="mb-auto" style="background-color: #164575;">
-          <input
-            type="search"
-            class="form-control"
-            id="searchInput"
-            placeholder="Search..."
-          />
-          <div id="suggestions"></div>
+            <input type="search" class="form-control" id="searchInput" placeholder="Search..." />
+            <div id="suggestions"></div>
         </form>
-      </div>
+    </div>
     <div id="map"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <script>
-       var searchInput = document.getElementById('searchInput');
-      var searchOption = document.getElementById('searchOption');
-      var form = document.querySelector('form');
-      var map = L.map('map').setView([13.412, 122.565], 6); // Centered on the Philippines
-      var marker;
+        var searchInput = document.getElementById('searchInput');
+        var searchOption = document.getElementById('searchOption');
+        var form = document.querySelector('form');
+        var map = L.map('map').setView([13.412, 122.565], 6); // Centered on the Philippines
+        var marker;
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-        maxZoom: 18
-      }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
 
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        if (searchOption.value === 'coordinates') {
-          var coordinates = searchInput.value.split(',');
-          var latitude = parseFloat(coordinates[0].trim());
-          var longitude = parseFloat(coordinates[1].trim());
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (searchOption.value === 'coordinates') {
+                var coordinates = searchInput.value.split(',');
+                var latitude = parseFloat(coordinates[0].trim());
+                var longitude = parseFloat(coordinates[1].trim());
+                if (isNaN(latitude) || isNaN(longitude)) {
+                    alert('Please enter valid coordinates.');
+                    return;
+                }
+                var latLng = L.latLng(latitude, longitude);
+                if (marker) {
+                    marker.setLatLng(latLng);
+                } else {
+                    marker = L.marker(latLng).addTo(map);
+                }
+                map.setView(latLng, 13);
 
-          if (isNaN(latitude) || isNaN(longitude)) {
-            alert('Please enter valid coordinates.');
-            return;
-          }
 
-          var latLng = L.latLng(latitude, longitude);
-          if (marker) {
-            marker.setLatLng(latLng);
-          } else {
-            marker = L.marker(latLng).addTo(map);
-          }
-          map.setView(latLng, 13);
-        } else if (searchOption.value === 'location') {
-          searchLocation(map, searchInput.value);
-        }
-      });
-
-      function searchLocation(map, query) {
-        // Clear any existing markers on the map
-        if (marker) {
-          map.removeLayer(marker);
-        }
-
-        // Use the geocoder to get the location coordinates
-        var geocoder = L.Control.Geocoder.nominatim();
-        geocoder.geocode(query, function (results) {
-          if (results.length > 0) {
-            var location = results[0].center;
-
-            // Create a marker for the selected location
-            marker = L.marker(location).addTo(map);
-
-            // Center the map on the selected location
-            map.setView(location, 13);
-          } else {
-            console.log('No results found');
-          }
+            } else if (searchOption.value === 'location') {
+                searchLocation(map, searchInput.value);
+            }
         });
-      }
+
+        function searchLocation(map, query) {
+            // Clear any existing markers on the map
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            // Use the geocoder to get the location coordinates
+            var geocoder = L.Control.Geocoder.nominatim();
+            geocoder.geocode(query, function (results) {
+                if (results.length > 0) {
+                    var location = results[0].center;
+
+                    // Create a marker for the selected location
+                    marker = L.marker(location).addTo(map);
+
+                    // Center the map on the selected location
+                    map.setView(location, 13);
+                } else {
+                    console.log('No results found');
+                }
+            });
+        }
     </script>
 </body>
 
