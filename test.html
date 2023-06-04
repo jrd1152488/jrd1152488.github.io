@@ -1,455 +1,120 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Location Search</title>
     <link rel="stylesheet" href="css/leaflet.css">
-    <link rel="stylesheet" href="css/qgis2web.css">
-    <link rel="stylesheet" href="css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="css/leaflet-search.css">
-    <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
-    <link rel="stylesheet" href="css/leaflet-measure.css">
-    <link rel="stylesheet" href="css/search-control.css">
-    <link rel="stylesheet" href="css/leaflet.fullscreen.css">
-    <link rel="stylesheet" href="js/src/leaflet.draw.css">
-    <link rel="stylesheet" href="css/leaflet-panel-layers.css">
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>SPT 2.0</title>
-
-    <script src="js/service_contracts.js"></script>
-    <script src="js/ancestral_domains.js"></script>
-    <script src="js/protected_areas.js"></script>
-    <script src="js/seaports.js"></script>
-    <script src="js/protected_areas.js"></script>
-    <script src="js/active_fault.js"></script>
-    <script src="js/taal_hazards.js"></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <style>
+        #map {
+          height: 400px;
+          width: 100%;
+        }
+        #searchInput {
+          width: 300px;
+        }
+        #suggestions {
+          position: absolute;
+          width: 300px;
+          margin-top: 40px;
+          background-color: #fff;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+          z-index: 1000;
+        }
+        .suggestion-item {
+          padding: 10px;
+          cursor: pointer;
+        }
+        .suggestion-item:hover {
+          background-color: #f8f9fa;
+        }
+      </style>
 </head>
 
 <body>
-    <div id="map">
-        <div class="leaflet-control search">
-            <input type="text" placeholder="Latitude,Longitude" ;
-                title="You'll need to input numerical coordinates, example: 15.424884, 120.811157">
-            <button id="search-btn">Locate Coordinate</button>
-        </div>
-    </div>
+    <div class="input-group">
+        <select class="form-select" id="searchOption">
+          <option selected>Select options</option>
+          <option value="coordinates">Coordinates</option>
+          <option value="location">Location</option>
+          <option value="substation">Substation</option>
+        </select>
+  
+        <form class="mb-auto" style="background-color: #164575;">
+          <input
+            type="search"
+            class="form-control"
+            id="searchInput"
+            placeholder="Search..."
+          />
+          <div id="suggestions"></div>
+        </form>
+      </div>
+    <div id="map"></div>
 
-    <button id="takeScreenshot">Take Screenshot</button>
-    <div id="screenshotContainer"></div>
-
-
-    <a href='#' id='export' ; title="You can export Polyline, Polygons & Rectangles">Export Polygons</a>
-    <script src="js/qgis2web_expressions.js"></script>
-    <script src="js/leaflet.js"></script>
-    <script src="js/leaflet-svg-shape-markers.min.js"></script>
-    <script src="js/leaflet.rotatedMarker.js"></script>
-    <script src="js/leaflet.pattern.js"></script>
-    <script src="js/leaflet-hash.js"></script>
-    <script src="js/Autolinker.min.js"></script>
-    <script src="js/rbush.min.js"></script>
-    <script src="js/labelgun.min.js"></script>
-    <script src="js/labels.js"></script>
-    <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-    <script src="js/leaflet-measure.js"></script>
-    <script src="js/leaflet-search.js"></script>
-    <script src="./leaflet-simple-map-screenshoter.js"></script>
-    <script src="https://unpkg.com/file-saver/dist/FileSaver.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
-
-
-    <script src="js/Leaflet.fullscreen.min.js"></script>
-
-    <script src="https://unpkg.com/togeojson@0.14.2"></script>
-    <script src="js/leaflet.filelayer.js"></script>
-    <script src="js/src/Leaflet.draw.js"></script>
-    <script src="js/src/Leaflet.Draw.Event.js"></script>
-    <script src="js/src/Toolbar.js"></script>
-    <script src="js/src/Tooltip.js"></script>
-
-    <script src="js/src/ext/GeometryUtil.js"></script>
-    <script src="js/src/ext/LatLngUtil.js"></script>
-    <script src="js/src/ext/LineUtil.Intersect.js"></script>
-    <script src="js/src/ext/Polygon.Intersect.js"></script>
-    <script src="js/src/ext/Polyline.Intersect.js"></script>
-    <script src="js/src/ext/TouchEvents.js"></script>
-
-    <script src="js/src/draw/DrawToolbar.js"></script>
-    <script src="js/src/draw/handler/Draw.Feature.js"></script>
-    <script src="js/src/draw/handler/Draw.SimpleShape.js"></script>
-    <script src="js/src/draw/handler/Draw.Polyline.js"></script>
-    <script src="js/src/draw/handler/Draw.Marker.js"></script>
-    <script src="js/src/draw/handler/Draw.CircleMarker.js"></script>
-    <script src="js/src/draw/handler/Draw.Circle.js"></script>
-    <script src="js/src/draw/handler/Draw.Polygon.js"></script>
-    <script src="js/src/draw/handler/Draw.Rectangle.js"></script>
-
-
-    <script src="js/src/edit/EditToolbar.js"></script>
-    <script src="js/src/edit/handler/EditToolbar.Edit.js"></script>
-    <script src="js/src/edit/handler/EditToolbar.Delete.js"></script>
-
-    <script src="js/src/Control.Draw.js"></script>
-
-    <script src="js/src/edit/handler/Edit.Poly.js"></script>
-    <script src="js/src/edit/handler/Edit.SimpleShape.js"></script>
-    <script src="js/src/edit/handler/Edit.Marker.js"></script>
-    <script src="js/src/edit/handler/Edit.CircleMarker.js"></script>
-    <script src="js/src/edit/handler/Edit.Circle.js"></script>
-    <script src="js/src/edit/handler/Edit.Rectangle.js"></script>
-
-
-    <script src="js/leaflet-panel-layers.js"></script>
-
-    <script src="js/leaflet.wms.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-
-    <script src="data/ServiceContracts_2.js"></script>
-    <script src="data/AncestralDomain_3.js"></script>
-    <script src="data/ProtectedAreas_4.js"></script>
-    <script src="data/Liquefaction_South_7.js"></script>
-    <script src="data/Liquefaction_North_8.js"></script>
-    <script src="data/ActiveFault_13.js"></script>
-    <script src="data/Seaports_14.js"></script>
-
-    <script src="data/TaalBufferRings_1.js"></script>
-    <script src="data/TaalFissuring_2.js"></script>
-    <script src="data/TaalBallisticProjectiles_3.js"></script>
-    <script src="data/PyroclasticFlow_4.js"></script>
-    <script src="data/Lava_5.js"></script>
-    <script src="data/Lahar_6.js"></script>
-    <script src="data/Volcanoes_7.js"></script>
-    <script src="data/ExistingTL_1.js"></script>
-    <script src="data/TDPTL_2.js"></script>
-    <script src="data/PlantCustomerownedSubstations_3.js"></script>
-    <script src="data/69kVDULoadendSubtations_4.js"></script>
-    <script src="data/500230138115kVExistingSubstations_5.js"></script>
-    <script src="data/500230kVTDPSubstations_6.js"></script>
-
-
-    <script src="data/BarangaysMin_1.js"></script>
-
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <script>
-        var highlightLayer;
+       var searchInput = document.getElementById('searchInput');
+      var searchOption = document.getElementById('searchOption');
+      var form = document.querySelector('form');
+      var map = L.map('map').setView([13.412, 122.565], 6); // Centered on the Philippines
+      var marker;
 
-        function highlightFeature(e) {
-            highlightLayer = e.target;
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(map);
 
-            if (e.target.feature.geometry.type === 'LineString') {
-                highlightLayer.setStyle({
-                    color: '#ffff00',
-                });
-            } else {
-                highlightLayer.setStyle({
-                    fillColor: '#ffff00',
-                    fillOpacity: 1
-                });
-            }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (searchOption.value === 'coordinates') {
+          var coordinates = searchInput.value.split(',');
+          var latitude = parseFloat(coordinates[0].trim());
+          var longitude = parseFloat(coordinates[1].trim());
+
+          if (isNaN(latitude) || isNaN(longitude)) {
+            alert('Please enter valid coordinates.');
+            return;
+          }
+
+          var latLng = L.latLng(latitude, longitude);
+          if (marker) {
+            marker.setLatLng(latLng);
+          } else {
+            marker = L.marker(latLng).addTo(map);
+          }
+          map.setView(latLng, 13);
+        } else if (searchOption.value === 'location') {
+          searchLocation(map, searchInput.value);
+        }
+      });
+
+      function searchLocation(map, query) {
+        // Clear any existing markers on the map
+        if (marker) {
+          map.removeLayer(marker);
         }
 
+        // Use the geocoder to get the location coordinates
+        var geocoder = L.Control.Geocoder.nominatim();
+        geocoder.geocode(query, function (results) {
+          if (results.length > 0) {
+            var location = results[0].center;
 
-        var map = L.map('map', {
+            // Create a marker for the selected location
+            marker = L.marker(location).addTo(map);
 
-            zoomControl: true,
-            maxZoom: 28,
-            minZoom: 1
-
-        }).fitBounds([
-            [5.297953240210605, 112.6829633123504],
-            [19.6527576056475, 132.83557187404648]
-        ]);
-
-
-
-        var fileUploaders = new L.FeatureGroup();
-        map.addLayer(fileUploaders);
-
-
-        L.Control.FileLayerLoad.LABEL = '<img class="icon" src="images/Folder.png" alt="file icon"/>';
-        L.Control.fileLayerLoad({
-            fitBounds: true,
-            featureGroup: fileUploaders,
-            layerOptions: {
-                onEachFeature: function (feature, layer) {
-                    layer.bindPopup("<strong>" + feature.properties.name + "</strong><br/>" + "Area: ~" + L
-                        .GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
-                            layer._defaultShape() : layer.getLatLngs())), true))
-                },
-                style: {
-                    color: 'yellow',
-                    clickable: true,
-                    fillOpacity: .1,
-                    fillColor: '#fff'
-                },
-                pointToLayer: function (data, latlng) {
-                    return L.circleMarker(
-                        latlng, {
-                            style: {
-                                color: 'yellow'
-                            }
-                        }
-                    )
-                }
-            }
-        }).addTo(map).loader.on('data:loaded', function (e) {
-            var layer = e.layer;
-            console.log(layer);
-            fileUploaders.addLayer(layer);
-
+            // Center the map on the selected location
+            map.setView(location, 13);
+          } else {
+            console.log('No results found');
+          }
         });
-
-        window.addEventListener('load', function () {
-            initMap();
-        });
-
-        var hash = new L.Hash(map);
-        map.attributionControl.setPrefix(
-            '<a href="https://products.aspose.app/gis/en/conversion/kmz-to-geojson" title="Fast converter of KMZ files"target="_blank">KMZ/KML to GeoJSON</a> &middot; <a href="https://docs.google.com/presentation/d/1axuiZhPorCGUERwNVxPLmkL-y0abwjHQ74vIZsYIFpg/edit?usp=sharing" title="Step by Step Guide of the SPT Process"target="_blank">Guide</a> &middot; <a href="https://drive.google.com/drive/folders/1HUbun0pdZxTa-Vbz2bwF2uT9WKjz6fhm?usp=sharing" title="Download the Slope Files here!"target="_blank">Slope Per Region</a> &middot; <a href="https://ph.linkedin.com/in/cezar-john-estrada-5a6a31105" title="Developer"target="_blank">CJEstrada</a> &middot; <a href="https://ph.linkedin.com/in/jolanzrodrigo"title="Developer"target="_blank">JRodrigo</a> &middot; <a href="https://ph.linkedin.com/in/wyethsy" title="Consultant"target="_blank">WSy</a>'
-        );
-        var autolinker = new Autolinker({
-            truncate: {
-                length: 30,
-                location: 'smart'
-            }
-        });
-
-        var bounds_group = new L.featureGroup([]);
-
-        function setBounds() {}
-
-        map.createPane('pane_GoogleMapsBasic_0');
-        map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
-        var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleMapsBasic_0',
-            opacity: 0.671,
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 18
-        });
-        layer_GoogleMapsBasic_0;
-
-        map.createPane('pane_GoogleMapsSatellite_1');
-        map.getPane('pane_GoogleMapsSatellite_1').style.zIndex = 100;
-        var layer_GoogleMapsSatellite_1 = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleMapsSatellite_1',
-            opacity: 1.0,
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 25
-        });
-        layer_GoogleMapsSatellite_1;
-        map.addLayer(layer_GoogleMapsSatellite_1);
-
-        map.createPane('pane_GoogleSatelliteHybrid_1');
-        map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
-        var layer_GoogleSatelliteHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleSatelliteHybrid_1',
-            opacity: 1.0,
-            minZoom: 1,
-            maxZoom: 28,
-            minNativeZoom: 0,
-            maxNativeZoom: 25
-        });
-        layer_GoogleSatelliteHybrid_1;
-
-        var osmGeocoder = new L.Control.Geocoder({
-            collapsed: false,
-            position: 'bottomleft',
-        }).addTo(map);
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-            .className += ' fa fa-search';
-        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-            .title += 'Search for a place, such as Barangay, Muncipality, etc.';
-
-        // marker add 
-        var marker = L.marker([83.520162, -33.398438]).addTo(map);
-
-
-        // search button click 
-        $('#search-btn').click(function () {
-            var latlng = $('input').val();
-            var latlngArr = latlng.split(',');
-            var lat = latlngArr[0];
-            var lng = latlngArr[1];
-            map.setView([lat, lng], 16);
-            marker.setLatLng([lat, lng]);
-        });
-
-        map.addControl(new L.Control.Search({
-            layer: layer_500230138115kVExistingSubstations_5,
-            initial: false,
-            textPlaceholder: "Search Existing Substation",
-            hideMarkerOnCollapse: false,
-            propertyName: 'Title'
-        }));
-        document.getElementsByClassName('search-button')[0].className +=
-            ' fa fa-bolt';
-
-        map.addControl(new L.Control.Search({
-            layer: layer_500230kVTDPSubstations_6,
-            initial: false,
-            textPlaceholder: "Search TDP Substation",
-            hideMarkerOnCollapse: false,
-            propertyName: 'Title'
-        }));
-        document.getElementsByClassName('search-button')[1].className +=
-            ' fa fa-bolt';
-
-        map.addControl(new L.Control.Search({
-            layer: layer_69kVDULoadendSubtations_4,
-            initial: false,
-            textPlaceholder: "Search 69kV Substation",
-            hideMarkerOnCollapse: false,
-            propertyName: 'Title'
-        }));
-        document.getElementsByClassName('search-button')[2].className +=
-            ' fa fa-bolt';
-
-
-        map.addControl(new L.Control.Search({
-            layer: layer_ServiceContracts_2,
-            initial: false,
-            textPlaceholder: "Search Power Project",
-            hideMarkerOnCollapse: true,
-            propertyName: 'SWG_Projec'
-        }));
-        document.getElementsByClassName('search-button')[3].className +=
-            ' fa fa-bullseye';
-
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map);
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-            .innerHTML = '';
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
-            .className += ' fas fa-ruler';
-
-
-
-
-
-
-        var drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
-        L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
-
-        map.addControl(new L.Control.Draw({
-            edit: {
-                featureGroup: drawnItems,
-                poly: {
-                    allowIntersection: false
-                }
-            },
-            draw: {
-                polygon: {
-                    allowIntersection: false,
-                    showArea: true
-                }
-            }
-        }));
-
-        // Truncate value based on number of decimals
-        var _round = function (num, len) {
-            return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
-        };
-        // Helper method to format LatLng object (x.xxxxxx, y.yyyyyy)
-        var strLatLng = function (latlng) {
-            return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
-        };
-
-        // Generate popup content based on layer type
-        // - Returns HTML string, or null if unknown object
-        var getPopupContent = function (layer) {
-            // Marker - add lat/long
-            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-                return strLatLng(layer.getLatLng());
-                // Circle - lat/long, radius
-            } else if (layer instanceof L.Circle) {
-                var center = layer.getLatLng(),
-                    radius = layer.getRadius();
-                return "Center: " + strLatLng(center) + "<br />" +
-                    "Radius: ~" + _round(radius, 2) + " m";
-                // Rectangle/Polygon - area
-            } else if (layer instanceof L.Polygon) {
-                var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-                    area = L.GeometryUtil.geodesicArea(latlngs);
-                return "Area: ~" + L.GeometryUtil.readableArea(area, true);
-                // Polyline - distance
-            } else if (layer instanceof L.Polyline) {
-                var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-                    distance = 0;
-                if (latlngs.length < 2) {
-                    return "Distance: N/A";
-                } else {
-                    for (var i = 0; i < latlngs.length - 1; i++) {
-                        distance += latlngs[i].distanceTo(latlngs[i + 1]);
-                    }
-                    return "Distance: ~" + _round(distance, 2) + " m";
-                }
-            }
-            return null;
-        };
-
-        // Object created - bind popup to layer, add to feature group
-        map.on(L.Draw.Event.CREATED, function (event) {
-            var layer = event.layer;
-            var content = getPopupContent(layer);
-            if (content !== null) {
-                layer.bindPopup(content);
-            }
-            drawnItems.addLayer(layer);
-        });
-
-        // Object(s) edited - update popups
-        map.on(L.Draw.Event.EDITED, function (event) {
-            var layers = event.layers,
-                content = null;
-            layers.eachLayer(function (layer) {
-                content = getPopupContent(layer);
-                if (content !== null) {
-                    layer.setPopupContent(content);
-                }
-            });
-        });
-
-
-        document.getElementById('export').onclick = function (e) {
-            // Extract GeoJson from featureGroup
-            var data = drawnItems.toGeoJSON();
-
-            // Stringify the GeoJson
-            var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
-
-            // Create export
-            document.getElementById('export').setAttribute('href', 'data:' + convertedData);
-            document.getElementById('export').setAttribute('download', 'data.geojson');
-        }
-
-        var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
-            compact: false,
-            collapsed: false,
-            selectorGroup: true,
-            collapsibleGroups: true
-        });
-
-        map.addControl(panelLayers);
-
-
+      }
     </script>
 </body>
 

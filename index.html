@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="css/L.Control.Sidebar.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
   <link rel="stylesheet" href="css/leaflet-panel-layers.css">
-  <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+  <!-- <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css"> -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/leaflet-search.css">
   <link rel="stylesheet" href="css/search-control.css">
@@ -20,10 +21,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
   </script>
   <script src="js/leaflet.js"></script>
   <script src="js/leaflet-svg-shape-markers.min.js"></script>
@@ -37,7 +38,8 @@
   <script src="js/leaflet-geotiff.js"></script>
   <script src="https://unpkg.com/geotiff@2.0.7/dist-browser/geotiff.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-  <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+  <!-- <script src="js/leaflet-control-geocoder.Geocoder.js"></script> -->
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
   <script src="js/leaflet-search.js"></script>
   <script src="js/leaflet-measure.js"></script>
   <script src="js/leaflet-panel-layers.js"></script>
@@ -151,27 +153,44 @@
       </div>
       <div class="search-bar">
         <div class="input-group">
-          <select class="form-select-sm">
-            <option selected>Select layer</option>
+          <select class="form-select" id="searchOption">
+            <option selected>Select options</option>
             <option value="coordinates">Coordinates</option>
             <option value="location">Location</option>
             <option value="substation">Substation</option>
           </select>
-          <form class="col-lg-auto mb-3 mb-lg-0 me-lg-3 sm">
-            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+
+          <form class="mb-auto" style="background-color: #164575;">
+            <input type="search" class="form-control" id="searchInput" placeholder="Search...">
+            <div id="suggestions"></div>
           </form>
+
+
           <div id="right-bar" class="right-bar">
             <button class="btn btn-outline-light me-2">Layers</button>
           </div>
         </div>
 
 
-      <!-- <div id="right-bar" class="right-bar">
+        <!-- <div class="dropdown"> -->
+        <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Search options
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Coordinates</a></li>
+              <li><a class="dropdown-item" href="#">Location</a></li>
+              <li><a class="dropdown-item" href="#">Substation</a></li>
+            </ul> -->
+        <!-- </div> -->
+
+
+        <!-- <div id="right-bar" class="right-bar">
         <span></span>
         <span></span>
         <span></span>
       </div> -->
-    </div>
+      </div>
     </div>
   </div>
 
@@ -271,6 +290,34 @@
       </div>
     </div>
 
+    <hr class="sidebar-spacer">
+
+    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 5px;">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="toggleCheckbox">
+            <label class="form-check-label" for="toggleCheckbox">Irradiance Map</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="WStoggleCheckbox">
+            <label class="form-check-label" for="WStoggleCheckbox">Wind Speed Map</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="SLPtoggleCheckbox">
+            <label class="form-check-label" for="SLPtoggleCheckbox">Slope Map</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="sidebar-spacer">
+
+
     <!-- Tile Layers -->
     <h1 class="sidebar-header common-header" style="margin-bottom: 10px; margin-top: 20px;">
       <i class="fa-solid fa-tiles sbheader-icon"></i>
@@ -285,17 +332,17 @@
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-GHISLP"
             onchange="toggleTileLayer(layer_GHISLP, this.checked)">
-          <label class="form-check-label" for="chk-GHISLP">GHISLP</label>
+          <label class="form-check-label" for="chk-GHISLP">GHI x Slope</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
             onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
-          <label class="form-check-label" for="chk-IRDGHI">IRDGHI</label>
+          <label class="form-check-label" for="chk-IRDGHI">Solar Irradiance, kWh/m²</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
             onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
-          <label class="form-check-label" for="chk-SLPSLR">SLPSLR</label>
+          <label class="form-check-label" for="chk-SLPSLR">Slope Caps - Solar</label>
         </div>
       </div>
     </div>
@@ -309,17 +356,17 @@
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-WSSLP"
             onchange="toggleTileLayer(layer_WSSLP, this.checked)">
-          <label class="form-check-label" for="chk-WSSLP">WSSLP</label>
+          <label class="form-check-label" for="chk-WSSLP">Wind x Slope</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-WS"
             onchange="toggleTileLayer(layer_WS, this.checked)">
-          <label class="form-check-label" for="chk-WS">WS</label>
+          <label class="form-check-label" for="chk-WS">Wind Speed, m/s</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-SLPWD"
             onchange="toggleTileLayer(layer_SLPWD, this.checked)">
-          <label class="form-check-label" for="chk-SLPWD">SLPWD</label>
+          <label class="form-check-label" for="chk-SLPWD">Slope Caps - Wind</label>
         </div>
       </div>
     </div>
@@ -333,7 +380,7 @@
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-SLP"
             onchange="toggleTileLayer(layer_SLP, this.checked)">
-          <label class="form-check-label" for="chk-SLP">SLP</label>
+          <label class="form-check-label" for="chk-SLP">Slope</label>
         </div>
       </div>
     </div>
@@ -811,6 +858,138 @@
       var philippines = L.latLng(12.8797, 121.7740);
       map.setView(philippines, 6);
 
+      // Start of Universal Search
+      var searchInput = document.getElementById('searchInput');
+      var searchOption = document.getElementById('searchOption');
+      var form = document.querySelector('form');
+      var suggestionsDiv = document.getElementById('suggestions');
+      var geocoder;
+      var marker;
+      var suggestionsShown = false; // Flag to track if suggestions are shown
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (searchOption.value === 'location') {
+          searchLocationByAddress(map, searchInput.value);
+        } else if (searchOption.value === 'coordinates') {
+          console.log('Coordinates search selected');
+        } else if (searchOption.value === 'substation') {
+          console.log('Substation search selected');
+        }
+      });
+
+      // Geocoder - Location
+      geocoder = L.Control.Geocoder.nominatim();
+      searchInput.addEventListener('input', function (event) {
+        var query = event.target.value;
+        if (query.length > 2 && searchOption.value === 'location' && !suggestionsShown) {
+          geocoder.geocode(query, function (results) {
+            showSuggestions(results);
+          });
+        } else if (query.length === 0) {
+          clearSuggestions();
+        }
+      });
+
+      // Event listener for the coordinates input
+      document.getElementById('searchInput').addEventListener('input', function (event) {
+        if (searchOption.value === 'coordinates') {
+          var coordinates = event.target.value.split(',');
+          if (coordinates.length !== 2) {
+            // Clear the marker if coordinates are not in the correct format
+            if (marker) {
+              map.removeLayer(marker);
+              marker = null;
+            }
+            return;
+          }
+
+          var latitude = parseFloat(coordinates[0].trim());
+          var longitude = parseFloat(coordinates[1].trim());
+
+          if (isNaN(latitude) || isNaN(longitude)) {
+            // Clear the marker if coordinates are not valid numbers
+            if (marker) {
+              map.removeLayer(marker);
+              marker = null;
+            }
+            return;
+          }
+
+          var latLng = L.latLng(latitude, longitude);
+          marker = L.marker(latLng).addTo(map);
+          if (marker) {
+            marker.setLatLng(latLng);
+            displayPopup(latLng, coordinates);
+          } else {
+            marker = L.marker(latLng).addTo(map);
+            displayPopup(latLng, coordinates);
+          }
+          map.setView(latLng, 16);
+          displayPopup(latLng, coordinates);
+
+          console.log('Coordinates search selected');
+        }
+      });
+
+      function searchLocationByAddress(map, query) {
+        // Clear any existing markers on the map
+        map.eachLayer(function (layer) {
+          if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+          }
+        });
+        // Use the geocoder to get the location coordinates
+        geocoder.geocode(query, function (results) {
+          if (results.length > 0) {
+            var location = results[0].center;
+            marker = L.marker(location).addTo(map);
+            map.setView(location, 16);
+            displayPopup(location, results[0].name);
+          } else {
+            console.log('No results found');
+          }
+        });
+      }
+
+      // Show suggested list based on location search
+      function showSuggestions(results) {
+        clearSuggestions();
+        if (results.length > 0) {
+          var div = document.createElement('div');
+          div.classList.add('card');
+          results.forEach(function (result) {
+            var suggestionItem = document.createElement('div');
+            suggestionItem.classList.add('suggestion-item');
+            suggestionItem.textContent = result.name;
+            suggestionItem.addEventListener('click', function () {
+              searchInput.value = result.name;
+              clearSuggestions();
+              searchLocationByAddress(map, result.name);
+            });
+            div.appendChild(suggestionItem);
+          });
+          suggestionsDiv.appendChild(div);
+          suggestionsShown = true; // Set suggestions shown flag
+        }
+      }
+
+      function clearSuggestions() {
+        suggestionsDiv.innerHTML = '';
+        suggestionsShown = false; // Reset suggestions shown flag
+      }
+
+      function displayPopup(latLng, content) {
+        var popupContent = '<b>' + (searchOption.value === 'location' ? 'Location' : 'Coordinates') + ':</b><br>' +
+          content;
+        marker.bindPopup(popupContent).openPopup();
+      }
+
+      // End of Universal Search
+
+
+
       // Sidebar easybutton
       L.easyButton({
         states: [{
@@ -826,18 +1005,6 @@
 
 
 
-
-      // Create a custom delete all polygons button
-      var deleteAllButton = L.easyButton({
-        states: [{
-          stateName: 'delete-all',
-          icon: 'fa-trash',
-          title: 'Delete All',
-          onClick: function (btn, map) {
-            drawnItems.clearLayers();
-          }
-        }]
-      }).addTo(map);
 
       // Create the settings-card EasyButton
       L.easyButton({
@@ -1098,9 +1265,11 @@
         'https://github.com/czrxstrd4/IRDGHI/raw/main/IRDGHI/{z}/{x}/{y}.png');
       const layer_SLPSLR = createTileLayer('SLPSLR',
         'https://github.com/czrxstrd4/SLPSLR/raw/main/SLPSLR/{z}/{x}/{y}.png');
-      const layer_WSSLP = createTileLayer('WSSLP', 'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
+      const layer_WSSLP = createTileLayer('WSSLP',
+        'https://github.com/czrxstrd4/WSSLP/raw/main/WSSLP/{z}/{x}/{y}.png');
       const layer_WS = createTileLayer('WS', 'https://github.com/czrxstrd4/WS/raw/main/WS/{z}/{x}/{y}.png');
-      const layer_SLPWD = createTileLayer('SLPWD', 'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
+      const layer_SLPWD = createTileLayer('SLPWD',
+        'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
       const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
 
       function toggleTileLayer(layer, checked) {
@@ -1140,7 +1309,8 @@
           toggleNestedCheckbox(nestedCheckbox);
         });
 
-        mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length === document
+        mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length ===
+          document
           .querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']:checked`).length;
       }
 
@@ -1170,56 +1340,66 @@
       });
 
       //Geocoder
-      var osmGeocoder = new L.Control.Geocoder({
-        collapsed: false,
-        position: 'bottomleft',
-      }).addTo(map);
+      // var osmGeocoder = new L.Control.Geocoder({
+      //         collapsed: false,
+      //         position: 'bottomleft',
+      //       }).addTo(map);
 
-      document.getElementsByClassName('leaflet-control-geocoder-icon')[0].className += ' fa fa-map-location-dot';
-      document.getElementsByClassName('leaflet-control-geocoder-icon')[0].title +=
-        'Search for a place, such as Barangay, Muncipality, etc.';
+      //       document.getElementsByClassName('leaflet-control-geocoder-icon')[0].className += ' fa fa-map-location-dot';
+      //       document.getElementsByClassName('leaflet-control-geocoder-icon')[0].title +=
+      //         'Search for a place, such as Barangay, Muncipality, etc.';
+
+      // Code A: Initialize osmGeocoder
+      // Create the geocoder control
+
+
+
+
+
+
+
 
       // Custom control for coordinates input
-      var CoordinatesInputControl = L.Control.extend({
-        options: {
-          position: 'bottomleft'
-        },
+      // var CoordinatesInputControl = L.Control.extend({
+      //   options: {
+      //     position: 'bottomleft'
+      //   },
 
-        onAdd: function (map) {
-          var container = L.DomUtil.create('div', 'coordinates-input-control leaflet-bar');
-          container.innerHTML = `
-          <input type="text" id="coordinates" placeholder="Search for Longitude, Latitude" />
-        `;
-          L.DomEvent.disableClickPropagation(container);
-          return container;
-        }
-      });
+      //   onAdd: function (map) {
+      //     var container = L.DomUtil.create('div', 'coordinates-input-control leaflet-bar');
+      //     container.innerHTML = `
+      //     <input type="text" id="coordinates" placeholder="Search for Longitude, Latitude" />
+      //   `;
+      //     L.DomEvent.disableClickPropagation(container);
+      //     return container;
+      //   }
+      // });
 
-      // Add the custom control to the map
-      var coordinatesInputControl = new CoordinatesInputControl().addTo(map);
+      // // Add the custom control to the map
+      // var coordinatesInputControl = new CoordinatesInputControl().addTo(map);
 
-      // Add a marker to the map
-      var marker = L.marker([0, 0]).addTo(map);
-      marker.setOpacity(0);
+      // // Add a marker to the map
+      // var marker = L.marker([0, 0]).addTo(map);
+      // marker.setOpacity(0);
 
-      // Event listener for the coordinates input
-      document.getElementById('coordinates').addEventListener('keydown', function (event) {
-        if (event.keyCode === 13) {
-          var coordinates = event.target.value.split(',');
-          var latitude = parseFloat(coordinates[0]);
-          var longitude = parseFloat(coordinates[1]);
+      // // Event listener for the coordinates input
+      // document.getElementById('coordinates').addEventListener('keydown', function (event) {
+      //   if (event.keyCode === 13) {
+      //     var coordinates = event.target.value.split(',');
+      //     var latitude = parseFloat(coordinates[0]);
+      //     var longitude = parseFloat(coordinates[1]);
 
-          if (isNaN(latitude) || isNaN(longitude)) {
-            alert('Please enter valid coordinates.');
-            return;
-          }
+      //     if (isNaN(latitude) || isNaN(longitude)) {
+      //       alert('Please enter valid coordinates.');
+      //       return;
+      //     }
 
-          var latLng = L.latLng(latitude, longitude);
-          marker.setLatLng(latLng);
-          marker.setOpacity(1);
-          map.setView(latLng, map.getZoom());
-        }
-      });
+      //     var latLng = L.latLng(latitude, longitude);
+      //     marker.setLatLng(latLng);
+      //     marker.setOpacity(1);
+      //     map.setView(latLng, map.getZoom());
+      //   }
+      // });
 
 
       //Calculator--------------------------------------------------------------------------------------------------
@@ -1231,15 +1411,19 @@
         var total_area = parseFloat(document.getElementById("total_area").value);
 
         if (ghi > 0 && slope > 0 && tl_distance > 0 && purchase_price > 0 && total_area > 0) {
-          var result = Math.round((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 + (
-            slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
-            tl_distance)) / 10) + 1)) * 0.2329 + (purchase_price < 150 ? 10 : purchase_price > 350 ? 1 : (((9 *
+          var result = Math.round((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 +
             (
-              350 -
-              purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 : ((-
-            0.000000000122212 * Math.pow(total_area, 5)) + (0.000000127783385 * Math.pow(total_area, 4)) - (
-            0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) - (
-            0.818987139682201 * total_area) + 24.612688789833400)) * 0.3414, 1);
+              slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
+              tl_distance)) / 10) + 1)) * 0.2329 + (purchase_price < 150 ? 10 : purchase_price > 350 ? 1 : (((
+              9 *
+              (
+                350 -
+                purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 : ((-
+                0.000000000122212 * Math.pow(total_area, 5)) + (0.000000127783385 * Math.pow(total_area, 4)) -
+              (
+                0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) -
+              (
+                0.818987139682201 * total_area) + 24.612688789833400)) * 0.3414, 1);
           document.getElementById("result").value = result;
         } else {
           alert("Please enter valid input values for all fields!");
@@ -1250,16 +1434,16 @@
       // Function to handle KML, KMZ, and GeoJSON files
 
       //  // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-      //  L.easyButton({
-      //   states: [{
-      //     stateName: 'upload-file',
-      //     icon: 'fa-file-import',
-      //     title: 'Upload KML/KMZ/GeoJSON',
-      //     onClick: function (control) {
-      //       holder_fileInput.click();
-      //     }
-      //   }]
-      // }).addTo(map);
+       L.easyButton({
+        states: [{
+          stateName: 'upload-file',
+          icon: 'fa-file-import',
+          title: 'Upload KML/KMZ/GeoJSON',
+          onClick: function (control) {
+            holder_fileInput.click();
+          }
+        }]
+      }).addTo(map);
 
 
 
@@ -1350,16 +1534,19 @@
       // }
 
       // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-      L.easyButton({
-        states: [{
-          stateName: 'upload-file',
-          icon: 'fa-file-import',
-          title: 'Upload KML/KMZ/GeoJSON',
-          onClick: function (control) {
-            fileInput.click();
-          }
-        }]
-      }).addTo(map);
+      // L.easyButton({
+      //   states: [{
+      //     stateName: 'upload-file',
+      //     icon: 'fa-file-import',
+      //     title: 'Upload KML/KMZ/GeoJSON',
+      //     onClick: function (control) {
+      //       fileInput.click();
+      //     }
+      //   }]
+      // }).addTo(map);
+
+
+
 
       // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
       var fileInput = document.createElement('input');
@@ -1411,7 +1598,8 @@
               console.error('Layer is not a valid shape');
               return;
             }
-            const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ? layer
+            const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+              layer
               ._defaultShape() : layer.getLatLngs())), true);
             const name = feature.properties.name || 'Unnamed feature';
             layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
@@ -1439,6 +1627,17 @@
 
       //_____________________________________________________________________________________________________________________________________________
 
+      // Create a custom delete all polygons button
+      var deleteAllButton = L.easyButton({
+        states: [{
+          stateName: 'delete-all',
+          icon: 'fa-trash',
+          title: 'Delete All',
+          onClick: function (btn, map) {
+            drawnItems.clearLayers();
+          }
+        }]
+      }).addTo(map);
 
       //_____________________________________________________________________________________________________________________________________________
 
@@ -2412,123 +2611,10 @@
 
 
       //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
-      var searchInput = L.DomUtil.get('searchInput');
-      var searchButton = L.DomUtil.get('searchButton');
-      var searchDropdown = L.DomUtil.get('searchDropdown');
-
-      // Hide the layers initially
-      [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-        layer_500230kVTDPSubstations_6
-      ]
-      .forEach(function (layer) {
-        layer.removeFrom(map);
-      });
-
-      searchInput.addEventListener('input', function () {
-        var searchTerm = searchInput.value.trim();
-        var matchingTitles = [];
-
-        if (searchTerm === '') {
-          clearDropdownMenu();
-        } else {
-          // Iterate over each layer and search for matching titles
-          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-            layer_500230kVTDPSubstations_6
-          ].forEach(function (layer) {
-            layer.eachLayer(function (subLayer) {
-              var title = subLayer.feature.properties.Title;
-              if (title.toLowerCase().includes(searchTerm.toLowerCase())) {
-                matchingTitles.push({
-                  title: title,
-                  layer: subLayer
-                });
-                subLayer.setStyle({
-                  opacity: 1
-                });
-              } else {
-                subLayer.setStyle({
-                  opacity: 0
-                });
-              }
-            });
-          });
-
-          updateDropdownMenu(matchingTitles);
-        }
-      });
 
 
 
-      function updateDropdownMenu(titles) {
-        clearDropdownMenu();
 
-        titles.forEach(function (item) {
-          var dropdownItem = document.createElement('li');
-          dropdownItem.classList.add('dropdown-item');
-          dropdownItem.textContent = item.title;
-          dropdownItem.addEventListener('click', function () {
-            searchInput.value = item.title;
-            clearDropdownMenu();
-            map.flyTo(item.layer.getLatLng(), 12);
-            showLayers();
-          });
-          searchDropdown.appendChild(dropdownItem);
-        });
-
-        if (titles.length > 0) {
-          searchDropdown.style.display = 'block';
-        } else {
-          searchDropdown.style.display = 'none';
-        }
-      }
-
-      function clearDropdownMenu() {
-        searchDropdown.innerHTML = '';
-        searchDropdown.style.display = 'none';
-      }
-
-      searchButton.addEventListener('click', function () {
-        var searchTerm = searchInput.value;
-
-        var matchingLayer = null;
-        [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-          layer_500230kVTDPSubstations_6
-        ]
-        .forEach(function (layer) {
-          layer.eachLayer(function (subLayer) {
-            var title = subLayer.feature.properties.Title;
-            if (title === searchTerm) {
-              matchingLayer = subLayer;
-              subLayer.setStyle({
-                opacity: 1
-              });
-            } else {
-              subLayer.setStyle({
-                opacity: 0
-              });
-            }
-          });
-        });
-
-        if (matchingLayer) {
-          map.flyTo(matchingLayer.getLatLng(), 12);
-          showLayersAfterMove();
-        }
-      });
-
-      map.on('moveend', showLayersAfterMove);
-
-      function showLayersAfterMove() {
-        var zoom = map.getZoom();
-        if (zoom >= 12) {
-          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
-            layer_500230kVTDPSubstations_6
-          ]
-          .forEach(function (layer) {
-            layer.addTo(map);
-          });
-        }
-      }
       //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
       // Get the upload shapefile button element
       // var uploadShapefileButton = document.getElementById('fileInput');
@@ -2576,7 +2662,8 @@
                 console.error('Layer is not a valid shape');
                 return;
               }
-              const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ? layer
+              const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+                layer
                 ._defaultShape() : layer.getLatLngs())), true);
               const name = feature.properties.name || 'Unnamed feature';
               layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
