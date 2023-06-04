@@ -12,11 +12,11 @@ body {
 }
 
 .header {
-  background-color: #001d3d;
-  /* background: linear-gradient(to right, #001d3d, #164575); */
-  color: white;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  background-color: #001d3d;
+  color: white;
   padding: 6px;
   position: fixed;
   top: 0;
@@ -24,6 +24,12 @@ body {
   width: 100%;
   z-index: 9999;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  /* background-color: #f0f0f0c8; */
 }
 
 .logo {
@@ -38,6 +44,9 @@ body {
   font-size: 24px;
   font-weight: 400;
   font-family: "Roboto Condensed", Arial, sans-serif;
+  margin-left: 3px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .logo-container {
@@ -50,6 +59,44 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+}
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px; 
+}
+
+.form-select {
+  width: 100px; /* Adjust the width as desired */
+}
+
+.form-control {
+  width: 300px; /* Adjust the width as desired */
+}
+
+.right-bar {
+  margin-left: auto;
+}
+
+.form-select {
+  width: 150px;
+
+}
+
+.form-control {
+  width: 350px;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
 }
 
 .animated-button {
@@ -367,7 +414,7 @@ body {
   margin-bottom: 10px;
 }
 
-.right-bar {
+/* .right-bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -378,6 +425,14 @@ body {
   margin-top: 5px;
   margin-left: auto;
   margin-right: 10px;
+} */
+
+.right-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 3px;
 }
 
 
@@ -446,31 +501,3 @@ body {
 }
 
 
-/* Search bar */
-.search-bar {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 20px; /* Adjust the height as desired */
-  padding: 0; /* Remove padding */
-  margin-left: 300px;
-  margin-right: 300px;
-}
-
-.form-select {
-  width: 100px;
-
-}
-
-.form-control {
-  width: 300px;
-}
-
-.btn-primary {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Center the text horizontally within the button */
-  height: 40px;
-  /* padding: 0 10px; */
-}

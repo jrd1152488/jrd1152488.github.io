@@ -138,38 +138,104 @@
 
   <div class="header-container">
     <div class="header">
-      <div class="logo-container">
-        <img src="AP Emblem.png" alt="AP Emblem" class="logo">
+      <div class="title">
+        <div class="logo-container">
+          <img src="AP Emblem.png" alt="AP Emblem" class="logo">
+        </div>
+        <div class="header-content">
+          <span class="header-text"
+            style="color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ARI MARKET STRATEGY
+            -
+            SPT</span>
+        </div>
       </div>
-      <div class="header-content">
-        <span class="header-text" style="color: #f0f0f0;">ARI MARKET STRATEGY - SPT</span>
-      </div>
-      <div class="search-bar" style="right: 0px;">
+      <div class="search-bar">
         <div class="input-group">
-          <select class="form-select">
+          <select class="form-select-sm">
             <option selected>Select layer</option>
             <option value="coordinates">Coordinates</option>
             <option value="location">Location</option>
             <option value="substation">Substation</option>
           </select>
-          <input type="searchText" class="form-control" placeholder="Search...">
-          <button class="btn btn-primary" type="button">Search</button>
+          <form class="col-lg-auto mb-3 mb-lg-0 me-lg-3 sm">
+            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+          </form>
+          <div id="right-bar" class="right-bar">
+            <button class="btn btn-outline-light me-2">Layers</button>
+          </div>
         </div>
-      </div>
-      <div id="right-bar" class="right-bar">
+
+
+      <!-- <div id="right-bar" class="right-bar">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </div> -->
+    </div>
     </div>
   </div>
 
 
-  <div id="right-menu">
+  <!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-4">Sidebar</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Orders
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+          Products
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          Customers
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong>mdo</strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="#">New project...</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><a class="dropdown-item" href="#">Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div> -->
+
+
+  <!-- <div id="right-menu">
     <div id="right-bar" class="right-bar">
       <i class="fas fa-bars"></i>
     </div>
-  </div>
+  </div> -->
 
   <div id="settings-card" class="settings-card">
     <i class="fa-solid fa-cogs"></i>
