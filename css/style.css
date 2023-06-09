@@ -103,7 +103,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 30px;
 }
 
 .animated-button {
@@ -122,8 +122,8 @@ body {
 }
 
 .suitability-content {
-font-size: 12px;
-font-family: "Roboto", Arial, sans-serif;
+  font-size: 12px;
+  font-family: "Roboto", Arial, sans-serif;
 }
 
 #calculator table td {
@@ -369,19 +369,6 @@ font-family: "Roboto", Arial, sans-serif;
   margin-left: 5px;
 }
 
-/* .right-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  margin-top: 5px;
-  margin-left: auto;
-  margin-right: 10px;
-} */
-
 .right-bar {
   display: flex;
   flex-direction: column;
@@ -390,7 +377,6 @@ font-family: "Roboto", Arial, sans-serif;
   margin-right: 5px;
   margin-left: 5px;
 }
-
 
 .right-bar span {
   display: block;
@@ -411,6 +397,10 @@ font-family: "Roboto", Arial, sans-serif;
 
 .right-bar.open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+}
+
+.layer-text {
+  padding: 0px;
 }
 
 .sidebar-three {
@@ -503,13 +493,16 @@ font-family: "Roboto", Arial, sans-serif;
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(0.9);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 .easy-btn-all {
   width: 100px;
   height: 100px;
