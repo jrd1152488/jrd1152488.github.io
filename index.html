@@ -6,10 +6,10 @@
   <title>Web Map</title>
 
   <link rel="stylesheet" href="css/leaflet.css">
-  <link rel="stylesheet" href="js/src/leaflet.draw.css">
+  <link rel="stylesheet" href="css/leaflet.draw.css">
   <link rel="stylesheet" href="css/leaflet-measure.css">
   <link rel="stylesheet" href="css/L.Control.Sidebar.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <link rel="stylesheet" href="css/easy-button.css">
   <link rel="stylesheet" href="css/leaflet-panel-layers.css">
   <!-- <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css"> -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
@@ -26,19 +26,24 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/simplebar@5.3.4/dist/simplebar.min.css" /> -->
+  <link rel="stylesheet" href="css/OverlayScrollbars.css">
+
+
+
   <script src="js/leaflet.js"></script>
   <script src="js/leaflet-svg-shape-markers.min.js"></script>
   <script src="js/leaflet.rotatedMarker.js"></script>
   <script src="js/leaflet.pattern.js"></script>
   <script src="js/Autolinker.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+  <script src="js/leaflet.draw.js"></script>
   <script src="js/leaflet-measure-path.js"></script>
   <script src="js/L.Control.Sidebar.js"></script>
   <script src="https://unpkg.com/leaflet-ajax@2.1.0/dist/leaflet.ajax.min.js"></script>
   <script src="js/leaflet-geotiff.js"></script>
   <script src="https://unpkg.com/geotiff@2.0.7/dist-browser/geotiff.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-  <!-- <script src="js/leaflet-control-geocoder.Geocoder.js"></script> -->
+  <script src="js/easy-button.js"></script>
   <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
   <script src="js/leaflet-search.js"></script>
   <script src="js/leaflet-measure.js"></script>
@@ -61,6 +66,8 @@
   <script src="js/src/Leaflet.Draw.Event.js"></script>
   <script src="js/src/Toolbar.js"></script>
   <script src="js/src/Tooltip.js"></script>
+
+  <!-- <script src="https://unpkg.com/simplebar@5.3.4/dist/simplebar.min.js"></script> -->
 
   <!-- Geoblaze -->
   <script src="https://unpkg.com/georaster"></script>
@@ -88,8 +95,6 @@
   <script src="data/ServiceContractMap_1.js"></script>
   <script src="data/AncestralDomain_3.js"></script>
   <script src="data/ProtectedAreas_4.js"></script>
-  <!-- <script src="data/Liquefaction_South_7.js"></script>
-  <script src="data/Liquefaction_North_8.js"></script> -->
   <script src="data/ActiveFault_13.js"></script>
   <script src="data/Seaports_14.js"></script>
 
@@ -131,6 +136,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <script src="js/OverlayScrollbars.js"></script>
+
   <style>
 
   </style>
@@ -153,36 +160,19 @@
       </div>
       <div class="search-bar">
         <div class="input-group">
-          <select class="form-select" id="searchOption">
-            <option selected>Select options</option>
-            <option value="coordinates">Coordinates</option>
-            <option value="location">Location</option>
-            <option value="substation">Substation</option>
+          <select class="form-select bg-transparent" id="searchOption" style="color: #f0f0f0;">
+            <option style="color: #202020;" selected>Select options</option>
+            <option style="color: #202020;" value="coordinates">Coordinates</option>
+            <option style="color: #202020;" value="location">Location</option>
+            <option style="color: #202020;" value="substation">Substation</option>
           </select>
 
-          <form class="mb-auto">
-            <input type="search" class="form-control" id="searchInput" placeholder="Search...">
+
+          <form class="mb-auto" style="color: #f0f0f0;">
+            <input type="search" class="form-control transparent-input" id="searchInput" placeholder="Search..." />
             <div id="suggestions"></div>
           </form>
 
-
-          <!-- <div id="right-bar" class="right-bar">
-            <button class="btn btn-outline-light me-2">Layers</button>
-          </div>
-        </div> -->
-
-
-          <!-- <div class="dropdown"> -->
-          <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Search options
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Coordinates</a></li>
-              <li><a class="dropdown-item" href="#">Location</a></li>
-              <li><a class="dropdown-item" href="#">Substation</a></li>
-            </ul> -->
-          <!-- </div> -->
 
 
           <div id="right-bar" class="right-bar">
@@ -191,106 +181,64 @@
             <span></span>
             <label class="layer-text"
               style="padding: 0px; margin-top: -2px; margin-bottom: -5px; font-size: 10px;">Layers</label>
+
           </div>
         </div>
       </div>
     </div>
 
-
-    <!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
-        </a>
-      </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-      </ul>
-    </div>
-  </div> -->
-
-
-    <!-- <div id="right-menu">
-    <div id="right-bar" class="right-bar">
-      <i class="fas fa-bars"></i>
-    </div>
-  </div> -->
-
     <div id="settings-card" class="settings-card">
       <i class="fa-solid fa-circle-info"></i>
     </div>
 
-
-    <div id="floating-card" class="floating-card">
-      <h1 class="sidebar-header common-header" style="margin-top: 10px;">
-        <i class="fa-solid fa-calculator sbheader-icon"></i>
-        <span class="sbheader-text">Layer Selection</span>
-      </h1>
-      <div class="d-flex flex-column" style="margin-bottom: 5px;">
-
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
-            onchange="toggleLayer('layer_GoogleMapsSatellite_1', this.checked)" checked>
-          <label class="form-check-label" for="googSat">Satellite</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
-            onchange="toggleLayer('layer_GoogleSatelliteHybrid_1', this.checked)">
-          <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
-            onchange="toggleLayer('layer_GoogleMapsBasic_0', this.checked)">
-          <label class="form-check-label" for="GoogBase">Base Map</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
-            onchange="toggleLayer('layer_planetNICFI', this.checked)">
-          <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
+    <div id="sidebar-three" class="sidebar-three">
+      <div class="container custom-scrollbar">
+        <div class="text-center">
+          <h1 class="sidebar-header common-header credit-h1">
+            ARI Market Strategy
+          </h1>
+          <h2 class="credit-h2">
+            Strategic Pipeline Targeting
+          </h2>
+          <p class="credit-text">
+            Website content © APC <br>
+            - All rights reserved. Unauthorized use and/or duplication of this material without express and written
+            permission from the website's owner is strictly prohibited.
+          </p>
         </div>
       </div>
+    </div>
+  </div>
+
+
+  <div id="floating-card" class="floating-card">
+    <h1 class="sidebar-header common-header" style="margin-top: 10px;">
+      <i class="fa-solid fa-calculator sbheader-icon"></i>
+      <span class="sbheader-text">Layer Selection</span>
+    </h1>
+    <div class="d-flex flex-column" style="margin-bottom: 5px;">
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
+          onchange="toggleLayer('layer_GoogleMapsSatellite', this.checked)" checked>
+        <label class="form-check-label" for="googSat">Satellite</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
+          onchange="toggleLayer('layer_GoogleSatelliteHybrid', this.checked)">
+        <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
+          onchange="toggleLayer('layer_GoogleMapsBasic', this.checked)">
+        <label class="form-check-label" for="GoogBase">Base Map</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
+          onchange="toggleLayer('layer_planetNICFI', this.checked)">
+        <label class="form-check-label" for="planetNICFI">Live Satellite (April 2023)</label>
+      </div>
+
 
       <hr class="sidebar-spacer">
 
@@ -548,19 +496,9 @@
         </div>
       </div>
     </div>
-
-    <div id="sidebar-three" class="sidebar-three">
-      <!-- <div class="container"> -->
-      <div class="container custom-scrollbar">
-        <h1 class="sidebar-header common-header">
-          <i class="fa-solid fa-calculator sbheader-icon"></i>
-          <span class="sbheader-text">Layer Select</span>
-          <!-- <span class="sidebar-close"></span> -->
-        </h1>
-        <!-- Add additional content here -->
-      </div>
-    </div>
   </div>
+
+
 
 
   <div id="sidebar-calc" class="sidebar-calc" style="padding: 2px; width: 400px;">
@@ -568,12 +506,11 @@
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
           <div class="sidebar-pane" id="geotiff">
-
             <!-- Raster Calculator -->
             <div class="sidebar-pane" id="geotiff">
               <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;;">
                 <i class="fa-solid fa-layer-group sbheader-icon"></i>
-                <span style="font-size: 22px;" class="sbheader-text">Area Suitability</span>
+                <span style="font-size: 22px;" class="sbheader-text"><strong>Area Suitability</strong></span>
               </h1>
 
               <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -596,83 +533,84 @@
                 </div>
                 <div class="suitability-content">
                   <div style="display: flex; justify-content: left; align-items: center; font-size: 12px;">
-                    <div class="card" style="width: 24rem;">
+                    <div class="card-header border border-light rounded" style="width: 24rem;">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                          <!-- <p><i class="fa-regular fa-sun custom-icon"></i>
-                            <span class="custom-heading">Irradiance:</span>
-                          </p> -->
+
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-regular fa-sun custom-icon"></i>
                           <span class="custom-heading">Irradiance:</span>
                           <br>
-                          <span id="GHIstatisticss" class="custom-text"></span>
+                          <span id="GHIstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-wind custom-icon"></i>
                           <span class="custom-heading">Wind Speed:</span>
                           <br>
-                          <span id="WSstatisticss" class="custom-text"></span>
+                          <span id="WSstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-mountain custom-icon"></i>
-                            <span class="custom-heading">Slope:</span>
-                            <br>
-                          <span id="SLPstatisticss" class="custom-text"></span>
+                          <span class="custom-heading">Slope:</span>
+                          <br>
+                          <span id="SLPstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-compass custom-icon"></i>
-                            <span class="custom-heading">Azimuth:</span>
-                            <br>
-                          <span id="Azmtstatisticss" class="custom-text"></span>
+                          <span class="custom-heading">Azimuth:</span>
+                          <br>
+                          <span id="Azmtstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
-                          <!-- <p><i class="fa-solid fa-file-contract custom-icon"></i>
-                            <span class="custom-heading">Service Contract:</span></p>
-                          <span id="SCstatisticss" class="custom-text"></span> -->
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-file-contract custom-icon"></i>
                           <span class="custom-heading">Service Contract:</span>
                           <br>
-                          <span id="SCstatisticss" class="custom-text"></span>
+                          <span id="SCstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-earth-asia custom-icon"></i>
                           <span class="custom-heading">Ancestral Domains:</span>
                           <br>
-                          <span id="ADstatisticss" class="custom-text"></span>
+                          <span id="ADstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-water custom-icon"></i>
                           <span class="custom-heading">Irrigated Land:</span>
                           <br>
-                          <span id="Irgtnstatisticss" class="custom-text"></span>
+                          <span id="Irgtnstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-kiwi-bird custom-icon"></i>
                           <span class="custom-heading">Protected Areas:</span>
                           <br>
-                          <span id="PrtdArsstatisticss" class="custom-text"></span>
+                          <span id="PrtdArsstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-house-crack custom-icon"></i>
                           <span class="custom-heading">Active Fault:</span>
                           <br>
-                          <span id="Fltstatisticss" class="custom-text"></span>
+                          <span id="Fltstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
-                        <li class="list-group-item">
-                          <i class="fa-solid fa-triangle-exclamation custom-icon"></i>
+                        <li class="list-group-item bg-transparent">
+                          <i class="fa-solid fa-house-flood-water custom-icon"></i>
                           <span class="custom-heading">Flood Hazard:</span>
                           <br>
-                          <span id="FldBistatisticss" class="custom-text"></span>
+                          <span id="FldBistatisticss" class="custom-text" style="font-weight: bold;"></span>
+                        </li>
+                        <li class="list-group-item bg-transparent">
+                          <i class="fa-solid fa-hill-rockslide custom-icon"></i>
+                          <span class="custom-heading">Liquefaction:</span>
+                          <br>
+                          <span id="LqfBistatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
                       </ul>
                     </div>
                   </div>
                   <!-- Histogram -->
                   </br><strong>Histogram Results: </strong>
-                  <div class="card text-center">
+                  <div class="card-header text-center border border-light rounded">
                     <div class="card-header">
                       <ul class="nav nav-tabs card-header-tabs justify-content-center"
-                        style="font-size: smaller; padding: 1px;">
+                        style="font-size: smaller; padding: 1px; background-color: rgba(240, 240, 240, 0.6);">
                         <li class="nav-item">
                           <a class="nav-link active" aria-current="true" href="#solarslopeTab"
                             data-bs-toggle="tab">SLRxSLP</a>
@@ -739,11 +677,11 @@
         <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
           <h1 class="sidebar-header common-header">
             <i class="fa-solid fa-database sbheader-icon"></i>
-            <span class="sbheader-text">HLA Calculator (Solar)</span>
+            <span class="sbheader-text"><strong>HLA Calculator (Solar)</strong></span>
           </h1>
           <div>
             <div>
-              <table class="table">
+              <table class="table" style="font-size: 12px;">
                 <tr>
                   <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
                   <td><input type="number" id="ghi" name="ghi" step="any" class="form-control"></td>
@@ -769,8 +707,8 @@
                 </tr>
 
                 <tr>
-                  <td colspan="2" style="text-align:center; padding: 10px 0;">
-                    <button onclick="calculate()" class="btn btn-primary">Calculate</button></td>
+                  <td colspan="2" style="text-align:center;  align-items: center;">
+                    <button onclick="calculate()" class="btn btn-primary btn-sm">Calculate</button></td>
                 </tr>
 
                 <tr>
@@ -789,30 +727,9 @@
     <div id="map" style="width: 100%; height: 100%;">
 
       <div id="sidemenu">
-        <!-- <div id="suitability" class="suitability">
-          <button class="sidemenu-btn btn-secondary sidemenu-button">
-            <i class="fas fa-chart-line"></i>
-          </button>
-        </div>
-        <div id="three" class="three">
-          <button class="sidemenu-btn btn-light sidemenu-button">
-            <i class="fas fa-cog"></i>
-          </button>
-        </div>
 
-        <hr class="sidebar-spacer">
+        <label style="margin-top: 48px; font-size: 10px;"></label>
 
-        <button id="uploadButton" class="sidemenu-btn btn-light sidemenu-button">
-          <i class="fas fa-file-import"></i>
-        </button>
-
-        <button id="deleteAllButton" class="sidemenu-btn btn-light sidemenu-button">
-          <i class="fas fa-trash"></i>
-        </button>
-
-        <button id="exportButton" class="sidemenu-btn btn-light sidemenu-button">
-          <i class="fas fa-download"></i>
-        </button> -->
       </div>
 
 
@@ -859,6 +776,17 @@
 
       var philippines = L.latLng(12.8797, 121.7740);
       map.setView(philippines, 6);
+
+      document.addEventListener("DOMContentLoaded", function () {
+        OverlayScrollbars(document.querySelector('.custom-scrollbar'), {
+          scrollbars: {
+            autoHide: "scroll", // Show scrollbars only on scroll
+            autoHideDelay: 1000 // Set the delay before hiding the scrollbars
+          }
+        });
+      });
+
+
 
       // Start of Universal Search
       var searchInput = document.getElementById('searchInput');
@@ -930,8 +858,6 @@
           }
           map.setView(latLng, 16);
           displayPopup(latLng, coordinates);
-
-          console.log('Coordinates search selected');
         }
       });
 
@@ -1001,6 +927,12 @@
           onClick: function (control) {
             var sidebar = document.getElementById('sidebar-calc');
             sidebar.classList.toggle('open');
+
+            // Close the other sidebar if it's open
+            var otherSidebar = document.getElementById('sidebar-three');
+            if (otherSidebar.classList.contains('open')) {
+              otherSidebar.classList.remove('open');
+            }
           }
         }]
       }).addTo(map);
@@ -1010,11 +942,17 @@
         id: 'settings-button',
         states: [{
           stateName: 'toggle-settings',
-          icon: 'fa-circle-info',
+          icon: '<img src="./images/info.png" style="width:15px;height:15px;display:flex;justify-content: middle; align-items: center;margin-top: 4px;">',
           title: 'Toggle Settings',
           onClick: function (control) {
             var sidebar = document.getElementById('sidebar-three');
             sidebar.classList.toggle('open');
+
+            // Close the other sidebar if it's open
+            var otherSidebar = document.getElementById('sidebar-calc');
+            if (otherSidebar.classList.contains('open')) {
+              otherSidebar.classList.remove('open');
+            }
           }
         }]
       }).addTo(map);
@@ -1025,25 +963,6 @@
         easyButtonElement.style.top = '800px'; // Adjust the top position in pixels
         easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       var fileUploaders = new L.FeatureGroup();
       map.addLayer(fileUploaders);
@@ -1113,6 +1032,7 @@
         var PrtdArsstatisticss = document.getElementById('PrtdArsstatisticss');
         var Fltstatisticss = document.getElementById('Fltstatisticss');
         var FldBistatisticss = document.getElementById('FldBistatisticss');
+        var LqfBistatisticss = document.getElementById('LqfBistatisticss');
 
         if (GHIstatisticss) {
           GHIstatisticss.textContent = '';
@@ -1144,6 +1064,9 @@
         if (FldBistatisticss) {
           FldBistatisticss.textContent = '';
         }
+        if (LqfBistatisticss) {
+          LqfBistatisticss.textContent = '';
+        }
         if (fileName) {
           fileName.textContent = '';
         }
@@ -1167,45 +1090,47 @@
       });
 
       var bounds_group = new L.featureGroup([]);
+      var currentLayer = null;
 
       function setBounds() {}
 
-      map.createPane('pane_GoogleMapsBasic_0');
-      map.getPane('pane_GoogleMapsBasic_0').style.zIndex = 100;
-      var layer_GoogleMapsBasic_0 = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        pane: 'pane_GoogleMapsBasic_0',
+      // Create the Google Maps Basic layer
+      map.createPane('pane_GoogleMapsBasic');
+      map.getPane('pane_GoogleMapsBasic').style.zIndex = 100;
+      var layer_GoogleMapsBasic = L.tileLayer('https://mt0.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        pane: 'pane_GoogleMapsBasic',
         opacity: 0.671,
         minZoom: 1,
         maxZoom: 28,
         minNativeZoom: 0,
         maxNativeZoom: 18
       });
-      layer_GoogleMapsBasic_0;
 
-      map.createPane('pane_GoogleMapsSatellite_1');
-      map.getPane('pane_GoogleMapsSatellite_1').style.zIndex = 100;
-      var layer_GoogleMapsSatellite_1 = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
-        pane: 'pane_GoogleMapsSatellite_1',
+      // Create the Google Maps Satellite layer
+      map.createPane('pane_GoogleMapsSatellite');
+      map.getPane('pane_GoogleMapsSatellite').style.zIndex = 100;
+      var layer_GoogleMapsSatellite = L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
+        pane: 'pane_GoogleMapsSatellite',
         opacity: 1.0,
         minZoom: 1,
         maxZoom: 28,
         minNativeZoom: 0,
         maxNativeZoom: 25
       });
-      layer_GoogleMapsSatellite_1;
 
-      map.createPane('pane_GoogleSatelliteHybrid_1');
-      map.getPane('pane_GoogleSatelliteHybrid_1').style.zIndex = 100;
-      var layer_GoogleSatelliteHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-        pane: 'pane_GoogleSatelliteHybrid_1',
+      // Create the Google Satellite Hybrid layer
+      map.createPane('pane_GoogleSatelliteHybrid');
+      map.getPane('pane_GoogleSatelliteHybrid').style.zIndex = 100;
+      var layer_GoogleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+        pane: 'pane_GoogleSatelliteHybrid',
         opacity: 1.0,
         minZoom: 1,
         maxZoom: 28,
         minNativeZoom: 0,
         maxNativeZoom: 25
       });
-      layer_GoogleSatelliteHybrid_1;
 
+      // Create the Planet NICFI layer
       map.createPane('pane_planetNICFI');
       map.getPane('pane_planetNICFI').style.zIndex = 100;
       var layer_planetNICFI = L.tileLayer(
@@ -1217,32 +1142,31 @@
           minNativeZoom: 0,
           maxNativeZoom: 25
         });
-      layer_planetNICFI;
-
-      map.addLayer(layer_GoogleMapsSatellite_1); // Add Google Satellite as the default layer
 
       function toggleLayer(layerName, checked) {
         if (checked) {
-          // Remove all other layers
-          map.eachLayer(function (layer) {
-            if (layer.options.pane !== layerName) {
-              map.removeLayer(layer);
-            }
-          });
-          // Add the selected layer
-          map.addLayer(eval(layerName));
-        } else {
-          // Remove the selected layer
-          map.removeLayer(eval(layerName));
+          if (currentLayer) {
+            map.removeLayer(currentLayer);
+          }
+          var layer = window[layerName];
+          if (layer) {
+            currentLayer = layer;
+            map.addLayer(currentLayer);
+          } else {
+            console.error('Layer not found:', layerName);
+          }
         }
       }
 
-      toggleLayer('layer_GoogleMapsSatellite_1', true);
-      toggleLayer('layer_GoogleSatelliteHybrid_1', false);
-      toggleLayer('layer_GoogleMapsBasic_0', false);
-      toggleLayer('layer_planetNICFI', false);
+
+      // Set the default layer
+      toggleLayer('layer_GoogleMapsSatellite', true);
 
 
+
+
+
+      // Function for toggling map
       function createTileLayer(name, url) {
         map.createPane(`pane_${name}`);
         map.getPane(`pane_${name}`).style.zIndex = 101;
@@ -1257,6 +1181,7 @@
         });
         return layer;
       }
+
 
       const layer_GHISLP = createTileLayer('GHISLP',
         'https://github.com/czrxstrd4/GHISLP/raw/main/GHISLP/{z}/{x}/{y}.png');
@@ -1279,39 +1204,39 @@
         }
       }
 
-      function toggleGroup(checkbox, groupId) {
-        var nestedCheckboxes = document.querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']`);
-        var isChecked = checkbox.checked;
+      // function toggleGroup(checkbox, groupId) {
+      //   var nestedCheckboxes = document.querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']`);
+      //   var isChecked = checkbox.checked;
 
-        nestedCheckboxes.forEach(function (nestedCheckbox) {
-          nestedCheckbox.checked = isChecked;
-          toggleNestedCheckbox(nestedCheckbox);
-        });
-      }
+      //   nestedCheckboxes.forEach(function (nestedCheckbox) {
+      //     nestedCheckbox.checked = isChecked;
+      //     toggleNestedCheckbox(nestedCheckbox);
+      //   });
+      // }
 
-      function toggleNestedCheckbox(nestedCheckbox) {
-        var layerId = nestedCheckbox.id.replace("chk-", "layer_");
-        var layer = window[layerId];
+      // function toggleNestedCheckbox(nestedCheckbox) {
+      //   var layerId = nestedCheckbox.id.replace("chk-", "layer_");
+      //   var layer = window[layerId];
 
-        if (layer) {
-          toggleTileLayer(layer, nestedCheckbox.checked);
-        }
-      }
+      //   if (layer) {
+      //     toggleTileLayer(layer, nestedCheckbox.checked);
+      //   }
+      // }
 
-      function toggleMainNest(checkbox, groupId) {
-        var mainNestCheckbox = document.getElementById(groupId);
-        var nestedCheckboxes = document.querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']`);
-        var isChecked = checkbox.checked;
+      // function toggleMainNest(checkbox, groupId) {
+      //   var mainNestCheckbox = document.getElementById(groupId);
+      //   var nestedCheckboxes = document.querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']`);
+      //   var isChecked = checkbox.checked;
 
-        nestedCheckboxes.forEach(function (nestedCheckbox) {
-          nestedCheckbox.checked = isChecked;
-          toggleNestedCheckbox(nestedCheckbox);
-        });
+      //   nestedCheckboxes.forEach(function (nestedCheckbox) {
+      //     nestedCheckbox.checked = isChecked;
+      //     toggleNestedCheckbox(nestedCheckbox);
+      //   });
 
-        mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length ===
-          document
-          .querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']:checked`).length;
-      }
+      //   mainNestCheckbox.checked = isChecked && nestedCheckboxes.length > 0 && nestedCheckboxes.length ===
+      //     document
+      //     .querySelectorAll(`#${groupId} .nested-checkboxes input[type='checkbox']:checked`).length;
+      // }
 
       var overLayers = {
         "GHISLP": layer_GHISLP,
@@ -1322,9 +1247,6 @@
         "SLPWD": layer_SLPWD,
         "SLP": layer_SLP
       };
-
-      // var sidebar = L.control.sidebar('sidebar').addTo(map);
-      var drawnItems = new L.FeatureGroup().addTo(map);
 
       //Hash-Autolinker
       var hash = new L.Hash(map);
@@ -1338,69 +1260,6 @@
         }
       });
 
-      //Geocoder
-      // var osmGeocoder = new L.Control.Geocoder({
-      //         collapsed: false,
-      //         position: 'bottomleft',
-      //       }).addTo(map);
-
-      //       document.getElementsByClassName('leaflet-control-geocoder-icon')[0].className += ' fa fa-map-location-dot';
-      //       document.getElementsByClassName('leaflet-control-geocoder-icon')[0].title +=
-      //         'Search for a place, such as Barangay, Muncipality, etc.';
-
-      // Code A: Initialize osmGeocoder
-      // Create the geocoder control
-
-
-
-
-
-
-
-
-      // Custom control for coordinates input
-      // var CoordinatesInputControl = L.Control.extend({
-      //   options: {
-      //     position: 'bottomleft'
-      //   },
-
-      //   onAdd: function (map) {
-      //     var container = L.DomUtil.create('div', 'coordinates-input-control leaflet-bar');
-      //     container.innerHTML = `
-      //     <input type="text" id="coordinates" placeholder="Search for Longitude, Latitude" />
-      //   `;
-      //     L.DomEvent.disableClickPropagation(container);
-      //     return container;
-      //   }
-      // });
-
-      // // Add the custom control to the map
-      // var coordinatesInputControl = new CoordinatesInputControl().addTo(map);
-
-      // // Add a marker to the map
-      // var marker = L.marker([0, 0]).addTo(map);
-      // marker.setOpacity(0);
-
-      // // Event listener for the coordinates input
-      // document.getElementById('coordinates').addEventListener('keydown', function (event) {
-      //   if (event.keyCode === 13) {
-      //     var coordinates = event.target.value.split(',');
-      //     var latitude = parseFloat(coordinates[0]);
-      //     var longitude = parseFloat(coordinates[1]);
-
-      //     if (isNaN(latitude) || isNaN(longitude)) {
-      //       alert('Please enter valid coordinates.');
-      //       return;
-      //     }
-
-      //     var latLng = L.latLng(latitude, longitude);
-      //     marker.setLatLng(latLng);
-      //     marker.setOpacity(1);
-      //     map.setView(latLng, map.getZoom());
-      //   }
-      // });
-
-
       //HLA Calculator--------------------------------------------------------------------------------------------------
       function calculate() {
         var ghi = parseFloat(document.getElementById("ghi").value);
@@ -1413,7 +1272,8 @@
           var result = ((ghi < 1750 ? 1 : ghi > 1950 ? 10 : (((9 * (ghi - 1750)) / 200) + 1)) * 0.1989 +
             (slope < 0.08 ? 10 : 5) * 0.1829 + (tl_distance < 5 ? 10 : tl_distance > 15 ? 1 : (((9 * (15 -
               tl_distance)) / 10) + 1)) * 0.2329 + (purchase_price < 150 ? 10 : purchase_price > 350 ? 1 : (((
-              9 * (350 - purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ? 10 :
+              9 * (350 - purchase_price)) / 200) + 1)) * 0.0438 + (total_area < 100 ? 0.975 : total_area > 300 ?
+              10 :
               ((-
                   0.000000000122212 * Math.pow(total_area, 5)) + (0.000000127783385 * Math.pow(total_area, 4)) -
                 (0.000051519346125 * Math.pow(total_area, 3)) + (0.009822457821232 * Math.pow(total_area, 2)) -
@@ -1428,127 +1288,26 @@
       //_____________________________________________________________________________________________________________________________________________
       // Function to handle KML, KMZ, and GeoJSON files
 
-      //  // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-      L.easyButton({
-        states: [{
-          stateName: 'upload-file',
-          icon: 'fa-file-import',
-          title: 'Upload KML/KMZ/GeoJSON',
-          onClick: function (control) {
-            holder_fileInput.click();
-          }
-        }]
-      }).addTo(map);
-
-
-
-
-      // // Get the upload button element
-      // var uploadButton = document.getElementById('uploadButton');
-
-      // // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
-      // var fileInput = document.createElement('input');
-      // fileInput.type = 'file';
-      // fileInput.accept = '.kml,.kmz,.geojson';
-      // fileInput.style.display = 'none';
-      // document.body.appendChild(fileInput);
-
-      // // Add event listener to the upload button
-      // uploadButton.addEventListener('click', function () {
-      //   fileInput.click();
-      // });
-
-      // // Add event listener to the file input element
-      // fileInput.addEventListener('change', function () {
-      //   if (fileInput.files.length > 0) {
-      //     handleFile(fileInput.files[0]);
-      //   }
-      // });
-
-      // // Function to handle the uploaded file
-      // async function handleFile(file) {
-      //   let geojson;
-      //   if (file.name.endsWith('.kml') || file.name.endsWith('.kmz')) {
-      //     let kmlText;
-      //     if (file.name.endsWith('.kmz')) {
-      //       const zip = new JSZip();
-      //       const content = await zip.loadAsync(file);
-      //       const kmlFile = content.files[Object.keys(content.files).find(name => name.endsWith('.kml'))];
-      //       kmlText = await kmlFile.async('text');
-      //     } else {
-      //       kmlText = await file.text();
-      //     }
-
-      //     const parser = new DOMParser();
-      //     const kml = parser.parseFromString(kmlText, 'text/xml');
-      //     geojson = toGeoJSON.kml(kml);
-      //   } else if (file.name.endsWith('.geojson')) {
-      //     const fileText = await file.text();
-      //     geojson = JSON.parse(fileText);
-      //   } else {
-      //     alert('Unsupported file format. Please upload KML, KMZ, or GeoJSON files.');
-      //     return;
-      //   }
-
-      //   if (!geojson) {
-      //     console.error('GeoJSON data is not defined');
-      //     return;
-      //   }
-
-
-
-      //   var layer = L.geoJSON(geojson, {
-      //     onEachFeature: function (feature, layer) {
-      //       if (!layer._defaultShape || !layer.getLatLngs) {
-      //         console.error('Layer is not a valid shape');
-      //         return;
-      //       }
-      //       const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
-      //         layer
-      //         ._defaultShape() : layer.getLatLngs())), true);
-      //       const name = feature.properties.name || 'Unnamed feature';
-      //       layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
-      //     },
-      //     style: {
-      //       color: 'yellow',
-      //       clickable: true,
-      //       fillOpacity: .1,
-      //       fillColor: '#fff'
-      //     },
-      //     pointToLayer: function (data, latlng) {
-      //       return L.circleMarker(latlng, {
-      //         style: {
-      //           color: 'yellow'
-      //         }
-      //       });
-      //     }
-      //   });
-      //   // Overlay the uploaded layer on the map
-      //   layer.addTo(map);
-      //   map.fitBounds(layer.getBounds());
-      // }
-
-      // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
-      // L.easyButton({
-      //   states: [{
-      //     stateName: 'upload-file',
-      //     icon: 'fa-file-import',
-      //     title: 'Upload KML/KMZ/GeoJSON',
-      //     onClick: function (control) {
-      //       fileInput.click();
-      //     }
-      //   }]
-      // }).addTo(map);
-
-
-
-
       // Create a hidden file input element for KML, KMZ, and GeoJSON file selection
       var fileInput = document.createElement('input');
       fileInput.type = 'file';
       fileInput.accept = '.kml,.kmz,.geojson';
       fileInput.style.display = 'none';
       document.body.appendChild(fileInput);
+
+      // Create the L.easyButton with KML, KMZ, and GeoJSON upload functionality
+      L.easyButton({
+        states: [{
+          stateName: 'upload-file',
+          icon: 'fa-file-import',
+          title: 'Upload KML/KMZ/GeoJSON',
+          onClick: function (control) {
+            fileInput.click();
+          }
+        }]
+      }).addTo(map);
+
+
 
       // Add event listener to the file input element
       fileInput.addEventListener('change', function () {
@@ -1643,57 +1402,6 @@
         });
       });
 
-
-
-
-      //_____________________________________________________________________________________________________________________________________________
-      // // Create the export EasyButton
-      // var exportButton = L.easyButton({
-      //   states: [{
-      //     stateName: 'export',
-      //     icon: 'fa-download',
-      //     title: 'Export all polygons',
-      //     onClick: function (btn, map) {
-      //       // Extract GeoJson from featureGroup
-      //       var data = drawnItems.toGeoJSON();
-
-      //       // Stringify the GeoJson
-      //       var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
-
-      //       // Create export
-      //       var exportLink = document.createElement('a');
-      //       exportLink.setAttribute('href', 'data:' + convertedData);
-      //       exportLink.setAttribute('download', 'data.geojson');
-      //       exportLink.click();
-      //     }
-      //   }]
-      // }).addTo(map);
-
-
-
-      // // Get the export button element
-      // var exportButton = document.getElementById('exportButton');
-
-      // // Add event listener to the export button
-      // exportButton.addEventListener('click', function () {
-      //   // Extract GeoJSON from featureGroup
-      //   var data = drawnItems.toGeoJSON();
-
-      //   // Stringify the GeoJSON
-      //   var convertedData = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
-
-      //   // Create export link
-      //   var exportLink = document.createElement('a');
-      //   exportLink.setAttribute('href', convertedData);
-      //   exportLink.setAttribute('download', 'data.geojson');
-      //   exportLink.style.display = 'none';
-      //   document.body.appendChild(exportLink);
-      //   exportLink.click();
-      //   document.body.removeChild(exportLink);
-      // });
-
-      // Create the export EasyButton
-      // Create the export EasyButton
       // Create the export EasyButton
       var exportButton = L.easyButton({
         states: [{
@@ -1726,16 +1434,10 @@
         }]
       }).addTo(map);
 
-
-
-      //_____________________________________________________________________________________________________________________________________________
-
-
-
       // Create the search bar and its functionality
-      var searchContainer = document.createElement('div');
-      searchContainer.id = 'searchContainer';
-      searchContainer.className = 'search-container';
+      // var searchContainer = document.createElement('div');
+      // searchContainer.id = 'searchContainer';
+      // searchContainer.className = 'search-container';
 
       var inputGroup = document.createElement('div');
       inputGroup.className = 'input-group';
@@ -1746,24 +1448,11 @@
       searchInput.type = 'text';
       searchInput.placeholder = 'Search...';
 
-      var searchButton = document.createElement('button');
-      searchButton.id = 'searchButton';
-      searchButton.className = 'btn btn-primary btn-sm search-button';
-      searchButton.type = 'button';
-      searchButton.innerHTML = 'Search';
-
       inputGroup.appendChild(searchInput);
-      inputGroup.appendChild(searchButton);
-      searchContainer.appendChild(inputGroup);
-      document.body.appendChild(searchContainer);
+      // searchContainer.appendChild(inputGroup);
+      // document.body.appendChild(searchContainer);
 
-      // Event listener for the search button
-      searchButton.addEventListener('click', function () {
-        var searchTerm = searchInput.value;
-        // Perform the search functionality based on the search term
-        // ...
-        console.log('Search term:', searchTerm);
-      });
+
 
       //_____________________________________________________________________________________________________________________________________________
 
@@ -2190,253 +1879,6 @@
       });
       layer_500230kVTDPSubstations_6;
 
-
-      // var baseLayers = [{
-      //     name: "Satellite",
-      //     layer: layer_GoogleMapsSatellite_1
-      //   },
-      //   {
-      //     name: "Satellite-Hybrid",
-      //     layer: layer_GoogleSatelliteHybrid_1
-      //   },
-      //   {
-      //     name: "Basic",
-      //     layer: layer_GoogleMapsBasic_0
-      //   },
-      //   {
-      //     name: "Live Satellite (April 2023)",
-      //     layer: layer_planetNICFI
-      //   }
-      // ];
-      // //Over_Layers
-      // var overLayers = [{
-      //     group: "Solar Suitability",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: 'GHI x Slope<br /><img src="legend/GHIxSlope.png" />',
-      //         layer: layer_GHISLP
-      //       },
-      //       {
-      //         name: 'Irradiance<br /><img src="legend/Irradiance.png" />',
-      //         layer: layer_IRDGHI
-      //       },
-      //       {
-      //         name: 'Slope Caps - Solar<br /><img src="legend/SlopeCaps-Solar.png" />',
-      //         layer: layer_SLPSLR
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     group: "Wind Suitability",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: 'Wind Speed x Slope<br /><img src="legend/WSxSlope.png" />',
-      //         layer: layer_WSSLP
-      //       },
-      //       {
-      //         name: 'Wind Speed<br /><img src="legend/WindSpeed.png" />',
-      //         layer: layer_WS,
-
-      //       },
-      //       {
-      //         name: 'Slope Caps - Wind<br /><img src="legend/SlopeCaps-Wind.png" />',
-      //         layer: layer_SLPWD,
-
-      //       }
-      //     ]
-      //   },
-
-      //   {
-      //     group: "Area Restrictions",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: 'Service Contract<br /><table><tr><td style="text-align: center;"><img src="legend/Merged_2_Geothermal0.png" /></td><td>Geothermal</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OffshoreWind1.png" /></td><td>Offshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_OnshoreWind2.png" /></td><td>Onshore Wind</td></tr><tr><td style="text-align: center;"><img src="legend/Merged_2_Solar3.png" /></td><td>Solar</td></tr></table>',
-      //         layer: layer_ServiceContractMap_1,
-
-
-      //       },
-      //       {
-      //         name: "Ancestral Domains",
-      //         layer: layer_AncestralDomain_3,
-      //         icon: '<i class="fa fa-universal-access" aria-hidden="true"></i>'
-      //       },
-      //       {
-      //         name: "Protected Areas",
-      //         layer: layer_ProtectedAreas_4,
-      //         icon: '<i class="fa fa-leaf" aria-hidden="true"></i>'
-      //       },
-      //       {
-      //         name: 'Key Biodiversity Areas<br /><img src="legend/KBA.png" />',
-      //         layer: layer_KeyBiodiversityAreas_5,
-
-      //       }
-      //     ]
-      //   },
-
-      //   {
-      //     group: "Hazards",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: "River & Water Bodies",
-      //         layer: layer_RVRWBS,
-      //         icon: '<i class="fa fa-tint" aria-hidden="true"></i>'
-
-      //       },
-      //       {
-      //         name: 'Flood Hazard<br /><img src="legend/Flood.png" />',
-      //         layer: layer_FloodHazard_25yrs_6
-
-      //       },
-      //       {
-      //         name: 'Active Faults<br /><img src="legend/Fault.png" />',
-      //         layer: layer_ActiveFault_13,
-
-      //       },
-      //       {
-      //         name: 'Liquefaction<br /><img src="legend/Liquefaction.png" />',
-      //         layer: layer_LQFCN,
-
-      //       }
-
-      //     ]
-      //   },
-
-      //   {
-      //     group: "Hazards - Volcano",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: 'Active Volcanoes<br /><img src="legend/Volcanoes.png" />',
-      //         layer: layer_Volcanoes_7
-      //       },
-      //       {
-      //         name: 'Lahar<br /><img src="legend/Lahar.png" />',
-      //         layer: layer_Lahar_6
-
-      //       },
-      //       {
-      //         name: "Lava",
-      //         layer: layer_Lava_5
-
-      //       },
-      //       {
-      //         name: "Pyroclastic Flow",
-      //         layer: layer_PyroclasticFlow_4
-
-      //       },
-      //       {
-      //         name: "Taal Ballistic Projectiles",
-      //         layer: layer_TaalBallisticProjectiles_3
-
-      //       },
-      //       {
-      //         name: "Taal Fissuring",
-      //         layer: layer_TaalFissuring_2
-
-      //       },
-      //       {
-      //         name: 'Taal Buffer Rings<br /><img src="legend/Taal_Buffer.png" />',
-      //         layer: layer_TaalBufferRings_1
-
-      //       }
-
-      //     ]
-      //   },
-
-      //   {
-      //     group: "Added layer",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: "Drawn Layer",
-      //         layer: drawnItems,
-      //         icon: '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
-
-      //       },
-      //       {
-      //         name: "Uploaded Layer",
-      //         layer: fileUploaders,
-      //         icon: '<i class="fa fa-upload" aria-hidden="true"></i>'
-
-      //       }
-
-
-      //     ]
-      //   },
-
-      //   {
-      //     group: "Others",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: "Seaports",
-      //         layer: layer_Seaports_14,
-      //         icon: '<img src="legend/Seaports_14.png" />'
-      //       },
-      //       {
-      //         name: "Roads",
-      //         layer: layer_RDS,
-      //         icon: '<img src="legend/Roads.png" />'
-      //       },
-      //       {
-      //         name: "Barangays",
-      //         layer: layer_BarangaysMin_1,
-      //         icon: '<img src="legend/BarangaysMin_1.png" />'
-      //       }
-
-
-      //     ]
-      //   },
-
-      //   {
-      //     group: "Transmission SS & TL",
-      //     collapsed: true,
-      //     layers: [{
-      //         name: "Existing SS (Above 69kV)",
-      //         layer: layer_500230138115kVExistingSubstations_5,
-      //         icon: '<img src="legend/500230138115kVExistingSubstations_5.png" />'
-      //       },
-      //       {
-      //         name: "TDP SS",
-      //         layer: layer_500230kVTDPSubstations_6,
-      //         icon: '<img src="legend/500230kVTDPSubstations_6.png" />'
-      //       },
-      //       {
-      //         name: "Existing SS (69kV)",
-      //         layer: layer_69kVDULoadendSubstations_4,
-      //         icon: '<img src="legend/69kVDULoadendSubstations_4.png" />'
-      //       },
-      //       {
-      //         name: "Plant-Owned SS",
-      //         layer: layer_PlantCustomerownedSubstations_3,
-      //         icon: '<img src="legend/PlantCustomerownedSubstations_3.png" />'
-      //       },
-      //       {
-      //         name: "Existing TL",
-      //         layer: layer_ExistingTL_1,
-      //         icon: '<img src="legend/ExistingTL_1.png" />'
-      //       },
-      //       {
-      //         name: "TDP TL",
-      //         layer: layer_TDPTL_2,
-      //         icon: '<img src="legend/TDPTL_2.png" />'
-      //       }
-
-
-      //     ]
-      //   },
-
-      // ];
-
-      // var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
-      //   compact: false,
-      //   collapsed: false,
-      //   selectorGroup: true,
-      //   collapsibleGroups: true,
-      //   className: 'custom-panel'
-      // });
-
-      // map.addControl(panelLayers);
-      // Get the container element for panel layers
-
-
       // Measure Button
       var measureControl = new L.Control.Measure({
         position: 'topleft',
@@ -2451,34 +1893,50 @@
       document.getElementsByClassName('leaflet-control-measure-toggle')[0]
         .className += ' fas fa-ruler';
 
-      // var measureControl = new L.Control.Measure({
-      //   primaryLengthUnit: 'meters',
-      //   secondaryLengthUnit: 'kilometers',
-      //   primaryAreaUnit: 'sqmeters',
-      //   secondaryAreaUnit: 'hectares'
-      // });
-      // measureControl.addTo(map);
-
-      // var measureContainer = document.createElement('div');
-      // measureContainer.className = 'leaflet-top leaflet-left';
-
-      // var measureControlContainer = document.createElement('div');
-      // measureControlContainer.id = 'measure-control';
-      // measureControlContainer.appendChild(measureControl.getContainer());
-
-      // measureContainer.appendChild(measureControlContainer);
-
-      // var containerElement = document.getElementById('map');
-      // containerElement.appendChild(measureContainer);
-
-
       //----------------------------------------------------------
 
       //--------------------------------------------------------------------Draw Polygons------------------------------------------------------------------------//
 
+      // Create the file input element
+      var fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.geojson, .kml, .kmz';
+      fileInput.style.display = 'none';
+      document.body.appendChild(fileInput);
+
+      // Create the file layer control
+      var fileLayerControl = L.Control.fileLayerLoad({
+        layerOptions: {
+          style: {
+            color: 'yellow'
+          }
+        },
+        addToMap: true,
+        fileSizeLimit: 1024,
+        formats: [
+          '.geojson',
+          '.kml',
+          '.kmz'
+        ],
+        fileInputElement: fileInput
+      }).addTo(map);
+
+      // fileLayerControl.loader.on('data:loaded', function (event) {
+      //   // event.layer gives you access to the layers you just uploaded!
+
+      //   // Add to map layer switcher
+      //   layerswitcher.addOverlay(event.layer, event.filename);
+      // });
+
+      // fileLayerControl.loader.on('data:error', function (error) {
+      //   // Do something useful with the error!
+      //   console.error(error);
+      // });
+
+      // Leaflet Draw
       var drawnItems = new L.FeatureGroup();
       map.addLayer(drawnItems);
-      L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
+      // L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
 
       var drawControl = new L.Control.Draw({
         edit: {
@@ -2495,6 +1953,7 @@
         }
       });
       map.addControl(drawControl);
+
 
       var _round = function (num, len) {
         return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
@@ -2571,73 +2030,12 @@
 
 
       //--------------------------------------------------------------------End Draw Polygons------------------------------------------------------------------------//
-      //Export Polygons---------------------------------------------------------------------------------------------
-
-      // // Create the export EasyButton
-      // var exportButton = L.easyButton({
-      //   states: [{
-      //     stateName: 'export',
-      //     icon: 'fa-download',
-      //     title: 'Export all polygons',
-      //     onClick: function (btn, map) {
-      //       // Extract GeoJson from featureGroup
-      //       var data = drawnItems.toGeoJSON();
-
-      //       // Stringify the GeoJson
-      //       var convertedData = 'text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data));
-
-      //       // Create export
-      //       var exportLink = document.createElement('a');
-      //       exportLink.setAttribute('href', 'data:' + convertedData);
-      //       exportLink.setAttribute('download', 'data.geojson');
-      //       exportLink.click();
-      //     }
-      //   }]
-      // }).addTo(map);
-
-      // // Add tooltip when hovering over the button
-      // exportButton.button.title = 'Export all polygons';
-
-
-
-      //------------------------------------------------------------------------------------------------------------
-
-
-
-
-      //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
-
-
-
-
-      //-------------------------------------------------------Universal Search-----------------------------------------------------------------------------//
-      // Get the upload shapefile button element
-      // var uploadShapefileButton = document.getElementById('fileInput');
-
-      // // Add event listener to the upload shapefile button
-      // uploadShapefileButton.addEventListener('change', function () {
-      //   if (uploadShapefileButton.files.length > 0) {
-      //     handleShapefile(uploadShapefileButton.files);
-      //   }
-      // });
-
-      // // Function to handle the uploaded shapefile
-      // async function handleShapefile(files) {
-      //   var shapefile = new L.Shapefile(files[0]);
-
-      //   shapefile.addTo(map);
-      // }
 
       //--------------------------------------------------------------------GeoBlaze------------------------------------------------------------------------//
 
       // Display the GHI Map with identify function
 
-      //Display filename for shapefile input
-      // function displayFileName() {
-      //   var fileInput = document.getElementById('fileInput');
-      //   var fileNameSpan = document.getElementById('fileName');
-      //   fileNameSpan.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "";
-      // }
+      //Display filename for shapefile input  
 
       function displayFileName() {
         var fileInput = document.getElementById('fileInput');
@@ -2705,10 +2103,6 @@
             const min = georaster.mins[0];
             const max = georaster.maxs[0];
             const range = georaster.ranges[0];
-
-            console.log("max:", max);
-            console.log("min:", min);
-            console.log("range:", range);
 
             var scale = chroma.scale("Viridis");
 
@@ -2782,10 +2176,6 @@
             const min = georaster.mins[0];
             const max = georaster.maxs[0];
             const range = georaster.ranges[0];
-
-            console.log("max:", max);
-            console.log("min:", min);
-            console.log("range:", range);
 
             var scale = chroma.scale("YlGnBu");
 
@@ -3199,7 +2589,6 @@
 
                     const meanss = geoblaze.mean(georaster, coordinates);
                     const mn = (Number(meanss) * 100).toFixed(2);
-                    console.log("Mean:", meanss);
                     let notes;
                     let fontColor;
 
@@ -3237,7 +2626,6 @@
 
                     const meanss = geoblaze.mean(georaster, coordinates);
                     const mn = (Number(meanss) * 100).toFixed(2);
-                    console.log("Mean:", meanss);
                     let notes;
                     let fontColor;
 
@@ -3268,10 +2656,7 @@
 
               // Calculate Flood Hazard Statistics
 
-              var url_to_geotiff_FldBi_file =
-                "https://czrxstrd4.github.io/avemn/FldBi.tif";
-
-
+              var url_to_geotiff_FldBi_file = "https://czrxstrd4.github.io/avemn/FldBi.tif";
               fetch(url_to_geotiff_FldBi_file)
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
@@ -3280,7 +2665,6 @@
                     const meanss = geoblaze.mean(georaster,
                       coordinates);
                     const mn = (Number(meanss) * 100).toFixed(2);
-                    console.log("Mean:", meanss);
                     let notes;
                     let fontColor;
 
@@ -3302,8 +2686,6 @@
                     document.getElementById("FldBistatisticss")
                       .style.color =
                       fontColor;
-
-
                     georaster = null;
 
                   });
@@ -3313,34 +2695,44 @@
           }, {
             code: function () {
               // Calculate Liquefaction Overlap Statistics
+
               var url_to_geotiff_LqfBi_file =
-                "https://czrxstrd4.github.io/avemn/LqfBi.tif";
+                "https://czrxstrd4.github.io/avemn/Lqf.tif";
+
+
               fetch(url_to_geotiff_LqfBi_file)
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
+
                     const meanss = geoblaze.mean(georaster,
                       coordinates);
                     const mn = (Number(meanss) * 100).toFixed(2);
-                    console.log("Mean:", meanss);
                     let notes;
                     let fontColor;
+
                     if (mn > 0) {
+
                       notes =
                         "Liquefaction: With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
                         mn + "%";
                       fontColor = "red";
                     } else {
+
                       notes =
                         "Liquefaction: No potential overlap.";
                       fontColor = "green";
                     }
+
                     document.getElementById("LqfBistatisticss")
                       .innerHTML = notes;
                     document.getElementById("LqfBistatisticss")
                       .style.color =
                       fontColor;
+
+
                     georaster = null;
+
                   });
                 });
             },
@@ -3356,15 +2748,10 @@
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
-
-
                     const GHISLP124Histo = geoblaze.histogram(georaster,
                       coordinates, {
                         scaleType: "nominal"
                       });
-                    console.log(GHISLP124Histo);
-
-
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
                         scaleType: "nominal"
@@ -3497,14 +2884,10 @@
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
-
-
                     const WSSLP123Histo = geoblaze.histogram(georaster,
                       coordinates, {
                         scaleType: "nominal"
                       });
-                    console.log(WSSLP123Histo);
-
 
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
@@ -3641,13 +3024,9 @@
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
-
                     const GHI123Histo = geoblaze.histogram(georaster, coordinates, {
                       scaleType: "nominal"
                     });
-                    console.log(GHI123Histo);
-
-
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
                         scaleType: "nominal"
@@ -3787,9 +3166,6 @@
                     const WS12Histo = geoblaze.histogram(georaster, coordinates, {
                       scaleType: "nominal"
                     });
-                    console.log(WS12Histo);
-
-
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
                         scaleType: "nominal"
@@ -3923,12 +3299,9 @@
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
-
                     const SLPHisto = geoblaze.histogram(georaster, coordinates, {
                       scaleType: "nominal"
                     });
-                    console.log(SLPHisto);
-
 
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
@@ -4061,12 +3434,9 @@
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
-
                     const LqfHisto = geoblaze.histogram(georaster, coordinates, {
                       scaleType: "nominal"
                     });
-                    console.log(LqfHisto);
-
 
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
@@ -4205,13 +3575,9 @@
                 .then(arrayBuffer => {
                   parseGeoraster(arrayBuffer).then(georaster => {
 
-
                     const FldHisto = geoblaze.histogram(georaster, coordinates, {
                       scaleType: "nominal"
                     });
-                    console.log(FldHisto);
-
-
                     const histogramData = geoblaze.histogram(georaster,
                       coordinates, {
                         scaleType: "nominal"
