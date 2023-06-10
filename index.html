@@ -1897,29 +1897,29 @@
 
       //--------------------------------------------------------------------Draw Polygons------------------------------------------------------------------------//
 
-      // Create the file input element
-      var fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = '.geojson, .kml, .kmz';
-      fileInput.style.display = 'none';
-      document.body.appendChild(fileInput);
+      // // Create the file input element
+      // var fileInput = document.createElement('input');
+      // fileInput.type = 'file';
+      // fileInput.accept = '.geojson, .kml, .kmz';
+      // fileInput.style.display = 'none';
+      // document.body.appendChild(fileInput);
 
-      // Create the file layer control
-      var fileLayerControl = L.Control.fileLayerLoad({
-        layerOptions: {
-          style: {
-            color: 'yellow'
-          }
-        },
-        addToMap: true,
-        fileSizeLimit: 1024,
-        formats: [
-          '.geojson',
-          '.kml',
-          '.kmz'
-        ],
-        fileInputElement: fileInput
-      }).addTo(map);
+      // // Create the file layer control
+      // var fileLayerControl = L.Control.fileLayerLoad({
+      //   layerOptions: {
+      //     style: {
+      //       color: 'yellow'
+      //     }
+      //   },
+      //   addToMap: true,
+      //   fileSizeLimit: 1024,
+      //   formats: [
+      //     '.geojson',
+      //     '.kml',
+      //     '.kmz'
+      //   ],
+      //   fileInputElement: fileInput
+      // }).addTo(map);
 
       // fileLayerControl.loader.on('data:loaded', function (event) {
       //   // event.layer gives you access to the layers you just uploaded!

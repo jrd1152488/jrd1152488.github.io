@@ -23,13 +23,13 @@ body {
 
 /* Search bar */
 .search-bar {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   margin-right: 5px;
 }
 
 .input-group {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   gap: 4px;
 }
@@ -335,6 +335,11 @@ table tr th {
   margin-top: 60px;
   z-index: 9999;
   text-align: left;
+}
+
+.leaflet-control-measure-toggle {
+  height: 30px !important;
+  width: 30px !important;
 }
 
 /* Styling the Leaflet.Draw toolbar and controls */
