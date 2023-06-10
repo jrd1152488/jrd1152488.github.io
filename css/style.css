@@ -206,10 +206,12 @@ table tr th {
 
 .custom-panel .form-check-label {
   padding-left: 10px;
+  font-size: 15px !important;
 }
 
 .custom-panel .form-check-input {
   margin-right: 5px;
+  font-size: 15px !important;
 }
 
 @keyframes loading-animation {
@@ -407,11 +409,8 @@ table tr th {
   width: 300px;
   height: 85vh;
   background-color: rgba(255, 255, 255, 0.7);
-  /* Set a transparent background color */
   backdrop-filter: blur(8px);
-  /* Apply a blur effect to the background */
   -webkit-backdrop-filter: blur(5px);
-  /* For Safari */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease;
@@ -423,9 +422,6 @@ table tr th {
 .leaflet-bar button {
   height: 30px !important;
   width: 30px !important;
-  /* font-size: 2.6em; */
-  /* padding: 8px; */
-  /* line-height: 30px; */
 }
 
 #floating-card .sbheader-text {
@@ -530,11 +526,8 @@ table tr th {
   width: 400px;
   height: 85vh;
   background-color: rgba(255, 255, 255, 0.7);
-  /* Set a transparent background color */
   backdrop-filter: blur(8px);
-  /* Apply a blur effect to the background */
   -webkit-backdrop-filter: blur(5px);
-  /* For Safari */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease;
@@ -623,4 +616,38 @@ table tr th {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+
+.collapsible {
+  background-color: #38383830;
+
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  color: rgb(233, 233, 233);
+  cursor: pointer;
+  padding: 3px;
+  width: 100%;
+  border: 1px;
+  text-align: left;
+  /* left: 3px; */
+  outline: none;
+  font-size: 15px;
+  text-indent: 5px;
+}
+
+.collapsible:hover {
+  background-color: #3a3a3ad5;
+}
+
+.panelLayers {
+  margin-top: 0px;
+  padding: 0 30px;
+  max-height: 0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: transparent;
+  margin-bottom: 5px;
 }
