@@ -111,7 +111,8 @@
   <script src="data/69kVDULoadendSubstations_4.js"></script>
   <script src="data/500230138115kVExistingSubstations_5.js"></script>
   <script src="data/500230kVTDPSubstations_6.js"></script>
-
+  <script src="data/NationalIrrigationSystem_0.js"></script>
+  <script src="data/MunicipalitiesMin_0.js"></script>
   <script src="data/BarangaysMin_1.js"></script>
 
   <!-- <script src="js/service_contracts.js"></script> -->
@@ -133,6 +134,8 @@
   <script src="js/tdp_substations.js"></script>
   <script src="js/existing_tl.js"></script>
   <script src="js/tdp_tl.js"></script>
+  <script src="js/irrigation.js"></script>
+  <script src="js/municipalities.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -194,12 +197,68 @@
     <div id="sidebar-three" class="sidebar-three">
       <div class="container custom-scrollbar">
         <div class="text-center">
-          <h1 class="sidebar-header common-header credit-h1">
+          <h1 class="credit-h1">
             ARI Market Strategy
           </h1>
           <h2 class="credit-h2">
             Strategic Pipeline Targeting
           </h2>
+
+
+          <h2 class="credit-h3">
+            Market Strategy Team:
+          </h2>
+
+          <div class="dev-1">
+            <div class="profile-image">
+              <img src="./images/jrodrigo.png" alt="Profile Image">
+            </div>
+            <div class="profile-details">
+              <p style="font-weight: 500;" class="name">Jolanz Rodrigo</p>
+              <p class="designation"><strong>Market Research Supervisor</strong></p>
+              <p style="font-style:italic;" class="designation">Developer</p>
+
+              <div class="social-buttons">
+                <a href="mailto:jolanz.rodrigo@aboitiz.com" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/jolanzrodrigo/" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/lanzrodrigo/" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <hr class="sidebar-spacer">
+
+          <div class="dev-1">
+            <div class="profile-image">
+              <img src="./images/cestrada.jfif" alt="Profile Image">
+            </div>
+            <div class="profile-details">
+              <p style="font-weight: 500;" class="name">Cezar John Estrada</p>
+              <p class="designation"><strong>Market Research Manager</strong></p>
+              <p style="font-style:italic;" class="designation">Developer</p>
+
+              <div class="social-buttons">
+                <a href="mailto:cezar.estrada@aboitiz.com" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/cezar-john-estrada-5a6a31105/" target="_blank"
+                  rel="noopener noreferrer">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/lanzrodrigo/" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+
           <p class="credit-text">
             Website content © APC <br>
             - All rights reserved. Unauthorized use and/or duplication of this material without express and written
@@ -212,11 +271,12 @@
 
 
   <div id="floating-card" class="floating-card">
-    <h1 class="sidebar-header common-header" style="margin-top: 10px;">
-      <i class="fa-solid fa-calculator sbheader-icon"></i>
-      <span class="sbheader-text">Layer Selection</span>
+    <h1 class="sidebar-header common-header">
+      <!-- <i class="fa-solid fa-map sbheader-icon"></i> -->
+      <img class="legend-image" src="./images/philippines.png" style="margin-left: -10px; width:40px; height:40px">
+      <span style="font-size: 20px;" class="sbheader-text"><strong>Layer Selection</strong></span>
     </h1>
-    <div class="d-flex flex-column" style="margin-bottom: 5px;">
+    <div class="d-flex flex-column" >
 
       <div class="form-check">
         <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
@@ -269,36 +329,37 @@
 
 
       <!-- Tile Layers -->
-      <h1 class="sidebar-header common-header" style="margin-bottom: 10px; margin-top: 15px;">
-        <i class="fa-solid fa-tiles sbheader-icon"></i>
-        <span class="sbheader-text">Tile Layers</span>
+      <h1 class="sidebar-header common-header" style="margin-bottom: 10px; margin-top: 10px;">
+        <!-- <i class="fa-solid fa-earth-asia sbheader-icon"></i> -->
+        <i class="fa-solid fa-map sbheader-icon"></i>
+        <span style="font-size: 20px;" class="sbheader-text"><strong>Tile Layers</strong></span>
       </h1>
 
       <div class="group-panelLayers">
         <button class="collapsible">Solar Suitability</button>
-        <div class="panelLayers">
+        <div class="panelLayers" style="max-height: 300px;">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-GHISLP"
               onchange="toggleTileLayer(layer_GHISLP, this.checked)">
-            <label class="form-check-label" for="chk-GHISLP">
+            <label class="panel-layer-label" style="font-size: 15px;" for="chk-GHISLP">
               GHI x Slope
-              <img src="legend/GHIxSlope.png" alt="Image 1">
+              <img class="legend-image" src="legend/GHIxSlope.png" alt="Image 1">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
               onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
-            <label class="form-check-label" for="chk-IRDGHI">
+            <label class="panel-layer-label" for="chk-IRDGHI">
               Solar Irradiance, kWh/m²
-              <img src="legend/Irradiance.png" alt="Image 2">
+              <img class="legend-image" src="legend/Irradiance.png" alt="Image 2">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
               onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
-            <label class="form-check-label" for="chk-SLPSLR">
+            <label class="panel-layer-label" for="chk-SLPSLR">
               Slope Caps - Solar
-              <img src="legend/SlopeCaps-Solar.png" alt="Image 3">
+              <img class="legend-image" src="legend/SlopeCaps-Solar.png" alt="Image 3">
             </label>
           </div>
         </div>
@@ -307,22 +368,22 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-WSSLP"
               onchange="toggleTileLayer(layer_WSSLP, this.checked)">
-            <label class="form-check-label" for="chk-WSSLP">Wind x Slope
-              <img src="legend/WSxSlope.png">
+            <label class="panel-layer-label" for="chk-WSSLP">Wind x Slope
+              <img class="legend-image" src="legend/WSxSlope.png">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-WS"
               onchange="toggleTileLayer(layer_WS, this.checked)">
-            <label class="form-check-label" for="chk-WS">Wind Speed, m/s
-              <img src="legend/WindSpeed.png">
+            <label class="panel-layer-label" for="chk-WS">Wind Speed, m/s
+              <img class="legend-image" src="legend/WindSpeed.png">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-SLPWD"
               onchange="toggleTileLayer(layer_SLPWD, this.checked)">
-            <label class="form-check-label" for="chk-SLPWD">Slope Caps - Wind
-              <img src="legend/SlopeCaps-Wind.png">
+            <label class="panel-layer-label" for="chk-SLPWD">Slope Caps - Wind
+              <img class="legend-image" src="legend/SlopeCaps-Wind.png">
             </label>
           </div>
         </div>
@@ -331,8 +392,9 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-SLP"
               onchange="toggleTileLayer(layer_SLP, this.checked)">
-            <label class="form-check-label" for="chk-SLP">Slope
-              <img src="legend/Slope_Industry.png">
+            <label class="panel-layer-label" for="chk-SLP">Slope
+              <br>
+              <img class="legend-image" src="legend/Slope_Industry.png">
             </label>
           </div>
         </div>
@@ -341,27 +403,39 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
               onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
-            <label class="form-check-label" for="chk-ServiceContractMap_1">Service Contract Map
-              <img src="legend/Legend_SC.png">
+            <label class="panel-layer-label" for="chk-ServiceContractMap_1">Service Contract Map
+              <img class="legend-image" src="legend/Legend_SC.png">
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="chk-NationalIrrigationSystem_0"
+              onchange="toggleTileLayer(layer_NationalIrrigationSystem_0, this.checked)">
+            <!-- <i class="fa-solid fa-calculator sbheader-icon"></i> -->
+            <img class="legend-image" src="./images/watering-plants.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-NationalIrrigationSystem_0">Irrigated Land
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
               onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
-            <label class="form-check-label" for="chk-AncestralDomain_3">Ancestral Domains
+            <!-- <i class="fa-solid fa-calculator sbheader-icon"></i> -->
+            <img class="legend-image" src="./images/management.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-AncestralDomain_3">Ancestral Domains
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
               onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
-            <label class="form-check-label" for="chk-ProtectedAreas_4">Protected Areas
+            <img class="legend-image" src="./images/leaf.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-ProtectedAreas_4">Protected Areas
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
               onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
-            <label class="form-check-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas
-              <img src="legend/KBA.png">
+            <label class="panel-layer-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas
+              <img class="legend-image" src="legend/KBA.png">
             </label>
           </div>
         </div>
@@ -369,26 +443,26 @@
         <div class="panelLayers">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-RVRWBS" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-RVRWBS">River and Water Bodies</label>
+            <label class="panel-layer-label" for="chk-RVRWBS">River and Water Bodies</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-FloodHazard_25yrs_6"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-FloodHazard_25yrs_6">Flood Hazard
-              <img src="legend/Flood.png">
+            <label class="panel-layer-label" for="chk-FloodHazard_25yrs_6">Flood Hazard
+              <img class="legend-image" src="legend/Flood.png">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-LQFCN" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-LQFCN">Liquefaction
-              <img src="legend/Liquefaction.png">
+            <label class="panel-layer-label" for="chk-LQFCN">Liquefaction
+              <img class="legend-image" src="legend/Liquefaction.png">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-ActiveFault_13"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-ActiveFault_13">Active Fault
-              <img src="legend/Fault.png">
+            <label class="panel-layer-label" for="chk-ActiveFault_13">Active Fault
+              <img class="legend-image" src="legend/Fault.png">
             </label>
           </div>
         </div>
@@ -396,41 +470,41 @@
         <div class="panelLayers">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-Volcanoes_7">Active Volcano
-              <img src="legend/Volcanoes.png">
+            <label class="panel-layer-label" for="chk-Volcanoes_7">Active Volcano
+              <img class="legend-image" src="legend/Volcanoes.png">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-Lahar_6" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-Lahar_6">Lahar<br>
-              <img src="legend/Lahar.png">
+            <label class="panel-layer-label" for="chk-Lahar_6">Lahar<br>
+              <img class="legend-image" src="legend/Lahar.png">
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-Lava_5" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-Lava_5">Lava</label>
+            <label class="panel-layer-label" for="chk-Lava_5">Lava</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
+            <label class="panel-layer-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
+            <label class="panel-layer-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
               Projectiles</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
+            <label class="panel-layer-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-TaalBufferRings_1"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-TaalBufferRings_1">Taal Buffer Rings
-              <img src="legend/Taal_Buffer.png">
+            <label class="panel-layer-label" for="chk-TaalBufferRings_1">Taal Buffer Rings
+              <img class="legend-image" src="legend/Taal_Buffer.png">
             </label>
           </div>
         </div>
@@ -438,81 +512,217 @@
         <div class="panelLayers">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-Seaports_14" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-Seaports_14">Seaports
-              <img src="legend/Seaports_14.png">
+            <img class="legend-image" src="./legend/Seaports_14.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-Seaports_14">Seaports
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-RDS" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-RDS">Roads
-              <img src="legend/Roads.png">
+            <img class="legend-image" src="./legend/Roads.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-RDS">Roads
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-BarangaysMin_1">Barangay
-              <img src="legend/BarangaysMin_1.png">
+            <img class="legend-image" src="./legend/BarangaysMin_1.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-BarangaysMin_1">Barangay
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-BarangaysMin_1">Barangay
-              <img src="legend/Municipalities.png">
+            <img class="legend-image" src="./legend/Municipalities.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-BarangaysMin_1">Municipalities
             </label>
           </div>
         </div>
+
         <button class="collapsible">Substation and Lines</button>
+
         <div class="panelLayers">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-ExistingTL_1">Existing Transmission Lines
-              <img src="legend/500230138115kVExistingSubstations_5.png">
+            <img class="legend-image" src="./legend/ExistingTL_1.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-ExistingTL_1">Existing T/L
+
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-TDPTL_2" onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-TDPTL_2">TDP Transmission Lines
-              <img src="legend/500230kVTDPSubstations_6.png">
+            <img class="legend-image" src="./legend/TDPTL_2.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-TDPTL_2">TDP T/L
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-500230kVTDPSubstations_6"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP Substations
-              <img src="legend/500230138115kVExistingSubstations_5.png">
+            <img class="legend-image" src="./legend/500230kVTDPSubstations_6.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP S/S
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-500230138115kVExistingSubstations_5"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-500230138115kVExistingSubstations_5">500/230/138/11kV
-              Existing Substations
-              <img src="legend/500230138115kVExistingSubstations_5.png"></label>
+            <img class="legend-image" src="./legend/500230138115kVExistingSubstations_5.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-500230138115kVExistingSubstations_5">Existing S/S
+
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-69kVDULoadendSubstations_4"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-69kVDULoadendSubstations_4">69kV Distribution Utility
-              Load-end Substations
-              <img src="legend/500230138115kVExistingSubstations_5.png"></label>
+            <img class="legend-image" src="./legend/69kVDULoadendSubstations_4.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-69kVDULoadendSubstations_4">69kV DU/Load-end S/S
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-PlantCustomerownedSubstations_3"
               onchange="toggleNestedCheckbox(this);">
-            <label class="form-check-label" for="chk-PlantCustomerownedSubstations_3">Plant Customer-owned
-              Substations
-              <img src="legend/69kVDULoadendSubtations_4.png"></label>
+            <img class="legend-image" src="./legend/PlantCustomerownedSubstations_3.png"
+              style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-PlantCustomerownedSubstations_3">Plant/Customer-owned S/S
           </div>
-
-
-
         </div>
-        <button class="collapsible">Open Section 3</button>
-        <div class="panelLayers">
+
+        <button class="collapsible">Land Use</button>
+        <div class="panelLayers" style="display: flex;">
+          <img class="legend-image" style="width: auto; height: 230px;" src="legend/Land_Use_2.png"></label>
+
+          <div class="button-container">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r1_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r1_2020">R1 - Ilocos</label>
+            </div>
+
+            <!-- Iterate over the layers -->
+            <!-- LC-R2-Cagayan -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r2_2020_2"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r2_2020_2">R2 - Cagayan</label>
+            </div>
+
+            <!-- LC-R3-Central Luzon -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r3_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r3_2020">R3 - Central Luzon</label>
+            </div>
+
+            <!-- LC-CAR-Cordillera -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_car_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_car_2020">CAR - Cordillera</label>
+            </div>
+
+            <!-- LC-NCR -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_ncr_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_ncr_2020">NCR</label>
+            </div>
+
+            <!-- LC-R4A-CALABARZON -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r4a_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r4a_2020">R4A - CALABARZON</label>
+            </div>
+
+            <!-- LC-R4B-MIMAROPA -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r4b_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r4b_2020">R4B - MIMAROPA</label>
+            </div>
+
+            <!-- LC-R4B-Palawan -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_palawan_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_palawan_2020">R4B - Palawan</label>
+            </div>
+
+            <!-- LC-R5-Bicol -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r5_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r5_2020">R5 - Bicol</label>
+            </div>
+
+            <!-- LC-R6-Western Vis. -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r6_2020_2"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r6_2020_2">R6 - Western Visayas</label>
+            </div>
+
+            <!-- LC-R7-Central Vis. -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r7_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r7_2020">R7 - Central Visayas</label>
+            </div>
+
+            <!-- LC-R8-Eastern Vis. -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r8_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r8_2020">R8 - Eastern Visayas</label>
+            </div>
+
+            <!-- LC-R9-Zamboanga Pen. -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r9_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r9_2020">R9 - Zamboanga Pen.</label>
+            </div>
+
+            <!-- LC-R10-Northern Min. -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r10_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r10_2020">R10 - Northern Mindanao</label>
+            </div>
+
+            <!-- LC-R11-Davao -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r11_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r11_2020">R11 - Davao</label>
+            </div>
+
+            <!-- LC-R12-SOCCSKSARGEN -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r12_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r12_2020">R12 - SOCCSKSARGEN</label>
+            </div>
+
+            <!-- LC-R13-Caraga -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r13_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_r13_2020">R13 - Caraga</label>
+            </div>
+
+            <!-- LC-BARMM -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="chk-land_cover_map_barmm_2020"
+                onchange="toggleNestedCheckbox(this);">
+              <label class="panel-layer-label" for="chk-land_cover_map_barmm_2020">BARMM</label>
+            </div>
+          </div>
         </div>
+
+
 
       </div>
 
@@ -525,7 +735,7 @@
 
 
 
-  <div id="sidebar-calc" class="sidebar-calc" style="padding: 2px; width: 400px;">
+  <div id="sidebar-calc" class="sidebar-calc" style="padding: 2px; width: 350px;">
     <div class="container">
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
@@ -534,7 +744,7 @@
             <div class="sidebar-pane" id="geotiff">
               <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;;">
                 <i class="fa-solid fa-layer-group sbheader-icon"></i>
-                <span style="font-size: 22px;" class="sbheader-text"><strong>Area Suitability</strong></span>
+                <span style="font-size: 20px;" class="sbheader-text"><strong>Area Suitability</strong></span>
               </h1>
 
               <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
@@ -701,7 +911,7 @@
         <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
           <h1 class="sidebar-header common-header">
             <i class="fa-solid fa-database sbheader-icon"></i>
-            <span class="sbheader-text"><strong>HLA Calculator (Solar)</strong></span>
+            <span style="font-size: 20px;" class="sbheader-text"><strong>HLA Calculator (Solar)</strong></span>
           </h1>
           <div>
             <div>
@@ -966,7 +1176,7 @@
         id: 'settings-button',
         states: [{
           stateName: 'toggle-settings',
-          icon: '<img src="./images/info.png" style="width:15px;height:15px;display:flex;justify-content: middle; align-items: center;margin-top: 4px;">',
+          icon: '<img class="info-image" src="./images/info.png" style="width:15px;height:15px;justify-content: middle; align-items: center;">',
           title: 'Toggle Settings',
           onClick: function (control) {
             var sidebar = document.getElementById('sidebar-three');
@@ -998,7 +1208,7 @@
         }
       });
 
-      // Function to toggle the nested layers
+      // Function to toggle the nested layers in panelLayers
       function toggleNestedLayers(collapseId, checked) {
         var layers = document.getElementById(collapseId).querySelectorAll('input[type="checkbox"]');
         for (var i = 0; i < layers.length; i++) {
@@ -1246,14 +1456,14 @@
       //   });
       // }
 
-      // function toggleNestedCheckbox(nestedCheckbox) {
-      //   var layerId = nestedCheckbox.id.replace("chk-", "layer_");
-      //   var layer = window[layerId];
+      function toggleNestedCheckbox(nestedCheckbox) {
+        var layerId = nestedCheckbox.id.replace("chk-", "layer_");
+        var layer = window[layerId];
 
-      //   if (layer) {
-      //     toggleTileLayer(layer, nestedCheckbox.checked);
-      //   }
-      // }
+        if (layer) {
+          toggleTileLayer(layer, nestedCheckbox.checked);
+        }
+      }
 
       // function toggleMainNest(checkbox, groupId) {
       //   var mainNestCheckbox = document.getElementById(groupId);
@@ -1534,6 +1744,19 @@
       bounds_group.addLayer(layer_ServiceContractMap_1);
       map.addLayer(layer_ServiceContractMap_1);
 
+      map.createPane('pane_NationalIrrigationSystem_0');
+      map.getPane('pane_NationalIrrigationSystem_0').style.zIndex = 107;
+      map.getPane('pane_NationalIrrigationSystem_0').style['mix-blend-mode'] = 'normal';
+      var layer_NationalIrrigationSystem_0 = new L.geoJson(json_NationalIrrigationSystem_0, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_NationalIrrigationSystem_0',
+        layerName: 'layer_NationalIrrigationSystem_0',
+        pane: 'pane_NationalIrrigationSystem_0',
+        onEachFeature: pop_NationalIrrigationSystem_0,
+        style: style_NationalIrrigationSystem_0_0,
+      });
+      bounds_group.addLayer(layer_NationalIrrigationSystem_0);
 
       //Ancestral_Domains
       map.createPane('pane_AncestralDomain_3');
@@ -1803,6 +2026,21 @@
       });
       bounds_group.addLayer(layer_BarangaysMin_1);
 
+      map.createPane('pane_MunicipalitiesMin_0');
+      map.getPane('pane_MunicipalitiesMin_0').style.zIndex = 499;
+      map.getPane('pane_MunicipalitiesMin_0').style['mix-blend-mode'] = 'normal';
+      var layer_MunicipalitiesMin_0 = new L.geoJson(json_MunicipalitiesMin_0, {
+        attribution: '',
+        interactive: true,
+        dataVar: 'json_MunicipalitiesMin_0',
+        layerName: 'layer_MunicipalitiesMin_0',
+        pane: 'pane_MunicipalitiesMin_0',
+        onEachFeature: pop_MunicipalitiesMin_0,
+        style: style_MunicipalitiesMin_0_0,
+      });
+      bounds_group.addLayer(layer_MunicipalitiesMin_0);
+
+
       map.createPane('pane_ExistingTL_1');
       map.getPane('pane_ExistingTL_1').style.zIndex = 123;
       map.getPane('pane_ExistingTL_1').style['mix-blend-mode'] = 'normal';
@@ -1911,6 +2149,326 @@
       });
       layer_500230kVTDPSubstations_6;
 
+      // Land Use Maps
+      map.createPane('pane_land_cover_map_r1_2020');
+      map.getPane('pane_land_cover_map_r1_2020').style.zIndex = 101;
+      var layer_land_cover_map_r1_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r1_2020", {
+          pane: 'pane_land_cover_map_r1_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r1_2020;
+
+      map.createPane('pane_land_cover_map_r2_2020_2');
+      map.getPane('pane_land_cover_map_r2_2020_2').style.zIndex = 101;
+      var layer_land_cover_map_r2_2020_2 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r2_2020_2", {
+          pane: 'pane_land_cover_map_r2_2020_2',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r2_2020_2;
+
+
+      map.createPane('pane_land_cover_map_r3_2020');
+      map.getPane('pane_land_cover_map_r3_2020').style.zIndex = 101;
+      var layer_land_cover_map_r3_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r3_2020", {
+          pane: 'pane_land_cover_map_r3_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r3_2020;
+
+
+      map.createPane('pane_land_cover_map_car_2020');
+      map.getPane('pane_land_cover_map_car_2020').style.zIndex = 101;
+      var layer_land_cover_map_car_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_car_2020", {
+          pane: 'pane_land_cover_map_car_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_car_2020;
+
+
+      map.createPane('pane_land_cover_map_ncr_2020');
+      map.getPane('pane_land_cover_map_ncr_2020').style.zIndex = 101;
+      var layer_land_cover_map_ncr_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_ncr_2020", {
+          pane: 'pane_land_cover_map_ncr_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_ncr_2020;
+
+
+      map.createPane('pane_land_cover_map_r4a_2020');
+      map.getPane('pane_land_cover_map_r4a_2020').style.zIndex = 101;
+      var layer_land_cover_map_r4a_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r4a_2020", {
+          pane: 'pane_land_cover_map_r4a_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r4a_2020;
+
+      map.createPane('pane_land_cover_map_r4b_2020');
+      map.getPane('pane_land_cover_map_r4b_2020').style.zIndex = 101;
+      var layer_land_cover_map_r4b_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r4b_2020", {
+          pane: 'pane_land_cover_map_r4b_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r4b_2020;
+
+
+      map.createPane('pane_land_cover_map_palawan_2020');
+      map.getPane('pane_land_cover_map_palawan_2020').style.zIndex = 101;
+      var layer_land_cover_map_palawan_2020 = L.WMS.layer(
+        "https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms", "land_cover_map_palawan_2020", {
+          pane: 'pane_land_cover_map_palawan_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_palawan_2020;
+
+
+      map.createPane('pane_land_cover_map_r5_2020');
+      map.getPane('pane_land_cover_map_r5_2020').style.zIndex = 101;
+      var layer_land_cover_map_r5_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r5_2020", {
+          pane: 'pane_land_cover_map_r5_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r5_2020;
+
+
+      map.createPane('pane_land_cover_map_r6_2020_2');
+      map.getPane('pane_land_cover_map_r6_2020_2').style.zIndex = 101;
+      var layer_land_cover_map_r6_2020_2 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r6_2020_2", {
+          pane: 'pane_land_cover_map_r6_2020_2',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r6_2020_2;
+
+
+      map.createPane('pane_land_cover_map_r7_2020');
+      map.getPane('pane_land_cover_map_r7_2020').style.zIndex = 101;
+      var layer_land_cover_map_r7_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r7_2020", {
+          pane: 'pane_land_cover_map_r7_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r7_2020;
+
+
+      map.createPane('pane_land_cover_map_r8_2020');
+      map.getPane('pane_land_cover_map_r8_2020').style.zIndex = 101;
+      var layer_land_cover_map_r8_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r8_2020", {
+          pane: 'pane_land_cover_map_r8_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r8_2020;
+
+
+      map.createPane('pane_land_cover_map_r9_2020');
+      map.getPane('pane_land_cover_map_r9_2020').style.zIndex = 101;
+      var layer_land_cover_map_r9_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r9_2020", {
+          pane: 'pane_land_cover_map_r9_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r9_2020;
+
+      map.createPane('pane_land_cover_map_r10_2020');
+      map.getPane('pane_land_cover_map_r10_2020').style.zIndex = 101;
+      var layer_land_cover_map_r10_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r10_2020", {
+          pane: 'pane_land_cover_map_r10_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r10_2020;
+
+
+      map.createPane('pane_land_cover_map_r11_2020');
+      map.getPane('pane_land_cover_map_r11_2020').style.zIndex = 101;
+      var layer_land_cover_map_r11_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r11_2020", {
+          pane: 'pane_land_cover_map_r11_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r11_2020;
+
+
+      map.createPane('pane_land_cover_map_r12_2020');
+      map.getPane('pane_land_cover_map_r12_2020').style.zIndex = 101;
+      var layer_land_cover_map_r12_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r12_2020", {
+          pane: 'pane_land_cover_map_r12_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r12_2020;
+
+      map.createPane('pane_land_cover_map_r13_2020');
+      map.getPane('pane_land_cover_map_r13_2020').style.zIndex = 101;
+      var layer_land_cover_map_r13_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_r13_2020", {
+          pane: 'pane_land_cover_map_r13_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_r13_2020;
+
+
+      map.createPane('pane_land_cover_map_barmm_2020');
+      map.getPane('pane_land_cover_map_barmm_2020').style.zIndex = 101;
+      var layer_land_cover_map_barmm_2020 = L.WMS.layer("https://geoserver.geoportal.gov.ph/geoserver/geoportal/wms",
+        "land_cover_map_barmm_2020", {
+          pane: 'pane_land_cover_map_barmm_2020',
+          format: 'image/png',
+          uppercase: true,
+          transparent: true,
+          continuousWorld: true,
+          tiled: true,
+          info_format: 'text/html',
+          opacity: 0.5,
+          identify: true,
+          attribution: '',
+        });
+      layer_land_cover_map_barmm_2020;
+
       // Measure Button
       var measureControl = new L.Control.Measure({
         position: 'topleft',
@@ -1944,10 +2502,6 @@
           }
         });
       }
-
-
-
-
 
 
 
