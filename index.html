@@ -163,16 +163,17 @@
     <!-- <div class="header-container"> -->
     <!-- <div class="header"> -->
     <div class="title">
-      <div class="logo-container">
+      <div class="logo-container" onclick="refreshPage()">
         <img src="AP Emblem.png" alt="AP Emblem" class="logo">
       </div>
-      <div class="header-content">
+      <div class="header-content" onclick="refreshPage()">
         <span class="header-text"
           style="color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ARI MARKET
           STRATEGY
           - SPT</span>
       </div>
     </div>
+
     <div class="search-bar">
       <div class="input-group">
         <select class="form-select bg-transparent" id="searchOption" style="color: #f0f0f0;">
@@ -620,18 +621,19 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-drawnItems"
               onchange="toggleTileLayer(drawnItems, this.checked)">
-              <img class="legend-image" src="./images/technical-drawing.png" style="margin-left: 4px; width:15px; height:15px">
+            <img class="legend-image" src="./images/technical-drawing.png"
+              style="margin-left: 4px; width:15px; height:15px">
             <label class="panel-layer-label" for="chk-drawnItems">Drawn Layer
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="chk-fileUploaders"
               onchange="toggleTileLayer(fileUploaders, this.checked)">
-              <img class="legend-image" src="./images/upload-shape.png" style="margin-left: 4px; width:15px; height:15px">
+            <img class="legend-image" src="./images/upload-shape.png" style="margin-left: 4px; width:15px; height:15px">
             <label class="panel-layer-label" for="chk-fileUploaders">Uploaded Layer
             </label>
           </div>
-         
+
         </div>
 
         <button class="collapsible">Others</button>
@@ -1119,11 +1121,18 @@
         });
       }
     }
+
+    function refreshPage() {
+      location.reload();
+    }
+
     var map = L.map('map', {
       zoomControl: false,
       maxZoom: 28,
       minZoom: 1
     });
+
+
 
     var philippines = L.latLng(12.8797, 121.7740);
     map.setView(philippines, 6);

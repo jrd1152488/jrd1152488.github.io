@@ -84,7 +84,27 @@ input.transparent-input {
   width: 35px;
   height: auto;
   margin-right: 5px;
+  transition: transform 0.2s ease-in-out;
 }
+
+.logo:hover {
+  transform: scale(1.1) rotate(360deg);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+}
+
+.logo:hover img {
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap');
 
