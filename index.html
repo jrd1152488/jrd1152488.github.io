@@ -544,6 +544,8 @@
             </label>
           </div>
         </div>
+
+
         <button class="collapsible">Hazards</button>
         <div class="panelLayers">
           <div class="form-check">
@@ -613,6 +615,25 @@
             </label>
           </div>
         </div>
+        <button class="collapsible">Added Layers</button>
+        <div class="panelLayers">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="chk-drawnItems"
+              onchange="toggleTileLayer(drawnItems, this.checked)">
+              <img class="legend-image" src="./images/technical-drawing.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-drawnItems">Drawn Layer
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="chk-fileUploaders"
+              onchange="toggleTileLayer(fileUploaders, this.checked)">
+              <img class="legend-image" src="./images/upload-shape.png" style="margin-left: 4px; width:15px; height:15px">
+            <label class="panel-layer-label" for="chk-fileUploaders">Uploaded Layer
+            </label>
+          </div>
+         
+        </div>
+
         <button class="collapsible">Others</button>
         <div class="panelLayers">
           <div class="form-check">
@@ -1536,7 +1557,7 @@
       id: 'settings-button',
       states: [{
         stateName: 'toggle-settings',
-        icon: '<img class="info-image" src="./images/info.png" style="width:15px;height:15px;justify-content: middle; align-items: center;">',
+        icon: '<img class="info-image" src="./images/info.png" style="width:15px;height:15px;margin-bottom:3px;">',
         title: 'Toggle Settings',
         onClick: function (control) {
           var sidebar = document.getElementById('sidebar-three');
@@ -1842,7 +1863,6 @@
       const layer = L.tileLayer(url, {
         pane: `pane_${name}`,
         opacity: 1,
-        attribution: '',
         minZoom: 1,
         maxZoom: 28,
         minNativeZoom: 4,
@@ -1912,6 +1932,7 @@
         }
       }]
     }).addTo(map);
+    console.log('Shapefile uploaded.')
 
     // Add event listener to the file input element
     fileInput.addEventListener('change', function () {

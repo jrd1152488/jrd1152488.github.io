@@ -340,10 +340,12 @@ table tr th {
   z-index: 9999;
   text-align: left;
 }
-
+/* Styling the Leaflet.Measure toolbar and controls */
 .leaflet-control-measure-toggle {
-  height: 30px !important;
-  width: 30px !important;
+  height: 26px !important;
+  width: 26px !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 /* Styling the Leaflet.Draw toolbar and controls */
@@ -357,9 +359,8 @@ table tr th {
 .leaflet-draw-tooltip-edit,
 .leaflet-draw-edit-remove,
 .leaflet-draw-tooltip-remove {
-  height: 30px !important;
-  width: 30px !important;
-
+  height: 26px !important;
+  width: 26px !important;
   justify-content: center !important;
   align-items: center !important;
 }
@@ -421,9 +422,10 @@ table tr th {
   padding: 20px;
 }
 
+/* Adjust Easybutton sizing */
 .leaflet-bar button {
-  height: 30px !important;
-  width: 30px !important;
+  height: 26px !important;
+  width: 26px !important;
 }
 
 #floating-card .sbheader-text {
@@ -658,22 +660,26 @@ table tr th {
 
 
 .collapsible {
-  background-color: #2b2b3794;
+  background-color: #91919179;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  color: rgb(233, 233, 233);
+  color: rgb(19, 16, 16);
   cursor: pointer;
   padding: 2px;
   width: 100%;
+  height: 26px;
   border: 1px;
   text-align: left;
   outline: none;
   font-size: 12px !important;
   text-indent: 5px;
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 500 !important;
 }
 
 .collapsible:hover {
   background-color: #3a3a3ad5;
+  color: #ddd;
 }
 
 .panelLayers {
@@ -683,10 +689,11 @@ table tr th {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.2s ease-out;
   background-color: transparent;
   margin-bottom: 5px;
   font-size: 13px !important;
+  font-family: "Roboto", Arial, sans-serif;
 }
 
 #panelLayers {
@@ -694,7 +701,7 @@ table tr th {
 }
 
 .legend-image {
-  width: 160px;
+  width: 180px;
   height: auto;
 }
 
@@ -741,9 +748,11 @@ table tr th {
   height: 100%;
   object-fit: cover;
 }
+
 .profile-details {
   font-size: 12px;
 }
+
 .social-buttons {
   margin-top: 18px;
   display: flex;
@@ -830,7 +839,7 @@ table tr th {
 }
 
 .lgu-container {
-padding: 20px;
+  padding: 20px;
   margin: 0 auto;
   position: relative;
   font-size: 12px;
