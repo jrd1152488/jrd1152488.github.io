@@ -3636,7 +3636,7 @@ fetch(url_to_geotiff_SLP_file)
       const mn = Number(meanss).toFixed(2);
 
       var statisticsDiv = document.getElementById('SLPstatisticss');
-      statisticsDiv.innerHTML = 'Mean: <span style="color: black; font-weight: bold;">' + mn + '% -> </span> ';
+      statisticsDiv.innerHTML = 'Mean: <span style="color: black; font-weight: bold;">' + mn + '% >> </span> ';
 
       if (mn < 6.9) {
         statisticsDiv.innerHTML += '<span style="color: green; font-weight: bold;">(Solar)</span> | <span style="color: green; font-weight: bold;">(Wind)</span>';
@@ -3665,50 +3665,55 @@ fetch(url_to_geotiff_SLP_file)
           //Azimuth Score
           code: function () {
 
-            var url_to_geotiff_Azmt_file = "https://czrxstrd4.github.io/avemn/Azmt.tif";
+var url_to_geotiff_Azmt_file = "https://czrxstrd4.github.io/avemn/Azmt.tif";
 
-            fetch(url_to_geotiff_Azmt_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+fetch(url_to_geotiff_Azmt_file)
+  .then(response => response.arrayBuffer())
+  .then(arrayBuffer => {
+    parseGeoraster(arrayBuffer).then(georaster => {
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
-                  let notes;
-                  let fontColor;
+      const meanss = geoblaze.mean(georaster, coordinates);
+      const mn = Number(meanss).toFixed(2);
+      let notes;
+      let fontColor;
 
-                  if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
-                    notes = "North, " + mn + "°";
-                    fontColor = "red";
-                  } else if (mn >= 22.51 && mn <= 67.5) {
-                    notes = "NorthEast, " + mn + "°";
-                    fontColor = "orange";
-                  } else if (mn >= 67.51 && mn <= 112.5) {
-                    notes = "East, " + mn + "°";
-                    fontColor = "blue";
-                  } else if (mn >= 112.51 && mn <= 157.5) {
-                    notes = "SouthEast, " + mn + "°";
-                    fontColor = "green";
-                  } else if (mn >= 157.51 && mn <= 202.5) {
-                    notes = "South, " + mn + "°";
-                    fontColor = "green";
-                  } else if (mn >= 202.51 && mn <= 247.5) {
-                    notes = "SouthWest, " + mn + "°";
-                    fontColor = "green";
-                  } else if (mn >= 247.51 && mn <= 292.5) {
-                    notes = "West, " + mn + "°";
-                    fontColor = "blue";
-                  } else if (mn >= 292.51 && mn <= 337.5) {
-                    notes = "NorthWest, " + mn + "°";
-                    fontColor = "orange";
-                  } else {
-                    notes = "N/A";
-                  }
-                  document.getElementById("Azmtstatisticss").innerHTML = notes;
-                  georaster = null;
-                });
-              });
-          },
+      if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
+        notes = "North, " + mn + "°";
+        fontColor = "red";
+      } else if (mn >= 22.51 && mn <= 67.5) {
+        notes = "NorthEast, " + mn + "°";
+        fontColor = "orange";
+      } else if (mn >= 67.51 && mn <= 112.5) {
+        notes = "East, " + mn + "°";
+        fontColor = "blue";
+      } else if (mn >= 112.51 && mn <= 157.5) {
+        notes = "SouthEast, " + mn + "°";
+        fontColor = "green";
+      } else if (mn >= 157.51 && mn <= 202.5) {
+        notes = "South, " + mn + "°";
+        fontColor = "green";
+      } else if (mn >= 202.51 && mn <= 247.5) {
+        notes = "SouthWest, " + mn + "°";
+        fontColor = "green";
+      } else if (mn >= 247.51 && mn <= 292.5) {
+        notes = "West, " + mn + "°";
+        fontColor = "blue";
+      } else if (mn >= 292.51 && mn <= 337.5) {
+        notes = "NorthWest, " + mn + "°";
+        fontColor = "orange";
+      } else {
+        notes = "N/A";
+      }
+      
+      var statisticssDiv = document.getElementById("Azmtstatisticss");
+      statisticssDiv.innerHTML = notes;
+      statisticssDiv.style.color = fontColor;
+
+      georaster = null;
+    });
+  });
+},
+
           delay: 5000 // Delay for code block 3 in milliseconds
         }, {
           code: function () {
@@ -3746,7 +3751,7 @@ fetch(url_to_geotiff_SLP_file)
 
 
           },
-          delay: 5000 // Delay for code block 3 in milliseconds
+          delay: 3000 // Delay for code block 3 in milliseconds
         }, {
           code: function () {
             // Calculate Ancestral Domain Statistics
