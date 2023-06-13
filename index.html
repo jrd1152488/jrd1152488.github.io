@@ -359,10 +359,19 @@
   </div>
 
   <div id="lgu-directory" class='lgu-directory'>
+
+    <div class="title">
+      <div class="logo-container" onclick="refreshPage()">
+        <img src="images/govt.png" alt="PH Government" class="logo">
+      </div>
+      <div class="header-content" onclick="refreshPage()">
+        <span class="header-text"
+          style="color: #000000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">LGU Directory</span>
+      </div>
+    </div>
     <div class="lgu-container">
-      <br>
-      <br>
-      <table id="lgulist" class="table is-striped is-hoverable" style="width: 100%">
+
+      <table id="lgu-table">
         <thead>
           <tr>
             <th>Region</th>
@@ -374,8 +383,8 @@
             <th>Contact</th>
           </tr>
         </thead>
+        <tbody></tbody>
       </table>
-      <br>
     </div>
   </div>
 
@@ -4794,6 +4803,32 @@
       });
 
     }
+
+
+   // Read the local JSON file
+   fetch('lgu.json')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector('#lgu-table tbody');
+        data.forEach(rowData => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${rowData.region}</td>
+            <td>${rowData.province}</td>
+            <td>${rowData.citymun}</td>
+            <td>${rowData.barangay}</td>
+            <td>${rowData.position}</td>
+            <td>${rowData.name}</td>
+            <td>${rowData.contact}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error reading JSON file:', error));
+
+
+
+
   </script>
 </body>
 
