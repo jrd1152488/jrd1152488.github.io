@@ -185,6 +185,7 @@ align-items: center;
   margin-left: 1px !important;
   padding: 1px !important;
   left: 3px !important;
+  height: 50px;
   background-color: #d5d8e2 !important;
   /* border-color: #444849; */
   border-radius: 8;

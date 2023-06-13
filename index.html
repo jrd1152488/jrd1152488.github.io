@@ -3628,53 +3628,33 @@
           code: function () {
 
             var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
-            fetch(url_to_geotiff_SLP_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
+fetch(url_to_geotiff_SLP_file)
+  .then(response => response.arrayBuffer())
+  .then(arrayBuffer => {
+    parseGeoraster(arrayBuffer).then(georaster => {
+      const meanss = geoblaze.mean(georaster, coordinates);
+      const mn = Number(meanss).toFixed(2);
 
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = Number(meanss).toFixed(2);
+      var statisticsDiv = document.getElementById('SLPstatisticss');
+      statisticsDiv.innerHTML = 'Mean: <span style="color: black; font-weight: bold;">' + mn + '% -> </span> ';
 
-                  var statisticsDiv = document.getElementById('SLPstatisticss');
-                  statisticsDiv.textContent = 'Mean: ' + mn + '%';
+      if (mn < 6.9) {
+        statisticsDiv.innerHTML += '<span style="color: green; font-weight: bold;">(Solar)</span> | <span style="color: green; font-weight: bold;">(Wind)</span>';
+      } else if (mn < 10.95) {
+        statisticsDiv.innerHTML += '<span style="color: blue; font-weight: bold;">(Solar)</span> | <span style="color: green; font-weight: bold;">(Wind)</span>';
+      } else if (mn < 15) {
+        statisticsDiv.innerHTML += '<span style="color: orange; font-weight: bold;">(Solar)</span> | <span style="color: green; font-weight: bold;">(Wind)</span>';
+      } else if (mn < 28.43) {
+        statisticsDiv.innerHTML += '<span style="color: red; font-weight: bold;">(Solar)</span> | <span style="color: blue; font-weight: bold;">(Wind)</span>';
+      } else {
+        statisticsDiv.innerHTML += '<span style="color: red; font-weight: bold;">(Solar)</span> | <span style="color: red; font-weight: bold;">(Wind)</span>';
+      }
 
-                  if (mn < 6.9) {
-                    statisticsDiv.textContent = 'Mean: ' + mn + ' %';
-                    statisticsDiv.textContent = '(For Solar)';
-                    statisticsDiv.style.color = "green";
-                    statisticsDiv.textContent = '(For Wind)';
-                    statisticsDiv.style.color = "green";
-                  } else if (mn < 10.95) {
-                    statisticsDiv.textContent = 'Mean: ' + mn + ' %';
-                    statisticsDiv.textContent = '(For Solar)';
-                    statisticsDiv.style.color = "blue";
-                    statisticsDiv.textContent = '(For Wind)';
-                    statisticsDiv.style.color = "green";
-                  } else if (mn < 15) {
-                    statisticsDiv.textContent = 'Mean: ' + mn + ' %';
-                    statisticsDiv.textContent = '(For Solar)';
-                    statisticsDiv.style.color = "orange";
-                    statisticsDiv.textContent = '(For Wind)';
-                    statisticsDiv.style.color = "green";
-                  } else if (mn < 28.43) {
-                    statisticsDiv.textContent = 'Mean: ' + mn + ' %';
-                    statisticsDiv.textContent = '(For Solar)';
-                    statisticsDiv.style.color = "red";
-                    statisticsDiv.textContent = '(For Wind)';
-                    statisticsDiv.style.color = "blue";
-                  } else {
-                    statisticsDiv.textContent = 'Mean: ' + mn + ' %';
-                    statisticsDiv.textContent = '(For Solar)';
-                    statisticsDiv.style.color = "red";
-                    statisticsDiv.textContent = '(For Wind)';
-                    statisticsDiv.style.color = "red";
-                  }
+      georaster = null;
+    });
+  });
 
-                  georaster = null;
 
-                });
-              });
 
 
 
@@ -3695,23 +3675,32 @@
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
                   let notes;
+                  let fontColor;
 
                   if ((mn >= 0 && mn <= 22.5) || (mn >= 337.51 && mn <= 360)) {
                     notes = "North, " + mn + "°";
+                    fontColor = "red";
                   } else if (mn >= 22.51 && mn <= 67.5) {
                     notes = "NorthEast, " + mn + "°";
+                    fontColor = "orange";
                   } else if (mn >= 67.51 && mn <= 112.5) {
                     notes = "East, " + mn + "°";
+                    fontColor = "blue";
                   } else if (mn >= 112.51 && mn <= 157.5) {
                     notes = "SouthEast, " + mn + "°";
+                    fontColor = "green";
                   } else if (mn >= 157.51 && mn <= 202.5) {
                     notes = "South, " + mn + "°";
+                    fontColor = "green";
                   } else if (mn >= 202.51 && mn <= 247.5) {
                     notes = "SouthWest, " + mn + "°";
+                    fontColor = "green";
                   } else if (mn >= 247.51 && mn <= 292.5) {
                     notes = "West, " + mn + "°";
+                    fontColor = "blue";
                   } else if (mn >= 292.51 && mn <= 337.5) {
                     notes = "NorthWest, " + mn + "°";
+                    fontColor = "orange";
                   } else {
                     notes = "N/A";
                   }
