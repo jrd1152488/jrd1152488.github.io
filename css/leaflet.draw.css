@@ -217,35 +217,35 @@
 /* ================================================================== */
 
 .leaflet-draw-toolbar .leaflet-draw-edit-edit {
-	background-position: -150px 0px;
+	background-position: -152px -2px;
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit {
-	background-position: -148px 0px;
+	background-position: -150px -1px;
 }
 
 .leaflet-draw-toolbar .leaflet-draw-edit-remove {
-	background-position: -180px 0px;
+	background-position: -182px -2px;
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
-	background-position: -178px 0px;
+	background-position: -180px -1px;
 }
 
 .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
-	background-position: -210px 0px;
+	background-position: -212px -2px;
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
-	background-position: -210px 0px;
+	background-position: -210px -1px;
 }
 
 .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
-	background-position: -240px 0px;
+	background-position: -242px -2px;
 }
 
 .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled {
-	background-position: -238px 0px;
+	background-position: -240px -2px;
 }
 
 /* ================================================================== */
