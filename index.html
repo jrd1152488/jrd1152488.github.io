@@ -543,6 +543,7 @@
       <div class="panelLayers collapsed" style="font-size: 13px;">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-RVRWBS" onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./images/river.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-RVRWBS">River and Water Bodies</label>
         </div>
         <div class="form-check">
@@ -586,22 +587,26 @@
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-Lava_5" onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./images/lava.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-Lava_5">Lava</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
             onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./images/volcano_2.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
             onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./images/rocks.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
             Projectiles</label>
         </div>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
             onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./images/crack.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
         </div>
         <div class="form-check">
@@ -855,7 +860,9 @@
                 </div>
               </div>
               <label style="margin-top: 5px; font-size: 12px;"><strong>Assessed Area: </strong><span
-                  id="fileName"></span></label>
+                  id="fileName"></span></label><br>
+              <label style="margin-top: 5px; font-size: 12px;"><strong>Est. Area (in hectares): </strong><span
+                  id="area"></span></label>
 
               <body onload="runSequentially()">
                 <pre id="output"></pre>
@@ -1135,6 +1142,9 @@
       } else if (searchOption.value === 'substation') {
         console.log('Substation search selected');
         substationSearch();
+      } else if (searchOption.value === 'servicecontract') {
+        console.log('SC search selected');
+        servicecontractSearch();
       }
     });
 
@@ -1154,6 +1164,11 @@
         clearSuggestions();
       }
     });
+
+    function clearSuggestions() {
+      suggestionsDiv.innerHTML = '';
+      suggestionsDiv.style.display = 'none';
+    }
 
     // Event listener for the coordinates input
     document.getElementById('searchInput').addEventListener('input', function (event) {
@@ -1474,6 +1489,110 @@
         }
       }
     }
+
+    function servicecontractSearch() {
+      var searchInput = document.getElementById('searchInput');
+      var suggestionsDiv = document.getElementById('suggestions');
+
+      searchInput.addEventListener('input', function () {
+        if (searchOption.value !== 'servicecontract') {
+          console.log('Service contract search ended');
+          return; // Stop execution if searchOption is not 'servicecontract'
+        }
+
+        var searchTerm = searchInput.value.trim().toLowerCase();
+        var matchingProjects = [];
+
+        if (searchTerm === '') {
+          clearSuggestions();
+        } else {
+          layer_ServiceContractMap_1.eachLayer(function (layer) {
+            var projectName = layer.feature.properties['sc_Project Name'];
+            if (projectName && projectName.toLowerCase().includes(searchTerm)) {
+              matchingProjects.push({
+                projectName: projectName,
+                layer: layer
+              });
+              layer.setStyle({
+                opacity: 1
+              });
+            } else {
+              layer.setStyle({
+                opacity: 0
+              });
+            }
+          });
+
+          updateSuggestions(matchingProjects);
+        }
+      });
+
+      function updateSuggestions(projects) {
+        clearSuggestions();
+
+        projects.forEach(function (item) {
+          var suggestionItem = document.createElement('div');
+          suggestionItem.classList.add('suggestion-item');
+          suggestionItem.textContent = item.projectName;
+          suggestionItem.addEventListener('click', function () {
+            searchInput.value = item.projectName;
+            clearSuggestions();
+            map.fitBounds(item.layer.getBounds());
+            item.layer.openPopup();
+          });
+          suggestionsDiv.appendChild(suggestionItem);
+        });
+
+        if (projects.length > 0) {
+          suggestionsDiv.style.display = 'block';
+        } else {
+          suggestionsDiv.style.display = 'none';
+        }
+      }
+
+      function clearSuggestions() {
+        suggestionsDiv.innerHTML = '';
+        suggestionsDiv.style.display = 'none';
+      }
+
+      searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          var searchTerm = searchInput.value;
+
+          var matchingLayer = null;
+          layer_ServiceContractMap_1.eachLayer(function (layer) {
+            var projectName = layer.feature.properties['sc_Project Name'];
+            if (projectName === searchTerm) {
+              matchingLayer = layer;
+              layer.setStyle({
+                opacity: 1
+              });
+            } else {
+              layer.setStyle({
+                opacity: 0
+              });
+            }
+          });
+
+          if (matchingLayer) {
+            map.flyTo(matchingLayer.getLatLng(), 12);
+            matchingLayer.openPopup();
+          }
+        }
+      });
+
+      map.on('moveend', showLayersAfterMove);
+
+      function showLayersAfterMove() {
+        var zoom = map.getZoom();
+        if (zoom >= 12) {
+          layer_ServiceContractMap_1.addTo(map);
+        }
+      }
+    }
+
+
+
 
 
 
@@ -2056,11 +2175,13 @@
             console.error('Layer is not a valid shape');
             return;
           }
-          const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
-            layer
-            ._defaultShape() : layer.getLatLngs())), true);
-          const name = feature.properties.name || 'Unnamed feature';
+          var area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+            layer._defaultShape() : layer.getLatLngs())), true);
+          var name = feature.properties.name || 'Unnamed feature';
           layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+
+          // Update the value of the 'area' span element
+          document.getElementById('area').textContent = area;
         },
         style: {
           color: 'yellow',
@@ -2080,6 +2201,7 @@
       // Overlay the uploaded layer on the map
       layer.addTo(map);
       map.fitBounds(layer.getBounds());
+
     }
 
     //_____________________________________________________________________________________________________________________________________________
@@ -2143,8 +2265,7 @@
     searchInput.placeholder = 'Search...';
 
     inputGroup.appendChild(searchInput);
-    // searchContainer.appendChild(inputGroup);
-    // document.body.appendChild(searchContainer);
+
 
 
 
@@ -2938,7 +3059,7 @@
     //----------------------------------------------------------
 
 
-
+    // Control for Collapsible Tile Layer
     var coll = document.getElementsByClassName("collapsible");
     var i;
 
@@ -2959,7 +3080,7 @@
       });
     }
 
-
+    // End of Control for Collapsible Tile Layer
 
 
 
@@ -3006,42 +3127,6 @@
 
 
     //--------------------------------------------------------------------Draw Polygons------------------------------------------------------------------------//
-
-    // // Create the file input element
-    // var fileInput = document.createElement('input');
-    // fileInput.type = 'file';
-    // fileInput.accept = '.geojson, .kml, .kmz';
-    // fileInput.style.display = 'none';
-    // document.body.appendChild(fileInput);
-
-    // // Create the file layer control
-    // var fileLayerControl = L.Control.fileLayerLoad({
-    //   layerOptions: {
-    //     style: {
-    //       color: 'yellow'
-    //     }
-    //   },
-    //   addToMap: true,
-    //   fileSizeLimit: 1024,
-    //   formats: [
-    //     '.geojson',
-    //     '.kml',
-    //     '.kmz'
-    //   ],
-    //   fileInputElement: fileInput
-    // }).addTo(map);
-
-    // fileLayerControl.loader.on('data:loaded', function (event) {
-    //   // event.layer gives you access to the layers you just uploaded!
-
-    //   // Add to map layer switcher
-    //   layerswitcher.addOverlay(event.layer, event.filename);
-    // });
-
-    // fileLayerControl.loader.on('data:error', function (error) {
-    //   // Do something useful with the error!
-    //   console.error(error);
-    // });
 
     // Leaflet Draw
     var drawnItems = new L.FeatureGroup();
@@ -3165,11 +3250,20 @@
               console.error('Layer is not a valid shape');
               return;
             }
-            const area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
-              layer
-              ._defaultShape() : layer.getLatLngs())), true);
+            const area = L.GeometryUtil.readableArea(
+              (L.GeometryUtil.geodesicArea(layer._defaultShape ? layer._defaultShape() : layer
+                .getLatLngs())) || 0,
+              true
+            );
+
+            // Format the area with commas and remove the decimal
+            const formattedArea = area.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,").split(".")[0];
+
             const name = feature.properties.name || 'Unnamed feature';
-            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + formattedArea);
+
+            // Update the value of the 'area' span element
+            document.getElementById('area').textContent = formattedArea;
           },
           style: {
             color: 'yellow',
@@ -3193,6 +3287,8 @@
 
       reader.readAsText(fileInput.files[0]);
     }
+
+
 
 
 
