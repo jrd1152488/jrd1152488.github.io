@@ -90,7 +90,7 @@ input.transparent-input {
 
 .logo:hover {
   transform: scale(1.1) rotate(360deg);
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
 }
 
 .logo:hover img {
@@ -101,6 +101,7 @@ input.transparent-input {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -362,6 +363,7 @@ table tr th {
   z-index: 9999;
   text-align: left;
 }
+
 /* Styling the Leaflet.Measure toolbar and controls */
 .leaflet-control-measure-toggle {
   height: 26px !important;
@@ -449,6 +451,34 @@ table tr th {
   height: 26px !important;
   width: 26px !important;
 }
+
+/* Easybutton pop animation */
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Easybutton pop animation on click */
+.leaflet-bar button:active {
+  animation: pop 0.3s;
+  animation-fill-mode: forwards;
+}
+
+/* Easybutton scale animation on hover */
+.leaflet-bar button:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
 
 #floating-card .sbheader-text {
   font-size: 18px;
@@ -680,7 +710,6 @@ table tr th {
   align-items: center;
 }
 
-
 .collapsible {
   background-color: #d5d8e2;
   border-top-left-radius: 4px;
@@ -702,66 +731,35 @@ table tr th {
   justify-content: space-between;
 }
 
-.toggle-all {
-  margin-right: 10px !important;
-  padding: 0;
-}
-
 .collapsible:hover {
   background-color: #3a3a3ad5;
   color: #ddd;
 }
 
+.collapsible .toggle-all {
+  margin-right: 10px !important;
+  padding: 0;
+}
 
+.collapsible .caret {
+  margin-left: 5px;
+}
 
 .panelLayers {
-  margin-top: 0px;f.collapsible {
-  background-color: #91919179;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  color: rgb(19, 16, 16);
-  cursor: pointer;
-  padding: 2px;
-  width: 100%;
-  height: 26px;
-  border: 1px;
-  text-align: left;
-  outline: none;
-  font-size: 12px !important;
-  text-indent: 5px;
-  font-family: "Roboto", Arial, sans-serif;
-  font-weight: 500 !important;
-  display: flex;
-  align-items: middle;
-  justify-content: space-between;
-}
-  padding: 0 2px;
-  max-height: 0;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  margin-top: 0px;
+  max-height: 400px;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: transparent;
-  margin-bottom: 5px;
-  font-size: 13px !important;
-  font-family: "Roboto", Arial, sans-serif;
 }
 
-#panelLayers {
-  max-height: 400px;
+.panelLayers.collapsed {
+  max-height: 0;
 }
 
 .legend-image {
   width: 180px;
   height: auto;
 }
-
-/* .group-panelLayers {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-} */
 
 .toggle-all-label {
   margin-left: 10px;
@@ -771,7 +769,6 @@ table tr th {
   font-size: 25px;
   text-align: center;
   font-family: "Roboto", Arial, sans-serif;
-  /* font-weight: 500; */
 }
 
 .credit-h2 {
@@ -841,7 +838,7 @@ table tr th {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -400px;
+  bottom: -300px;
   height: 300px;
   width: 1200px;
   align-items: center;
@@ -868,11 +865,6 @@ table tr th {
   bottom: 50px;
   left: 10px;
 }
-
-/* #export-button {
-  margin-bottom: 20px;
-} */
-
 
 .lgu-directory {
   position: fixed;
@@ -924,11 +916,8 @@ table tr th {
   width: 350px;
   height: 85vh;
   background-color: rgba(255, 255, 255, 0.9);
-  /* Set a transparent background color */
   backdrop-filter: blur(8px);
-  /* Apply a blur effect to the background */
   -webkit-backdrop-filter: blur(5px);
-  /* For Safari */
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease;
@@ -940,4 +929,3 @@ table tr th {
 .sidebar-search.open {
   left: 55px;
 }
-
