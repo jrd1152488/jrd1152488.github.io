@@ -239,10 +239,6 @@ table tr th {
   font-size: 12px !important;
 } */
 
-/* .custom-panel .form-check-input {
-  margin-right: 5px;
-  font-size: 15px !important;
-} */
 
 @keyframes loading-animation {
   0% {
@@ -747,6 +743,7 @@ table tr th {
 
 .panelLayers {
   margin-top: 0px;
+  margin-left: 3px !important;
   max-height: 400px;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
@@ -754,6 +751,7 @@ table tr th {
 
 .panelLayers.collapsed {
   max-height: 0;
+  margin-left: 3px !important;
 }
 
 .legend-image {

@@ -421,7 +421,7 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" style="margin-right: 5px;" type="checkbox" id="chk-GHISLP"
             onchange="toggleTileLayer(layer_GHISLP, this.checked)">
           <label class="panel-layer-label" style="font-size: 13px;" for="chk-GHISLP">
@@ -429,7 +429,7 @@
             <img class="legend-image" src="legend/GHIxSlope.png" alt="Image 1">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-IRDGHI"
             onchange="toggleTileLayer(layer_IRDGHI, this.checked)">
           <label class="panel-layer-label" for="chk-IRDGHI">
@@ -437,7 +437,7 @@
             <img class="legend-image" src="legend/Irradiance.png" alt="Image 2">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-SLPSLR"
             onchange="toggleTileLayer(layer_SLPSLR, this.checked)">
           <label class="panel-layer-label" for="chk-SLPSLR">
@@ -453,21 +453,21 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-WSSLP"
             onchange="toggleTileLayer(layer_WSSLP, this.checked)">
           <label class="panel-layer-label" for="chk-WSSLP">Wind x Slope<br>
             <img class="legend-image" src="legend/WSxSlope.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-WS"
             onchange="toggleTileLayer(layer_WS, this.checked)">
           <label class="panel-layer-label" for="chk-WS">Wind Speed, m/s<br>
             <img class="legend-image" src="legend/WindSpeed.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-SLPWD"
             onchange="toggleTileLayer(layer_SLPWD, this.checked)">
           <label class="panel-layer-label" for="chk-SLPWD">Slope Caps - Wind<br>
@@ -482,11 +482,27 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-SLP"
             onchange="toggleTileLayer(layer_SLP, this.checked)">
           <label class="panel-layer-label" for="chk-SLP">Slope<br>
             <img class="legend-image" src="legend/Slope_Industry.png">
+          </label>
+        </div>
+        <div class="form-check" style="margin-left: 10px;">
+          <input class="form-check-input" type="checkbox" id="chk-OpenTopo"
+            onchange="toggleTileLayer(layer_OpenTopo, this.checked)">
+            <img class="legend-image" src="./legend/opentopo.png"
+            style="margin-left: 4px; width:15px; height:15px">
+          <label class="panel-layer-label" for="chk-OpenTopo">OpenTopo<br>
+          </label>
+        </div>
+        <div class="form-check" style="margin-left: 10px;">
+          <input class="form-check-input" type="checkbox" id="chk-EsriTopo"
+            onchange="toggleTileLayer(layer_EsriTopo, this.checked)">
+            <img class="legend-image" src="./legend/esritopo.png"
+            style="margin-left: 4px; width:15px; height:15px">
+          <label class="panel-layer-label" for="chk-EsriTopo">EsriTopo<br>
           </label>
         </div>
       </div>
@@ -496,14 +512,14 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
             onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
           <label class="panel-layer-label" for="chk-ServiceContractMap_1">Service Contract Map<br>
             <img class="legend-image" src="legend/Legend_SC.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-NationalIrrigationSystem_0"
             onchange="toggleTileLayer(layer_NationalIrrigationSystem_0, this.checked)">
           <!-- <i class="fa-solid fa-calculator sbheader-icon"></i> -->
@@ -512,7 +528,7 @@
           <label class="panel-layer-label" for="chk-NationalIrrigationSystem_0">Irrigated Land
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-AncestralDomain_3"
             onchange="toggleTileLayer(layer_AncestralDomain_3, this.checked)">
           <!-- <i class="fa-solid fa-calculator sbheader-icon"></i> -->
@@ -520,14 +536,14 @@
           <label class="panel-layer-label" for="chk-AncestralDomain_3">Ancestral Domains
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-ProtectedAreas_4"
             onchange="toggleTileLayer(layer_ProtectedAreas_4, this.checked)">
           <img class="legend-image" src="./images/leaf.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-ProtectedAreas_4">Protected Areas
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-KeyBiodiversityAreas_5"
             onchange="toggleTileLayer(layer_KeyBiodiversityAreas_5, this.checked)">
           <label class="panel-layer-label" for="chk-KeyBiodiversityAreas_5">Key Biodiversity Areas<br>
@@ -541,25 +557,25 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-RVRWBS" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./images/river.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-RVRWBS">River and Water Bodies</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-FloodHazard_25yrs_6"
             onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-FloodHazard_25yrs_6">Flood Hazard<br>
             <img class="legend-image" src="legend/Flood.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-LQFCN" onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-LQFCN">Liquefaction<br>
             <img class="legend-image" src="legend/Liquefaction.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-ActiveFault_13"
             onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-ActiveFault_13">Active Fault<br>
@@ -573,43 +589,43 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7" onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-Volcanoes_7">Active Volcano<br>
             <img class="legend-image" src="legend/Volcanoes.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-Lahar_6" onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-Lahar_6">Lahar<br>
             <img class="legend-image" src="legend/Lahar.png">
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-Lava_5" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./images/lava.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-Lava_5">Lava</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-PyroclasticFlow_4"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./images/volcano_2.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-PyroclasticFlow_4">Pyroclastic Flow</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-TaalBallisticProjectiles_3"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./images/rocks.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-TaalBallisticProjectiles_3">Taal Ballistic
             Projectiles</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-TaalFissuring_2"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./images/crack.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-TaalFissuring_2">Taal Fissuring</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-TaalBufferRings_1"
             onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-TaalBufferRings_1">Taal Buffer Rings<br>
@@ -623,7 +639,7 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-drawnItems"
             onchange="toggleTileLayer(drawnItems, this.checked)">
           <img class="legend-image" src="./images/technical-drawing.png"
@@ -631,7 +647,7 @@
           <label class="panel-layer-label" for="chk-drawnItems">Drawn Layer
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-fileUploaders"
             onchange="toggleTileLayer(fileUploaders, this.checked)">
           <img class="legend-image" src="./images/upload-shape.png" style="margin-left: 4px; width:15px; height:15px">
@@ -645,26 +661,26 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-Seaports_14" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Seaports_14.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-Seaports_14">Seaports
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-RDS" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Roads.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-RDS">Roads
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-BarangaysMin_1"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/BarangaysMin_1.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-BarangaysMin_1">Barangay
           </label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-MunicipalitiesMin_0"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Municipalities.png" style="margin-left: 4px; width:15px; height:15px">
@@ -679,36 +695,36 @@
         </div>
       </button>
       <div class="panelLayers collapsed" style="font-size: 13px;">
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/ExistingTL_1.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-ExistingTL_1">Existing T/L</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-TDPTL_2" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/TDPTL_2.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-TDPTL_2">TDP T/L</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-500230kVTDPSubstations_6"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/500230kVTDPSubstations_6.png"
             style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-500230kVTDPSubstations_6">500/230kV TDP S/S</label>
         </div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-500230138115kVExistingSubstations_5"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/500230138115kVExistingSubstations_5.png"
             style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-500230138115kVExistingSubstations_5">Existing S/S</div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-69kVDULoadendSubstations_4"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/69kVDULoadendSubstations_4.png"
             style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-69kVDULoadendSubstations_4">69kV DU/Load-end S/S</div>
-        <div class="form-check">
+        <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-PlantCustomerownedSubstations_3"
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/PlantCustomerownedSubstations_3.png"
@@ -724,109 +740,109 @@
         <img class="legend-image" style="width: auto; height: 230px;" src="legend/Land_Use_2.png"></label>
 
         <div class="button-container">
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r1_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r1_2020">R1 - Ilocos</label>
           </div>
           <!-- LC-R2-Cagayan -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r2_2020_2"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r2_2020_2">R2 - Cagayan</label>
           </div>
           <!-- LC-R3-Central Luzon -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r3_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r3_2020">R3 - Central Luzon</label>
           </div>
           <!-- LC-CAR-Cordillera -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_car_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_car_2020">CAR - Cordillera</label>
           </div>
           <!-- LC-NCR -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_ncr_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_ncr_2020">NCR</label>
           </div>
           <!-- LC-R4A-CALABARZON -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r4a_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r4a_2020">R4A - CALABARZON</label>
           </div>
           <!-- LC-R4B-MIMAROPA -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r4b_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r4b_2020">R4B - MIMAROPA</label>
           </div>
           <!-- LC-R4B-Palawan -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_palawan_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_palawan_2020">R4B - Palawan</label>
           </div>
           <!-- LC-R5-Bicol -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r5_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r5_2020">R5 - Bicol</label>
           </div>
           <!-- LC-R6-Western Vis. -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r6_2020_2"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r6_2020_2">R6 - Western Visayas</label>
           </div>
           <!-- LC-R7-Central Vis. -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r7_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r7_2020">R7 - Central Visayas</label>
           </div>
           <!-- LC-R8-Eastern Vis. -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r8_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r8_2020">R8 - Eastern Visayas</label>
           </div>
           <!-- LC-R9-Zamboanga Pen. -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r9_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r9_2020">R9 - Zamboanga Pen.</label>
           </div>
           <!-- LC-R10-Northern Min. -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r10_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r10_2020">R10 - Northern Mindanao</label>
           </div>
           <!-- LC-R11-Davao -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r11_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r11_2020">R11 - Davao</label>
           </div>
           <!-- LC-R12-SOCCSKSARGEN -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r12_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r12_2020">R12 - SOCCSKSARGEN</label>
           </div>
           <!-- LC-R13-Caraga -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_r13_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_r13_2020">R13 - Caraga</label>
           </div>
           <!-- LC-BARMM -->
-          <div class="form-check">
+          <div class="form-check" style="margin-left: 10px;">
             <input class="form-check-input" type="checkbox" id="chk-land_cover_map_barmm_2020"
               onchange="toggleNestedCheckbox(this);">
             <label class="panel-layer-label" for="chk-land_cover_map_barmm_2020">BARMM</label>
