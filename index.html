@@ -265,7 +265,8 @@
 
         <!-- <hr class="sidebar-spacer"> -->
 
-        <hr class="sidebar-spacer">
+        <hr class="credit-spacer">
+
         <div class="team">
           <div class="dev-1">
             <div class="profile-image">
@@ -279,6 +280,9 @@
                 <a href="mailto:wyeth.sy@aboitiz.com" target="_blank" rel="noopener noreferrer">
                   <i class="fa-solid fa-envelope"></i>
                 </a>
+                <a href="https://www.linkedin.com/in/wyethsy/" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -290,10 +294,12 @@
             <div class="profile-details">
               <p style="font-weight: 500;" class="name">David Aboitiz</p>
               <p class="designation">VP - ARI</p>
-
               <div class="social-buttons">
                 <a href="mailto:david.aboitiz@aboitiz.com" target="_blank" rel="noopener noreferrer">
                   <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/daboitiz/" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-linkedin"></i>
                 </a>
               </div>
             </div>
@@ -1060,11 +1066,11 @@
                   </td>
                 </tr>
                 <tr>
-                  <td><label for="purchase_price">Purchase Price
-                      (Net/sqm):</label></td>
-                  <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control">
-                  </td>
+                  <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
+                  <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control"
+                      placeholder="150" oninput="updateInputColor(this)"></td>
                 </tr>
+
                 <tr>
                   <td><label for="total_area">Total Area in Ha:</label></td>
                   <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"></td>
@@ -1632,6 +1638,16 @@
 
 
     //HLA Calculator--------------------------------------------------------------------------------------------------
+    function updateInputColor(input) {
+      if (input.value === '') {
+        input.classList.remove('user-input');
+      } else {
+        input.classList.add('user-input');
+      }
+    }
+
+
+
     function calculate() {
       var ghi = parseFloat(document.getElementById("ghi").value);
       var slope = parseFloat(document.getElementById("slope").value);
@@ -3601,7 +3617,7 @@
                 parseGeoraster(arrayBuffer).then(georaster => {
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
-
+                  // var ghiInput = document.getElementById('ghi');
                   var statisticsDiv = document.getElementById('GHIstatisticss');
 
                   if (mn < 1700) {
@@ -3816,6 +3832,12 @@
                       "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
+                  } else if (mn > 0) {
+
+                    notes =
+                      "With Potential Overlap. Contact the Owner/Broker/LGU/NCIP to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "orange ";
                   } else {
 
                     notes = "No potential overlap.";
@@ -3849,12 +3871,16 @@
                   let notes;
                   let fontColor;
 
-                  if (mn > 0) {
-
+                  if (mn > 20) {
                     notes =
                       "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
+                  } else if (mn > 0) {
+                    notes =
+                      "With Potential Overlap. Contact the Owner/Broker/LGU/NIA to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "orange";
                   } else {
 
                     notes = "No potential overlap.";
@@ -3885,12 +3911,17 @@
                   let notes;
                   let fontColor;
 
-                  if (mn > 0) {
+                  if (mn > 20) {
 
                     notes =
                       "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
+                  } else if (mn > 0) {
+                    notes =
+                      "With Potential Overlap. Contact the Owner/Broker/LGU/DENR to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "orange";
                   } else {
 
                     notes = "No potential overlap.";
@@ -3922,11 +3953,15 @@
                   let notes;
                   let fontColor;
 
-                  if (mn > 0) {
+                  if (mn > 20) {
 
                     notes =
                       "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
                     fontColor = "red";
+                  } else if (mn > 0) {
+                    notes =
+                      "With Potential Overlap. Check the maps or contact PHILVOCS to confirm.";
+                    fontColor = "orange";
                   } else {
 
                     notes = "No potential overlap.";
@@ -3960,13 +3995,17 @@
                   const mn = (Number(meanss) * 100).toFixed(2);
                   let notes;
                   let fontColor;
-
-                  if (mn > 0) {
-
+                  if (mn > 20) {
                     notes =
                       "Flood Hazard: With Potential Overlap. Contact the owner/broker/LGU to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
+                  } else if (mn > 0) {
+
+                    notes =
+                      "Flood Hazard: With Potential Overlap. Contact the owner/broker/LGU to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "orange";
                   } else {
 
                     notes =
@@ -3992,31 +4031,30 @@
             var url_to_geotiff_LqfBi_file =
               "https://czrxstrd4.github.io/avemn/Lqf.tif";
 
-
             fetch(url_to_geotiff_LqfBi_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
                 parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster,
-                    coordinates);
+                  const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = (Number(meanss) * 100).toFixed(2);
                   let notes;
                   let fontColor;
 
-                  if (mn > 0) {
-
+                  if (mn > 20) {
                     notes =
                       "Liquefaction: With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
+                  } else if (mn > 0) {
+                    notes =
+                      "Liquefaction: With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "orange";
                   } else {
-
                     notes =
                       "Liquefaction: No potential overlap.";
                     fontColor = "green";
                   }
-
                   document.getElementById("LqfBistatisticss")
                     .innerHTML = notes;
                   document.getElementById("LqfBistatisticss")
@@ -4890,8 +4928,6 @@
 
                     // Assign custom labels based on the actual labels
 
-
-
                     const customLabels = Object.keys(histogramData[0]).map(
                       key => {
                         if (key === "0") {
@@ -5002,22 +5038,6 @@
         }
       ];
 
-      // document.getElementById('fetchButton').addEventListener('click', function () {
-      //   var index = 0;
-
-      //   function executeNext() {
-      //     if (index < codeBlocks.length) {
-      //       var codeBlock = codeBlocks[index];
-      //       codeBlock.code(); // Execute the code block
-
-      //       index++;
-      //       setTimeout(executeNext, codeBlock
-      //         .delay); // Delay before executing the next code block
-      //     }
-      //   }
-
-      //   executeNext();
-      // });
       var fetchButton = document.getElementById('fetchButton');
 
       fetchButton.addEventListener('click', function () {
@@ -5046,28 +5066,6 @@
       });
 
     }
-
-
-    // Read the local JSON file
-    // fetch('lgu.json')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     const tableBody = document.querySelector('#lgu-table tbody');
-    //     data.forEach(rowData => {
-    //       const row = document.createElement('tr');
-    //       row.innerHTML = `
-    //         <td>${rowData.region}</td>
-    //         <td>${rowData.province}</td>
-    //         <td>${rowData.citymun}</td>
-    //         <td>${rowData.barangay}</td>
-    //         <td>${rowData.position}</td>
-    //         <td>${rowData.name}</td>
-    //         <td>${rowData.contact}</td>
-    //       `;
-    //       tableBody.appendChild(row);
-    //     });
-    //   })
-    //   .catch(error => console.error('Error reading JSON file:', error));
   </script>
 </body>
 
