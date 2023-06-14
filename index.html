@@ -1220,26 +1220,26 @@
       });
     }
 
-    // function showSuggestions(results) {
-    //   var suggestionsDiv = document.getElementById('suggestions');
-    //   if (results.length > 0) {
-    //     var div = document.createElement('div');
-    //     div.classList.add('card');
-    //     results.forEach(function (result) {
-    //       var suggestionItem = document.createElement('div');
-    //       suggestionItem.classList.add('suggestion-item');
-    //       suggestionItem.textContent = result.name;
-    //       suggestionItem.addEventListener('click', function () {
-    //         searchInput.value = result.name;
-    //         clearSuggestions();
-    //         searchLocationByAddress(map, result.name);
-    //       });
-    //       div.appendChild(suggestionItem);
-    //     });
-    //     suggestionsDiv.appendChild(div);
-    //     suggestionsShown = true; // Set suggestions shown flag
-    //   }
-    // }
+    function showSuggestions(results) {
+      var suggestionsDiv = document.getElementById('suggestions');
+      if (results.length > 0) {
+        var div = document.createElement('div');
+        div.classList.add('card');
+        results.forEach(function (result) {
+          var suggestionItem = document.createElement('div');
+          suggestionItem.classList.add('suggestion-item');
+          suggestionItem.textContent = result.name;
+          suggestionItem.addEventListener('click', function () {
+            searchInput.value = result.name;
+            clearSuggestions();
+            searchLocationByAddress(map, result.name);
+          });
+          div.appendChild(suggestionItem);
+        });
+        suggestionsDiv.appendChild(div);
+        suggestionsShown = true; // Set suggestions shown flag
+      }
+    }
 
     function searchLocationByAddress(map, query) {
       // Clear any existing markers on the map
