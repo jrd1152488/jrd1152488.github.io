@@ -1504,51 +1504,56 @@
         var matchingProjects = [];
 
         if (searchTerm === '') {
-          clearSuggestions();
-        } else {
-          layer_ServiceContractMap_1.eachLayer(function (layer) {
-            var projectName = layer.feature.properties['sc_Project Name'];
-            if (projectName && projectName.toLowerCase().includes(searchTerm)) {
-              matchingProjects.push({
-                projectName: projectName,
-                layer: layer
-              });
-              layer.setStyle({
-                opacity: 1
-              });
-            } else {
-              layer.setStyle({
-                opacity: 0
-              });
-            }
-          });
+      clearSuggestions();
+    } else {
+      layer_ServiceContractMap_1.eachLayer(function (layer) {
+        var projectName = layer.feature.properties['sc_Project Name'];
+        var spv = layer.feature.properties['sc_SPV'];
+        var parentCompany = layer.feature.properties['sc_Parent Company'];
+        var lookupColumn = projectName + ' - ' + spv + ' (' + parentCompany + ')';
 
-          updateSuggestions(matchingProjects);
+        if (lookupColumn && lookupColumn.toLowerCase().includes(searchTerm)) {
+          matchingProjects.push({
+            projectName: projectName,
+            lookupColumn: lookupColumn,
+            layer: layer
+          });
+          layer.setStyle({
+            opacity: 1
+          });
+        } else {
+          layer.setStyle({
+            opacity: 0
+          });
         }
       });
 
-      function updateSuggestions(projects) {
-        clearSuggestions();
+      updateSuggestions(matchingProjects);
+    }
+  });
 
-        projects.forEach(function (item) {
-          var suggestionItem = document.createElement('div');
-          suggestionItem.classList.add('suggestion-item');
-          suggestionItem.textContent = item.projectName;
-          suggestionItem.addEventListener('click', function () {
-            searchInput.value = item.projectName;
-            clearSuggestions();
-            map.fitBounds(item.layer.getBounds());
-            item.layer.openPopup();
-          });
-          suggestionsDiv.appendChild(suggestionItem);
-        });
+  function updateSuggestions(projects) {
+  clearSuggestions();
 
-        if (projects.length > 0) {
-          suggestionsDiv.style.display = 'block';
-        } else {
-          suggestionsDiv.style.display = 'none';
-        }
-      }
+  projects.forEach(function (item) {
+    var suggestionItem = document.createElement('div');
+    suggestionItem.classList.add('suggestion-item');
+    suggestionItem.textContent = item.lookupColumn; // Display the lookupColumn value
+    suggestionItem.addEventListener('click', function () {
+      searchInput.value = item.projectName;
+      clearSuggestions();
+      map.fitBounds(item.layer.getBounds());
+      item.layer.openPopup();
+    });
+    suggestionsDiv.appendChild(suggestionItem);
+  });
+
+  if (projects.length > 0) {
+    suggestionsDiv.style.display = 'block';
+  } else {
+    suggestionsDiv.style.display = 'none';
+  }
+}
 
       function clearSuggestions() {
         suggestionsDiv.innerHTML = '';
