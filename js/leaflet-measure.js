@@ -590,6 +590,7 @@
         options: {
             units: {},
             position: "topright",
+            size: "8px",
             primaryLengthUnit: "feet",
             secondaryLengthUnit: "miles",
             primaryAreaUnit: "acres",
