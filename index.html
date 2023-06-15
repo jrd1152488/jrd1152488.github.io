@@ -1738,116 +1738,116 @@
     });
 
     // Create the Timeline EasyButton
-    L.easyButton({
-      id: 'timeline-button',
-      states: [{
-        stateName: 'toggle-timeline',
-        icon: 'fa-clock-rotate-left',
-        title: 'Toggle Timeline',
-        onClick: function (control) {
-          var sidebar = document.getElementById('timeline-bar');
-          sidebar.classList.toggle('open');
+    // L.easyButton({
+    //   id: 'timeline-button',
+    //   states: [{
+    //     stateName: 'toggle-timeline',
+    //     icon: 'fa-clock-rotate-left',
+    //     title: 'Toggle Timeline',
+    //     onClick: function (control) {
+    //       var sidebar = document.getElementById('timeline-bar');
+    //       sidebar.classList.toggle('open');
 
-          // Close the other sidebar if it's open
-          var otherSidebars = ['sidebar-credits', 'sidebar-calc', 'lgu-directory', 'sidebar-search'];
-          otherSidebars.forEach(function (sidebarId) {
-            var otherSidebar = document.getElementById(sidebarId);
-            if (otherSidebar.classList.contains('open')) {
-              otherSidebar.classList.remove('open');
-            }
-          });
-        }
-      }]
-    }).addTo(map);
+    //       // Close the other sidebar if it's open
+    //       var otherSidebars = ['sidebar-credits', 'sidebar-calc', 'lgu-directory', 'sidebar-search'];
+    //       otherSidebars.forEach(function (sidebarId) {
+    //         var otherSidebar = document.getElementById(sidebarId);
+    //         if (otherSidebar.classList.contains('open')) {
+    //           otherSidebar.classList.remove('open');
+    //         }
+    //       });
+    //     }
+    //   }]
+    // }).addTo(map);
 
-    var easyButtonElement = document.querySelector('#timeline-button.leaflet-bar');
-    if (easyButtonElement) {
-      easyButtonElement.style.position = 'absolute';
-      easyButtonElement.style.top = '700px'; // Adjust the top position in pixels
-      easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
-    }
+    // var easyButtonElement = document.querySelector('#timeline-button.leaflet-bar');
+    // if (easyButtonElement) {
+    //   easyButtonElement.style.position = 'absolute';
+    //   easyButtonElement.style.top = '700px'; // Adjust the top position in pixels
+    //   easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
+    // }
 
-    $(document).ready(function () {
-      // Add click event to the settings-card
-      $('#timeline-card').click(function () {
-        $('#timeline-bar').toggleClass('open');
-      });
-    });
+    // $(document).ready(function () {
+    //   // Add click event to the settings-card
+    //   $('#timeline-card').click(function () {
+    //     $('#timeline-bar').toggleClass('open');
+    //   });
+    // });
     //_____________________________________________________________________________________________________________________________________________
 
     // Create the LGU EasyButton
-    L.easyButton({
-      id: 'lgu-button',
-      states: [{
-        stateName: 'toggle-lgu',
-        icon: 'fa-landmark',
-        title: 'Toggle LGU',
-        onClick: function (control) {
-          var sidebar = document.getElementById('lgu-directory');
-          sidebar.classList.toggle('open');
+    // L.easyButton({
+    //   id: 'lgu-button',
+    //   states: [{
+    //     stateName: 'toggle-lgu',
+    //     icon: 'fa-landmark',
+    //     title: 'Toggle LGU',
+    //     onClick: function (control) {
+    //       var sidebar = document.getElementById('lgu-directory');
+    //       sidebar.classList.toggle('open');
 
-          // Close the other sidebar if it's open
-          var otherSidebars = ['sidebar-credits', 'timeline-bar', 'sidebar-calc', 'sidebar-search'];
-          otherSidebars.forEach(function (sidebarId) {
-            var otherSidebar = document.getElementById(sidebarId);
-            if (otherSidebar.classList.contains('open')) {
-              otherSidebar.classList.remove('open');
-            }
-          });
-        }
-      }]
-    }).addTo(map);
+    //       // Close the other sidebar if it's open
+    //       var otherSidebars = ['sidebar-credits', 'timeline-bar', 'sidebar-calc', 'sidebar-search'];
+    //       otherSidebars.forEach(function (sidebarId) {
+    //         var otherSidebar = document.getElementById(sidebarId);
+    //         if (otherSidebar.classList.contains('open')) {
+    //           otherSidebar.classList.remove('open');
+    //         }
+    //       });
+    //     }
+    //   }]
+    // }).addTo(map);
 
-    var easyButtonElement = document.querySelector('#lgu-button.leaflet-bar');
-    if (easyButtonElement) {
-      easyButtonElement.style.position = 'absolute';
-      easyButtonElement.style.top = '700px'; // Adjust the top position in pixels
-      easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
-    }
+    // var easyButtonElement = document.querySelector('#lgu-button.leaflet-bar');
+    // if (easyButtonElement) {
+    //   easyButtonElement.style.position = 'absolute';
+    //   easyButtonElement.style.top = '700px'; // Adjust the top position in pixels
+    //   easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
+    // }
 
-    $(document).ready(function () {
-      // Add click event to the settings-card
-      $('#lgu-card').click(function () {
-        $('#lgu-directory').toggleClass('open');
-      });
-    });
+    // $(document).ready(function () {
+    //   // Add click event to the settings-card
+    //   $('#lgu-card').click(function () {
+    //     $('#lgu-directory').toggleClass('open');
+    //   });
+    // });
 
     // Create the Search EasyButton
-    L.easyButton({
-      id: 'search-button',
-      states: [{
-        stateName: 'toggle-search',
-        icon: 'fa-landmark',
-        title: 'Search Service Contract',
-        onClick: function (control) {
-          var sidebar = document.getElementById('sidebar-search');
-          sidebar.classList.toggle('open');
+    // L.easyButton({
+    //   id: 'search-button',
+    //   states: [{
+    //     stateName: 'toggle-search',
+    //     icon: 'fa-landmark',
+    //     title: 'Search Service Contract',
+    //     onClick: function (control) {
+    //       var sidebar = document.getElementById('sidebar-search');
+    //       sidebar.classList.toggle('open');
 
-          // Close the other sidebar if it's open
-          var otherSidebars = ['sidebar-credits', 'timeline-bar', 'sidebar-calc', 'lgu-directory'];
-          otherSidebars.forEach(function (sidebarId) {
-            var otherSidebar = document.getElementById(sidebarId);
-            if (otherSidebar.classList.contains('open')) {
-              otherSidebar.classList.remove('open');
-            }
-          });
-        }
-      }]
-    }).addTo(map);
+    //       // Close the other sidebar if it's open
+    //       var otherSidebars = ['sidebar-credits', 'timeline-bar', 'sidebar-calc', 'lgu-directory'];
+    //       otherSidebars.forEach(function (sidebarId) {
+    //         var otherSidebar = document.getElementById(sidebarId);
+    //         if (otherSidebar.classList.contains('open')) {
+    //           otherSidebar.classList.remove('open');
+    //         }
+    //       });
+    //     }
+    //   }]
+    // }).addTo(map);
 
-    var easyButtonElement = document.querySelector('#search-button.leaflet-bar');
-    if (easyButtonElement) {
-      easyButtonElement.style.position = 'absolute';
-      easyButtonElement.style.top = '700px'; // Adjust the top position in pixels
-      easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
-    }
+    // var easyButtonElement = document.querySelector('#search-button.leaflet-bar');
+    // if (easyButtonElement) {
+    //   easyButtonElement.style.position = 'absolute';
+    //   easyButtonElement.style.top = '700px'; // Adjust the top position in pixels
+    //   easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
+    // }
 
-    $(document).ready(function () {
-      // Add click event to the settings-card
-      $('#search-card').click(function () {
-        $('#sidebar-search').toggleClass('open');
-      });
-    });
+    // $(document).ready(function () {
+    //   // Add click event to the settings-card
+    //   $('#search-card').click(function () {
+    //     $('#sidebar-search').toggleClass('open');
+    //   });
+    // });
 
     //_____________________________________________________________________________________________________________________________________________
     function toggleLayers(checkbox, checkboxIds) {
@@ -4147,20 +4147,23 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
+
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4173,7 +4176,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -4181,7 +4184,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4282,20 +4285,25 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
+
+
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4308,7 +4316,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -4316,7 +4324,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4420,20 +4428,23 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
+
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4446,7 +4457,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -4454,7 +4465,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4557,20 +4568,22 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4583,7 +4596,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -4591,7 +4604,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4700,20 +4713,23 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
+
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4726,7 +4742,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -4734,7 +4750,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4833,20 +4849,23 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
+
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4859,7 +4878,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -4867,7 +4886,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4969,20 +4988,23 @@
                                 const originalValue =
                                   context.parsed.y;
 
-                                // Calculate the multiplied value
-                                const multipliedValue =
-                                  Number(
-                                    originalValue *
-                                    4.015).toFixed(
-                                    2);
+
 
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
                                     .dataIndex];
 
+                                // Calculate the multiplied value
+
+                                const multipliedValue =
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
+
+                                const multipliedValue2 = Number(multipliedValue).toLocaleString();
+
                                 // Return the label string for the tooltip
-                                return `Value: ${multipliedValue}, Percentage: ${percentage}%`;
+                                return `Percentage: ${percentage}%, Hectares: ${multipliedValue2}`;
                               }
                             }
                           }
@@ -4995,7 +5017,7 @@
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: 'Hectares',
+                              text: 'Percent, %',
                               font: {
                                 size: 14
                               }
@@ -5003,7 +5025,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return (value * 4.015)
+                                return ((value / sum) * 100)
                                   .toFixed(0);
                               }
                             }

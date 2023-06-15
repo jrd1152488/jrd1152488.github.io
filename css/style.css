@@ -12,7 +12,8 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: "Roboto", Arial, sans-serif;
-  background-color: #DEE5E3
+  background-color: #DEE5E3;
+  /* zoom: 80%; */
 }
 
 #map {
@@ -826,7 +827,7 @@ table tr th {
 
 .dev-1,
 .dev-2 {
-width: 195px;
+  width: 195px;
 }
 
 
@@ -883,10 +884,14 @@ width: 195px;
   font-size: 16px;
 
 }
+
 .credit-spacer {
-  height: 3px; /* Set the height */
-  width: 70%; /* Set the width */
-  margin: 20px auto; /* Set the margin */
+  height: 3px;
+  /* Set the height */
+  width: 70%;
+  /* Set the width */
+  margin: 20px auto;
+  /* Set the margin */
 }
 
 
@@ -990,4 +995,3 @@ width: 195px;
 .sidebar-search.open {
   left: 55px;
 }
-
