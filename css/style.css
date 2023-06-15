@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap');
 
+
+
 * {
   /* color:#464646;
   font-family: ff-cocon-pro, sans-serif; */
@@ -13,13 +15,6 @@ body {
   overflow: hidden;
   font-family: "Roboto", Arial, sans-serif;
   background-color: #DEE5E3;
-  /* zoom: 80%; */
-}
-
-@media (min-width: 1200px) {
-  body {
-    zoom: 0.8;
-  }
 }
 
 
@@ -35,24 +30,25 @@ body {
   justify-content: space-between;
   background-color: #001d3d;
   color: white;
-  /* padding: 6px; */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 9999;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-  height: 50px;
+  height: 40px;
 }
 
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 5px;
+  height: 25px;
 }
 
 .logo {
-  width: 32px;
+  width: 25px;
   height: auto;
   margin-right: 5px;
   transition: transform 0.2s ease-in-out;
@@ -68,27 +64,58 @@ body {
   /* display: flex; */
   align-items: center;
   margin-right: 5px;
+  font-size: 10px !important;
 }
 
-/* .input-group {
-  align-items: center;
-  gap: 4px;
-} */
-
 .form-select {
-  width: 150px !important;
-  height: 35px !important;
-  font-size: 12px !important;
+  width: 120px !important;
+  height: 25px !important;
+  font-size: 10px !important;
 }
 
 .form-control {
-  width: 300px;
+  width: 230px !important;
   color: #f0f0f0;
+  height: 25px !important;
+  font-size: 10px !important;
 }
+
+
+#searchInput {
+  width: 230px;
+  margin-right: 5px;
+  font-size: 10px !important;
+}
+
+#suggestions {
+  position: absolute;
+  font-size: 10px;
+  color: #383838;
+  width: 230px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(5px);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #e6e6e69c;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 
 input.transparent-input {
   background-color: transparent !important;
-  height: 35px !important;
+  height: 25px !important;
   font-size: 12px !important;
   color: #f0f0f0;
 }
@@ -157,9 +184,7 @@ align-items: center;
 
 
 
-.right-bar {
-  margin-left: auto;
-}
+
 
 .form-select {
   width: 150px;
@@ -167,7 +192,7 @@ align-items: center;
 }
 
 .form-control {
-  width: 350px;
+  width: 2500px;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -182,7 +207,15 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
   justify-content: center;
   height: 25px !important;
-  font-size: 12px !important;
+  font-size: 10px !important;
+  text-align: center !important;
+}
+.btn-warning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px !important;
+  font-size: 10px !important;
   text-align: center !important;
 }
 
@@ -191,10 +224,14 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-left: auto;
 }
 
+.shapefile-display {
+  font-size: 10px;
+  padding: 0;
+}
 
 .content {
   position: absolute;
-  top: 50px;
+  top: 40px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -202,12 +239,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .suitability-content {
-  font-size: 12px;
+  font-size: 10px !important;
   font-family: "Roboto", Arial, sans-serif;
 }
 
 #calculator table td {
   vertical-align: middle;
+
 }
 
 .list-group-item {
@@ -230,7 +268,7 @@ table tr th {
 
 .loading-bar {
   width: 100%;
-  height: 10px;
+  height: 5px;
   background-color: #f0f0f0;
   position: relative;
 }
@@ -284,19 +322,20 @@ table tr th {
 ::-webkit-scrollbar {
   width: 18px;
   background-color: transparent;
-  padding: 0px;
+  padding: 0px; 
   align-items: center;
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
   padding: 0px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #869092;
-  border-radius: 20px;
-  border: 5px solid transparent;
+  border-radius: 22px;
+  border: 6px solid transparent;
   background-clip: content-box;
   padding: 0px;
 }
@@ -313,20 +352,19 @@ table tr th {
 
 .sbheader-icon {
   display: inline-block;
-  font-size: 24px;
+  font-size: 18px;
   margin-right: 10px;
 }
 
 .sbheader-text {
-  font-size: 22px;
+  font-size: 15px;
 }
 
 #sidemenu {
-  position: fixed;
-  top: 50px;
+  position: absolute;
   left: 0;
-  height: 100vh;
-  width: 50px;
+  height: 100%;
+  width: 45px;
   transition: width 0.5s;
   background-color: rgba(0, 0, 0, 0.23);
   color: #fff;
@@ -381,7 +419,7 @@ table tr th {
 
 .leaflet-top.leaflet-left {
   position: fixed;
-  margin-top: 60px;
+  margin-top: 40px;
   z-index: 9999;
   text-align: left;
 }
@@ -453,9 +491,9 @@ table tr th {
 
 .floating-card {
   position: fixed;
-  top: 70px;
-  right: -350px;
-  width: 350px;
+  top: 50px;
+  right: -300px;
+  width: 300px;
   height: 90%;
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
@@ -470,8 +508,8 @@ table tr th {
 
 /* Adjust Easybutton sizing */
 .leaflet-bar button {
-  height: 26px !important;
-  width: 26px !important;
+  height: 23px !important;
+  width: 23px !important;
 }
 
 /* Easybutton pop animation */
@@ -503,15 +541,26 @@ table tr th {
 
 
 #floating-card .sbheader-text {
-  font-size: 18px;
+  font-size: 15px;
 }
 
-#floating-card .form-check-label {
-  font-size: 12px;
+/* #floating-card .form-check-label {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+} */
+.form-check {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  padding: 0px;
+}
+.form-check-input {
+  margin-right: 5px;
 }
 
 .sidebar-layer {
-  padding: 20px;
+  padding: 10px;
 }
 
 .sidebar-header {
@@ -523,7 +572,7 @@ table tr th {
 }
 
 .sbheader-text {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .floating-card.active {
@@ -545,18 +594,21 @@ table tr th {
   margin-right: 5px;
   margin-left: 5px;
 }
+/* .right-bar {
+  margin-left: auto;
+} */
 
 .right-bar span {
   display: block;
-  width: 30px;
-  height: 3px;
+  width: 20px;
+  height: 2px;
   background-color: #f0f0f0;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   transition: transform 0.3s, opacity 0.3s;
 }
 
 .right-bar.open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(5px) rotate(45deg);
 }
 
 .right-bar.open span:nth-child(2) {
@@ -564,7 +616,7 @@ table tr th {
 }
 
 .right-bar.open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+  transform: translateY(-5px) rotate(-45deg);
 }
 
 .layer-text {
@@ -572,11 +624,10 @@ table tr th {
 }
 
 .sidebar-credits {
-
   position: fixed;
-  top: 70px;
-  left: -350px;
-  width: 350px;
+  top: 50px;
+  left: -300px;
+  width: 300px;
   height: 90%;
   background-color: rgba(255, 255, 255, 0.9);
   /* Set a transparent background color */
@@ -593,7 +644,6 @@ table tr th {
 }
 
 .credits-container {
-
   margin-top: 20px;
 }
 
@@ -637,9 +687,9 @@ table tr th {
 .sidebar-calc {
   position: fixed;
   align-items: center;
-  top: 70px;
-  left: -350px;
-  width: 350px;
+  top: 50px;
+  left: -300px;
+  width: 300px;
   height: 90%;
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
@@ -650,6 +700,7 @@ table tr th {
   z-index: 8000;
   /* overflow: visible; */
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
 
 }
@@ -659,7 +710,7 @@ table tr th {
 }
 
 .sidebar-calc.open {
-  left: 55px;
+  left: 50px;
 }
 
 
@@ -670,35 +721,7 @@ table tr th {
 }
 
 
-#searchInput {
-  width: 300px;
-  margin-right: 5px;
-}
 
-#suggestions {
-  position: absolute;
-  font-size: small;
-  color: #383838;
-  width: 300px;
-  background-color: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(5px);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-}
-
-.suggestion-item {
-  padding: 5px;
-  cursor: pointer;
-}
-
-.suggestion-item:hover {
-  background-color: #e6e6e69c;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
 
 .easy-button {
   color: #fff;
@@ -708,6 +731,11 @@ table tr th {
   font-size: 12px;
   cursor: pointer;
   transition: background-color 0.3s;
+
+}
+
+.easy-button-container {
+padding: 0;
 }
 
 .easy-button:active {
@@ -746,17 +774,18 @@ table tr th {
   cursor: pointer;
   padding: 2px;
   width: 100%;
-  height: 26px;
+  height: 20px;
   border: 1px;
   text-align: left;
   outline: none;
-  font-size: 12px !important;
+  font-size: 10px !important;
   text-indent: 5px;
   font-family: "Roboto", Arial, sans-serif;
   font-weight: 500 !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 3px;
 }
 
 .collapsible:hover {
@@ -787,7 +816,7 @@ table tr th {
 }
 
 .legend-image {
-  width: 180px;
+  width: 110px;
   height: auto;
 }
 
@@ -796,26 +825,26 @@ table tr th {
 }
 
 .credit-h1 {
-  font-size: 25px;
+  font-size: 15px;
   text-align: center;
   font-family: "Roboto", Arial, sans-serif;
 }
 
 .credit-h2 {
-  font-size: 20px;
+  font-size: 13x;
   margin-bottom: 20px;
   font-family: "Roboto", Arial, sans-serif;
 }
 
 .credit-h3 {
-  font-size: 16px;
+  font-size: 12px;
   margin-bottom: 20px;
   margin-top: 20px;
 }
 
 .credit-text {
   margin-top: 50px;
-  font-size: 12px;
+  font-size: 8px;
   text-align: center;
   line-height: 1.5;
 }
@@ -825,17 +854,20 @@ table tr th {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* gap: 20px; */
+  font-size: 10px !important;
 }
-
+.developers {
+  gap: 30px;
+}
 .team {
-  gap: 50px;
+  gap: 40px;
   margin-top: 20px;
 }
 
-.dev-1,
-.dev-2 {
+#dev-1,
+#dev-2 {
   width: 195px;
+  font-size: 10px;
 }
 
 
@@ -845,8 +877,8 @@ table tr th {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   overflow: hidden;
   margin: auto;
   margin-bottom: 10px;
@@ -887,9 +919,9 @@ table tr th {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  font-size: 16px;
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
 
 }
 
@@ -1003,3 +1035,8 @@ table tr th {
 .sidebar-search.open {
   left: 55px;
 }
+
+  /* Adjust the font size for tooltips */
+  .chartjs-tooltip {
+    font-size: 6px !important;
+  }

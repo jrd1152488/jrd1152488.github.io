@@ -160,22 +160,23 @@
 </head>
 
 <body>
+
   <nav class="navbar">
-    <div class="title">
+    <div class="title" style="padding: 0; align-items: center;">
       <div class="logo-container" onclick="refreshPage()">
         <img src="AP Emblem.png" alt="AP Emblem" class="logo">
       </div>
       <div class="header-content" onclick="refreshPage()">
         <span class="header-text"
-          style="color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ARI MARKET
-          STRATEGY
+          style="color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ARI MARKET STRATEGY
           - SPT</span>
       </div>
     </div>
 
     <div class="search-bar">
       <div class="input-group">
-        <select class="form-select bg-transparent" id="searchOption" style="color: #f0f0f0; margin-right: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+        <select class="form-select bg-transparent" id="searchOption"
+          style="color: #f0f0f0; margin-right: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;font-size: 12px; padding-top: 0; padding-bottom: 0;">
           <option style="color: #202020;" selected>Select options</option>
           <option style="color: #202020;" value="coordinates">Coordinates</option>
           <option style="color: #202020;" value="location">Location</option>
@@ -210,7 +211,7 @@
         <!-- <h1 class="credit-h1">
           ARI Market Strategy
         </h1> -->
-        <h2 class="credit-h2" style="font-weight: 500;">
+        <h2 class="credit-h2" style="font-size: 15px; font-weight: 600  ;">
           Strategic Pipeline Targeting (SPT)
         </h2>
         <!-- <a href="https://docs.google.com/presentation/d/1axuiZhPorCGUERwNVxPLmkL-y0abwjHQ74vIZsYIFpg/edit?usp=sharing"
@@ -218,13 +219,13 @@
         <h2 class="credit-h3">
           ARI Market Strategy Team:
         </h2>
-        <div class="developers">
+        <div class="developers" style="font-size: 8px !important;">
 
-          <div class="dev-1">
+          <div class="dev-1" style="font-size: 8px !important;">
             <div class="profile-image">
               <img src="./images/cestrada.jfif" alt="Profile Image">
             </div>
-            <div class="profile-details">
+            <div class="profile-details" style="font-size: 8px !important;">
               <p style="font-weight: 500;" class="name">Cezar John Estrada</p>
               <p class="designation">Market Research Manager</p>
               <p style="font-style:italic;" class="designation">Developer</p>
@@ -241,11 +242,11 @@
             </div>
           </div>
 
-          <div class="dev-2">
+          <div class="dev-2" style="font-size: 8px !important;">
             <div class="profile-image">
               <img src="./images/jrodrigo.png" alt="Profile Image">
             </div>
-            <div class="profile-details">
+            <div class="profile-details" style="font-size: 8px !important;">
               <p style="font-weight: 500;" class="name">Jolanz Rodrigo</p>
               <p class="designation">Market Research Supervisor</p>
               <p style="font-style:italic;" class="designation">Developer</p>
@@ -266,12 +267,12 @@
 
         <hr class="credit-spacer">
 
-        <div class="team">
-          <div class="dev-1">
+        <div class="team" style="font-size: 8px !important;">
+          <div class="dev-1" style="font-size: 8px !important;">
             <div class="profile-image">
-              <img src="./images/wsy.webp" alt="Profile Image">
+              <img src="./images/wsy.jpg" alt="Profile Image">
             </div>
-            <div class="profile-details">
+            <div class="profile-details" style="font-size: 8px !important;">
               <p style="font-weight: 500;" class="name">Wyeth Sy</p>
               <p class="designation">AVP - Market Strategy</p>
 
@@ -286,13 +287,14 @@
             </div>
           </div>
 
-          <div class="dev-1">
+          <div class="dev-2" style="font-size: 8px !important;">
             <div class="profile-image">
               <img src="./images/david.webp" alt="Profile Image">
             </div>
-            <div class="profile-details">
+            <div class="profile-details" style="font-size: 8px !important;">
               <p style="font-weight: 500;" class="name">David Aboitiz</p>
-              <p class="designation">VP - ARI</p>
+              <p class="designation">VP - ARI
+              </p>
               <div class="social-buttons">
                 <a href="mailto:david.aboitiz@aboitiz.com" target="_blank" rel="noopener noreferrer">
                   <i class="fa-solid fa-envelope"></i>
@@ -375,10 +377,10 @@
   <div id="floating-card" class="floating-card">
     <h1 class="sidebar-header common-header">
       <!-- <i class="fa-solid fa-map sbheader-icon"></i> -->
-      <img class="legend-image" src="./images/philippines.png" style="margin-left: -10px; width:40px; height:40px">
-      <span style="font-size: 20px;" class="sbheader-text"><strong>Layer Selection</strong></span>
+      <img class="legend-image" src="./images/philippines.png" style="margin-left: -10px; margin-right: 5px; width:20px; height:20px">
+      <span style="font-size: 15px;" class="sbheader-text"><strong>Layer Selection</strong></span>
     </h1>
-    <div class="d-flex flex-column">
+    <!-- <div class="d-flex flex-column"> -->
 
       <div class="form-check">
         <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
@@ -423,14 +425,14 @@
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
     <hr class="sidebar-spacer">
 
     <!-- Tile Layers -->
-    <h1 class="sidebar-header common-header" style="margin-bottom: 10px; margin-top: 10px;">
+    <h1 class="sidebar-header common-header" style="margin-bottom: 6px; margin-top: 6px;">
       <i class="fa-solid fa-map sbheader-icon"></i>
-      <span style="font-size: 20px;" class="sbheader-text"><strong>Tile Layers</strong></span>
+      <span style="font-size: 15px;" class="sbheader-text"><strong>Tile Layers</strong></span>
     </h1>
     <div class="group-panelLayers">
       <button class="collapsible">Solar Suitability
@@ -438,11 +440,11 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Solar_Suit(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" style="margin-right: 5px;" type="checkbox" id="chk-GHISLP"
             onchange="toggleTileLayer(layer_GHISLP, this.checked)">
-          <label class="panel-layer-label" style="font-size: 13px;" for="chk-GHISLP">
+          <label class="panel-layer-label" style="font-size: 9px;" for="chk-GHISLP">
             GHI x Slope<br>
             <img class="legend-image" src="legend/GHIxSlope.png" alt="Image 1">
           </label>
@@ -470,7 +472,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Wind_Suit(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-WSSLP"
             onchange="toggleTileLayer(layer_WSSLP, this.checked)">
@@ -499,7 +501,7 @@
           <!-- <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Area_Res(this)"> -->
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-SLP"
             onchange="toggleTileLayer(layer_SLP, this.checked)">
@@ -527,7 +529,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Area_Res(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
             onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
@@ -572,7 +574,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Hazard(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-RVRWBS" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./images/river.png" style="margin-left: 4px; width:15px; height:15px">
@@ -604,7 +606,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Hazard_Volcano(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-Volcanoes_7" onchange="toggleNestedCheckbox(this);">
           <label class="panel-layer-label" for="chk-Volcanoes_7">Active Volcano<br>
@@ -654,7 +656,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Added_Layers(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-drawnItems"
             onchange="toggleTileLayer(drawnItems, this.checked)">
@@ -676,7 +678,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_Others(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-Seaports_14" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Seaports_14.png" style="margin-left: 4px; width:15px; height:15px">
@@ -710,7 +712,7 @@
           <input class="form-check-input" type="checkbox" id="chk-toggleAll" onchange="toggle_SS_TL(this)">
         </div>
       </button>
-      <div class="panelLayers collapsed" style="font-size: 13px;">
+      <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
           <input class="form-check-input" type="checkbox" id="chk-ExistingTL_1" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/ExistingTL_1.png" style="margin-left: 4px; width:15px; height:15px">
@@ -867,19 +869,19 @@
       </div>
     </div>
   </div>
-  </div>
+  <!-- </div> -->
 
   <!-- Sidebar-Calc -->
-  <div id="sidebar-calc" class="sidebar-calc" style="padding: 2px; width: 350px;">
+  <div id="sidebar-calc" class="sidebar-calc" style="padding: 1px;">
     <div class="container">
       <div class="container custom-scrollbar">
         <div class="sidebar-tabs">
           <div class="sidebar-pane" id="geotiff">
             <!-- Raster Calculator -->
             <div class="sidebar-pane" id="geotiff">
-              <h1 class="sidebar-header common-header" style="margin-bottom: 20px; margin-top: 30px;;">
+              <h1 class="sidebar-header common-header" style="margin-bottom: 13px; margin-top: 20px;">
                 <i class="fa-solid fa-layer-group sbheader-icon"></i>
-                <span style="font-size: 20px;" class="sbheader-text"><strong>Area Suitability</strong></span>
+                <span style="font-size: 15px;" class="sbheader-text"><strong>Area Suitability</strong></span>
               </h1>
               <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                 <div>
@@ -891,20 +893,23 @@
                   <button id="fetchButton" class="btn btn-primary btn-sm text-center">Calculate Stats</button>
                 </div>
               </div>
-              <label style="margin-top: 5px; font-size: 12px;"><strong>Assessed Area: </strong><span
-                  id="fileName"></span></label><br>
-              <label style="margin-top: 5px; font-size: 12px;"><strong>Est. Area (in hectares): </strong><span
-                  id="area"></span></label>
+              <div class="shapefile-display">
+                <label style="margin-top: 3px; font-size: 10px;"><strong>Assessed Area: </strong><span
+                    id="fileName"></span></label><br>
+                <label style="margin-top: 3px; font-size: 10px;"><strong>Est. Area (in hectares): </strong><span
+                    id="area"></span></label>
+              </div>
 
               <body onload="runSequentially()">
                 <pre id="output"></pre>
-                <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 10px">
+                <div id="loading-prompt" class="loading-prompt" style="display: none; margin-top: 5px">
                   <div class="loading-bar"></div>
                 </div>
                 <div class="suitability-content">
-                  <div style="display: flex; justify-content: left; align-items: center; font-size: 12px;">
+                  <div
+                    style="display: flex; justify-content: left; align-items: center; font-size: 10px; padding-bottom: 5px;">
                     <div class="card-header border border-light rounded" style="width: 24rem;">
-                      <ul class="list-group list-group-flush">
+                      <ul class="list-group list-group-flush" style="margin-bottom: 5px;">
                         <li class="list-group-item bg-transparent">
                           <i class="fa-regular fa-sun custom-icon"></i>
                           <span class="custom-heading">Irradiance:</span>
@@ -924,7 +929,7 @@
                           <span id="SLPstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
                         <li class="list-group-item bg-transparent">
-                          <i class="fa-solid fa-compass custom-icon" ></i>
+                          <i class="fa-solid fa-compass custom-icon"></i>
                           <span class="custom-heading">Azimuth:</span>
                           <br>
                           <span id="Azmtstatisticss" class="custom-text" style="font-weight: bold;"></span>
@@ -1046,33 +1051,37 @@
         <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
           <h1 class="sidebar-header common-header">
             <i class="fa-solid fa-database sbheader-icon"></i>
-            <span style="font-size: 20px;" class="sbheader-text"><strong>HLA Calculator (Solar)</strong></span>
+            <span style="font-size: 15px;" class="sbheader-text"><strong>HLA Calculator (Solar)</strong></span>
           </h1>
           <div>
             <div>
-              <table class="table" style="font-size: 12px;">
+              <table class="table" style="font-size: 9px !important;">
                 <tr>
                   <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
-                  <td><input type="number" id="ghi" name="ghi" step="any" class="form-control"></td>
+                  <td><input type="number" id="ghi" name="ghi" step="any" class="form-control" style="font-size: 9px;">
+                  </td>
                 </tr>
                 <tr>
                   <td><label for="slope">Mean Slope, Percent:</label></td>
-                  <td><input type="number" id="slope" name="slope" step="any" class="form-control"></td>
+                  <td><input type="number" id="slope" name="slope" step="any" class="form-control"
+                      style="font-size: 9px;"></td>
                 </tr>
                 <tr>
                   <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
-                  <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control">
+                  <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control"
+                      style="font-size: 9px;">
                   </td>
                 </tr>
                 <tr>
                   <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
                   <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control"
-                      placeholder="150" oninput="updateInputColor(this)"></td>
+                      style="font-size: 9px;" placeholder="150" oninput="updateInputColor(this)"></td>
                 </tr>
 
                 <tr>
                   <td><label for="total_area">Total Area in Ha:</label></td>
-                  <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"></td>
+                  <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"
+                      style="font-size: 9px;"></td>
                 </tr>
 
                 <tr>
@@ -1082,7 +1091,8 @@
 
                 <tr>
                   <td><label for="result">Result:</label></td>
-                  <td><input type="number" id="result" name="result" readonly class="form-control"></td>
+                  <td><input type="number" id="result" name="result" readonly class="form-control"
+                      style="font-size: 9px;"></td>
                 </tr>
               </table>
             </div>
@@ -1091,6 +1101,7 @@
       </div>
     </div>
   </div>
+  <!-- </div> -->
 
   <!-- Content -->
   <div class="content">
@@ -1113,6 +1124,16 @@
 
   <script>
     //SPT
+
+    var map = L.map('map', {
+      zoomControl: false,
+      maxZoom: 28,
+      minZoom: 1
+    });
+
+    var philippines = L.latLng(12.8797, 121.7740);
+    map.setView(philippines, 6);
+
     var highlightLayer;
 
     function highlightFeature(e) {
@@ -1133,16 +1154,16 @@
       location.reload();
     }
 
-    var map = L.map('map', {
-      zoomControl: false,
-      maxZoom: 28,
-      minZoom: 1
-    });
+    // var map = L.map('map', {
+    //   zoomControl: false,
+    //   maxZoom: 28,
+    //   minZoom: 1
+    // });
 
 
 
-    var philippines = L.latLng(12.8797, 121.7740);
-    map.setView(philippines, 6);
+    // var philippines = L.latLng(12.8797, 121.7740);
+    // map.setView(philippines, 6);
 
     document.addEventListener("DOMContentLoaded", function () {
       OverlayScrollbars(document.querySelector('.custom-scrollbar'), {
@@ -1514,7 +1535,9 @@
       function showLayersAfterMove() {
         var zoom = map.getZoom();
         if (zoom >= 12) {
-          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5, layer_500230kVTDPSubstations_6]
+          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+            layer_500230kVTDPSubstations_6
+          ]
           .forEach(function (layer) {
             layer.addTo(map);
           });
@@ -4119,8 +4142,7 @@
                     // Create the histogram chart
                     var canvas = document.getElementById('GHISLP124Histo');
                     canvas.height = 300; // Adjust the height value as desired
-                    var ctx = document.getElementById('GHISLP124Histo')
-                      .getContext('2d');
+                    var ctx = document.getElementById('GHISLP124Histo').getContext('2d');
                     var histogramChart = new Chart(ctx, {
                       type: 'bar',
                       data: {
@@ -4130,7 +4152,7 @@
                           data: histogramValues,
                           backgroundColor: 'rgba(75, 192, 192, 0.2)',
                           borderColor: 'rgba(75, 192, 192, 1)',
-                          borderWidth: 1
+                          borderWidth: 1,
                         }]
                       },
                       options: {
@@ -4139,20 +4161,18 @@
                             callbacks: {
                               label: function (context) {
                                 // Retrieve the original data point
-                                const originalValue =
-                                  context.parsed.y;
-
-                                
+                                const originalValue = context.parsed.y;
 
                                 // Retrieve the percentage
-                                const percentage =
-                                  percentages[context
-                                    .dataIndex];
+                                const percentage = percentages[context.dataIndex];
 
                                 // Calculate the multiplied value
-                               
                                 const multipliedValue =
-                                  (Number ((document.getElementById('area').textContent).replace(/,/g, "")) * (percentage/100)).toFixed(0);
+                                  (Number(
+                                      document.getElementById('area').textContent.replace(/,/g, "")
+                                    ) *
+                                    (percentage / 100)
+                                  ).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
 
@@ -4164,7 +4184,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -4172,21 +4197,39 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value /sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
                     });
+
                   } else {
                     console.error("Invalid data for histogram");
                   }
@@ -4299,7 +4342,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -4307,17 +4355,34 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value / sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
@@ -4440,7 +4505,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -4448,17 +4518,34 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value / sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
@@ -4579,7 +4666,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -4587,17 +4679,34 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value / sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
@@ -4725,7 +4834,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -4733,17 +4847,34 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value / sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
@@ -4861,7 +4992,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -4869,17 +5005,34 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value / sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
@@ -4971,14 +5124,14 @@
                       options: {
                         plugins: {
                           tooltip: {
+                            font: {
+                              size: 6
+                            },
                             callbacks: {
                               label: function (context) {
                                 // Retrieve the original data point
                                 const originalValue =
                                   context.parsed.y;
-
-
-
                                 // Retrieve the percentage
                                 const percentage =
                                   percentages[context
@@ -5000,7 +5153,12 @@
                         },
                         scales: {
                           x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the x-axis ticks
+                              }
+                            }
                           },
                           y: {
                             beginAtZero: true,
@@ -5008,17 +5166,34 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 14
+                                size: 8 // Adjust the font size for the y-axis title
                               }
                             },
-
                             ticks: {
+                              font: {
+                                size: 8 // Adjust the font size for the y-axis ticks
+                              },
                               callback: function (value) {
-                                return ((value / sum) * 100)
-                                  .toFixed(0);
+                                return ((value / sum) * 100).toFixed(0);
                               }
                             }
-
+                          }
+                        },
+                        layout: {
+                          padding: {
+                            top: 8,
+                            right: 8,
+                            bottom: 8,
+                            left: 8
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              font: {
+                                size: 8 // Adjust the font size for the legend labels
+                              }
+                            }
                           }
                         }
                       }
