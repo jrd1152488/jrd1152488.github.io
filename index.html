@@ -885,10 +885,10 @@
                 <div>
                   <input type="file" id="fileInput" accept=".geojson" multiple style="display: none;"
                     onchange="displayFileName()">
-                  <label for="fileInput" class="btn btn-primary btn-sm">Upload Shapefile</label>
+                  <label for="fileInput" class="btn btn-primary btn-sm text-center">Upload Shapefile</label>
                 </div>
                 <div>
-                  <button id="fetchButton" class="btn btn-primary btn-sm">Calculate Stats</button>
+                  <button id="fetchButton" class="btn btn-primary btn-sm text-center">Calculate Stats</button>
                 </div>
               </div>
               <label style="margin-top: 5px; font-size: 12px;"><strong>Assessed Area: </strong><span
@@ -924,7 +924,7 @@
                           <span id="SLPstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
                         <li class="list-group-item bg-transparent">
-                          <i class="fa-solid fa-compass custom-icon"></i>
+                          <i class="fa-solid fa-compass custom-icon" ></i>
                           <span class="custom-heading">Azimuth:</span>
                           <br>
                           <span id="Azmtstatisticss" class="custom-text" style="font-weight: bold;"></span>
@@ -957,19 +957,19 @@
                           <i class="fa-solid fa-house-crack custom-icon"></i>
                           <span class="custom-heading">Active Fault:</span>
                           <br>
-                          <span id="Fltstatisticss" class="custom-text" style="font-weight: 500;"></span>
+                          <span id="Fltstatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
                         <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-house-flood-water custom-icon"></i>
                           <span class="custom-heading">Flood Hazard:</span>
                           <br>
-                          <span id="FldBistatisticss" class="custom-text" style="font-weight: 600;"></span>
+                          <span id="FldBistatisticss" class="custom-text" style="font-weight: bold;"></span>
                         </li>
                         <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-hill-rockslide custom-icon"></i>
                           <span class="custom-heading">Liquefaction:</span>
                           <br>
-                          <span id="LqfBistatisticss" class="custom-text" style="font-weight: 800 !important;"></span>
+                          <span id="LqfBistatisticss" class="custom-text" style="font-weight: bold"></span>
                         </li>
                       </ul>
                     </div>
@@ -4142,7 +4142,7 @@
                                 const originalValue =
                                   context.parsed.y;
 
-
+                                
 
                                 // Retrieve the percentage
                                 const percentage =
@@ -4150,10 +4150,9 @@
                                     .dataIndex];
 
                                 // Calculate the multiplied value
-
+                               
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
-                                    "")) * (percentage / 100)).toFixed(0);
+                                  (Number ((document.getElementById('area').textContent).replace(/,/g, "")) * (percentage/100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
 
@@ -4179,7 +4178,7 @@
 
                             ticks: {
                               callback: function (value) {
-                                return ((value / sum) * 100)
+                                return ((value /sum) * 100)
                                   .toFixed(0);
                               }
                             }
@@ -4195,11 +4194,6 @@
 
                 });
               });
-
-
-
-
-
           },
           delay: 3000 // Delay for code block 2 in milliseconds
         }, {

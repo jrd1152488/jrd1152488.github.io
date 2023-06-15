@@ -181,8 +181,11 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
+  height: 25px !important;
+  font-size: 12px !important;
+  text-align: center !important;
 }
+
 
 .animated-button {
   margin-left: auto;
