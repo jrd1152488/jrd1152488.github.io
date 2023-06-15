@@ -16,6 +16,13 @@ body {
   /* zoom: 80%; */
 }
 
+@media (min-width: 1024px) {
+  body {
+    zoom: 0.8;
+  }
+}
+
+
 #map {
   width: 100%;
   height: 100%;

@@ -159,7 +159,7 @@
         return t.statics && (h(i, t.statics), delete t.statics), t.includes && (function (t) {
             if ("undefined" == typeof L || !L || !L.Mixin) return;
             t = v(t) ? t : [t];
-            for (var i = 0; i < t.length; i++) t[i] === L.Mixin.Events && console.warn("Deprecated include of L.Mixin.Events: this property will be removed in future releases, please inherit from L.Evented instead.", (new Error).stack)
+            for (var i = 0; i < t.length; i++) t[i] === L.Evented && console.warn("Deprecated include of L.Mixin.Events: this property will be removed in future releases, please inherit from L.Evented instead.", (new Error).stack)
         }(t.includes), h.apply(null, [n].concat(t.includes)), delete t.includes), n.options && (t.options = h(s(n.options), t.options)), h(n, t), n._initHooks = [], n.callInitHooks = function () {
             if (!this._initHooksCalled) {
                 e.callInitHooks && e.callInitHooks.call(this), this._initHooksCalled = !0;
