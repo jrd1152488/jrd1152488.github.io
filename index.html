@@ -175,7 +175,7 @@
 
     <div class="search-bar">
       <div class="input-group">
-        <select class="form-select bg-transparent" id="searchOption" style="color: #f0f0f0;">
+        <select class="form-select bg-transparent" id="searchOption" style="color: #f0f0f0; margin-right: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
           <option style="color: #202020;" selected>Select options</option>
           <option style="color: #202020;" value="coordinates">Coordinates</option>
           <option style="color: #202020;" value="location">Location</option>
@@ -183,7 +183,7 @@
           <option style="color: #202020;" value="servicecontract">Service Contract</option>
         </select>
 
-        <form class="mb-auto" style="color: #f0f0f0;" autocomplete="off">
+        <form class="mb-auto" style="color: #f0f0f0; border-radius: 4px; margin-right: 8px;" autocomplete="off">
           <input type="search" style="color: #f0f0f0;" class="form-control transparent-input" id="searchInput"
             placeholder="Search..." />
           <div id="suggestions"></div>
@@ -198,8 +198,6 @@
           <label class="layer-text"
             style="padding: 0px; margin-top: -2px; margin-bottom: -5px; font-size: 10px;">Layers</label>
         </div>
-
-
       </div>
     </div>
   </nav>
@@ -959,19 +957,19 @@
                           <i class="fa-solid fa-house-crack custom-icon"></i>
                           <span class="custom-heading">Active Fault:</span>
                           <br>
-                          <span id="Fltstatisticss" class="custom-text" style="font-weight: bold;"></span>
+                          <span id="Fltstatisticss" class="custom-text" style="font-weight: 500;"></span>
                         </li>
                         <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-house-flood-water custom-icon"></i>
                           <span class="custom-heading">Flood Hazard:</span>
                           <br>
-                          <span id="FldBistatisticss" class="custom-text" style="font-weight: bold;"></span>
+                          <span id="FldBistatisticss" class="custom-text" style="font-weight: 600;"></span>
                         </li>
                         <li class="list-group-item bg-transparent">
                           <i class="fa-solid fa-hill-rockslide custom-icon"></i>
                           <span class="custom-heading">Liquefaction:</span>
                           <br>
-                          <span id="LqfBistatisticss" class="custom-text" style="font-weight: bold;"></span>
+                          <span id="LqfBistatisticss" class="custom-text" style="font-weight: 800 !important;"></span>
                         </li>
                       </ul>
                     </div>
@@ -1974,7 +1972,8 @@
         'Fltstatisticss',
         'FldBistatisticss',
         'LqfBistatisticss',
-        'fileName'
+        'fileName',
+        'area'
       ];
 
       // Clear the values of the histogram result elements
@@ -1987,7 +1986,6 @@
 
 
       // Clear the histogram chart
-      // Clear the histogram charts based on the elements in Code B
       var histogramChartIds = ['GHISLP124Histo', 'WSSLP123Histo', 'GHI123Histo', 'WS12Histo', 'SLPHisto',
         'LqfHisto', 'FldHisto'
       ];
@@ -4029,9 +4027,7 @@
           code: function () {
             // Calculate Liquefaction Overlap Statistics
 
-            var url_to_geotiff_LqfBi_file =
-              "https://czrxstrd4.github.io/avemn/LqfBi.tif";
-
+            var url_to_geotiff_LqfBi_file = "https://czrxstrd4.github.io/avemn/LqfBi.tif";
             fetch(url_to_geotiff_LqfBi_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
@@ -4061,8 +4057,6 @@
                   document.getElementById("LqfBistatisticss")
                     .style.color =
                     fontColor;
-
-
                   georaster = null;
 
                 });
