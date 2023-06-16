@@ -3531,25 +3531,25 @@
 
           var scale = chroma.scale('YlGnBu');
 
-SLPValuesLayer = new GeoRasterLayer({
-  georaster: georaster,
-  opacity: 0.4,
-  resolution: 200,
-  pane: 'SLPValues',
-  pixelValuesToColorFn: function (pixelValues) {
-    var pixelValue = pixelValues[0];
-    if (pixelValue === 0) return null;
-    var scaledPixelValue = (pixelValue) / 50;
-    var color = scale(scaledPixelValue).hex();
-    return color;
-  }
-});
+          SLPValuesLayer = new GeoRasterLayer({
+            georaster: georaster,
+            opacity: 0.3,
+            resolution: 100,
+            pane: 'SLPValues',
+            pixelValuesToColorFn: function (pixelValues) {
+              var pixelValue = pixelValues[0];
+              if (pixelValue === 0) return null;
+              var scaledPixelValue = (pixelValue) / 50;
+              var color = scale(scaledPixelValue).hex();
+              return color;
+            }
+          });
 
 
 
 
 
-          
+
 
           // Toggle popups based on checkbox state
           var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
