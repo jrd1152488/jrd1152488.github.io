@@ -2157,6 +2157,7 @@
     const layer_SLPWD = createTileLayer('SLPWD',
       'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
     const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+    const layer_SLP2 = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
 
     function toggleTileLayer(layer, checked) {
       if (checked) {
@@ -3590,11 +3591,11 @@
             if (SLPValuesLayer) {
               if (map.hasLayer(SLPValuesLayer)) {
                 map.removeLayer(SLPValuesLayer);
-                map.removeLayer(layer_SLP);
+                map.removeLayer(layer_SLP2);
                 map.off('click', handleMapClick);
               } else {
                 map.addLayer(SLPValuesLayer);
-                layer_SLP.addTo(map);
+                layer_SLP2.addTo(map);
                 map.on('click', handleMapClick);
               }
             }
