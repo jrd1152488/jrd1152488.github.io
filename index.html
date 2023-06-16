@@ -305,7 +305,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <p class="credit-text">
@@ -532,7 +531,7 @@
       </button>
       <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
-          <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1"
+          <input class="form-check-input" type="checkbox" id="chk-ServiceContractMap_1" checked
             onchange="toggleTileLayer(layer_ServiceContractMap_1, this.checked)">
           <label class="panel-layer-label" for="chk-ServiceContractMap_1">Service Contract Map<br>
             <img class="legend-image" src="legend/Legend_SC.png">
@@ -659,20 +658,20 @@
       </button>
       <div class="panelLayers collapsed" style="font-size: 9px;">
         <div class="form-check" style="margin-left: 10px;">
-          <input class="form-check-input" type="checkbox" id="chk-drawnItems"
+          <input class="form-check-input" type="checkbox" id="chk-drawnItems" checked
             onchange="toggleTileLayer(drawnItems, this.checked)">
           <img class="legend-image" src="./images/technical-drawing.png"
             style="margin-left: 4px; width:15px; height:15px">
-          <label class="panel-layer-label" for="chk-drawnItems">Drawn Layer
-          </label>
+          <label class="panel-layer-label" for="chk-drawnItems">Drawn Layer</label>
         </div>
+
         <div class="form-check" style="margin-left: 10px;">
-          <input class="form-check-input" type="checkbox" id="chk-fileUploaders"
-            onchange="toggleTileLayer(fileUploaders, this.checked)">
+          <input class="form-check-input" type="checkbox" id="chk-fileUpload" checked
+            onchange="toggleTileLayer(fileUpload, this.checked)">
           <img class="legend-image" src="./images/upload-shape.png" style="margin-left: 4px; width:15px; height:15px">
-          <label class="panel-layer-label" for="chk-fileUploaders">Uploaded Layer
-          </label>
+          <label class="panel-layer-label" for="chk-fileUpload">Uploaded Layer</label>
         </div>
+
       </div>
       <button class="collapsible">Others
         <div class="toggle-all">
@@ -1912,7 +1911,7 @@
     }
 
     function toggle_Added_Layers(checkbox) {
-      toggleLayers(checkbox, '#chk-drawnItems, #chk-fileUploaders');
+      toggleLayers(checkbox, '#chk-drawnItems, #chk-fileUpload');
     }
 
     function toggle_Others(checkbox) {
@@ -1931,8 +1930,8 @@
 
 
     // Upload File
-    var fileUploaders = new L.FeatureGroup();
-    map.addLayer(fileUploaders);
+    var fileUpload = new L.FeatureGroup();
+    map.addLayer(fileUpload);
 
     var autolinker = new Autolinker({
       truncate: {
@@ -2035,12 +2034,24 @@
         }
       }
 
+      deleteFileUpload();
     });
 
-    function toggleMainNest(checkbox, groupId) {
-      var nestedCheckboxes = document.getElementById("nested-" + groupId);
-      nestedCheckboxes.style.display = checkbox.checked ? "block" : "none";
+
+    function deleteFileUpload() {
+      if (fileUpload) {
+        fileUpload.clearLayers();
+        map.removeLayer(fileUpload);
+        fileUpload = null;
+      }
     }
+
+
+
+    // function toggleMainNest(checkbox, groupId) {
+    //   var nestedCheckboxes = document.getElementById("nested-" + groupId);
+    //   nestedCheckboxes.style.display = checkbox.checked ? "block" : "none";
+    // }
 
 
     //Hash-Autolinker
@@ -2206,6 +2217,9 @@
     }).addTo(map);
     console.log('Shapefile uploaded.')
 
+    var fileUpload; // Define the 'fileUpload' variable outside the function
+
+
     // Add event listener to the file input element
     fileInput.addEventListener('change', function () {
       if (fileInput.files.length > 0) {
@@ -2243,7 +2257,7 @@
         return;
       }
 
-      var layer = L.geoJSON(geojson, {
+      fileUpload = L.geoJSON(geojson, {
         onEachFeature: function (feature, layer) {
           if (!layer._defaultShape || !layer.getLatLngs) {
             console.error('Layer is not a valid shape');
@@ -2252,7 +2266,7 @@
           var area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
             layer._defaultShape() : layer.getLatLngs())), true);
           var name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area + "( has.)");
 
           // Update the value of the 'area' span element
           document.getElementById('area').textContent = area;
@@ -2272,8 +2286,11 @@
         }
       });
 
+      // Save the uploaded file in the fileUploaders variable
+      // fileUpload = L.geoJSON(geojson).addTo(map);
+
       // Overlay the uploaded layer on the map
-      layer.addTo(map);
+      fileUpload.addTo(map);
       map.fitBounds(layer.getBounds());
 
     }
@@ -3367,10 +3384,18 @@
         // Overlay the uploaded layer on the map
         layer.addTo(map);
         map.fitBounds(layer.getBounds());
+
+        // Save the uploaded layer in the fileUpload variable as an overlay
+        if (typeof fileUpload === 'undefined') {
+          fileUpload = layer;
+        } else {
+          fileUpload.addLayer(layer);
+        }
       };
 
       reader.readAsText(fileInput.files[0]);
     }
+
 
 
 
@@ -3680,19 +3705,15 @@
         {
           code: function () {
             // Calculate Wind Speed Statistics
-
             var url_to_geotiff_WS_file = "https://czrxstrd4.github.io/avemn/WS.tif";
             fetch(url_to_geotiff_WS_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
                 parseGeoraster(arrayBuffer).then(georaster => {
-
                   const meanss = geoblaze.mean(georaster, coordinates);
                   const mn = Number(meanss).toFixed(2);
-
                   var statisticsDiv = document.getElementById('WSstatisticss');
                   statisticsDiv.textContent = 'Mean: ' + mn + ' m/s';
-
                   if (mn < 6.54) {
                     statisticsDiv.textContent = 'Mean: ' + mn + ' m/s';
                     statisticsDiv.style.color = "red";
@@ -3703,10 +3724,7 @@
                     statisticsDiv.textContent = 'Mean: ' + mn + ' m/s';
                     statisticsDiv.style.color = "green";
                   }
-
-
                   georaster = null;
-
                 });
               });
           },
