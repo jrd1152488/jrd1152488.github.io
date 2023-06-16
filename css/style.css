@@ -210,6 +210,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 10px !important;
   text-align: center !important;
 }
+
 .btn-warning {
   display: flex;
   align-items: center;
@@ -259,8 +260,21 @@ input[type="number"]::-webkit-outer-spin-button {
 
 table tr td,
 table tr th {
-  background-color: rgba(255, 255, 255, 0) !important;
+  background-color: rgba(203, 61, 61, 0) !important;
 }
+
+.table td {
+  white-space: nowrap;
+  width: 50%;
+margin-left: 0px;
+padding: 0;
+}
+
+.table label {
+  display: inline-block;
+  width: 100%;
+}
+
 
 #custom-icon {
   margin-left: 0px;
@@ -322,7 +336,7 @@ table tr th {
 ::-webkit-scrollbar {
   width: 18px;
   background-color: transparent;
-  padding: 0px; 
+  padding: 0px;
   align-items: center;
 }
 
@@ -410,11 +424,8 @@ table tr th {
 
 #sidebar-pane {
   background-color: rgba(255, 255, 255, 0.8);
-  /* Set a transparent background color */
   backdrop-filter: blur(5px);
-  /* Apply a blur effect to the background */
   -webkit-backdrop-filter: blur(5px);
-  /* For Safari */
 }
 
 .leaflet-top.leaflet-left {
@@ -430,8 +441,8 @@ table tr th {
 }
 
 .leaflet-popup-content-wrapper {
-font-size: 8px !important;
-padding: 2px !important;
+  font-size: 8px !important;
+  padding: 2px !important;
 }
 
 /* Styling the Leaflet.Measure toolbar and controls */
@@ -480,9 +491,9 @@ padding: 2px !important;
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
-}f
+}
 
-.group-container {
+f .group-container {
   margin-bottom: 10px;
 }
 
@@ -566,6 +577,7 @@ padding: 2px !important;
   font-size: 10px;
   padding: 0px;
 }
+
 .form-check-input {
   margin-right: 5px;
 }
@@ -605,6 +617,7 @@ padding: 2px !important;
   margin-right: 5px;
   margin-left: 5px;
 }
+
 /* .right-bar {
   margin-left: auto;
 } */
@@ -748,7 +761,7 @@ padding: 2px !important;
 }
 
 .easy-button-container {
-padding: 0;
+  padding: 0;
 }
 
 .easy-button:active {
@@ -869,9 +882,11 @@ padding: 0;
   justify-content: center;
   font-size: 10px !important;
 }
+
 .developers {
   gap: 30px;
 }
+
 .team {
   gap: 40px;
   margin-top: 20px;
@@ -1049,7 +1064,7 @@ padding: 0;
   left: 55px;
 }
 
-  /* Adjust the font size for tooltips */
-  .chartjs-tooltip {
-    font-size: 6px !important;
-  }
+/* Adjust the font size for tooltips */
+.chartjs-tooltip {
+  font-size: 6px !important;
+}
