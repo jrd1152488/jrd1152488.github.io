@@ -3539,27 +3539,27 @@
           const max = georaster.maxs[0];
           const range = georaster.ranges[0];
 
-          var scale = chroma.scale("YlGnBu");
+          var scale = chroma.scale('YlGnBu');
 
           SLPValuesLayer = new GeoRasterLayer({
             georaster: georaster,
-            opacity: 0.8,
-            resolution: 80,
+            opacity: 0.3,
+            resolution: 130,
             pane: 'SLPValues',
             pixelValuesToColorFn: function (pixelValues) {
               var pixelValue = pixelValues[0];
-              if (pixelValue === 0) return "none"; // Return "none" for transparent color
-
-              var maxSlope = 45; // Maximum slope value
-              var minColor = chroma('#fdf0d5'); // Color for lower slope values
-              var maxColor = chroma('#780000'); // Color for higher slope values
-
-              // Calculate the color based on the slope value
-              var color = chroma.mix(minColor, maxColor, pixelValue / maxSlope).hex();
-
+              if (pixelValue === 0) return null;
+              var scaledPixelValue = (pixelValue) / 50;
+              var color = scale(scaledPixelValue).hex();
               return color;
             }
           });
+
+
+
+
+
+
 
           // Toggle popups based on checkbox state
           var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
