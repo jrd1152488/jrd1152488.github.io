@@ -377,54 +377,55 @@
   <div id="floating-card" class="floating-card">
     <h1 class="sidebar-header common-header">
       <!-- <i class="fa-solid fa-map sbheader-icon"></i> -->
-      <img class="legend-image" src="./images/philippines.png" style="margin-left: -10px; margin-right: 5px; width:20px; height:20px">
+      <img class="legend-image" src="./images/philippines.png"
+        style="margin-left: -10px; margin-right: 5px; width:20px; height:20px">
       <span style="font-size: 15px;" class="sbheader-text"><strong>Layer Selection</strong></span>
     </h1>
     <!-- <div class="d-flex flex-column"> -->
 
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
-          onchange="toggleLayer('layer_GoogleMapsSatellite', this.checked)" checked>
-        <label class="form-check-label" for="googSat">Satellite</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
-          onchange="toggleLayer('layer_GoogleSatelliteHybrid', this.checked)">
-        <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
-          onchange="toggleLayer('layer_GoogleMapsBasic', this.checked)">
-        <label class="form-check-label" for="GoogBase">Base Map</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
-          onchange="toggleLayer('layer_planetNICFI', this.checked)">
-        <label class="form-check-label" for="planetNICFI">Live Satellite (May 2023)</label>
-      </div>
-      <hr class="sidebar-spacer">
-      <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 5px;">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="toggleCheckbox">
-              <label class="form-check-label" for="toggleCheckbox">Irradiance Map</label>
-            </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="mapLayer" id="googSat" autocomplete="off"
+        onchange="toggleLayer('layer_GoogleMapsSatellite', this.checked)" checked>
+      <label class="form-check-label" for="googSat">Satellite</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="mapLayer" id="googHySat" autocomplete="off"
+        onchange="toggleLayer('layer_GoogleSatelliteHybrid', this.checked)">
+      <label class="form-check-label" for="googHySat">Hybrid Satellite</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="mapLayer" id="GoogBase" autocomplete="off"
+        onchange="toggleLayer('layer_GoogleMapsBasic', this.checked)">
+      <label class="form-check-label" for="GoogBase">Base Map</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
+        onchange="toggleLayer('layer_planetNICFI', this.checked)">
+      <label class="form-check-label" for="planetNICFI">Live Satellite (May 2023)</label>
+    </div>
+    <hr class="sidebar-spacer">
+    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 5px;">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="toggleCheckbox">
+            <label class="form-check-label" for="toggleCheckbox">Irradiance Map</label>
           </div>
-          <div class="col-md-12">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="WStoggleCheckbox">
-              <label class="form-check-label" for="WStoggleCheckbox">Wind Speed Map</label>
-            </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="WStoggleCheckbox">
+            <label class="form-check-label" for="WStoggleCheckbox">Wind Speed Map</label>
           </div>
-          <div class="col-md-12">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="SLPtoggleCheckbox">
-              <label class="form-check-label" for="SLPtoggleCheckbox">Slope Map</label>
-            </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="SLPtoggleCheckbox">
+            <label class="form-check-label" for="SLPtoggleCheckbox">Slope Map</label>
           </div>
         </div>
       </div>
+    </div>
     <!-- </div> -->
 
     <hr class="sidebar-spacer">
@@ -1058,30 +1059,33 @@
               <table class="table" style="font-size: 9px !important;">
                 <tr>
                   <td><label for="ghi">GHI Mean Irradiance, kWh/sqm:</label></td>
-                  <td><input type="number" id="ghi" name="ghi" step="any" class="form-control" style="font-size: 9px;">
+                  <td><input type="number" id="ghi" name="ghi" step="any" class="form-control"
+                      style="font-size: 9px; width: 80px !important">
                   </td>
                 </tr>
                 <tr>
                   <td><label for="slope">Mean Slope, Percent:</label></td>
                   <td><input type="number" id="slope" name="slope" step="any" class="form-control"
-                      style="font-size: 9px;"></td>
+                      style="font-size: 9px;width: 80px !important"></td>
                 </tr>
                 <tr>
                   <td><label for="tl_distance">TL Distance (x 1.1):</label></td>
                   <td><input type="number" id="tl_distance" name="tl_distance" step="any" class="form-control"
-                      style="font-size: 9px;">
+                      style="font-size: 9px;width: 80px !important">
                   </td>
                 </tr>
                 <tr>
                   <td><label for="purchase_price">Purchase Price (Net/sqm):</label></td>
                   <td><input type="number" id="purchase_price" name="purchase_price" step="any" class="form-control"
-                      style="font-size: 9px;" placeholder="150" oninput="updateInputColor(this)"></td>
+                      style="font-size: 9px; width: 80px !important" value="150" placeholder="150"
+                      oninput="updateInputColor(this)">
+                  </td>
                 </tr>
 
                 <tr>
                   <td><label for="total_area">Total Area in Ha:</label></td>
                   <td><input type="number" id="total_area" name="total_area" step="any" class="form-control"
-                      style="font-size: 9px;"></td>
+                      style="font-size: 9px;width: 80px !important"></td>
                 </tr>
 
                 <tr>
@@ -1092,7 +1096,7 @@
                 <tr>
                   <td><label for="result">Result:</label></td>
                   <td><input type="number" id="result" name="result" readonly class="form-control"
-                      style="font-size: 9px;"></td>
+                      style="font-size: 9px;width: 80px !important"></td>
                 </tr>
               </table>
             </div>
