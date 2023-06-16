@@ -3545,8 +3545,7 @@
 
           SLPValuesLayer = new GeoRasterLayer({
             georaster: georaster,
-            opacity: 0.3,
-            resolution: 130,
+            opacity: 0,
             pane: 'SLPValues',
             pixelValuesToColorFn: function (pixelValues) {
               var pixelValue = pixelValues[0];
@@ -3558,10 +3557,7 @@
           });
 
 
-
-
-
-
+          
 
           // Toggle popups based on checkbox state
           var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
@@ -3594,9 +3590,11 @@
             if (SLPValuesLayer) {
               if (map.hasLayer(SLPValuesLayer)) {
                 map.removeLayer(SLPValuesLayer);
+                map.removeLayer(layer_SLP);
                 map.off('click', handleMapClick);
               } else {
                 map.addLayer(SLPValuesLayer);
+                layer_SLP.addTo(map);
                 map.on('click', handleMapClick);
               }
             }
