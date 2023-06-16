@@ -2049,6 +2049,20 @@
       }
     }
 
+    // Create the L.easyButton for the external link
+    L.easyButton({
+      id: 'open-external-link',
+      states: [{
+        stateName: 'open-link',
+        icon: 'fa-external-link-alt',
+        title: 'Open LGU Directory',
+        onClick: function () {
+          window.open('https://sites.google.com/aboitiz.com/ari-ms/lgu', '_blank');
+        }
+      }]
+    }).addTo(map);
+
+
 
 
     // function toggleMainNest(checkbox, groupId) {
@@ -2065,7 +2079,8 @@
     var autolinker = new Autolinker({
       truncate: {
         length: 30,
-        location: 'smart'
+        location: 'smart',
+        font: '10px'
       }
     });
 
@@ -3584,7 +3599,7 @@
           });
 
 
-          
+
 
           // Toggle popups based on checkbox state
           var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
@@ -3734,7 +3749,6 @@
         },
         {
           code: function () {
-
             var url_to_geotiff_SLP_file = "https://czrxstrd4.github.io/avemn/SLP.tif";
             fetch(url_to_geotiff_SLP_file)
               .then(response => response.arrayBuffer())
@@ -3763,15 +3777,9 @@
                     statisticsDiv.innerHTML +=
                       '<span style="color: red; font-weight: bold;">(Solar)</span> | <span style="color: red; font-weight: bold;">(Wind)</span>';
                   }
-
                   georaster = null;
                 });
               });
-
-
-
-
-
           },
           delay: 5000 // Delay for code block 3 in milliseconds
         },
