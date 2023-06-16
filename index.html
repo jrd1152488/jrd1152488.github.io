@@ -214,6 +214,10 @@
         <h2 class="credit-h2" style="font-size: 15px; font-weight: 600  ;">
           Strategic Pipeline Targeting (SPT)
         </h2>
+
+        <h3 class="credit-h2" style="font-size: 10px; font-weight: 400  ; font-style:italic;">
+          "Helping ARI identify projects that will have the greatest potential while minimizing risks."
+        </h3>
         <!-- <a href="https://docs.google.com/presentation/d/1axuiZhPorCGUERwNVxPLmkL-y0abwjHQ74vIZsYIFpg/edit?usp=sharing"
           title="Step by Step Guide of the SPT Process" target="_blank">Guide on using SPT</a> -->
         <h2 class="credit-h3">
@@ -306,7 +310,6 @@
             </div>
           </div>
         </div>
-
         <p class="credit-text">
           Website content © Aboitiz Power Corporation <br>
           All rights reserved. Unauthorized use and/or duplication of this material without express and written
@@ -2166,6 +2169,7 @@
     const layer_SLPWD = createTileLayer('SLPWD',
       'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
     const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+    const layer_SLP2 = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
 
     function toggleTileLayer(layer, checked) {
       if (checked) {
@@ -3568,8 +3572,7 @@
 
           SLPValuesLayer = new GeoRasterLayer({
             georaster: georaster,
-            opacity: 0.3,
-            resolution: 130,
+            opacity: 0,
             pane: 'SLPValues',
             pixelValuesToColorFn: function (pixelValues) {
               var pixelValue = pixelValues[0];
@@ -3581,10 +3584,7 @@
           });
 
 
-
-
-
-
+          
 
           // Toggle popups based on checkbox state
           var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
@@ -3617,9 +3617,11 @@
             if (SLPValuesLayer) {
               if (map.hasLayer(SLPValuesLayer)) {
                 map.removeLayer(SLPValuesLayer);
+                map.removeLayer(layer_SLP2);
                 map.off('click', handleMapClick);
               } else {
                 map.addLayer(SLPValuesLayer);
+                layer_SLP2.addTo(map);
                 map.on('click', handleMapClick);
               }
             }
