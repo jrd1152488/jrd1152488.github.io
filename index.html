@@ -4134,7 +4134,6 @@
             // Calculate SLRxSLP Histogram
 
             var url_to_geotiff_GHISLP124_file = "https://czrxstrd4.github.io/avemn/GHISLP124.tif";
-
             fetch(url_to_geotiff_GHISLP124_file)
               .then(response => response.arrayBuffer())
               .then(arrayBuffer => {
@@ -4147,23 +4146,16 @@
                     coordinates, {
                       scaleType: "nominal"
                     });
-
                   if (Array.isArray(histogramData) && histogramData.length > 0) {
                     // Access the first (and only) object in the array
                     const histogramValues = Object.values(histogramData[0]);
-
                     // Calculate the total sum of data
                     const sum = histogramValues.reduce((total, value) => total +
                       value, 0);
-
                     // Calculate the percentage of each data point
                     const percentages = histogramValues.map(value => ((value /
                       sum) * 100).toFixed(2));
-
                     // Assign custom labels based on the actual labels
-
-
-
                     const customLabels = Object.keys(histogramData[0]).map(
                       key => {
                         if (key === "0") {
@@ -4180,11 +4172,11 @@
                           return `Label ${key}`;
                         }
                       });
-
                     // Create the histogram chart
                     var canvas = document.getElementById('GHISLP124Histo');
                     canvas.height = 300; // Adjust the height value as desired
-                    var ctx = document.getElementById('GHISLP124Histo').getContext('2d');
+                    var ctx = document.getElementById('GHISLP124Histo')
+                      .getContext('2d');
                     var histogramChart = new Chart(ctx, {
                       type: 'bar',
                       data: {
@@ -4194,7 +4186,7 @@
                           data: histogramValues,
                           backgroundColor: 'rgba(75, 192, 192, 0.2)',
                           borderColor: 'rgba(75, 192, 192, 1)',
-                          borderWidth: 1,
+                          borderWidth: 1
                         }]
                       },
                       options: {
@@ -4203,18 +4195,16 @@
                             callbacks: {
                               label: function (context) {
                                 // Retrieve the original data point
-                                const originalValue = context.parsed.y;
-
+                                const originalValue =
+                                  context.parsed.y;
                                 // Retrieve the percentage
-                                const percentage = percentages[context.dataIndex];
-
+                                const percentage =
+                                  percentages[context
+                                    .dataIndex];
                                 // Calculate the multiplied value
                                 const multipliedValue =
-                                  (Number(
-                                      document.getElementById('area').textContent.replace(/,/g, "")
-                                    ) *
-                                    (percentage / 100)
-                                  ).toFixed(0);
+                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                    "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
 
@@ -4239,39 +4229,24 @@
                               display: true,
                               text: 'Percent, %',
                               font: {
-                                size: 8 // Adjust the font size for the y-axis title
+                                size: 8
                               }
                             },
+
                             ticks: {
+                              callback: function (value) {
+                                return ((value / sum) * 100)
+                                  .toFixed(0);
+                              },
                               font: {
                                 size: 8 // Adjust the font size for the y-axis ticks
                               },
-                              callback: function (value) {
-                                return ((value / sum) * 100).toFixed(0);
-                              }
                             }
+
                           }
                         },
-                        layout: {
-                          padding: {
-                            top: 8,
-                            right: 8,
-                            bottom: 8,
-                            left: 8
-                          }
-                        },
-                        plugins: {
-                          legend: {
-                            labels: {
-                              font: {
-                                size: 8 // Adjust the font size for the legend labels
-                              }
-                            }
-                          }
-                        }
                       }
                     });
-
                   } else {
                     console.error("Invalid data for histogram");
                   }
