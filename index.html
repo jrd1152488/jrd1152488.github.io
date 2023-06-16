@@ -3204,8 +3204,13 @@
 
     // Leaflet Draw
     var drawnItems = new L.FeatureGroup();
+    drawnItems.on('layeradd', function (e) {
+      var layer = e.layer;
+      layer.setStyle({
+        className: 'custom-drawn'
+      });
+    });
     map.addLayer(drawnItems);
-    // L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a polygon';
 
     var drawControl = new L.Control.Draw({
       edit: {
@@ -3217,7 +3222,12 @@
       draw: {
         polygon: {
           allowIntersection: false,
-          showArea: true
+          showArea: true,
+          shapeOptions: {
+            color: '#04ff00', // Set the stroke color to neon green
+            fillColor: '#04ff00', // Set the fill color to neon green
+            fillOpacity: 0.2, // Set the fill opacity
+          }
         }
       }
     });

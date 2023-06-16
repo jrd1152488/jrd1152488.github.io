@@ -436,12 +436,12 @@ padding: 0;
 }
 
 .leaflet-control-measure {
-  font-size: 8px !important;
+  font-size: 9px !important;
   padding: 2px !important;
 }
 
 .leaflet-popup-content-wrapper {
-  font-size: 8px !important;
+  font-size: 9px !important;
   padding: 2px !important;
 }
 
@@ -469,7 +469,41 @@ padding: 0;
   width: 23px !important;
   justify-content: center !important;
   align-items: center !important;
+  
+
+
 }
+
+  /* Set the stroke color */
+  .leaflet-draw-toolbar .leaflet-draw-edit-edit,
+  .leaflet-draw-toolbar .leaflet-draw-edit-remove {
+    stroke: #04ff00 !important;
+    stroke-opacity: 1!important;
+    stroke-width: 2!important;
+    stroke-linecap: round!important;
+    stroke-linejoin: round!important;
+    fill: #04ff00 !important;
+    fill-opacity: 0.1!important;
+  }
+
+  /* Set the background color */
+  .leaflet-draw-toolbar .leaflet-draw-draw-polygon,
+  .leaflet-draw-toolbar .leaflet-draw-draw-rectangle,
+  .leaflet-draw-toolbar .leaflet-draw-draw-circle,
+  .leaflet-draw-toolbar .leaflet-draw-draw-marker,
+  .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+    stroke: #04ff00 !important;
+    stroke-opacity: 1!important;
+    stroke-width: 2!important;
+    stroke-linecap: round!important;
+    stroke-linejoin: round!important;
+    fill: #04ff00 !important;
+    fill-opacity: 0.1!important;
+  }
+
+
+
+
 
 .leaflet-draw-section {
   margin-bottom: 100px;
@@ -744,6 +778,15 @@ f .group-container {
   left: 10px;
 }
 
+/* .leaflet-interactive.custom-drawn {
+  stroke: #04ff00 !important;
+  stroke-opacity: 1!important;
+  stroke-width: 2!important;
+  stroke-linecap: round!important;
+  stroke-linejoin: round!important;
+  fill: #04ff00 !important;
+  fill-opacity: 0.1!important;
+} */
 
 
 

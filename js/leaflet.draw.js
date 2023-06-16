@@ -165,9 +165,9 @@
             maxGuideLineLength: 4e3,
             shapeOptions: {
                 stroke: !0,
-                color: "#08de04",
-                weight: 4,
-                opacity: .5,
+                color: "#04ff00",
+                weight: 3,
+                opacity: 1,
                 fill: !1,
                 clickable: !0
             },
@@ -336,9 +336,9 @@
             showArea: !1,
             shapeOptions: {
                 stroke: !0,
-                color: "#08de04",
-                weight: 4,
-                opacity: .5,
+                color: "#04ff00",
+                weight: 3,
+                opacity: 1,
                 fill: !0,
                 fillColor: null,
                 fillOpacity: .2,
@@ -412,9 +412,9 @@
         options: {
             shapeOptions: {
                 stroke: !0,
-                color: "#08de04",
-                weight: 4,
-                opacity: .5,
+                color: "#04ff00",
+                weight: 3,
+                opacity: 1,
                 fill: !0,
                 fillColor: null,
                 fillOpacity: .2,
@@ -447,9 +447,9 @@
         options: {
             shapeOptions: {
                 stroke: !0,
-                color: "#08de04",
-                weight: 4,
-                opacity: .5,
+                color: "#04ff00",
+                weight: 3,
+                opacity: 1,
                 fill: !0,
                 fillColor: null,
                 fillOpacity: .2,
