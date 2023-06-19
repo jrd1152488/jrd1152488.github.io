@@ -2050,17 +2050,26 @@
     }
 
     // Create the L.easyButton for the external link
-    L.easyButton({
+    var easyButton = L.easyButton({
       id: 'open-external-link',
       states: [{
         stateName: 'open-link',
-        icon: 'fa-external-link-alt',
+        icon: 'fa-landmark',
         title: 'Open LGU Directory',
         onClick: function () {
           window.open('https://sites.google.com/aboitiz.com/ari-ms/lgu', '_blank');
         }
       }]
-    }).addTo(map);
+    });
+
+    // Add the EasyButton to the map
+    easyButton.addTo(map);
+
+    // Manually adjust the position of the EasyButton
+    var buttonElement = document.getElementById('open-external-link');
+    buttonElement.style.position = 'absolute';
+    buttonElement.style.top = '495px'; // Adjust the top position in pixels
+    buttonElement.style.left = '0px'; // Adjust the left position in pixels
 
 
 
