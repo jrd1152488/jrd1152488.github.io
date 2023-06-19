@@ -3839,43 +3839,6 @@
           delay: 5000 // Delay for code block 3 in milliseconds
         }, {
           code: function () {
-            // Calculate Service Contract Statistics
-
-            var url_to_geotiff_SC_file = "https://czrxstrd4.github.io/avemn/SC.tif";
-
-            fetch(url_to_geotiff_SC_file)
-              .then(response => response.arrayBuffer())
-              .then(arrayBuffer => {
-                parseGeoraster(arrayBuffer).then(georaster => {
-
-                  const meanss = geoblaze.mean(georaster, coordinates);
-                  const mn = (Number(meanss) * 100).toFixed(2);
-                  let notes;
-                  let fontColor;
-
-                  if (mn > 0) {
-                    notes =
-                      "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
-                      mn + "%";
-                    fontColor = "red";
-                  } else {
-
-                    notes = "No potential overlap.";
-                    fontColor = "green";
-                  }
-                  document.getElementById("SCstatisticss").innerHTML = notes;
-                  document.getElementById("SCstatisticss").style.color =
-                    fontColor;
-                  georaster = null;
-
-                });
-              });
-
-
-          },
-          delay: 3000 // Delay for code block 3 in milliseconds
-        }, {
-          code: function () {
             // Calculate Ancestral Domain Statistics
 
             var url_to_geotiff_AD_file = "https://czrxstrd4.github.io/avemn/AncstrlD.tif";
@@ -4129,6 +4092,43 @@
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
+          code: function () {
+            // Calculate Service Contract Statistics
+
+            var url_to_geotiff_SC_file = "https://czrxstrd4.github.io/avemn/SC.tif";
+
+            fetch(url_to_geotiff_SC_file)
+              .then(response => response.arrayBuffer())
+              .then(arrayBuffer => {
+                parseGeoraster(arrayBuffer).then(georaster => {
+
+                  const meanss = geoblaze.mean(georaster, coordinates);
+                  const mn = (Number(meanss) * 100).toFixed(2);
+                  let notes;
+                  let fontColor;
+
+                  if (mn > 0) {
+                    notes =
+                      "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "red";
+                  } else {
+
+                    notes = "No potential overlap.";
+                    fontColor = "green";
+                  }
+                  document.getElementById("SCstatisticss").innerHTML = notes;
+                  document.getElementById("SCstatisticss").style.color =
+                    fontColor;
+                  georaster = null;
+
+                });
+              });
+          },
+          delay: 3000 // Delay for code block 3 in milliseconds
+        },
+
+        {
           code: function () {
 
             // Calculate SLRxSLP Histogram
