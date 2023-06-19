@@ -1274,23 +1274,35 @@
       }
     });
 
-    function searchLocationByAddress(map, query) {
-      // Clear any existing markers on the map
-      map.eachLayer(function (layer) {
-        if (layer instanceof L.Marker) {
-          map.removeLayer(layer);
-        }
-      });
-      // Use the geocoder to get the location coordinates
-      geocoder.geocode(query, function (results) {
-        if (results.length > 0) {
-          var location = results[0].center;
-          marker = L.marker(location).addTo(map);
-          map.setView(location, 16);
-          displayPopup(location, results[0].name);
-        } else {
-          console.log('No results found');
-        }
+    function searchByLocationAddress(address) {
+      // Use geocoder plugin to search for location by address
+      // Show query results in a dropdown based on user input
+      geocoder.geocode(address, function (results) {
+        // Clear previous suggestions
+        clearSuggestions();
+
+        // Create a dropdown to display the suggestions
+        var dropdown = document.createElement('ul');
+        dropdown.classList.add('suggestions-dropdown');
+
+        // Iterate over the results and create a list item for each suggestion
+        results.forEach(function (result) {
+          var listItem = document.createElement('li');
+          listItem.textContent = result.name;
+          listItem.addEventListener('click', function () {
+            // Set the selected suggestion as the search input value
+            searchInput.value = result.name;
+            // Clear the suggestions dropdown
+            clearSuggestions();
+          });
+          dropdown.appendChild(listItem);
+        });
+
+        // Append the dropdown to the suggestions div
+        suggestionsDiv.appendChild(dropdown);
+
+        // Set the suggestionsShown flag to true
+        suggestionsShown = true;
       });
     }
 
@@ -2065,20 +2077,12 @@
     // Add the EasyButton to the map
     easyButton.addTo(map);
 
-    // Manually adjust the position of the EasyButton
-    var buttonElement = document.getElementById('open-external-link');
-    buttonElement.style.position = 'absolute';
-    buttonElement.style.top = '495px'; // Adjust the top position in pixels
-    buttonElement.style.left = '0px'; // Adjust the left position in pixels
-
-
-
-
-    // function toggleMainNest(checkbox, groupId) {
-    //   var nestedCheckboxes = document.getElementById("nested-" + groupId);
-    //   nestedCheckboxes.style.display = checkbox.checked ? "block" : "none";
-    // }
-
+    var easyButtonElement = document.querySelector('#settings-button.leaflet-bar');
+    if (easyButtonElement) {
+      easyButtonElement.style.position = 'absolute';
+      easyButtonElement.style.top = '800px'; // Adjust the top position in pixels
+      easyButtonElement.style.left = '600px'; // Adjust the left position in pixels
+    }
 
     //Hash-Autolinker
     var hash = new L.Hash(map);
