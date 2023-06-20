@@ -710,8 +710,7 @@
           </label>
         </div>
         <div class="form-check" style="margin-left: 10px;">
-          <input class="form-check-input" type="checkbox" id="chk-caap"
-            onchange="toggleNestedCheckbox(this);">
+          <input class="form-check-input" type="checkbox" id="chk-caap" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/caap.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-caap">CAAP
           </label>
@@ -1197,7 +1196,10 @@
     var suggestionsDiv = document.getElementById('suggestions');
     var geocoder;
     var marker;
-    var suggestionsShown = false; // Flag to track if suggestions are shown
+    var suggestionsShown = false; // Flag to track if suggestions are shown.
+    var searchTimeout;
+
+
 
     searchOption.addEventListener('change', function () {
       if (searchOption.value === 'location') {
@@ -1217,25 +1219,23 @@
 
     // Geocoder - Location
     geocoder = L.Control.Geocoder.nominatim();
-    searchInput.addEventListener('input', function (event) {
-      var query = event.target.value;
-      if (searchOption.value === 'location') {
-        if (query.length > 2 && !suggestionsShown) {
-          geocoder.geocode(query, function (results) {
-            showSuggestions(results);
-          });
-        } else if (query.length === 0) {
+    var marker = null; // Declare the marker variable
+    searchInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        var query = event.target.value;
+        if (searchOption.value === 'location') {
+          if (query.length > 5 && !suggestionsShown) {
+            geocoder.geocode(query, function (results) {
+              showSuggestions(results);
+            });
+          } else if (query.length === 0) {
+            clearSuggestions();
+          }
+        } else {
           clearSuggestions();
         }
-      } else {
-        clearSuggestions();
       }
     });
-
-    function clearSuggestions() {
-      suggestionsDiv.innerHTML = '';
-      suggestionsDiv.style.display = 'none';
-    }
 
     // Event listener for the coordinates input
     document.getElementById('searchInput').addEventListener('input', function (event) {
@@ -1254,7 +1254,6 @@
         var longitude = parseFloat(coordinates[1].trim());
 
         if (isNaN(latitude) || isNaN(longitude)) {
-          // Clear the marker if coordinates are not valid numbers
           if (marker) {
             map.removeLayer(marker);
             marker = null;
@@ -1263,7 +1262,7 @@
         }
 
         var latLng = L.latLng(latitude, longitude);
-        marker = L.marker(latLng).addTo(map);
+        navigateToLocation(latitude, longitude);
         if (marker) {
           marker.setLatLng(latLng);
           displayPopup(latLng, coordinates);
@@ -1271,10 +1270,8 @@
           marker = L.marker(latLng).addTo(map);
           displayPopup(latLng, coordinates);
         }
-        map.setView(latLng, 16);
         displayPopup(latLng, coordinates);
       } else {
-        // Clear the marker if option is not coordinates
         if (marker) {
           map.removeLayer(marker);
           marker = null;
@@ -1282,40 +1279,26 @@
       }
     });
 
-    function searchByLocationAddress(address) {
-      // Use geocoder plugin to search for location by address
-      // Show query results in a dropdown based on user input
-      geocoder.geocode(address, function (results) {
-        // Clear previous suggestions
-        clearSuggestions();
-
-        // Create a dropdown to display the suggestions
-        var dropdown = document.createElement('ul');
-        dropdown.classList.add('suggestions-dropdown');
-
-        // Iterate over the results and create a list item for each suggestion
-        results.forEach(function (result) {
-          var listItem = document.createElement('li');
-          listItem.textContent = result.name;
-          listItem.addEventListener('click', function () {
-            // Set the selected suggestion as the search input value
-            searchInput.value = result.name;
-            // Clear the suggestions dropdown
-            clearSuggestions();
-          });
-          dropdown.appendChild(listItem);
-        });
-
-        // Append the dropdown to the suggestions div
-        suggestionsDiv.appendChild(dropdown);
-
-        // Set the suggestionsShown flag to true
-        suggestionsShown = true;
+    function navigateToLocation(latitude, longitude) {
+      var latLng = L.latLng(latitude, longitude);
+      map.setView(latLng, 16);
+      geocoder.reverse(latLng, map.options.crs.scale(map.getZoom()), function (results) {
+        if (results && results.length > 0) {
+          var address = results[0].name;
+          displayPopup(latLng, [latitude, longitude], address);
+        }
       });
+    }
+
+    function clearSuggestions() {
+      var suggestionsDiv = document.getElementById('suggestions');
+      suggestionsDiv.innerHTML = '';
+      suggestionsShown = false;
     }
 
     function showSuggestions(results) {
       var suggestionsDiv = document.getElementById('suggestions');
+      suggestionsDiv.innerHTML = '';
       if (results.length > 0) {
         var div = document.createElement('div');
         div.classList.add('card');
@@ -1326,65 +1309,39 @@
           suggestionItem.addEventListener('click', function () {
             searchInput.value = result.name;
             clearSuggestions();
-            searchLocationByAddress(map, result.name);
+            navigateToLocation(result.center.lat, result.center.lng);
           });
           div.appendChild(suggestionItem);
         });
         suggestionsDiv.appendChild(div);
-        suggestionsShown = true; // Set suggestions shown flag
+        suggestionsShown = true;
       }
     }
 
+    // function displayPopup(latLng, coordinates, address) {
+    //   var popupContent = '';
+    //   if (address) {
+    //     popupContent += '<strong>' + address + '</strong><br>';
+    //   }
+    //   popupContent += 'Latitude: ' + coordinates[0] + '<br>';
+    //   popupContent += 'Longitude: ' + coordinates[1];
+
+    //   if (marker && marker.getPopup()) {
+    //     marker.setLatLng(latLng);
+    //     marker.getPopup().setContent(popupContent).update();
+    //   } else {
+    //     marker = L.marker(latLng).addTo(map);
+    //     marker.bindPopup(popupContent).openPopup();
+    //   }
+    // }
+
     function searchLocationByAddress(map, query) {
-      // Clear any existing markers on the map
       map.eachLayer(function (layer) {
         if (layer instanceof L.Marker) {
           map.removeLayer(layer);
         }
       });
-
-      // Clear any existing suggestions
       clearSuggestions();
-
-      // Use the geocoder to get the location coordinates
-      geocoder.geocode(query, function (results) {
-        if (results.length > 0) {
-          var location = results[0].center;
-          marker = L.marker(location).addTo(map);
-          map.setView(location, 16);
-          displayPopup(location, results[0].name);
-          // showSuggestions(results);
-        } else {
-          console.log('No results found');
-        }
-      });
-
-      // function showSuggestions(results) {
-      //   var suggestionsDiv = document.getElementById('suggestions');
-      //   if (results.length > 0) {
-      //     var div = document.createElement('div');
-      //     div.classList.add('card');
-      //     results.forEach(function (result) {
-      //       var suggestionItem = document.createElement('div');
-      //       suggestionItem.classList.add('suggestion-item');
-      //       suggestionItem.textContent = result.name;
-      //       suggestionItem.addEventListener('click', function () {
-      //         searchInput.value = result.name;
-      //         clearSuggestions();
-      //         searchLocationByAddress(map, result.name);
-      //       });
-      //       div.appendChild(suggestionItem);
-      //     });
-      //     suggestionsDiv.appendChild(div);
-      //     suggestionsShown = true; // Set suggestions shown flag
-      //   }
-      // }
-
-      function clearSuggestions() {
-        var suggestionsDiv = document.getElementById('suggestions');
-        suggestionsDiv.innerHTML = '';
-        suggestionsShown = false; // Reset suggestions shown flag
-      }
     }
 
     // Event listener for search input keydown
@@ -1397,14 +1354,9 @@
       }
     });
 
-
-
-
-
     function searchLocationByCoordinates(query) {
       var coordinates = query.split(',');
       if (coordinates.length !== 2) {
-        // Clear the marker if coordinates are not in the correct format
         if (marker) {
           map.removeLayer(marker);
           marker = null;
@@ -1416,7 +1368,6 @@
       var longitude = parseFloat(coordinates[1].trim());
 
       if (isNaN(latitude) || isNaN(longitude)) {
-        // Clear the marker if coordinates are not valid numbers
         if (marker) {
           map.removeLayer(marker);
           marker = null;
@@ -1437,14 +1388,14 @@
       displayPopup(latLng, coordinates);
     }
 
-
-
-
     function displayPopup(latLng, content) {
-      var popupContent =
-        '<b>' + (searchOption.value === 'location' ? 'Location' : 'Coordinates') + ':</b><br>' + content;
-      marker.bindPopup(popupContent).openPopup();
+      if (marker) {
+        var popupContent =
+          '<b>' + (searchOption.value === 'location' ? 'Location' : 'Coordinates') + ':</b><br>' + content;
+        marker.bindPopup(popupContent).openPopup();
+      }
     }
+
 
     // Substation search
     function substationSearch() {
@@ -1508,7 +1459,6 @@
             searchInput.value = item.title;
             clearSuggestions();
             map.flyTo(item.layer.getLatLng(), 12);
-            // showLayers();
           });
           suggestionsDiv.appendChild(suggestionItem);
         });
@@ -1676,11 +1626,6 @@
         }
       }
     }
-
-
-
-
-
 
     // End of Universal Search
 
@@ -2751,14 +2696,18 @@
     //CAAP
 
     var layer_caap = L.featureGroup();
-   
+
     for (var i = 0; i < polygons.length; i++) {
-      polygons[i].setStyle({ color: '#ed7402', opacity: 0.7, zIndex: 120 });
+      polygons[i].setStyle({
+        color: '#ed7402',
+        opacity: 0.7,
+        zIndex: 120
+      });
       layer_caap.addLayer(polygons[i]);
     }
 
     //Existing Transmission Lines
-    
+
     map.createPane('pane_ExistingTL_1');
     map.getPane('pane_ExistingTL_1').style.zIndex = 123;
     map.getPane('pane_ExistingTL_1').style['mix-blend-mode'] = 'normal';

@@ -768,13 +768,14 @@ f .group-container {
   left: 50px;
 }
 
-
+/* Position adjustment for credit roll button */
 #settings-button {
   position: fixed;
   bottom: 10px;
   left: 10px;
 }
 
+/* Position adjustment for opening LGU link */
 #open-external-link {
   position: fixed;
   bottom: 40px;
