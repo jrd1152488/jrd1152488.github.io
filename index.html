@@ -1950,6 +1950,7 @@
 
     // Clear Sidebar Values
     document.getElementById('clearResultsBtn').addEventListener('click', function () {
+      stopExecution = true;
       // Clear the values of the Raster Calculator and the Histogram here
       var rasterCalculatorInput = document.getElementById('rasterCalculatorInput');
       var fileName = document.getElementById('fileName');
@@ -3644,6 +3645,7 @@
     var FldClass;
 
     var isRunning = false;
+    var stopExecution = false;
 
     function runSequentially() {
       var codeBlocks = [{
@@ -3705,7 +3707,9 @@
                   georaster = null;
                 });
               });
+              if (stopExecution) return;
           },
+          
           delay: 2000 // Delay for code block 2 in milliseconds
           // Delay for code block 2 in milliseconds
         },
@@ -3734,6 +3738,7 @@
                   georaster = null;
                 });
               });
+              if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 3 in milliseconds
         },
@@ -3770,6 +3775,7 @@
                   georaster = null;
                 });
               });
+              if (stopExecution) return;
           },
           delay: 5000 // Delay for code block 3 in milliseconds
         },
@@ -3824,6 +3830,7 @@
                   georaster = null;
                 });
               });
+              if (stopExecution) return;
           },
 
           delay: 5000 // Delay for code block 3 in milliseconds
@@ -3869,6 +3876,7 @@
 
                 });
               });
+              if (stopExecution) return;
           },
           delay: 3000 // Delay for code block 2 in milliseconds
         }, {
@@ -3910,6 +3918,7 @@
 
                 });
               });
+              if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
@@ -3952,6 +3961,7 @@
 
                 });
               });
+              if (stopExecution) return;
           },
           delay: 3000 // Delay for code block 2 in milliseconds
         }, {
@@ -3994,6 +4004,7 @@
 
                 });
               });
+              if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 3 in milliseconds
         }, {
@@ -4039,6 +4050,7 @@
 
                 });
               });
+              if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
@@ -4079,6 +4091,7 @@
 
                 });
               });
+              if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
