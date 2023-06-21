@@ -1167,16 +1167,6 @@
       location.reload();
     }
 
-    // var map = L.map('map', {
-    //   zoomControl: false,
-    //   maxZoom: 28,
-    //   minZoom: 1
-    // });
-
-
-
-    // var philippines = L.latLng(12.8797, 121.7740);
-    // map.setView(philippines, 6);
 
     document.addEventListener("DOMContentLoaded", function () {
       OverlayScrollbars(document.querySelector('.custom-scrollbar'), {
@@ -1195,11 +1185,9 @@
     var form = document.querySelector('form');
     var suggestionsDiv = document.getElementById('suggestions');
     var geocoder;
-    var marker;
-    var suggestionsShown = false; // Flag to track if suggestions are shown.
-    var searchTimeout;
-
-
+    var suggestionsShown = false;
+    var marker = null;
+    var popup = null;
 
     searchOption.addEventListener('change', function () {
       if (searchOption.value === 'location') {
@@ -1219,7 +1207,7 @@
 
     // Geocoder - Location
     geocoder = L.Control.Geocoder.nominatim();
-    var marker = null; // Declare the marker variable
+
     searchInput.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         var query = event.target.value;
@@ -1237,8 +1225,8 @@
       }
     });
 
-    // Event listener for the coordinates input
-    document.getElementById('searchInput').addEventListener('input', function (event) {
+        // Event listener for the coordinates input
+        document.getElementById('searchInput').addEventListener('input', function (event) {
       if (searchOption.value === 'coordinates') {
         var coordinates = event.target.value.split(',');
         if (coordinates.length !== 2) {
@@ -1285,19 +1273,18 @@
       geocoder.reverse(latLng, map.options.crs.scale(map.getZoom()), function (results) {
         if (results && results.length > 0) {
           var address = results[0].name;
+          displayLocation(latLng, [latitude, longitude], address);
           displayPopup(latLng, [latitude, longitude], address);
         }
       });
     }
 
     function clearSuggestions() {
-      var suggestionsDiv = document.getElementById('suggestions');
       suggestionsDiv.innerHTML = '';
       suggestionsShown = false;
     }
 
     function showSuggestions(results) {
-      var suggestionsDiv = document.getElementById('suggestions');
       suggestionsDiv.innerHTML = '';
       if (results.length > 0) {
         var div = document.createElement('div');
@@ -1318,23 +1305,6 @@
       }
     }
 
-    // function displayPopup(latLng, coordinates, address) {
-    //   var popupContent = '';
-    //   if (address) {
-    //     popupContent += '<strong>' + address + '</strong><br>';
-    //   }
-    //   popupContent += 'Latitude: ' + coordinates[0] + '<br>';
-    //   popupContent += 'Longitude: ' + coordinates[1];
-
-    //   if (marker && marker.getPopup()) {
-    //     marker.setLatLng(latLng);
-    //     marker.getPopup().setContent(popupContent).update();
-    //   } else {
-    //     marker = L.marker(latLng).addTo(map);
-    //     marker.bindPopup(popupContent).openPopup();
-    //   }
-    // }
-
     function searchLocationByAddress(map, query) {
       map.eachLayer(function (layer) {
         if (layer instanceof L.Marker) {
@@ -1343,6 +1313,42 @@
       });
       clearSuggestions();
     }
+
+    function displayLocation(latLng, coordinates, address) {
+      var popupContent = "Location: " + address;
+      var marker = L.marker(latLng).addTo(map);
+      marker.bindPopup(popupContent).openPopup();
+    }
+
+
+
+    function displayPopup(latLng, coordinates, address) {
+      var popupContent = '';
+      if (address) {
+        popupContent += '<strong>' + address + '</strong><br>';
+      }
+      popupContent += 'Latitude: ' + coordinates[0] + '<br>';
+      popupContent += 'Longitude: ' + coordinates[1];
+
+      if (marker) {
+        marker.setLatLng(latLng);
+        if (popup) {
+          popup.setContent(popupContent);
+        } else {
+          popup = L.popup().setContent(popupContent);
+          marker.bindPopup(popup);
+        }
+        marker.openPopup();
+      } else {
+        marker = L.marker(latLng).addTo(map);
+        popup = L.popup().setContent(popupContent);
+        marker.bindPopup(popup).openPopup();
+      }
+    }
+
+
+
+
 
     // Event listener for search input keydown
     searchInput.addEventListener('keydown', function (event) {
