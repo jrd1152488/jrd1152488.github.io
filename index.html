@@ -3655,7 +3655,7 @@
           code: function () {
 
             var fileInput = document.getElementById('fileInput');
-            var file = fileInput.file[0];
+            var file = fileInput.files[0];
             var reader = new FileReader();
             reader.onload = function (e) {
               var fileContent = e.target.result;
