@@ -2158,7 +2158,7 @@
     const layer_SLPWD = createTileLayer('SLPWD',
       'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
     const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
-    const layer_SLP2 = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
+    
 
     function toggleTileLayer(layer, checked) {
       if (checked) {
@@ -3433,7 +3433,7 @@
 
           GHIValuesLayer = new GeoRasterLayer({
             georaster: georaster,
-            opacity: 0.4,
+            opacity: 0,
             pane: 'GHIValues',
             pixelValuesToColorFn: function (pixelValues) {
               var pixelValue = pixelValues[0];
@@ -3474,9 +3474,11 @@
             if (GHIValuesLayer) {
               if (map.hasLayer(GHIValuesLayer)) {
                 map.removeLayer(GHIValuesLayer);
+                map.removeLayer(layer_IRDGHI);
                 map.off('click', handleMapClick);
               } else {
                 map.addLayer(GHIValuesLayer);
+                layer_IRDGHI.addTo(map);
                 map.on('click', handleMapClick);
               }
             }
@@ -3506,8 +3508,7 @@
 
           WSValuesLayer = new GeoRasterLayer({
             georaster: georaster,
-            opacity: 0.6,
-            resolution: 80,
+            opacity: 0,
             pane: 'WSValues',
             pixelValuesToColorFn: function (pixelValues) {
               var pixelValue = pixelValues[0];
@@ -3548,9 +3549,11 @@
             if (WSValuesLayer) {
               if (map.hasLayer(WSValuesLayer)) {
                 map.removeLayer(WSValuesLayer);
+                map.removeLayer(layer_WS);
                 map.off('click', handleMapClick);
               } else {
                 map.addLayer(WSValuesLayer);
+                layer_WS.addTo(map);
                 map.on('click', handleMapClick);
               }
             }
@@ -3623,11 +3626,11 @@
             if (SLPValuesLayer) {
               if (map.hasLayer(SLPValuesLayer)) {
                 map.removeLayer(SLPValuesLayer);
-                map.removeLayer(layer_SLP2);
+                map.removeLayer(layer_SLP);
                 map.off('click', handleMapClick);
               } else {
                 map.addLayer(SLPValuesLayer);
-                layer_SLP2.addTo(map);
+                layer_SLP.addTo(map);
                 map.on('click', handleMapClick);
               }
             }
