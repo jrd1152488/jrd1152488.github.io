@@ -178,9 +178,9 @@
       <div class="input-group">
         <select class="form-select bg-transparent" id="searchOption"
           style="color: #f0f0f0; margin-right: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px;font-size: 12px; padding-top: 0; padding-bottom: 0;">
-          <option style="color: #202020;" selected>Select options</option>
+          <!-- <option style="color: #202020;" selected>Select options</option> -->
+          <option style="color: #202020;" value="location" selected>Location</option>
           <option style="color: #202020;" value="coordinates">Coordinates</option>
-          <option style="color: #202020;" value="location">Location</option>
           <option style="color: #202020;" value="substation">Substation</option>
           <option style="color: #202020;" value="servicecontract">Service Contract</option>
         </select>
@@ -1188,6 +1188,8 @@
     var suggestionsShown = false;
     var marker = null;
     var popup = null;
+    var firstEnterPressed = false; // Add a flag to track the first Enter press
+
 
     searchOption.addEventListener('change', function () {
       if (searchOption.value === 'location') {
@@ -1209,63 +1211,25 @@
     geocoder = L.Control.Geocoder.nominatim();
 
     searchInput.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        var query = event.target.value;
-        if (searchOption.value === 'location') {
-          if (query.length > 5 && !suggestionsShown) {
-            geocoder.geocode(query, function (results) {
-              showSuggestions(results);
-            });
-          } else if (query.length === 0) {
-            clearSuggestions();
-          }
-        } else {
-          clearSuggestions();
+  if (event.key === 'Enter') {
+    var query = event.target.value;
+    if (searchOption.value === 'location') {
+      if (query.length > 5 && !suggestionsShown) {
+        if (!firstEnterPressed) {
+          firstEnterPressed = true;
+          event.preventDefault(); 
         }
+        geocoder.geocode(query, function (results) {
+          showSuggestions(results);
+        });
+      } else if (query.length === 0) {
+        clearSuggestions();
       }
-    });
-
-        // Event listener for the coordinates input
-        document.getElementById('searchInput').addEventListener('input', function (event) {
-      if (searchOption.value === 'coordinates') {
-        var coordinates = event.target.value.split(',');
-        if (coordinates.length !== 2) {
-          // Clear the marker if coordinates are not in the correct format
-          if (marker) {
-            map.removeLayer(marker);
-            marker = null;
-          }
-          return;
-        }
-
-        var latitude = parseFloat(coordinates[0].trim());
-        var longitude = parseFloat(coordinates[1].trim());
-
-        if (isNaN(latitude) || isNaN(longitude)) {
-          if (marker) {
-            map.removeLayer(marker);
-            marker = null;
-          }
-          return;
-        }
-
-        var latLng = L.latLng(latitude, longitude);
-        navigateToLocation(latitude, longitude);
-        if (marker) {
-          marker.setLatLng(latLng);
-          displayPopup(latLng, coordinates);
-        } else {
-          marker = L.marker(latLng).addTo(map);
-          displayPopup(latLng, coordinates);
-        }
-        displayPopup(latLng, coordinates);
-      } else {
-        if (marker) {
-          map.removeLayer(marker);
-          marker = null;
-        }
-      }
-    });
+    } else {
+      clearSuggestions();
+    }
+  }
+});
 
     function navigateToLocation(latitude, longitude) {
       var latLng = L.latLng(latitude, longitude);
@@ -1356,6 +1320,48 @@
         var searchTerm = searchInput.value.trim();
         if (searchTerm !== '') {
           searchLocationByAddress(map, searchTerm);
+        }
+      }
+    });
+
+    // Event listener for the coordinates input
+    document.getElementById('searchInput').addEventListener('input', function (event) {
+      if (searchOption.value === 'coordinates') {
+        var coordinates = event.target.value.split(',');
+        if (coordinates.length !== 2) {
+          // Clear the marker if coordinates are not in the correct format
+          if (marker) {
+            map.removeLayer(marker);
+            marker = null;
+          }
+          return;
+        }
+
+        var latitude = parseFloat(coordinates[0].trim());
+        var longitude = parseFloat(coordinates[1].trim());
+
+        if (isNaN(latitude) || isNaN(longitude)) {
+          if (marker) {
+            map.removeLayer(marker);
+            marker = null;
+          }
+          return;
+        }
+
+        var latLng = L.latLng(latitude, longitude);
+        navigateToLocation(latitude, longitude);
+        if (marker) {
+          marker.setLatLng(latLng);
+          displayPopup(latLng, coordinates);
+        } else {
+          marker = L.marker(latLng).addTo(map);
+          displayPopup(latLng, coordinates);
+        }
+        displayPopup(latLng, coordinates);
+      } else {
+        if (marker) {
+          map.removeLayer(marker);
+          marker = null;
         }
       }
     });
@@ -2208,7 +2214,6 @@
         }
       }]
     }).addTo(map);
-    console.log('Shapefile uploaded.')
 
     var fileUpload; // Define the 'fileUpload' variable outside the function
 
@@ -2284,7 +2289,7 @@
 
       // Overlay the uploaded layer on the map
       fileUpload.addTo(map);
-      map.fitBounds(layer.getBounds());
+      map.fitBounds(fileUpload.getBounds());
 
     }
 
@@ -3710,9 +3715,9 @@
                   georaster = null;
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
-          
+
           delay: 2000 // Delay for code block 2 in milliseconds
           // Delay for code block 2 in milliseconds
         },
@@ -3741,7 +3746,7 @@
                   georaster = null;
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 3 in milliseconds
         },
@@ -3778,7 +3783,7 @@
                   georaster = null;
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 5000 // Delay for code block 3 in milliseconds
         },
@@ -3833,7 +3838,7 @@
                   georaster = null;
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
 
           delay: 5000 // Delay for code block 3 in milliseconds
@@ -3879,7 +3884,7 @@
 
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 3000 // Delay for code block 2 in milliseconds
         }, {
@@ -3921,7 +3926,7 @@
 
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
@@ -3964,7 +3969,7 @@
 
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 3000 // Delay for code block 2 in milliseconds
         }, {
@@ -4007,7 +4012,7 @@
 
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 3 in milliseconds
         }, {
@@ -4053,7 +4058,7 @@
 
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
@@ -4094,7 +4099,7 @@
 
                 });
               });
-              if (stopExecution) return;
+            if (stopExecution) return;
           },
           delay: 2000 // Delay for code block 2 in milliseconds
         }, {
