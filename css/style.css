@@ -211,7 +211,7 @@ input[type="number"]::-webkit-outer-spin-button {
   text-align: center !important;
 }
 
-.btn-warning {
+.btn-warning, .btn-danger {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -527,7 +527,7 @@ padding: 0;
   cursor: pointer;
 }
 
-f .group-container {
+ .group-container {
   margin-bottom: 10px;
 }
 
