@@ -1211,25 +1211,25 @@
     geocoder = L.Control.Geocoder.nominatim();
 
     searchInput.addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    var query = event.target.value;
-    if (searchOption.value === 'location') {
-      if (query.length > 5 && !suggestionsShown) {
-        if (!firstEnterPressed) {
-          firstEnterPressed = true;
-          event.preventDefault(); 
+      if (event.key === 'Enter') {
+        var query = event.target.value;
+        if (searchOption.value === 'location') {
+          if (query.length > 5 && !suggestionsShown) {
+            if (!firstEnterPressed) {
+              firstEnterPressed = true;
+              event.preventDefault();
+            }
+            geocoder.geocode(query, function (results) {
+              showSuggestions(results);
+            });
+          } else if (query.length === 0) {
+            clearSuggestions();
+          }
+        } else {
+          clearSuggestions();
         }
-        geocoder.geocode(query, function (results) {
-          showSuggestions(results);
-        });
-      } else if (query.length === 0) {
-        clearSuggestions();
       }
-    } else {
-      clearSuggestions();
-    }
-  }
-});
+    });
 
     function navigateToLocation(latitude, longitude) {
       var latLng = L.latLng(latitude, longitude);
@@ -2164,7 +2164,7 @@
     const layer_SLPWD = createTileLayer('SLPWD',
       'https://github.com/czrxstrd4/SLPWD/raw/main/SLPWD/{z}/{x}/{y}.png');
     const layer_SLP = createTileLayer('SLP', 'https://github.com/czrxstrd4/SLP/raw/main/SLP/{z}/{x}/{y}.png');
-    
+
 
     function toggleTileLayer(layer, checked) {
       if (checked) {
@@ -3647,6 +3647,9 @@
     let FldSumstat;
     var FldClass;
 
+    var pointsLayer = L.geoJSON();
+    var polygonLayer;
+
     var isRunning = false;
     var stopExecution = false;
 
@@ -3660,6 +3663,10 @@
             reader.onload = function (e) {
               var fileContent = e.target.result;
               var geojson = JSON.parse(fileContent);
+              if (polygonLayer) {
+                map.removeLayer(polygonLayer);
+              }
+              polygonLayer = L.geoJSON(geojson);
               coordinates = extractCoordinates(geojson);
             };
             reader.readAsText(file);
@@ -3677,6 +3684,83 @@
               return coordinates;
             };
 
+
+            function loadGeoJSONFromURL(url) {
+              fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  pointsLayer.clearLayers();
+                  pointsLayer.addData(data);
+                })
+                .catch(error => console.error('Error:', error));
+            };
+
+            loadGeoJSONFromURL('https://czrxstrd4.github.io/avemn/SS.geojson');
+
+          },
+          delay: 2000 // Delay for code block 1 in milliseconds
+        },
+        {
+          code: function () {
+
+            
+
+
+            // Function to conduct proximity assessment
+            
+              
+
+              var polygonCentroid = polygonLayer.getBounds().getCenter();
+              var pointsWithinProximity = [];
+              var distance =[];
+              pointsLayer.eachLayer(function (layer) {
+                var point = layer.toGeoJSON();
+                distance = getDistance(polygonCentroid.lat, polygonCentroid.lng, point.geometry.coordinates[
+                  1], point.geometry.coordinates[0]);
+                if (distance <= 10000) { // 10 kilometers in meters
+                  pointsWithinProximity.push(point.properties);
+                }
+              });
+
+              if (pointsWithinProximity.length > 0) {
+                var list = document.createElement('ul');
+                pointsWithinProximity.forEach(function (point) {
+                  var item = document.createElement('li');
+                  item.innerText = point.Title;
+                  list.appendChild(item);
+                  console.log( point.Title ); // Display the title of each point in the console
+                });
+                document.body.appendChild(list);
+
+              } else {
+                alert('No SS found within 5 kilometers of the Site.');
+              }
+            
+
+            // Function to calculate distance using Haversine formula
+            function getDistance(lat1, lon1, lat2, lon2) {
+              var earthRadius = 6371;
+              var dLat = deg2rad(lat2 - lat1);
+              var dLon = deg2rad(lon2 - lon1);
+              var a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+              var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+              var distance = earthRadius * c * 1000;
+              return distance;
+            };
+
+            // Function to convert degrees to radians
+            function deg2rad(deg) {
+              return deg * (Math.PI / 180);
+            };
+
+
+
+
+
+            
           },
           delay: 1000 // Delay for code block 1 in milliseconds
         },
