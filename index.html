@@ -1184,26 +1184,44 @@
     });
 
     // Geocoder - Location
-    geocoder = L.Control.Geocoder.nominatim();
+    // geocoder = L.Control.Geocoder.nominatim();
 
-    searchInput.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        var query = event.target.value;
-        if (searchOption.value === 'location') {
-          if (query.length > 5 && !suggestionsShown) {
-            if (!firstEnterPressed) {
-              firstEnterPressed = true;
-              event.preventDefault();
-            }
-            geocoder.geocode(query, function (results) {
-              showSuggestions(results);
-            });
-          } else if (query.length === 0) {
-            clearSuggestions();
-          }
-        } else {
-          clearSuggestions();
-        }
+        var geocoder = L.Control.Geocoder.nominatim({
+      geocodingQueryParams: {
+        countrycodes: 'ph'
+      }
+    });
+
+    // searchInput.addEventListener('keydown', function (event) {
+    //   if (event.key === 'Enter') {
+    //     var query = event.target.value;
+    //     if (searchOption.value === 'location') {
+    //       if (query.length > 2 && !suggestionsShown) {
+    //         if (!firstEnterPressed) {
+    //           firstEnterPressed = true;
+    //           event.preventDefault();
+    //         }
+    //         geocoder.geocode(query, function (results) {
+    //           showSuggestions(results);
+    //         });
+    //       } else if (query.length === 0) {
+    //         clearSuggestions();
+    //       }
+    //     } else {
+    //       clearSuggestions();
+    //     }
+    //   }
+    // });
+
+    
+    searchInput.addEventListener('input', function (event) {
+      var query = event.target.value;
+      if (query.length >= 2) {
+        geocoder.geocode(query, function (results) {
+          showSuggestions(results);
+        });
+      } else {
+        clearSuggestions();
       }
     });
 
@@ -1286,10 +1304,6 @@
       }
     }
 
-
-
-
-
     // Event listener for search input keydown
     searchInput.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
@@ -1299,6 +1313,121 @@
         }
       }
     });
+
+
+
+
+
+
+//     var geocoder = L.Control.Geocoder.nominatim({
+//       geocodingQueryParams: {
+//         countrycodes: 'ph'
+//       }
+//     });
+//     var marker;
+//     var popup;
+
+//     searchInput.addEventListener('input', function (event) {
+//       var query = event.target.value;
+//       if (query.length >= 2) {
+//         geocoder.geocode(query, function (results) {
+//           showSuggestions(results);
+//         });
+//       } else {
+//         clearSuggestions();
+//       }
+//     });
+
+//     function navigateToLocation(latitude, longitude) {
+//       var latLng = L.latLng(latitude, longitude);
+//       map.setView(latLng, 16);
+//       geocoder.reverse(latLng, map.options.crs.scale(map.getZoom()), function (results) {
+//         if (results && results.length > 0) {
+//           var address = results[0].name;
+//           displayLocation(latLng, [latitude, longitude], address);
+//           displayPopup(latLng, [latitude, longitude], address);
+//         }
+//       });
+//     }
+
+//     function clearSuggestions() {
+//       suggestionsDiv.innerHTML = '';
+//     }
+
+//     function showSuggestions(results) {
+//       suggestionsDiv.innerHTML = '';
+//       if (results.length > 0) {
+//         results.forEach(function (result) {
+//           var suggestionItem = document.createElement('div');
+//           suggestionItem.classList.add('suggestion-item');
+//           suggestionItem.textContent = result.name;
+//           suggestionItem.addEventListener('click', function () {
+//             searchInput.value = result.name;
+//             clearSuggestions();
+//             navigateToLocation(result.center.lat, result.center.lng);
+//           });
+//           suggestionsDiv.appendChild(suggestionItem);
+//         });
+//       }
+//     }
+
+//     function searchLocationByAddress(map, query) {
+//       if (marker) {
+//         map.removeLayer(marker);
+//       }
+//       clearSuggestions();
+//     }
+
+//     function displayLocation(latLng, coordinates, address) {
+//       if (marker) {
+//         marker.setLatLng(latLng);
+//       } else {
+//         marker = L.marker(latLng).addTo(map);
+//       }
+//       if (address) {
+//         marker.bindPopup('Location: ' + address + '<br>' +
+//           'Latitude: ' + coordinates[0] + '<br>' +
+//           'Longitude: ' + coordinates[1]).openPopup();
+//       }
+//     }
+
+//     function displayPopup(latLng, coordinates, address) {
+//   var popupContent = '';
+//   if (address) {
+//     popupContent += '<strong>' + address + '</strong><br>';
+//   }
+//   popupContent += 'Latitude: ' + coordinates[0].toFixed(4) + '<br>';
+//   popupContent += 'Longitude: ' + coordinates[1].toFixed(4);
+
+//   if (marker) {
+//     marker.setLatLng(latLng);
+//     if (popup) {
+//       popup.setContent(popupContent);
+//     } else {
+//       popup = L.popup().setContent(popupContent);
+//       marker.bindPopup(popup);
+//     }
+//     marker.openPopup();
+//   } else {
+//     marker = L.marker(latLng).addTo(map);
+//     popup = L.popup().setContent(popupContent);
+//     marker.bindPopup(popup).openPopup();
+//   }
+// }
+
+
+//     searchInput.addEventListener('keydown', function (event) {
+//       if (event.key === 'Enter') {
+//         var searchTerm = searchInput.value.trim();
+//         if (searchTerm !== '') {
+//           searchLocationByAddress(map, searchTerm);
+//         }
+//       }
+//     });
+
+
+
+
 
     // Event listener for the coordinates input
     document.getElementById('searchInput').addEventListener('input', function (event) {
@@ -2240,7 +2369,7 @@
           var area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
             layer._defaultShape() : layer.getLatLngs())), true);
           var name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area + "( has.)");
+          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
 
           document.getElementById('area').textContent = area;
         },
@@ -3679,39 +3808,39 @@
         {
           code: function () {
 
-            
+
 
 
             // Function to conduct proximity assessment
-            
-              
 
-              var polygonCentroid = polygonLayer.getBounds().getCenter();
-              var pointsWithinProximity = [];
-              var distance =[];
-              pointsLayer.eachLayer(function (layer) {
-                var point = layer.toGeoJSON();
-                distance = getDistance(polygonCentroid.lat, polygonCentroid.lng, point.geometry.coordinates[
-                  1], point.geometry.coordinates[0]);
-                if (distance <= 10000) { // 10 kilometers in meters
-                  pointsWithinProximity.push(point.properties);
-                }
-              });
 
-              if (pointsWithinProximity.length > 0) {
-                var list = document.createElement('ul');
-                pointsWithinProximity.forEach(function (point) {
-                  var item = document.createElement('li');
-                  item.innerText = point.Title;
-                  list.appendChild(item);
-                  console.log( point.Title ); // Display the title of each point in the console
-                });
-                document.body.appendChild(list);
 
-              } else {
-                alert('No SS found within 5 kilometers of the Site.');
+            var polygonCentroid = polygonLayer.getBounds().getCenter();
+            var pointsWithinProximity = [];
+            var distance = [];
+            pointsLayer.eachLayer(function (layer) {
+              var point = layer.toGeoJSON();
+              distance = getDistance(polygonCentroid.lat, polygonCentroid.lng, point.geometry.coordinates[
+                1], point.geometry.coordinates[0]);
+              if (distance <= 10000) { // 10 kilometers in meters
+                pointsWithinProximity.push(point.properties);
               }
-            
+            });
+
+            if (pointsWithinProximity.length > 0) {
+              var list = document.createElement('ul');
+              pointsWithinProximity.forEach(function (point) {
+                var item = document.createElement('li');
+                item.innerText = point.Title;
+                list.appendChild(item);
+                console.log(point.Title); // Display the title of each point in the console
+              });
+              document.body.appendChild(list);
+
+            } else {
+              alert('No SS found within 5 kilometers of the Site.');
+            }
+
 
             // Function to calculate distance using Haversine formula
             function getDistance(lat1, lon1, lat2, lon2) {
@@ -3736,7 +3865,7 @@
 
 
 
-            
+
           },
           delay: 1000 // Delay for code block 1 in milliseconds
         },
