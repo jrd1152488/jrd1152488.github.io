@@ -9,14 +9,11 @@ function pop_Provinces_0(feature, layer) {
         mouseover: highlightFeature,
     });
 
+
     var popupContent = '<table>\
             <tr>\
-                <th scope="row">Region Code</th>\
-                <td>' + (feature.properties['Region Code'] !== null ? autolinker.link(feature.properties['Region Code'].toLocaleString()) : '') + '</td>\
-            </tr>\
-            <tr>\
                 <th scope="row">Province</th>\
-                <td>' + (feature.properties['Area Name'] !== null ? autolinker.link(feature.properties['Area Name'].toLocaleString()) : '') + '</td>\
+                <td>' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
             </tr>\
         </table>';
     layer.bindPopup(popupContent, {maxHeight: 400});
