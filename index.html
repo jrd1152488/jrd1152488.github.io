@@ -2322,12 +2322,12 @@
             console.error('Layer is not a valid shape');
             return;
           }
-          var area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+          var area2 = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
             layer._defaultShape() : layer.getLatLngs())), true);
           var name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area2);
 
-          document.getElementById('area_ext').textContent = area;
+          document.getElementById('area_ext').textContent = area2;
         },
         style: {
           color: 'yellow',
@@ -4381,8 +4381,10 @@
                                   percentages[context
                                     .dataIndex];
                                 // Calculate the multiplied value
+
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4525,7 +4527,7 @@
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4674,7 +4676,7 @@
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4821,7 +4823,7 @@
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4975,7 +4977,7 @@
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -5119,7 +5121,7 @@
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -5266,7 +5268,7 @@
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
