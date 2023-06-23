@@ -121,6 +121,8 @@
   <script src="data/MunicipalitiesMin_0.js"></script>
   <script src="data/BarangaysMin_1.js"></script>
   <script src="data/caap.js"></script>
+  <script src="data/Regions_0.js"></script>
+  <script src="data/Provinces_0.js"></script>
 
   <!-- <script src="js/service_contracts.js"></script> -->
   <script src="js/service_contracts.js"></script>
@@ -143,6 +145,8 @@
   <script src="js/tdp_tl.js"></script>
   <script src="js/irrigation.js"></script>
   <script src="js/municipalities.js"></script>
+  <script src="js/region.js"></script>
+  <script src="js/provinces.js"></script>
   <script src="js/timeline.js"></script>
   <!-- <script src="js/lgu_directory.js"></script> -->
 
@@ -683,6 +687,20 @@
             onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Municipalities.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-MunicipalitiesMin_0">Municipalities
+          </label>
+        </div>
+        <div class="form-check" style="margin-left: 10px;">
+          <input class="form-check-input" type="checkbox" id="chk-Provinces_0"
+            onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./legend/Municipalities.png" style="margin-left: 4px; width:15px; height:15px">
+          <label class="panel-layer-label" for="chk-Provinces_0">Provinces
+          </label>
+        </div>
+        <div class="form-check" style="margin-left: 10px;">
+          <input class="form-check-input" type="checkbox" id="chk-Regions_0"
+            onchange="toggleNestedCheckbox(this);">
+          <img class="legend-image" src="./legend/Municipalities.png" style="margin-left: 4px; width:15px; height:15px">
+          <label class="panel-layer-label" for="chk-Regions_0">Regions
           </label>
         </div>
         <div class="form-check" style="margin-left: 10px;">
@@ -1880,7 +1898,7 @@ searchInput.addEventListener('keydown', function (event) {
     }
 
     function toggle_Others(checkbox) {
-      toggleLayers(checkbox, '#chk-Seaports_14, #chk-RDS, #chk-BarangaysMin_1, #chk-MunicipalitiesMin_0, #chk-caap');
+      toggleLayers(checkbox, '#chk-Seaports_14, #chk-RDS, #chk-BarangaysMin_1, #chk-MunicipalitiesMin_0, #chk-Provinces_0, #chk-Regions_0, #chk-caap');
     }
 
     function toggle_SS_TL(checkbox) {
@@ -2682,6 +2700,36 @@ searchInput.addEventListener('keydown', function (event) {
       style: style_MunicipalitiesMin_0_0,
     });
     bounds_group.addLayer(layer_MunicipalitiesMin_0);
+
+     //Provinces
+     map.createPane('pane_Provinces_0');
+    map.getPane('pane_Provinces_0').style.zIndex = 499;
+    map.getPane('pane_Provinces_0').style['mix-blend-mode'] = 'normal';
+    var layer_Provinces_0 = new L.geoJson(json_Provinces_0, {
+      attribution: '',
+      interactive: true,
+      dataVar: 'json_Provinces_0',
+      layerName: 'layer_Provinces_0',
+      pane: 'pane_Provinces_0',
+      onEachFeature: pop_Provinces_0,
+      style: style_Provinces_0_0,
+    });
+    bounds_group.addLayer(layer_Provinces_0);
+
+    //Regions
+    map.createPane('pane_Regions_0');
+    map.getPane('pane_Regions_0').style.zIndex = 500;
+    map.getPane('pane_Regions_0').style['mix-blend-mode'] = 'normal';
+    var layer_Regions_0 = new L.geoJson(json_Regions_0, {
+      attribution: '',
+      interactive: true,
+      dataVar: 'json_Regions_0',
+      layerName: 'layer_Regions_0',
+      pane: 'pane_Regions_0',
+      onEachFeature: pop_Regions_0,
+      style: style_Regions_0_0,
+    });
+    bounds_group.addLayer(layer_Regions_0);
 
 
     //CAAP
