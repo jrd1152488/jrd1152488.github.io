@@ -900,7 +900,7 @@
               <div class="shapefile-display">
                 <label style="margin-top: 3px; font-size: 10px;"><strong>Assessed Area: </strong><span
                     id="fileName"></span></label><br>
-                <label style="margin-top: 3px; font-size: 10px;"><strong>Est. Area (in hectares): </strong><span
+                <label style="margin-top: 3px; font-size: 10px;"><strong>Est. Area: </strong><span
                     id="area"></span></label>
               </div>
 
@@ -1143,6 +1143,8 @@
       </div>
     </div>
     <div id="drawContainer"></div>
+    <div id="area_ext"></div>
+
     <div id="deleteAllContainer"></div>
     <div id="map-container">
       <div id="polygon-layer" class="leaflet-pane leaflet-overlay-pane">
@@ -2323,9 +2325,9 @@
           var area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
             layer._defaultShape() : layer.getLatLngs())), true);
           var name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area + "( has.)");
+          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
 
-          document.getElementById('area').textContent = area;
+          document.getElementById('area_ext').textContent = area;
         },
         style: {
           color: 'yellow',
@@ -3459,11 +3461,11 @@
             // Format the area with commas and remove the decimal
             const formattedArea = area.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,").split(".")[0];
 
-            const name = feature.properties.name || 'Unnamed feature';
-            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + formattedArea);
+            const name = feature.properties.name || fileName;
+            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + formattedArea + " has.");
 
             // Update the value of the 'area' span element
-            document.getElementById('area').textContent = formattedArea;
+            document.getElementById('area').textContent = formattedArea + " has.";
           },
           style: {
             color: 'yellow',
