@@ -1102,3 +1102,17 @@ f .group-container {
 /* .chartjs-tooltip {
   font-size: 6px !important;
 } */
+
+.tl-list strong {
+  font-size: 15px; /* Adjust the font size to your preference */
+}
+
+.tl-list-group {
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+  list-style-type: none; /* Remove bullets */
+}
+
+#tl-list-output {
+  font-size: 10px; /* Adjust the font size to your preference */
+}
