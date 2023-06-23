@@ -690,15 +690,13 @@
           </label>
         </div>
         <div class="form-check" style="margin-left: 10px;">
-          <input class="form-check-input" type="checkbox" id="chk-Provinces_0"
-            onchange="toggleNestedCheckbox(this);">
+          <input class="form-check-input" type="checkbox" id="chk-Provinces_0" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Provinces.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-Provinces_0">Provinces
           </label>
         </div>
         <div class="form-check" style="margin-left: 10px;">
-          <input class="form-check-input" type="checkbox" id="chk-Regions_0"
-            onchange="toggleNestedCheckbox(this);">
+          <input class="form-check-input" type="checkbox" id="chk-Regions_0" onchange="toggleNestedCheckbox(this);">
           <img class="legend-image" src="./legend/Regions.png" style="margin-left: 4px; width:15px; height:15px">
           <label class="panel-layer-label" for="chk-Regions_0">Regions
           </label>
@@ -1041,21 +1039,22 @@
                       </div>
                     </div>
                   </div>
-                </br>
+                  </br>
                   <div class="tl-list">
 
                     <i class="fa-solid fa-ruler sbheader-icon"></i>
                     <label style="font-size: 15px; font-weight: bold;">Substation Proximity</label>
-                  </br>
+                    </br>
                     <ul class="tl-list-group" style="font-size: 10px;">
-                      <li class="tl-list-group-item" style="margin-bottom: 2px;">Approx. S/S and T/L Length from site center:
+                      <li class="tl-list-group-item" style="margin-bottom: 2px;">Approx. S/S and T/L Length from site
+                        center:
                       </li>
                       <li class="tl-list-group-item" style="font-size: 10px; margin-bottom: 2px; line-height: 20px;"
                         id="tl-list-output"></li>
                     </ul>
                   </div>
                 </div>
-                
+
             </div>
           </div>
           </br>
@@ -1070,9 +1069,11 @@
 
           <hr class="sidebar-spacer">
           <div style="display: flex; justify-content: center; align-items: center;">
-            <button id="clearResultsBtn" class="btn btn-warning btn-sm">Clear
-              Results</button>
+            <button id="stopButton" class="btn btn-danger btn-sm">Stop Program</button>
+            <div style="width: 10px;"></div> <!-- Add spacing between the buttons -->
+            <button id="clearResultsBtn" class="btn btn-warning btn-sm">Clear Results</button>
           </div>
+          
 
         </div>
         <!-- <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
@@ -1956,7 +1957,9 @@
     }
 
     function toggle_Others(checkbox) {
-      toggleLayers(checkbox, '#chk-Seaports_14, #chk-RDS, #chk-BarangaysMin_1, #chk-MunicipalitiesMin_0, #chk-Provinces_0, #chk-Regions_0, #chk-caap');
+      toggleLayers(checkbox,
+        '#chk-Seaports_14, #chk-RDS, #chk-BarangaysMin_1, #chk-MunicipalitiesMin_0, #chk-Provinces_0, #chk-Regions_0, #chk-caap'
+      );
     }
 
     function toggle_SS_TL(checkbox) {
@@ -2014,9 +2017,7 @@
     // End of Floating Card
 
 
-    // Clear Sidebar Values
-    document.getElementById('clearResultsBtn').addEventListener('click', function () {
-      stopExecution = true;
+    function clearValues() {
       // Clear the values of the Raster Calculator and the Histogram here
       var rasterCalculatorInput = document.getElementById('rasterCalculatorInput');
       var fileName = document.getElementById('fileName');
@@ -2027,8 +2028,8 @@
         fileName.value = '';
       }
 
-      // Define an array with the IDs of the histogram result elements
-      var histogramResultIds = [
+      // Define an array with the IDs of the elements to be cleared
+      var elementIds = [
         'GHIstatisticss',
         'WSstatisticss',
         'SLPstatisticss',
@@ -2042,44 +2043,41 @@
         'LqfBistatisticss',
         'fileName',
         'area',
-        'tl-list-output'
+        'tl-list-output',
+        'GHISLP124Histo',
+        'WSSLP123Histo',
+        'GHI123Histo',
+        'WS12Histo',
+        'SLPHisto',
+        'LqfHisto',
+        'FldHisto'
       ];
 
-      // Clear the values of the histogram result elements
-      histogramResultIds.forEach(function (elementId) {
+      // Clear the values of the elements
+      elementIds.forEach(function (elementId) {
         var element = document.getElementById(elementId);
         if (element) {
           element.textContent = '';
         }
       });
 
-
-      // Clear the histogram chart
-      var histogramChartIds = ['GHISLP124Histo', 'WSSLP123Histo', 'GHI123Histo', 'WS12Histo', 'SLPHisto',
-        'LqfHisto', 'FldHisto'
-      ];
-
-      for (var i = 0; i < histogramChartIds.length; i++) {
-        var histogramChart = document.getElementById(histogramChartIds[i]);
-
-        if (histogramChart) {
-          // Get the existing chart instance
-          var existingChart = Chart.getChart(histogramChart);
-
+      // Clear the histogram charts
+      var chartIds = ['GHISLP124Histo', 'WSSLP123Histo', 'GHI123Histo', 'WS12Histo', 'SLPHisto', 'LqfHisto',
+      'FldHisto'];
+      chartIds.forEach(function (chartId) {
+        var chart = document.getElementById(chartId);
+        if (chart) {
+          var existingChart = Chart.getChart(chart);
           if (existingChart) {
-            // Destroy the existing chart instance
             existingChart.destroy();
           }
-
-          // Clear the canvas
-          var ctx = histogramChart.getContext('2d');
-          ctx.clearRect(0, 0, histogramChart.width, histogramChart.height);
+          var ctx = chart.getContext('2d');
+          ctx.clearRect(0, 0, chart.width, chart.height);
         }
-      }
+      });
 
       deleteFileUpload();
-    });
-
+    }
 
     function deleteFileUpload() {
       if (fileUpload) {
@@ -2088,6 +2086,20 @@
         fileUpload = null;
       }
     }
+
+    // Add event listener to the "Clear Results" button
+    var clearResultsBtn = document.getElementById('clearResultsBtn');
+    clearResultsBtn.addEventListener('click', function () {
+      stopExecution = true;
+      clearValues();
+
+      // Disable the "Clear Results" button for 10 seconds
+      // clearResultsBtn.disabled = true;
+      // setTimeout(function () {
+      //   clearResultsBtn.disabled = false;
+      // }, 10000);
+    });
+
 
     // Create the L.easyButton for the external link
     var easyButton = L.easyButton({
@@ -2760,8 +2772,8 @@
     });
     bounds_group.addLayer(layer_MunicipalitiesMin_0);
 
-     //Provinces
-     map.createPane('pane_Provinces_0');
+    //Provinces
+    map.createPane('pane_Provinces_0');
     map.getPane('pane_Provinces_0').style.zIndex = 499;
     map.getPane('pane_Provinces_0').style['mix-blend-mode'] = 'normal';
     var layer_Provinces_0 = new L.geoJson(json_Provinces_0, {
@@ -3733,8 +3745,8 @@
     // End of create map layer for GHI & WS
 
     var coordinates = [];
-
     var loadingPrompt = document.getElementById('loading-prompt');
+    var loadingBar = document.querySelector('.loading-bar');
     let FldSumstat;
     var FldClass;
 
@@ -3743,9 +3755,26 @@
 
     var isRunning = false;
     var stopExecution = false;
+    var runningInstances = [];
+
+    var stopButton = document.getElementById('stopButton');
+var clearResultsBtn = document.getElementById('clearResultsBtn');
+
+stopButton.addEventListener('click', function () {
+  stopExecution = true;
+  // Disable the "Clear Results" button for 10 seconds
+  clearResultsBtn.disabled = true;
+  setTimeout(function () {
+    clearValues();
+    clearResultsBtn.disabled = false;
+  }, 10000);
+});
+
 
     function runSequentially() {
+
       var codeBlocks = [{
+
           code: function () {
 
             var fileInput = document.getElementById('fileInput');
@@ -5336,7 +5365,9 @@
         }
       ];
 
-      var fetchButton = document.getElementById('fetchButton');
+
+      var isRunning = false; // Flag to indicate if code execution is running
+      var shouldStop = false; // Flag to indicate if code execution should stop
 
       fetchButton.addEventListener('click', function () {
         if (isRunning) {
@@ -5345,9 +5376,21 @@
         }
 
         isRunning = true; // Set the flag to indicate that code execution is now running
+        shouldStop = false; // Reset the stop flag
+        loadingPrompt.style.display = 'block'; // Show the loading prompt
+        loadingBar.style.animation = 'loading-bar 2s infinite'; // Start the loading bar animation
         var index = 0;
 
         function executeNext() {
+          if (shouldStop) {
+            // If stop flag is set, terminate the code execution
+            isRunning = false;
+            loadingPrompt.style.display = 'none'; // Hide the loading prompt
+            loadingBar.style.animation = ''; // Reset the loading bar animation
+            console.log('Execution stopped.');
+            return;
+          }
+
           if (index < codeBlocks.length) {
             var codeBlock = codeBlocks[index];
             codeBlock.code(); // Execute the code block
@@ -5355,14 +5398,21 @@
             index++;
             setTimeout(executeNext, codeBlock.delay); // Delay before executing the next code block
           } else {
-            // Code execution is complete, reset the flag
+            // Code execution is complete, reset the flags
             isRunning = false;
+            shouldStop = false;
+            loadingPrompt.style.display = 'none'; // Hide the loading prompt
+            loadingBar.style.animation = ''; // Reset the loading bar animation
+            console.log('Code execution completed.');
           }
         }
 
         executeNext();
       });
 
+      stopButton.addEventListener('click', function () {
+        shouldStop = true; // Set the stop flag when the stop button is clicked
+      });
     }
   </script>
 </body>
