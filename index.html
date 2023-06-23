@@ -406,30 +406,6 @@
         onchange="toggleLayer('layer_planetNICFI', this.checked)">
       <label class="form-check-label" for="planetNICFI">Live Satellite (May 2023)</label>
     </div>
-    <hr class="sidebar-spacer">
-    <div class="d-flex justify-content-center align-items-center" style="margin-bottom: 5px;">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="toggleCheckbox">
-            <label class="form-check-label" for="toggleCheckbox">Irradiance Map</label>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="WStoggleCheckbox">
-            <label class="form-check-label" for="WStoggleCheckbox">Wind Speed Map</label>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="SLPtoggleCheckbox">
-            <label class="form-check-label" for="SLPtoggleCheckbox">Slope Map</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- </div> -->
 
     <hr class="sidebar-spacer">
 
@@ -3449,7 +3425,7 @@
           });
 
           // Toggle popups based on checkbox state
-          var toggleCheckbox = document.getElementById('toggleCheckbox');
+          var toggleCheckbox = document.getElementById('chk-IRDGHI');
           toggleCheckbox.addEventListener('change', function () {
             togglePopups();
           });
@@ -3520,7 +3496,7 @@
           });
 
           // Toggle popups based on checkbox state
-          var WStoggleCheckbox = document.getElementById('WStoggleCheckbox');
+          var WStoggleCheckbox = document.getElementById('chk-WS');
           WStoggleCheckbox.addEventListener('change', function () {
             togglePopups();
           });
@@ -3596,7 +3572,7 @@
 
 
           // Toggle popups based on checkbox state
-          var SLPtoggleCheckbox = document.getElementById('SLPtoggleCheckbox');
+          var SLPtoggleCheckbox = document.getElementById('chk-SLP');
           SLPtoggleCheckbox.addEventListener('change', function () {
             togglePopups();
           });
