@@ -901,7 +901,7 @@
                 <label style="margin-top: 3px; font-size: 10px;"><strong>Assessed Area: </strong><span
                     id="fileName"></span></label><br>
                 <label style="margin-top: 3px; font-size: 10px;"><strong>Est. Area: </strong><span
-                    id="area"></span> has.</label>
+                    id="area"></span></label>
               </div>
 
               <body onload="runSequentially()">
@@ -3462,7 +3462,7 @@
             const formattedArea = area.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,").split(".")[0];
 
             const name = feature.properties.name || fileName;
-            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + formattedArea);
+            layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + formattedArea + " has.");
 
             // Update the value of the 'area' span element
             document.getElementById('area').textContent = formattedArea + " has.";
