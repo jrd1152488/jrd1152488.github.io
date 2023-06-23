@@ -1183,55 +1183,39 @@
       }
     });
 
-    // Geocoder - Location
-    // geocoder = L.Control.Geocoder.nominatim();
-
-        var geocoder = L.Control.Geocoder.nominatim({
+    var geocoder = L.Control.Geocoder.nominatim({
       geocodingQueryParams: {
         countrycodes: 'ph'
       }
     });
 
-    // searchInput.addEventListener('keydown', function (event) {
-    //   if (event.key === 'Enter') {
-    //     var query = event.target.value;
-    //     if (searchOption.value === 'location') {
-    //       if (query.length > 2 && !suggestionsShown) {
-    //         if (!firstEnterPressed) {
-    //           firstEnterPressed = true;
-    //           event.preventDefault();
-    //         }
-    //         geocoder.geocode(query, function (results) {
-    //           showSuggestions(results);
-    //         });
-    //       } else if (query.length === 0) {
-    //         clearSuggestions();
-    //       }
-    //     } else {
-    //       clearSuggestions();
-    //     }
-    //   }
-    // });
-
-    
     searchInput.addEventListener('input', function (event) {
-      var query = event.target.value;
-      if (query.length >= 2) {
-        geocoder.geocode(query, function (results) {
-          showSuggestions(results);
-        });
-      } else {
-        clearSuggestions();
-      }
-    });
-
-    searchInput.addEventListener('input', function () {
-      var query = searchInput.value;
+      var query = event.target.value.trim();
       if (query.length === 0) {
         clearSuggestions();
       }
     });
 
+    searchInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        var query = event.target.value.trim();
+        if (searchOption.value === 'location') {
+          if (query.length > 2 && !suggestionsShown) {
+            if (!firstEnterPressed) {
+              firstEnterPressed = true;
+              event.preventDefault();
+            }
+            geocoder.geocode(query, showSuggestions);
+          } else if (query.length === 0) {
+            clearSuggestions();
+          }
+        } else {
+          clearSuggestions();
+        }
+      } else if (event.key === 'Escape' || event.key === 'Esc') {
+        clearSuggestions();
+      }
+    });
 
 
     function navigateToLocation(latitude, longitude) {
@@ -1269,10 +1253,13 @@
         });
         suggestionsDiv.appendChild(div);
         suggestionsShown = true;
+      } else {
+        clearSuggestions();
       }
     }
 
-    function searchLocationByAddress(map, query) {
+
+    function searchLocationByAddress(query) {
       map.eachLayer(function (layer) {
         if (layer instanceof L.Marker) {
           map.removeLayer(layer);
@@ -1286,8 +1273,6 @@
       var marker = L.marker(latLng).addTo(map);
       marker.bindPopup(popupContent).openPopup();
     }
-
-
 
     function displayPopup(latLng, coordinates, address) {
       var popupContent = '';
@@ -1313,130 +1298,17 @@
       }
     }
 
-
-
-
-
     // Event listener for search input keydown
     searchInput.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         var searchTerm = searchInput.value.trim();
         if (searchTerm !== '') {
-          searchLocationByAddress(map, searchTerm);
+          searchLocationByAddress(searchTerm);
         }
       }
     });
 
 
-
-
-
-
-//     var geocoder = L.Control.Geocoder.nominatim({
-//       geocodingQueryParams: {
-//         countrycodes: 'ph'
-//       }
-//     });
-//     var marker;
-//     var popup;
-
-//     searchInput.addEventListener('input', function (event) {
-//       var query = event.target.value;
-//       if (query.length >= 2) {
-//         geocoder.geocode(query, function (results) {
-//           showSuggestions(results);
-//         });
-//       } else {
-//         clearSuggestions();
-//       }
-//     });
-
-//     function navigateToLocation(latitude, longitude) {
-//       var latLng = L.latLng(latitude, longitude);
-//       map.setView(latLng, 16);
-//       geocoder.reverse(latLng, map.options.crs.scale(map.getZoom()), function (results) {
-//         if (results && results.length > 0) {
-//           var address = results[0].name;
-//           displayLocation(latLng, [latitude, longitude], address);
-//           displayPopup(latLng, [latitude, longitude], address);
-//         }
-//       });
-//     }
-
-//     function clearSuggestions() {
-//       suggestionsDiv.innerHTML = '';
-//     }
-
-//     function showSuggestions(results) {
-//       suggestionsDiv.innerHTML = '';
-//       if (results.length > 0) {
-//         results.forEach(function (result) {
-//           var suggestionItem = document.createElement('div');
-//           suggestionItem.classList.add('suggestion-item');
-//           suggestionItem.textContent = result.name;
-//           suggestionItem.addEventListener('click', function () {
-//             searchInput.value = result.name;
-//             clearSuggestions();
-//             navigateToLocation(result.center.lat, result.center.lng);
-//           });
-//           suggestionsDiv.appendChild(suggestionItem);
-//         });
-//       }
-//     }
-
-//     function searchLocationByAddress(map, query) {
-//       if (marker) {
-//         map.removeLayer(marker);
-//       }
-//       clearSuggestions();
-//     }
-
-//     function displayLocation(latLng, coordinates, address) {
-//       if (marker) {
-//         marker.setLatLng(latLng);
-//       } else {
-//         marker = L.marker(latLng).addTo(map);
-//       }
-//       if (address) {
-//         marker.bindPopup('Location: ' + address + '<br>' +
-//           'Latitude: ' + coordinates[0] + '<br>' +
-//           'Longitude: ' + coordinates[1]).openPopup();
-//       }
-//     }
-
-//     function displayPopup(latLng, coordinates, address) {
-//   var popupContent = '';
-//   if (address) {
-//     popupContent += '<strong>' + address + '</strong><br>';
-//   }
-//   popupContent += 'Latitude: ' + coordinates[0].toFixed(4) + '<br>';
-//   popupContent += 'Longitude: ' + coordinates[1].toFixed(4);
-
-//   if (marker) {
-//     marker.setLatLng(latLng);
-//     if (popup) {
-//       popup.setContent(popupContent);
-//     } else {
-//       popup = L.popup().setContent(popupContent);
-//       marker.bindPopup(popup);
-//     }
-//     marker.openPopup();
-//   } else {
-//     marker = L.marker(latLng).addTo(map);
-//     popup = L.popup().setContent(popupContent);
-//     marker.bindPopup(popup).openPopup();
-//   }
-// }
-
-
-//     searchInput.addEventListener('keydown', function (event) {
-//       if (event.key === 'Enter') {
-//         var searchTerm = searchInput.value.trim();
-//         if (searchTerm !== '') {
-//           searchLocationByAddress(map, searchTerm);
-//         }
-//       }
-//     });
 
 
 
@@ -1527,16 +1399,25 @@
     }
 
 
+
+    // Hide the layers initially
+    // [
+    //   layer_69kVDULoadendSubstations_4,
+    //   layer_500230138115kVExistingSubstations_5,
+    //   layer_500230kVTDPSubstations_6
+    // ].forEach(function (layer) {
+    //   layer.setStyle({
+    //     opacity: 0
+    //   });
+    // });
+
     // Substation search
     function substationSearch() {
       var searchInput = document.getElementById('searchInput');
       var suggestionsDiv = document.getElementById('suggestions');
 
-      // Hide the layers initially
-      [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5, layer_500230kVTDPSubstations_6]
-      .forEach(function (layer) {
-        layer.removeFrom(map);
-      });
+      // Toggle show all layers initially
+      showLayers();
 
       searchInput.addEventListener('input', function () {
         var searchOption = document.getElementById('searchOption');
@@ -1552,23 +1433,17 @@
           clearSuggestions();
         } else {
           // Iterate over each layer and search for matching titles
-          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+          [
+            layer_69kVDULoadendSubstations_4,
+            layer_500230138115kVExistingSubstations_5,
             layer_500230kVTDPSubstations_6
-          ]
-          .forEach(function (layer) {
+          ].forEach(function (layer) {
             layer.eachLayer(function (subLayer) {
               var title = subLayer.feature.properties.Title;
               if (title.toLowerCase().includes(searchTerm.toLowerCase())) {
                 matchingTitles.push({
                   title: title,
                   layer: subLayer
-                });
-                subLayer.setStyle({
-                  opacity: 1
-                });
-              } else {
-                subLayer.setStyle({
-                  opacity: 0
                 });
               }
             });
@@ -1589,6 +1464,7 @@
             searchInput.value = item.title;
             clearSuggestions();
             map.flyTo(item.layer.getLatLng(), 12);
+            item.layer.openPopup();
           });
           suggestionsDiv.appendChild(suggestionItem);
         });
@@ -1610,21 +1486,15 @@
           var searchTerm = searchInput.value;
 
           var matchingLayer = null;
-          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+          [
+            layer_69kVDULoadendSubstations_4,
+            layer_500230138115kVExistingSubstations_5,
             layer_500230kVTDPSubstations_6
-          ]
-          .forEach(function (layer) {
+          ].forEach(function (layer) {
             layer.eachLayer(function (subLayer) {
               var title = subLayer.feature.properties.Title;
               if (title === searchTerm) {
                 matchingLayer = subLayer;
-                subLayer.setStyle({
-                  opacity: 1
-                });
-              } else {
-                subLayer.setStyle({
-                  opacity: 0
-                });
               }
             });
           });
@@ -1632,6 +1502,7 @@
           if (matchingLayer) {
             map.flyTo(matchingLayer.getLatLng(), 12);
             showLayersAfterMove();
+            matchingLayer.openPopup();
           }
         }
       });
@@ -1641,57 +1512,69 @@
       function showLayersAfterMove() {
         var zoom = map.getZoom();
         if (zoom >= 12) {
-          [layer_69kVDULoadendSubstations_4, layer_500230138115kVExistingSubstations_5,
+          [
+            layer_69kVDULoadendSubstations_4,
+            layer_500230138115kVExistingSubstations_5,
             layer_500230kVTDPSubstations_6
-          ]
-          .forEach(function (layer) {
+          ].forEach(function (layer) {
             layer.addTo(map);
           });
         }
       }
+
+      function showLayers() {
+        [
+          layer_69kVDULoadendSubstations_4,
+          layer_500230138115kVExistingSubstations_5,
+          layer_500230kVTDPSubstations_6
+        ].forEach(function (layer) {
+          layer.addTo(map);
+        });
+      }
     }
+
+
+
+
+
 
     function servicecontractSearch() {
       var searchInput = document.getElementById('searchInput');
       var suggestionsDiv = document.getElementById('suggestions');
 
+      // Toggle show all layers initially
+      showLayers();
+
       searchInput.addEventListener('input', function () {
-        if (searchOption.value !== 'servicecontract') {
-          console.log('Service contract search ended');
-          return; // Stop execution if searchOption is not 'servicecontract'
-        }
+    if (searchOption.value !== 'servicecontract') {
+      console.log('Service contract search ended');
+      return; // Stop execution if searchOption is not 'servicecontract'
+    }
 
-        var searchTerm = searchInput.value.trim().toLowerCase();
-        var matchingProjects = [];
+    var searchTerm = searchInput.value.trim().toLowerCase();
+    var matchingProjects = [];
 
-        if (searchTerm === '') {
-          clearSuggestions();
-        } else {
-          layer_ServiceContractMap_1.eachLayer(function (layer) {
-            var projectName = layer.feature.properties['sc_Project Name'];
-            var spv = layer.feature.properties['sc_SPV'];
-            var parentCompany = layer.feature.properties['sc_Parent Company'];
-            var lookupColumn = projectName + ' - ' + spv + ' (' + parentCompany + ')';
+    if (searchTerm === '') {
+      clearSuggestions();
+    } else {
+      layer_ServiceContractMap_1.eachLayer(function (layer) {
+        var projectName = layer.feature.properties['sc_Project Name'];
+        var spv = layer.feature.properties['sc_SPV'];
+        var parentCompany = layer.feature.properties['sc_Parent Company'];
+        var lookupColumn = projectName + ' - ' + spv + ' (' + parentCompany + ')';
 
-            if (lookupColumn && lookupColumn.toLowerCase().includes(searchTerm)) {
-              matchingProjects.push({
-                projectName: projectName,
-                lookupColumn: lookupColumn,
-                layer: layer
-              });
-              layer.setStyle({
-                opacity: 1
-              });
-            } else {
-              layer.setStyle({
-                opacity: 0
-              });
-            }
+        if (lookupColumn && lookupColumn.toLowerCase().includes(searchTerm)) {
+          matchingProjects.push({
+            projectName: projectName,
+            lookupColumn: lookupColumn,
+            layer: layer
           });
-
-          updateSuggestions(matchingProjects);
         }
       });
+
+      updateSuggestions(matchingProjects);
+    }
+  });
 
       function updateSuggestions(projects) {
         clearSuggestions();
@@ -1755,6 +1638,10 @@
           layer_ServiceContractMap_1.addTo(map);
         }
       }
+
+      function showLayers() {
+    layer_ServiceContractMap_1.addTo(map);
+  }
     }
 
     // End of Universal Search
@@ -3846,17 +3733,17 @@
               pointsWithinProximity.forEach(function (point) {
                 var item = document.createElement('li');
                 item.innerText = point.Title + ' (' + point.distance.toFixed(2) +
-                ' meters)'; // Display the title and distance of each point within proximity
+                  ' meters)'; // Display the title and distance of each point within proximity
                 list.appendChild(item);
-                console.log(point.Title, '(~', (point.distance/1000).toFixed(
-                2),'km from site center)'); // Log the title and distance of each point in the console
+                console.log(point.Title, '(~', (point.distance / 1000).toFixed(
+                  2), 'km from site center)'); // Log the title and distance of each point in the console
               });
               document.body.appendChild(list);
 
-              } else {
-                alert('No SS found within 5 kilometers of the Site.');
-              }
-            
+            } else {
+              alert('No SS found within 5 kilometers of the Site.');
+            }
+
 
             // Function to calculate distance using Haversine formula
             function getDistance(lat1, lon1, lat2, lon2) {
