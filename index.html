@@ -966,7 +966,9 @@
                     </div>
                   </div>
                   <!-- Histogram -->
-                  </br><strong>Histogram Results: </strong>
+                  </br>
+                  <i class="fa-solid fa-chart-simple sbheader-icon"></i>
+                  <label style="font-size: 15px; font-weight: bold;"> Histogram Results</label>
                   <div class="card-header text-center border border-light rounded">
                     <div class="card-header">
                       <ul class="nav nav-tabs card-header-tabs justify-content-center"
@@ -1025,15 +1027,31 @@
             </div>
           </div>
           </br>
+
+
+          <div class="tl-list">
+            <h1>
+              <i class="fa-solid fa-ruler sbheader-icon"></i>
+              <strong>Substation Proximity</strong><br>
+            </h1>
+            <ul class="tl-list-group" style="font-size: 10px;">
+              <li class="tl-list-group-item" style="margin-bottom: 2px;">Approx. S/S and T/L Length from site center:</li>
+              <li class="tl-list-group-item" style="font-size: 10px; margin-bottom: 2px; line-height: 20px;" id="tl-list-output"></li>
+            </ul>
+          </div>
+
+
+
+
+
+
+          <hr class="sidebar-spacer">
           <div style="display: flex; justify-content: center; align-items: center;">
             <button id="clearResultsBtn" class="btn btn-warning btn-sm">Clear
               Results</button>
           </div>
 
         </div>
-
-        <hr class="sidebar-spacer">
-
         <!-- <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
           <h1 class="sidebar-header common-header">
             <i class="fa-solid fa-database sbheader-icon"></i>
@@ -1187,99 +1205,99 @@
 
 
     var geocoder = L.Control.Geocoder.nominatim({
-  // geocodingQueryParams: {
-  //   countrycodes: 'ph'
-  // }
-});
+      // geocodingQueryParams: {
+      //   countrycodes: 'ph'
+      // }
+    });
 
-searchInput.addEventListener('input', handleInput);
+    searchInput.addEventListener('input', handleInput);
 
-searchInput.addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    var query = event.target.value.trim();
-    if (searchOption.value === 'location') {
-      if (query.length > 2 && !suggestionsShown) {
-        if (!firstEnterPressed) {
-          firstEnterPressed = true;
-          event.preventDefault();
+    searchInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        var query = event.target.value.trim();
+        if (searchOption.value === 'location') {
+          if (query.length > 2 && !suggestionsShown) {
+            if (!firstEnterPressed) {
+              firstEnterPressed = true;
+              event.preventDefault();
+            }
+            geocoder.geocode(query, showSuggestions);
+          } else if (query.length === 0) {
+            clearSuggestions();
+          }
+        } else {
+          clearSuggestions();
         }
-        geocoder.geocode(query, showSuggestions);
-      } else if (query.length === 0) {
+      } else if (event.key === 'Escape' || event.key === 'Esc') {
         clearSuggestions();
       }
-    } else {
-      clearSuggestions();
-    }
-  } else if (event.key === 'Escape' || event.key === 'Esc') {
-    clearSuggestions();
-  }
-});
-
-function searchLocationByAddress(query) {
-  clearSuggestions();
-  query = query.toString().trim(); // Convert to string and trim whitespace
-  if (query.length === 0) {
-    return;
-  }
-  geocoder.geocode(query, showSuggestions);
-}
-
-function navigateToLocation(latitude, longitude) {
-  var latLng = L.latLng(latitude, longitude);
-  map.setView(latLng, 16);
-  geocoder.reverse(latLng, map.options.crs.scale(map.getZoom()), function (results) {
-    if (results && results.length > 0) {
-      var address = results[0].name;
-      displayLocation(latLng, [latitude, longitude], address);
-      displayPopup(latLng, [latitude, longitude], address);
-    }
-  });
-}
-
-function clearSuggestions() {
-  suggestionsDiv.innerHTML = '';
-  suggestionsShown = false;
-}
-
-function showSuggestions(results) {
-  suggestionsDiv.innerHTML = '';
-  if (results.length > 0) {
-    var div = document.createElement('div');
-    div.classList.add('card');
-    results.forEach(function (result) {
-      var suggestionItem = document.createElement('div');
-      suggestionItem.classList.add('suggestion-item');
-      suggestionItem.textContent = result.name;
-      suggestionItem.addEventListener('click', function () {
-        searchInput.value = result.name;
-        clearSuggestions();
-        navigateToLocation(result.center.lat, result.center.lng);
-      });
-      div.appendChild(suggestionItem);
     });
-    suggestionsDiv.appendChild(div);
-    suggestionsShown = true;
-  } else {
-    clearSuggestions();
-  }
-}
 
-function handleInput(event) {
-  var query = event.target.value.trim();
-  if (query.length === 0) {
-    clearSuggestions();
-  }
-}
-
-// Event listener for search input keydown
-searchInput.addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    var searchTerm = searchInput.value.trim();
-    if (searchTerm !== '') {
-      searchLocationByAddress(searchTerm);
+    function searchLocationByAddress(query) {
+      clearSuggestions();
+      query = query.toString().trim(); // Convert to string and trim whitespace
+      if (query.length === 0) {
+        return;
+      }
+      geocoder.geocode(query, showSuggestions);
     }
-  }
-});
+
+    function navigateToLocation(latitude, longitude) {
+      var latLng = L.latLng(latitude, longitude);
+      map.setView(latLng, 16);
+      geocoder.reverse(latLng, map.options.crs.scale(map.getZoom()), function (results) {
+        if (results && results.length > 0) {
+          var address = results[0].name;
+          displayLocation(latLng, [latitude, longitude], address);
+          displayPopup(latLng, [latitude, longitude], address);
+        }
+      });
+    }
+
+    function clearSuggestions() {
+      suggestionsDiv.innerHTML = '';
+      suggestionsShown = false;
+    }
+
+    function showSuggestions(results) {
+      suggestionsDiv.innerHTML = '';
+      if (results.length > 0) {
+        var div = document.createElement('div');
+        div.classList.add('card');
+        results.forEach(function (result) {
+          var suggestionItem = document.createElement('div');
+          suggestionItem.classList.add('suggestion-item');
+          suggestionItem.textContent = result.name;
+          suggestionItem.addEventListener('click', function () {
+            searchInput.value = result.name;
+            clearSuggestions();
+            navigateToLocation(result.center.lat, result.center.lng);
+          });
+          div.appendChild(suggestionItem);
+        });
+        suggestionsDiv.appendChild(div);
+        suggestionsShown = true;
+      } else {
+        clearSuggestions();
+      }
+    }
+
+    function handleInput(event) {
+      var query = event.target.value.trim();
+      if (query.length === 0) {
+        clearSuggestions();
+      }
+    }
+
+    // Event listener for search input keydown
+    searchInput.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        var searchTerm = searchInput.value.trim();
+        if (searchTerm !== '') {
+          searchLocationByAddress(searchTerm);
+        }
+      }
+    });
 
 
 
@@ -1625,6 +1643,39 @@ searchInput.addEventListener('keydown', function (event) {
 
     // End of Universal Search
 
+    // Transmission Calculator
+
+    // Function to display the proximity assessment results
+    function displayProximityResults(pointsWithinProximity) {
+      var listContainer = document.querySelector('.tl-list');
+      listContainer.innerHTML = '';
+
+      if (pointsWithinProximity.length > 0) {
+        var list = document.createElement('ul');
+        list.classList.add('list-group');
+
+        pointsWithinProximity.forEach(function (point) {
+          var item = document.createElement('li');
+          item.classList.add('list-group-item');
+          item.innerText = point.Title + ' (' + point.distance.toFixed(2) +
+            ' meters)'; // Display the title and distance of each point within proximity
+          list.appendChild(item);
+        });
+
+        listContainer.appendChild(list);
+      } else {
+        var noPointsFound = document.createElement('p');
+        noPointsFound.classList.add('text-muted');
+        noPointsFound.innerText = 'No SS found within 5 kilometers of the Site.';
+        listContainer.appendChild(noPointsFound);
+      }
+    }
+
+
+
+
+
+
 
     //HLA Calculator--------------------------------------------------------------------------------------------------
     function updateInputColor(input) {
@@ -1965,7 +2016,8 @@ searchInput.addEventListener('keydown', function (event) {
         'FldBistatisticss',
         'LqfBistatisticss',
         'fileName',
-        'area'
+        'area',
+        'tl-list-output'
       ];
 
       // Clear the values of the histogram result elements
@@ -3686,14 +3738,7 @@ searchInput.addEventListener('keydown', function (event) {
         },
         {
           code: function () {
-
-
-
-
             // Function to conduct proximity assessment
-
-
-
             var polygonCentroid = polygonLayer.getBounds().getCenter();
             var pointsWithinProximity = [];
             var distance = [];
@@ -3706,21 +3751,29 @@ searchInput.addEventListener('keydown', function (event) {
                 pointsWithinProximity.push(point.properties);
               }
             });
-
             if (pointsWithinProximity.length > 0) {
-              var list = document.createElement('ul');
-              pointsWithinProximity.forEach(function (point) {
-                var item = document.createElement('li');
-                item.innerText = point.Title + ' (' + point.distance.toFixed(2) +
-                  ' meters)'; // Display the title and distance of each point within proximity
-                list.appendChild(item);
-                console.log(point.Title, '(~', (point.distance / 1000).toFixed(
-                  2), 'km from site center)'); // Log the title and distance of each point in the console
+              // Sort the pointsWithinProximity array based on point.distance
+              pointsWithinProximity.sort(function (a, b) {
+                return a.distance - b.distance;
               });
-              document.body.appendChild(list);
 
+              var list = document.createElement('ol'); // Create an ordered list element
+              pointsWithinProximity.forEach(function (point, index) {
+                var item = document.createElement('li');
+                item.innerText = point.Title + ' (~' + (point.distance / 1000).toFixed(2) +
+                  'km)'; // Display the title and distance of each point within proximity
+                list.appendChild(item);
+                console.log(point.Title, '(~', (point.distance / 1000).toFixed(2),
+                  'km)'); // Log the title and distance of each point in the console
+              });
+
+              const outputElement = document.getElementById('tl-list-output');
+              outputElement.innerHTML = ''; // Clear the content of the output element
+              outputElement.appendChild(list); // Append the ordered list to the output element
             } else {
-              alert('No SS found within 5 kilometers of the Site.');
+              // alert('No SS found within 10 kilometers of the Site.');
+              const outputElement = document.getElementById('tl-list-output');
+              outputElement.innerText = 'No SS found within 10 kilometers of the Site.';
             }
 
 
@@ -3742,12 +3795,6 @@ searchInput.addEventListener('keydown', function (event) {
             function deg2rad(deg) {
               return deg * (Math.PI / 180);
             };
-
-
-
-
-
-
           },
           delay: 1000 // Delay for code block 1 in milliseconds
         },
