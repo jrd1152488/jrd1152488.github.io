@@ -159,24 +159,27 @@
   <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="js/dataTables.bulma.min.js"></script>
 
-  <style>
 
-  </style>
+  <!-- Script for disabling inspect view -->
+  <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+
+
 </head>
 
 <body>
 
   <nav class="navbar">
     <div class="title" style="padding: 0; align-items: center;">
-      <div class="logo-container" onclick="refreshPage()">
+      <div class="logo-container" onclick="accessWebsite()">
         <img src="AP Emblem.png" alt="AP Emblem" class="logo">
       </div>
-      <div class="header-content" onclick="refreshPage()">
+      <div class="header-content" onclick="accessWebsite()">
         <span class="header-text"
-          style="color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ARI MARKET STRATEGY
-          - SPT</span>
+          style="color: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ARI MARKET STRATEGY -
+          SPT</span>
       </div>
     </div>
+
 
     <div class="search-bar">
       <div class="input-group">
@@ -1046,7 +1049,8 @@
                     <label style="font-size: 15px; font-weight: bold;">Substation Proximity</label>
                     </br>
                     <ul class="tl-list-group" style="font-size: 10px;">
-                      <li class="tl-list-group-item" style="margin-bottom: 2px;">S/S w/in 10km & ≈distance from site center:
+                      <li class="tl-list-group-item" style="margin-bottom: 2px;">S/S w/in 10km & ≈distance from site
+                        center:
                       </li>
                       <li class="tl-list-group-item" style="font-size: 10px; margin-bottom: 2px; line-height: 20px;"
                         id="tl-list-output"></li>
@@ -1064,7 +1068,7 @@
             <div style="width: 10px;"></div> <!-- Add spacing between the buttons -->
             <button id="clearResultsBtn" class="btn btn-warning btn-sm">Clear Results</button>
           </div>
-          
+
 
         </div>
         <!-- <div class="sidebar-pane" id="calculator" style="margin-top: 30px;">
@@ -1149,6 +1153,40 @@
 
 
   <script>
+    document.onkeydown = (e) => {
+      if (e.key == 123) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && e.key == 'U') {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && (e.key == 'S' || e.key == 's')) {
+        e.preventDefault();
+      }
+      if (e.ctrlKey && (e.key == 'U' || e.key == 'u')) {
+        e.preventDefault();
+      }
+      if (e.key === 'F12') {
+        return false;
+      }
+    };
+
+
+
+    function accessWebsite() {
+      window.location.href = "https://sites.google.com/aboitiz.com/ari-ms/spt"; 
+    }
+
+
     //SPT
 
     var map = L.map('map', {
@@ -2054,7 +2092,8 @@
 
       // Clear the histogram charts
       var chartIds = ['GHISLP124Histo', 'WSSLP123Histo', 'GHI123Histo', 'WS12Histo', 'SLPHisto', 'LqfHisto',
-      'FldHisto'];
+        'FldHisto'
+      ];
       chartIds.forEach(function (chartId) {
         var chart = document.getElementById(chartId);
         if (chart) {
@@ -3706,7 +3745,7 @@
             if (SLPValues > 0) {
               popupss
                 .setLatLng(latlng)
-                .setContent("Slope: " + SLPValues.toFixed(2) + " %")
+                .setContent("Slope: " + SLPValues.toFixed(2) + "%")
                 .openOn(map);
             } else {
               popupss
@@ -3749,17 +3788,17 @@
     var runningInstances = [];
 
     var stopButton = document.getElementById('stopButton');
-var clearResultsBtn = document.getElementById('clearResultsBtn');
+    var clearResultsBtn = document.getElementById('clearResultsBtn');
 
-stopButton.addEventListener('click', function () {
-  stopExecution = true;
-  // Disable the "Clear Results" button for 10 seconds
-  clearResultsBtn.disabled = true;
-  setTimeout(function () {
-    clearValues();
-    clearResultsBtn.disabled = false;
-  }, 10000);
-});
+    stopButton.addEventListener('click', function () {
+      stopExecution = true;
+      // Disable the "Clear Results" button for 10 seconds
+      clearResultsBtn.disabled = true;
+      setTimeout(function () {
+        clearValues();
+        clearResultsBtn.disabled = false;
+      }, 10000);
+    });
 
 
     function runSequentially() {
@@ -4403,8 +4442,9 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4547,7 +4587,8 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4696,7 +4737,8 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4843,7 +4885,8 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4997,7 +5040,8 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -5141,7 +5185,8 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -5288,7 +5333,8 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.",
+                                    "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
