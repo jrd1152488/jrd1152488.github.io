@@ -1046,7 +1046,7 @@
                     <label style="font-size: 15px; font-weight: bold;">Substation Proximity</label>
                     </br>
                     <ul class="tl-list-group" style="font-size: 10px;">
-                      <li class="tl-list-group-item" style="margin-bottom: 2px;">Approx. S/S and T/L Length from site center:
+                      <li class="tl-list-group-item" style="margin-bottom: 2px;">S/S w/in 10km & ≈distance from site center:
                       </li>
                       <li class="tl-list-group-item" style="font-size: 10px; margin-bottom: 2px; line-height: 20px;"
                         id="tl-list-output"></li>
@@ -2325,12 +2325,12 @@
             console.error('Layer is not a valid shape');
             return;
           }
-          var area = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
+          var area2 = L.GeometryUtil.readableArea((L.GeometryUtil.geodesicArea(layer._defaultShape ?
             layer._defaultShape() : layer.getLatLngs())), true);
           var name = feature.properties.name || 'Unnamed feature';
-          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area);
+          layer.bindPopup("<strong>" + name + "</strong><br/>" + "Area: ~" + area2);
 
-          document.getElementById('area_ext').textContent = area;
+          document.getElementById('area_ext').textContent = area2;
         },
         style: {
           color: 'yellow',
@@ -4401,8 +4401,10 @@ stopButton.addEventListener('click', function () {
                                   percentages[context
                                     .dataIndex];
                                 // Calculate the multiplied value
+
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4545,7 +4547,7 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4694,7 +4696,7 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4841,7 +4843,7 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -4995,7 +4997,7 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -5139,7 +5141,7 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
@@ -5286,7 +5288,7 @@ stopButton.addEventListener('click', function () {
                                 // Calculate the multiplied value
 
                                 const multipliedValue =
-                                  (Number((document.getElementById('area').textContent).replace(/,/g,
+                                  (Number((document.getElementById('area').textContent.replace(" has.", "")).replace(/,/g,
                                     "")) * (percentage / 100)).toFixed(0);
 
                                 const multipliedValue2 = Number(multipliedValue).toLocaleString();
