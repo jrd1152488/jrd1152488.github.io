@@ -1058,14 +1058,6 @@
           </div>
           </br>
 
-
-
-
-
-
-
-
-
           <hr class="sidebar-spacer">
           <div style="display: flex; justify-content: center; align-items: center;">
             <button id="stopButton" class="btn btn-danger btn-sm">Stop Program</button>
@@ -1580,9 +1572,9 @@
           clearSuggestions();
         } else {
           layer_ServiceContractMap_1.eachLayer(function (layer) {
-            var projectName = layer.feature.properties['sc_Project Name'];
-            var spv = layer.feature.properties['sc_SPV'];
-            var parentCompany = layer.feature.properties['sc_Parent Company'];
+            var projectName = layer.feature.properties['Project Name'];
+            var spv = layer.feature.properties['SPV'];
+            var parentCompany = layer.feature.properties['Parent Company'];
             var lookupColumn = projectName + ' - ' + spv + ' (' + parentCompany + ')';
 
             if (lookupColumn && lookupColumn.toLowerCase().includes(searchTerm)) {
