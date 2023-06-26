@@ -4304,17 +4304,17 @@
 
                   if (mn > 20) {
                     notes =
-                      "Liquefaction: With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
+                      "With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
                   } else if (mn > 0) {
                     notes =
-                      "Liquefaction: With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
+                      "With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "orange";
                   } else {
                     notes =
-                      "Liquefaction: No potential overlap.";
+                      "No potential overlap.";
                     fontColor = "green";
                   }
                   document.getElementById("LqfBistatisticss")
@@ -4345,14 +4345,19 @@
                   let notes;
                   let fontColor;
 
-                  if (mn > 0) {
+                  if (mn > 20) {
                     notes =
                       "With Potential Overlap. Contact the Owner/Broker/DOE to confirm. Overlap at ~" +
                       mn + "%";
                     fontColor = "red";
+                  } else if (mn > 0) {
+                    notes =
+                      "With Potential Overlap. Contact the owner/broker/LGU/Philvocs to confirm. Overlap at ~" +
+                      mn + "%";
+                    fontColor = "orange";
                   } else {
-
-                    notes = "No potential overlap.";
+                    notes =
+                      "No potential overlap.";
                     fontColor = "green";
                   }
                   document.getElementById("SCstatisticss").innerHTML = notes;
