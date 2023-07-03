@@ -1152,3 +1152,32 @@ padding: 0;
 #tl-list-output {
   font-size: 10px; /* Adjust the font size to your preference */
 }
+/* Add this updated custom CSS to your stylesheet */
+.custom-modal-size .modal-content {
+  max-width: 400px;
+  font-size: 14px;
+}
+
+.custom-modal-size .modal-header {
+  height: 40px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-modal-size .modal-header .modal-title {
+  flex-grow: 1;
+}
+
+.custom-modal-size .modal-header .close {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  color: #000;
+  opacity: 1;
+}
+
+.custom-modal-size .modal-header .close:hover {
+  color: #ff0000;
+}
