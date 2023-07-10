@@ -403,7 +403,7 @@
     <div class="form-check">
       <input class="form-check-input" type="radio" name="mapLayer" id="planetNICFI" autocomplete="off"
         onchange="toggleLayer('layer_planetNICFI', this.checked)">
-      <label class="form-check-label" for="planetNICFI">Live Satellite (May 2023)</label>
+      <label class="form-check-label" for="planetNICFI">Live Satellite (June 2023)</label>
     </div>
 
     <hr class="sidebar-spacer">
@@ -2225,7 +2225,7 @@
     map.createPane('pane_planetNICFI');
     map.getPane('pane_planetNICFI').style.zIndex = 100;
     var layer_planetNICFI = L.tileLayer(
-      'https://tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2023-05_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAK157598af286b421386a7fa8a69f90b85', {
+      'https://tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2023-06_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAK157598af286b421386a7fa8a69f90b85', {
         pane: 'pane_planetNICFI',
         opacity: 1.0,
         minZoom: 1,
