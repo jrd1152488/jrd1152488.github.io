@@ -162,6 +162,37 @@
 
   <!-- Script for disabling inspect view -->
   <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
+  <script>
+    var originalWidth = window.innerWidth;
+
+    window.addEventListener('resize', function() {
+      var currentWidth = window.innerWidth;
+      var widthDifference = originalWidth - currentWidth;
+
+      if (widthDifference > 400) {
+      closeWindow();
+        window.open('https://example.com/new-page', '_blank');
+      }
+    });
+  </script>
+  <script type="text/javascript">
+    function closeWindow() {
+  
+      // Open the new window
+      // with the URL replacing the
+      // current page using the
+      // _self value
+      let new_window =
+        open(location, '_self');
+  
+      // Close this window
+      new_window.close();
+  
+      return false;
+    }
+  </script>
+
+
 
  
 
